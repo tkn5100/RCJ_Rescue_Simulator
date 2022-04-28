@@ -84,6 +84,12 @@
     function course_input() {
       for (let index = 1; index < courseNrlLen; index++) {
         $course_nrl[index].addEventListener('click', (e)=> {
+          //被災者自動入力の無効化
+          $img[0].onclick = function () {};
+          $img[4].onclick = function () {};
+          $img[24].onclick = function () {};
+          $img[28].onclick = function () {};
+          nomal_guide();
           src = e.target.src;
           for (let index = 0; index < imgLen; index++) {
             $img[index].addEventListener('click', (e)=> {
@@ -95,6 +101,12 @@
       }
       for (let index = 1; index < courseWrlLen; index++) {
         $course_wrl[index].addEventListener('click', (e)=> {
+          //被災者自動入力の無効化
+          $img[0].onclick = function () {};
+          $img[4].onclick = function () {};
+          $img[24].onclick = function () {};
+          $img[28].onclick = function () {};
+          nomal_guide();
           src = e.target.src;
           for (let index = 0; index < imgLen; index++) {
             $img[index].addEventListener('click', (e)=> {
@@ -390,11 +402,6 @@
     function print() {
       $tools[5].addEventListener('click', ()=> {
         window.alert('PDFとして印刷するにはプリンターを「PDFとして保存」にしてください。印刷するときはレイアウトを「横」にしてください。');
-        $menu[0].style.display = 'none';
-        $toolbar[0].style.display = 'none';
-        $guide.style.display = 'none';
-        $copyright.style.display = 'none';
-        document.body.style.background = '#FFFFFF';
         if($table[0].style.display == 'block'){
           $table[1].style.display = 'block';
           print_block = 0;
@@ -415,11 +422,6 @@
           print_block = 5;
         }
         window.print();
-        $menu[0].style.display = 'flex';
-        $toolbar[0].style.display = 'flex';
-        $guide.style.display = 'block';
-        $copyright.style.display = 'block';
-        document.body.style.background = '#F8F8F8';
         if(print_block = 0){
           $table[1].style.display = 'none';
         }else if(print_block = 1){
@@ -454,6 +456,10 @@
           $img[index].dataset.bump = 0;
         }
       }
+      $img[0].onclick = "";
+      $img[4].onclick = "";
+      $img[24].onclick = "";
+      $img[28].onclick = "";
       a = 0;
     }
     $tools[6].addEventListener('click', ()=> {
@@ -482,7 +488,7 @@
       tile(0);
       $tools[0].dataset.one = 1;
       $guide.textContent = '6×8タイルに切り替えました';
-        setTimeout(nomal_guide, 2000);
+      setTimeout(nomal_guide, 2000);
     });
 
     //4×9タイル
@@ -490,7 +496,7 @@
       tile(2);
       $tools[0].dataset.one = 1;
       $guide.textContent = '4×9タイルに切り替えました。このモードでは被災者ゾーンの自動入力機能は使えません。';
-        setTimeout(nomal_guide, 3000);
+      setTimeout(nomal_guide, 3000);
     });
 
     //3×12タイル
@@ -498,7 +504,7 @@
       tile(4);
       $tools[0].dataset.one = 1;
       $guide.textContent = '3×12タイルに切り替えました。このモードでは被災者ゾーンの自動入力機能は使えません。';
-        setTimeout(nomal_guide, 3000);
+      setTimeout(nomal_guide, 3000);
     });
 
     //ヘルプ

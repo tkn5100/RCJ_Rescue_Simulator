@@ -247,6 +247,43 @@ table{
         top: 0px;
     }
 }
+@media print{
+    body{
+        background-color: #FFFFFF;
+    }
+    .menu{
+        display: none;
+    }
+    .image{
+        height: 80px;
+        width: 80px;
+        cursor: pointer;
+    }
+    .toolbar{
+        display: none;
+    }
+    .check-marker{
+        height: 17px;
+        width: 17px;
+    }
+    .obstacle{
+        height: 30px;
+        width: 30px;
+        left: 25px;
+        top: 25px;
+    }
+    .bump{
+        height: 80px;
+        left: 37px;
+        top: 0px;
+    }
+    .guide{
+        display: none;
+    }
+    .copyright{
+        display: none;
+    }
+}
 .menu-img-w, .menu-img-n{
     margin: 1px 1px 1px 1px;
     border: solid 0.1px #AAAAAA;
