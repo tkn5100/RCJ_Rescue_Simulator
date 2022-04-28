@@ -15,10 +15,6 @@
     const $copyright = $doc.getElementsByClassName('copyright')[0];
     // const $index = document.getElementsByClassName('index')
     const $coursedata = $doc.getElementsByClassName('coursedata');
-    const $alert = $doc.getElementById('alert')
-    const $alert_content = $doc.querySelector('#alert > p')
-    const $confirm = $doc.getElementById('confirm')
-    const $confirm_content = $doc.querySelector('#confirm > p')
     let nowturn = null;
     let src = null;
     let secondOrFirst = null;
@@ -41,11 +37,8 @@
     let file = null;
     // let course_show = 0;
     let data = null;
-    let what_time = null;
-    let key = null;
     let auto_save = [];
     let auto_save_input = [];
-    let canceled = null;
 
 
     function nomal_guide() {
@@ -489,6 +482,7 @@
     //6×8タイル
     $tools[8].addEventListener('click', ()=> {
       tile(0);
+      $tools[0].dataset.one = 1;
       $guide.textContent = '6×8タイルに切り替えました';
         setTimeout(nomal_guide, 2000);
     });
@@ -496,6 +490,7 @@
     //4×9タイル
     $tools[9].addEventListener('click', ()=> {
       tile(2);
+      $tools[0].dataset.one = 1;
       $guide.textContent = '4×9タイルに切り替えました。このモードでは被災者ゾーンの自動入力機能は使えません。';
         setTimeout(nomal_guide, 3000);
     });
@@ -503,6 +498,7 @@
     //3×12タイル
     $tools[10].addEventListener('click', ()=> {
       tile(4);
+      $tools[0].dataset.one = 1;
       $guide.textContent = '3×12タイルに切り替えました。このモードでは被災者ゾーンの自動入力機能は使えません。';
         setTimeout(nomal_guide, 3000);
     });
