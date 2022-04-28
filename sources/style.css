@@ -1,0 +1,247 @@
+body{
+    display: flex;
+    flex-direction: column;
+    background: #f8f8f8;
+    font-family: '游ゴシック';
+}
+.copyright{
+    position: absolute;
+    bottom: 5px;
+    right: 0;
+}
+.copyright-help{
+    margin-right: 0;
+    margin-left: auto;
+}
+/* home.html */
+.home-img{
+    margin: 5vw auto 5vw auto;
+    height: 15vw;
+    width: 80vw;
+    font-size: 5vw;
+}
+.home-link{
+    background: #000000;
+    color: #ffffff;
+    font-size: 2vw;
+    text-align: center;
+    line-height: 5vw;
+    height: 5vw;
+    width: 80vw;
+    margin: 1vw auto 1vw auto;
+    border-radius: 7px 7px 7px 7px;
+}
+/* help.html */
+.help_h1{
+    font-size: 40px;
+    font-weight: bold;
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+.help_h2{
+    font-size: 30px;
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+.help_h3{
+    font-size: 20px;
+    margin-top: 20px;
+    font-weight: 700;
+}
+.help_h4{
+    font-size: 20px;
+    text-decoration: underline solid 1px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+.help-sentence{
+    font-size: 20px;
+}
+.help_img{
+    width: 80%;
+    height: auto;
+}
+.help-link-div{
+    display: flex;
+    flex-direction: row;
+}
+.help-link{
+    width: 200px;
+    text-align: center;
+    background-color: #000000;
+    color: #f8f8f8;
+    padding: 10px;
+    border-radius: 8px;
+    margin-right: 15px;
+}
+
+/* index.html */
+table{
+    margin-left: 30px !important;
+    border-collapse: collapse;
+}
+.main{
+    display: flex;
+    align-items: flex-start;
+}
+.toolbar{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+    background: #eeeeee;
+    border: solid 1px #888888;
+}
+.tools{
+    margin: 5px 10px 5px 10px;
+    width: 60px;
+    height: 60px;
+    font-size: 10px;
+    text-align: center;
+    color: #ffffff;
+    background-color: #000000;
+    border-radius: 7px 7px 7px 7px;
+}
+.menu{
+    display: flex;
+    /* flex-wrap:wrap; */
+    flex-direction: column !important;
+    align-items: center;
+    border-right: solid 5px #000000;
+    height: 80vh;
+    overflow: auto;
+}
+@media screen and (min-width:1040px){
+    .menu{
+        width: 340px;
+    }
+    .index{
+        width: 270px;
+    }
+    .index-plus{
+        padding-left: 180px;
+    }
+}
+@media screen and (max-width:1040px){
+    .menu{
+        width: 270px;
+    }
+    .index{
+        width: 200px;
+    }
+    .index-plus{
+        padding-left: 110px;
+    }
+}
+.menu-title{
+    display: flex;
+    margin-top: 1px;
+}
+.menu-img-w, .menu-img-n{
+    height: 60px;
+    width: 60px;
+    margin: 1px 1px 1px 1px;
+    border: solid 0.1px #AAAAAA;
+    background-color: #FFFFFF;
+    cursor: pointer;
+    z-index: 0;
+}
+td{
+    position: relative;
+    border: 1px solid #AAAAAA;
+    background-color: #FFFFFF;
+}
+.check-marker{
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    background-color: #FFD700;
+    height: 17px;
+    width: 17px;
+    border-radius: 50%;
+    z-index: 1;
+}
+.obstacle{
+    display: block;
+    position: absolute;
+    left: 25px;
+    top: 25px;
+    height: 30px;
+    width: 30px;
+    z-index: 1;
+}
+.bump{
+    position: absolute;
+    height: 80px;
+    z-index: 1;
+}
+.image{
+    height: 80px;
+    width: 80px;
+    cursor: pointer;
+}
+.guide{
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    height: 30px;
+    padding: 7px 10px 7px 10px;
+    font-size: 15px;
+    width: 100%;
+    background: #DDDDDD;
+    cursor: default;
+}
+#contextmenu{
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    cursor: pointer;
+    background: #FFFFFF;
+    padding: 10px 10px 10px 10px;
+    border-radius: 5px 5px 5px 5px;
+    z-index: 2;
+}
+.contextmenu-title{
+    padding-bottom: 5px;
+    padding-top: 5px;
+    font-size: 15px;
+    border-bottom: solid 1px #AAAAAA;
+}
+.index{
+    height: 35px;
+    padding-top: 10px;
+    padding-left: 10px;
+    font-size: 15px;
+    color: #FFFFFF;
+    background-color: #000000;
+    cursor: pointer;
+}
+.coursedata{
+    margin: 5px 10px 5px 10px;
+    width: 60px;
+    height: 60px;
+    font-size: 10px;
+    text-align: center;
+    color: #000000;
+    background-color: #CCCCCC;
+    border-radius: 7px 7px 7px 7px;   
+}
+dialog{
+    border-radius: 5px;
+    padding: none;
+    width: 400px;
+    z-index: 3;
+}
+dialog > input{
+    width: 360px;
+    height: 50px;
+}
+dialog > div > button, dialog > button{
+    width: 100px;
+    text-align: center;
+    background-color: #000000;
+    color: #f8f8f8;
+    padding: 5px;
+    border-radius: 5px;
+    margin-right: 10px;
+}
