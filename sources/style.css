@@ -136,6 +136,21 @@ table{
         width: 60px;
         height: 60px;
     }
+    .check-marker{
+        height: 17px;
+        width: 17px;
+    }
+    .obstacle{
+        height: 30px;
+        width: 30px;
+        left: 25px;
+        top: 25px;
+    }
+    .bump{
+        height: 80px;
+        left: 37px;
+        top: 0px;
+    }
 }
 @media screen and (max-width:1040px) and (min-width:920px){
     .menu{
@@ -166,6 +181,21 @@ table{
         margin: 5px 10px 5px 10px;
         width: 60px;
         height: 60px;
+    }
+    .check-marker{
+        height: 17px;
+        width: 17px;
+    }
+    .obstacle{
+        height: 30px;
+        width: 30px;
+        left: 25px;
+        top: 25px;
+    }
+    .bump{
+        height: 80px;
+        left: 37px;
+        top: 0px;
     }
 }
 @media screen and (max-width:920px){
@@ -201,6 +231,21 @@ table{
     .help-link{
         width: 20vw !important;
     }
+    .check-marker{
+        height: 2vw;
+        width: 2vw;
+    }
+    .obstacle{
+        height: 3vw;
+        width: 3vw;
+        left: 2.5vw;
+        top: 2.5vw;
+    }
+    .bump{
+        height: 8vw;
+        left: 3.7vw;
+        top: 0px;
+    }
 }
 .menu-img-w, .menu-img-n{
     margin: 1px 1px 1px 1px;
@@ -219,23 +264,16 @@ td{
     left: 0px;
     top: 0px;
     background-color: #FFD700;
-    height: 17px;
-    width: 17px;
     border-radius: 50%;
     z-index: 1;
 }
 .obstacle{
     display: block;
     position: absolute;
-    left: 25px;
-    top: 25px;
-    height: 30px;
-    width: 30px;
     z-index: 1;
 }
 .bump{
     position: absolute;
-    height: 80px;
     z-index: 1;
 }
 .guide{

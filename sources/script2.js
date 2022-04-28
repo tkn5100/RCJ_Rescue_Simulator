@@ -46,24 +46,4 @@
     //   }); 
     // };
 
-    //NRL・WRL切り替え
-    document.getElementById('tab-nav').addEventListener('click', (e) => {
-      e.preventDefault();
-      if(document.getElementById('tab-nav').textContent == 'WRLタイルへ'){
-        console.log('a')
-        document.getElementById('wrl-tiles').style.display = 'block';
-        document.getElementById('nrl-tiles').style.display = 'none';
-        document.getElementById('tab-nav').textContent ='NRLタイルへ';
-        $tools[0].style.display = 'block';
-        nomal_guide();
-      } else {
-        console.log('b')
-        document.getElementById('wrl-tiles').style.display = 'none';
-        document.getElementById('nrl-tiles').style.display = 'block';
-        document.getElementById('tab-nav').textContent ='WRLタイルへ';
-        $tools[0].style.display = 'none';
-        nomal_guide();
-      }
-    });
-
   })();

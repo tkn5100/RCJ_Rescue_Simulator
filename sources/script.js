@@ -20,7 +20,6 @@
     let nowturn = null;
     let src = null;
     let secondOrFirst = null;
-    let img_coordinate = null;
     let checkOrUncheck = null;
     let newCheckMarker = null;
     let obOrUnob = null;
@@ -358,7 +357,7 @@
               newBump.src = ".././img/bu.png";
               newBump.className = "bump";
               bump_rotate = input_data_bump[index + 1];
-              newBump.setAttribute("style", "left: 37px; top: 0px; transform: rotate(" + bump_rotate + "deg)");
+              newBump.setAttribute("style", "transform: rotate(" + bump_rotate + "deg)");
               $img[index].parentElement.appendChild(newBump);
               $img[index].dataset.bump = bump_rotate;
             }
@@ -556,22 +555,27 @@
     }
 
 
-    //右クリックメニュー coordinate=座標
+    //右クリックメニュー
     for (let index = 0; index < imgLen; index++) {
       secondOrFirst = null;
       $img[index].addEventListener('contextmenu', (e) => {
         e.preventDefault();
         document.getElementById('contextmenu').style.display = "block";
-        img_coordinate = $img[index].getBoundingClientRect();
-        //もし下のスペースがなければメニューを上にずらす
-        if (window.innerHeight - img_coordinate.top < 250) {
-          document.getElementById('contextmenu').style.left = e.pageX+"px";
-          document.getElementById('contextmenu').style.bottom = "10px";
+        //topとbottomの決定(もし下のスペースがなければメニューを上にずらす)
+        if (window.innerHeight - e.pageY < 250) {
           document.getElementById('contextmenu').style.top = "auto";
+          document.getElementById('contextmenu').style.bottom = "10px";
         } else {
-          document.getElementById('contextmenu').style.left = e.pageX+"px";
           document.getElementById('contextmenu').style.top = e.pageY+"px";
           document.getElementById('contextmenu').style.bottom = "auto";
+        }
+        //rightとleftの決定(もし右のスペースがなければメニューを左にずらす)
+        if (window.innerWidth - e.pageX < 180) {
+          document.getElementById('contextmenu').style.right = (window.innerWidth - e.pageX) + "px";
+          document.getElementById('contextmenu').style.left = "auto";
+        } else {
+          document.getElementById('contextmenu').style.left = e.pageX+"px";
+          document.getElementById('contextmenu').style.right = "auto";
         }
         //90度回転
         document.getElementsByClassName('contextmenu-title')[0].onclick= function() {
@@ -636,7 +640,7 @@
                 newBump = document.createElement("img");
                 newBump.src = ".././img/bu.png";
                 newBump.className = "bump";
-                newBump.setAttribute("style", "left: 37px; top: 0px; transform: rotate(" + (Number(bump_rotate) + 180) + "deg)");
+                newBump.setAttribute("style", "transform: rotate(" + (Number(bump_rotate) + 180) + "deg)");
                 $img[index].parentElement.appendChild(newBump);
                 $img[index].dataset.bump = bump_rotate;
               }
@@ -652,10 +656,29 @@
       });
     }
 
-
-    //右クリック非表示
+    //右クリックメニュー非表示
     document.body.addEventListener('click',function (){
       document.getElementById('contextmenu').style.display="none";
+    });
+
+    //NRL・WRL切り替え
+    document.getElementById('tab-nav').addEventListener('click', (e) => {
+      e.preventDefault();
+      if(document.getElementById('tab-nav').textContent == 'WRLタイルへ'){
+        console.log('a')
+        document.getElementById('wrl-tiles').style.display = 'block';
+        document.getElementById('nrl-tiles').style.display = 'none';
+        document.getElementById('tab-nav').textContent ='NRLタイルへ';
+        $tools[0].style.display = 'block';
+        nomal_guide();
+      } else {
+        console.log('b')
+        document.getElementById('wrl-tiles').style.display = 'none';
+        document.getElementById('nrl-tiles').style.display = 'block';
+        document.getElementById('tab-nav').textContent ='WRLタイルへ';
+        $tools[0].style.display = 'none';
+        nomal_guide();
+      }
     });
 
   })();
