@@ -489,6 +489,7 @@
       $tools[0].dataset.one = 1;
       $guide.textContent = '6×8タイルに切り替えました';
       setTimeout(nomal_guide, 2000);
+      $tools[0].textContent = '2階・半2階部分の作成';
     });
 
     //4×9タイル
@@ -496,7 +497,8 @@
       tile(2);
       $tools[0].dataset.one = 1;
       $guide.textContent = '4×9タイルに切り替えました。このモードでは被災者ゾーンの自動入力機能は使えません。';
-      setTimeout(nomal_guide, 3000);
+      setTimeout(nomal_guide, 2000);
+      $tools[0].textContent = '2階・半2階部分の作成';
     });
 
     //3×12タイル
@@ -504,7 +506,8 @@
       tile(4);
       $tools[0].dataset.one = 1;
       $guide.textContent = '3×12タイルに切り替えました。このモードでは被災者ゾーンの自動入力機能は使えません。';
-      setTimeout(nomal_guide, 3000);
+      setTimeout(nomal_guide, 2000);
+      $tools[0].textContent = '2階・半2階部分の作成';
     });
 
     //ヘルプ
