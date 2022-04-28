@@ -1,4 +1,6 @@
 (()=>{
+    //メインプログラムのためのjsファイル
+
     const $doc = document;
     const $guide = $doc.getElementById('guidetext');
     const $img = $doc.getElementsByClassName('image');
@@ -37,7 +39,7 @@
     let file = null;
     // let course_show = 0;
     let data = null;
-    let auto_save = [];
+    let auto_save_tile = [];
     let auto_save_input = [];
 
 
@@ -52,6 +54,17 @@
         }
       }
     };
+
+    function auto_save(){
+      for (let index = 0; index < imgLen; index++) {
+        auto_save_tile.push(".././img/" + $img[index].src.slice(-6));
+      }
+      if (localStorage.hasOwnProperty("rrl_auto-save")){
+        localStorage.removeItem("rrl_auto-save");
+      }
+      localStorage.setItem("rrl_auto-save", JSON.stringify(auto_save_tile));
+      auto_save_tile = [];
+    }
 
 
     //回転
@@ -76,15 +89,7 @@
           for (let index = 0; index < imgLen; index++) {
             $img[index].addEventListener('click', (e)=> {
               e.target.src = src;
-              //自動保存
-              for (let index = 0; index < imgLen; index++) {
-                auto_save.push(".././img/" + $img[index].src.slice(-6));
-              }
-              if (localStorage.hasOwnProperty("rrl_auto-save")){
-                localStorage.removeItem("rrl_auto-save");
-              }
-              localStorage.setItem("rrl_auto-save", JSON.stringify(auto_save));
-              auto_save = [];
+              auto_save();
             });
           }
         });
@@ -95,15 +100,7 @@
           for (let index = 0; index < imgLen; index++) {
             $img[index].addEventListener('click', (e)=> {
               e.target.src = src;
-              //自動保存
-              for (let index = 0; index < imgLen; index++) {
-                auto_save.push(".././img/" + $img[index].src.slice(-6));
-              }
-              if (localStorage.hasOwnProperty("wrl_auto-save")){
-                localStorage.removeItem("wrl_auto-save");
-              }
-              localStorage.setItem("wrl_auto-save", JSON.stringify(auto_save));
-              auto_save = [];
+              auto_save();
             });
           }
         });
@@ -160,6 +157,7 @@
         $img[arg + 19].style.transform = 'rotate(180deg)';
         $img[arg + 19].dataset.turn = 180;
         a = 1
+        auto_save();
         nomal_guide();
       } else if (src != '.././img/r1.png'){} else{
         window.alert('コートに避難ゾーンは一つしか置けません。');
@@ -377,7 +375,7 @@
     //自動保存の読み込み
     $tools[4].addEventListener('click', ()=> {
       if (window.confirm('最新の自動保存データを読み込みますか？このデータにはタイルのみが含まれます。詳細はヘルプをご覧ください。')) {
-        auto_save_input = localStorage.getItem("wrl_auto-save",);
+        auto_save_input = localStorage.getItem("rrl_auto-save",);
         if (auto_save_input == null){
           window.alert('自動保存データがありません')
         }else{
@@ -474,8 +472,9 @@
           $img[index].src = '.././img/wt.png';
         }
       }
+      auto_save();
       $guide.textContent = '未入力のタイルをすべて白色にしました';
-        setTimeout(nomal_guide, 2000);
+      setTimeout(nomal_guide, 2000);
     });
 
 
@@ -657,39 +656,6 @@
     //右クリック非表示
     document.body.addEventListener('click',function (){
       document.getElementById('contextmenu').style.display="none";
-    });
-
-    // //左側表示・非表示
-    // for (let i = 0; i < $index.length; i++) {
-    //   $index[i].addEventListener('click', () => {
-    //     if (course_show == 0){
-    //       document.getElementsByClassName('group')[i].style.display = 'none';
-    //       course_show = 1;
-    //     }else{
-    //       document.getElementsByClassName('group')[i].style.display = 'block';
-    //       course_show = 0;
-    //     };
-    //   }); 
-    // };
-
-    //NRL・WRL切り替え
-    document.getElementById('tab-nav').addEventListener('click', (e) => {
-      e.preventDefault();
-      if(document.getElementById('tab-nav').textContent == 'WRLタイルへ'){
-        console.log('a')
-        document.getElementById('wrl-tiles').style.display = 'block';
-        document.getElementById('nrl-tiles').style.display = 'none';
-        document.getElementById('tab-nav').textContent ='NRLタイルへ';
-        $tools[0].style.display = 'block';
-        nomal_guide();
-      } else {
-        console.log('b')
-        document.getElementById('wrl-tiles').style.display = 'none';
-        document.getElementById('nrl-tiles').style.display = 'block';
-        document.getElementById('tab-nav').textContent ='WRLタイルへ';
-        $tools[0].style.display = 'none';
-        nomal_guide();
-      }
     });
 
   })();

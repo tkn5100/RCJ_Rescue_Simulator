@@ -92,9 +92,6 @@ table{
     border: solid 1px #888888;
 }
 .tools{
-    margin: 5px 10px 5px 10px;
-    width: 60px;
-    height: 60px;
     font-size: 10px;
     text-align: center;
     color: #ffffff;
@@ -107,38 +104,105 @@ table{
     flex-direction: column !important;
     align-items: center;
     border-right: solid 5px #000000;
-    height: 80vh;
     overflow: auto;
 }
 @media screen and (min-width:1040px){
     .menu{
         width: 340px;
+        height: 80vh;
     }
     .index{
         width: 270px;
     }
-    .index-plus{
+    /* .index-plus{
         padding-left: 180px;
+    } */
+    .image{
+        height: 80px;
+        width: 80px;
+        cursor: pointer;
+    }
+    .tools{
+        width: 60px;
+        height: 60px;
+        margin: 5px 10px 5px 10px;
+    }
+    .menu-img-w, .menu-img-n{
+        height: 60px;
+        width: 60px;
+    }
+    .coursedata{
+        margin: 5px 10px 5px 10px;
+        width: 60px;
+        height: 60px;
     }
 }
-@media screen and (max-width:1040px){
+@media screen and (max-width:1040px) and (min-width:920px){
     .menu{
         width: 270px;
+        height: 80vh;
     }
     .index{
         width: 200px;
     }
-    .index-plus{
+    /* .index-plus{
         padding-left: 110px;
+    } */
+    .image{
+        height: 80px;
+        width: 80px;
+        cursor: pointer;
+    }
+    .tools{
+        width: 60px;
+        height: 60px;
+        margin: 5px 10px 5px 10px;
+    }
+    .menu-img-w, .menu-img-n{
+        height: 60px;
+        width: 60px;
+    }
+    .coursedata{
+        margin: 5px 10px 5px 10px;
+        width: 60px;
+        height: 60px;
     }
 }
-.menu-title{
-    display: flex;
-    margin-top: 1px;
+@media screen and (max-width:920px){
+    .menu{
+        width: 25vw;
+        height: 85vh;
+    }
+    .index{
+        width: 20vw;
+    }
+    /* .index-plus{
+        padding-left: 110px;
+    } */
+    .image{
+        height: 8vw;
+        width: 8vw;
+        cursor: pointer;
+    }
+    .tools{
+        width: 7vw;
+        height: 7vw;
+        margin: 0.5% 0.5% 0.5% 0.5%;
+    }
+    .menu-img-w, .menu-img-n{
+        height: 8vw;
+        width: 8vw;
+    }
+    .coursedata{
+        margin: 1vw;
+        width: 8vw;
+        height: 8vw;
+    }
+    .help-link{
+        width: 20vw !important;
+    }
 }
 .menu-img-w, .menu-img-n{
-    height: 60px;
-    width: 60px;
     margin: 1px 1px 1px 1px;
     border: solid 0.1px #AAAAAA;
     background-color: #FFFFFF;
@@ -173,11 +237,6 @@ td{
     position: absolute;
     height: 80px;
     z-index: 1;
-}
-.image{
-    height: 80px;
-    width: 80px;
-    cursor: pointer;
 }
 .guide{
     position: absolute;
@@ -214,34 +273,12 @@ td{
     font-size: 15px;
     color: #FFFFFF;
     background-color: #000000;
-    cursor: pointer;
+    cursor: normal;
 }
 .coursedata{
-    margin: 5px 10px 5px 10px;
-    width: 60px;
-    height: 60px;
     font-size: 10px;
     text-align: center;
     color: #000000;
     background-color: #CCCCCC;
     border-radius: 7px 7px 7px 7px;   
-}
-dialog{
-    border-radius: 5px;
-    padding: none;
-    width: 400px;
-    z-index: 3;
-}
-dialog > input{
-    width: 360px;
-    height: 50px;
-}
-dialog > div > button, dialog > button{
-    width: 100px;
-    text-align: center;
-    background-color: #000000;
-    color: #f8f8f8;
-    padding: 5px;
-    border-radius: 5px;
-    margin-right: 10px;
 }
