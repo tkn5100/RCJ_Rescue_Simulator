@@ -4,9 +4,9 @@
     <meta charset="utf-8">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="destyle.css">
-    <title>RoboCupJunior コート作成環境v1.1.3</title>
+    <title>RoboCupJunior コート作成環境v2.0.0</title>
   </head>
-  
+
   <body class="body">
     <div id="contextmenu">
       <ul>
@@ -20,6 +20,52 @@
           <li class="contextmenu-title" style="padding-bottom: 0px; border-bottom: none;">バンプを取る</li>
       </ul>
     </div>
+    <div id="bump_settings">
+      <div>
+        <span>バンプの個数を選択:</span>
+        <label class="container">1個<input type="radio" checked="checked" name="radio" value="0"><span class="checkmark"></span></label>
+        <label class="container">2個<input type="radio" name="radio" value="1"><span class="checkmark"></span></label>
+        <label class="container">3個<input type="radio" name="radio" value="2"><span class="checkmark"></span></label>
+        <label class="container">4個<input type="radio" name="radio" value="3"><span class="checkmark"></span></label>
+      </div>
+      <div>
+        <span>1本目</span>
+        <span>左のスペース:</span><input type="number" class="bump-input" value="37" placeholder="0~80">
+        <span>上のスペース:</span><input type="number" class="bump-input" value="0" placeholder="-37~37">
+        <span>回転:</span><input type="number" class="bump-input" value="0" placeholder="-90~90,0度で縦向き" style="width: 14vw;">
+      </div>
+      <div>
+        <span>2本目</span>
+        <span>左のスペース:</span><input type="number" class="bump-input" value="37" placeholder="0~80">
+        <span>上のスペース:</span><input type="number" class="bump-input" value="0" placeholder="-37~37">
+        <span>回転:</span><input type="number" class="bump-input" value="0" placeholder="-90~90,0度で縦向き" style="width: 14vw;">
+      </div>
+      <div>
+        <span>3本目</span>
+        <span>左のスペース:</span><input type="number" class="bump-input" value="37" placeholder="0~80">
+        <span>上のスペース:</span><input type="number" class="bump-input" value="0" placeholder="-37~37">
+        <span>回転:</span><input type="number" class="bump-input" value="0" placeholder="-90~90,0度で縦向き" style="width: 14vw;">
+      </div>
+      <div>
+        <span>4本目</span>
+        <span>左のスペース:</span><input type="number" class="bump-input" value="37" placeholder="0~80">
+        <span>上のスペース:</span><input type="number" class="bump-input" value="0" placeholder="-37~37">
+        <span>回転:</span><input type="number" class="bump-input" value="0" placeholder="-90~90,0度で縦向き" style="width: 14vw;">
+      </div>
+      <p>※左のスペースは0~80で、中央は37。上のスペースは-37~37で、中央は0。回転は-90~90で、0度だと縦向き。</p>
+      <br>
+      <p>プレビュー</p>
+      <div style="position: relative;">
+        <img src=".././img/no.png" alt="no image" id="image-preview" style="cursor: default;">
+        <img src=".././img/bu.png" alt="バンプ" class="bump">
+        <img src=".././img/bu.png" alt="バンプ" class="bump">
+        <img src=".././img/bu.png" alt="バンプ" class="bump">
+        <img src=".././img/bu.png" alt="バンプ" class="bump">
+      </div>
+      <button id="bump_decide">決定</button>
+      <button id="bump_cancel">キャンセル</button>
+    </div>
+    <div id="overlay"></div>
     <div class="toolbar">
       <button class="tools" data-one="1">2階・半2階部分の作成</button>
       <button class="tools" data-grid="1">グリッドの非表示</button>
@@ -42,18 +88,28 @@
           <p class="index">通常タイル</p>
           <div class="group">
             <img src=".././img/r0.png" alt="course" class="menu-img-w">
+            <p class="description">被災者ゾーンの自動入力</p>
             <img src=".././img/r1.png" alt="course" class="menu-img-w">
             <img src=".././img/r2.png" alt="course" class="menu-img-w">
             <img src=".././img/r3.png" alt="course" class="menu-img-w">
+            <p class="description">被災者ゾーンの入口</p>
             <img src=".././img/r4.png" alt="course" class="menu-img-w">
+            <p class="description">被災者ゾーンの入口</p>
             <img src=".././img/r5.png" alt="course" class="menu-img-w">
+            <p class="description">被災者ゾーンの入口</p>
             <img src=".././img/r6.png" alt="course" class="menu-img-w">
+            <p class="description">被災者ゾーンの出口</p>
             <img src=".././img/r7.png" alt="course" class="menu-img-w">
+            <p class="description">被災者ゾーンの出口</p>
             <img src=".././img/r8.png" alt="course" class="menu-img-w">
+            <p class="description">被災者ゾーンの出口</p>
             <img src=".././img/01.png" alt="course" class="menu-img-w">
+            <p class="description">スタート</p>
             <img src=".././img/02.png" alt="course" class="menu-img-w">
             <img src=".././img/03.png" alt="course" class="menu-img-w">
+            <p class="description">ギャップ/10点</p>
             <img src=".././img/04.png" alt="course" class="menu-img-w">
+            <p class="description">ギャップ/計20点</p>
             <img src=".././img/05.png" alt="course" class="menu-img-w">
             <img src=".././img/06.png" alt="course" class="menu-img-w">
             <img src=".././img/07.png" alt="course" class="menu-img-w">
@@ -80,6 +136,7 @@
             <img src=".././img/31.png" alt="course" class="menu-img-w">
             <img src=".././img/32.png" alt="course" class="menu-img-w">
             <img src=".././img/33.png" alt="course" class="menu-img-w">
+            <p class="description">十字ギャップ/計20点</p>
             <img src=".././img/34.png" alt="course" class="menu-img-w">
             <img src=".././img/37.png" alt="course" class="menu-img-w">
             <img src=".././img/38.png" alt="course" class="menu-img-w">
@@ -101,7 +158,9 @@
             <img src=".././img/ak.png" alt="course" class="menu-img-w">
             <img src=".././img/al.png" alt="course" class="menu-img-w">
             <img src=".././img/an.png" alt="course" class="menu-img-w">
+            <p class="description">終端</p>
             <img src=".././img/se.png" alt="course" class="menu-img-w">
+            <p class="description">シーソー/15点</p>
           </div>
           <p class="index">タイル情報</p>
           <div class="group">
@@ -110,6 +169,7 @@
             <button class="coursedata" style="border: solid 1px #993366">半2階のタイル</button>
             <button class="coursedata" style="border: solid 1px #CC3366">半2階→2階の坂</button>
             <button class="coursedata" style="border: solid 1px #FF3366">2階のタイル</button>
+            <p class="description">タイルは前回選択時のものが引き継がれます</p>
           </div>
         </div>
 
@@ -117,15 +177,21 @@
           <p class="index">通常タイル</p>
           <div class="group">
             <img src=".././img/r0.png" alt="course" class="menu-img-n">
-            <img src=".././img/r1.png" alt="course" class="menu-img-n">
-            <img src=".././img/r2.png" alt="course" class="menu-img-n">
-            <img src=".././img/r3.png" alt="course" class="menu-img-n">
-            <img src=".././img/r4.png" alt="course" class="menu-img-n">
-            <img src=".././img/r5.png" alt="course" class="menu-img-n">
-            <img src=".././img/01.png" alt="course" class="menu-img-n">
-            <img src=".././img/02.png" alt="course" class="menu-img-n">
-            <img src=".././img/03.png" alt="course" class="menu-img-n">
-            <img src=".././img/04.png" alt="course" class="menu-img-n">
+            <p class="description">被災者ゾーンの自動入力</p>
+            <img src=".././img/r1.png" alt="course" class="menu-img-w">
+            <img src=".././img/r2.png" alt="course" class="menu-img-w">
+            <img src=".././img/r3.png" alt="course" class="menu-img-w">
+            <p class="description">被災者ゾーンの入口</p>
+            <img src=".././img/r4.png" alt="course" class="menu-img-w">
+            <p class="description">被災者ゾーンの入口</p>
+            <img src=".././img/r5.png" alt="course" class="menu-img-w">
+            <p class="description">被災者ゾーンの入口</p>
+            <img src=".././img/01.png" alt="course" class="menu-img-w">
+            <img src=".././img/02.png" alt="course" class="menu-img-w">
+            <img src=".././img/03.png" alt="course" class="menu-img-w">
+            <p class="description">ギャップ/10点</p>
+            <img src=".././img/04.png" alt="course" class="menu-img-w">
+            <p class="description">ギャップ/計20点</p>
             <img src=".././img/05.png" alt="course" class="menu-img-n">
             <img src=".././img/06.png" alt="course" class="menu-img-n">
             <img src=".././img/07.png" alt="course" class="menu-img-n">
@@ -152,6 +218,7 @@
             <img src=".././img/31.png" alt="course" class="menu-img-n">
             <img src=".././img/32.png" alt="course" class="menu-img-n">
             <img src=".././img/33.png" alt="course" class="menu-img-n">
+            <p class="description">十字ギャップ/計20点</p>
             <img src=".././img/34.png" alt="course" class="menu-img-n">
             <img src=".././img/37.png" alt="course" class="menu-img-n">
             <img src=".././img/38.png" alt="course" class="menu-img-n">
@@ -165,6 +232,7 @@
             <button class="coursedata" style="border: solid 1px #993366">半2階のタイル</button>
             <button class="coursedata" style="border: solid 1px #CC3366">半2階→2階の坂</button>
             <button class="coursedata" style="border: solid 1px #FF3366">2階のタイル</button>
+            <p class="description">タイルは前回選択時のものが引き継がれます</p>
           </div>
         </div>
       </div>
@@ -172,319 +240,319 @@
       <!-- 6×8 -->
       <table style="display: block;">
         <tr>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></div></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></div></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
         </tr>
         <tr>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
         </tr>
         <tr>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
         </tr>
         <tr>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
         </tr>
         <tr>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
         </tr>
         <tr>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
         </tr>
       </table>
       <!-- 2階 -->
       <table style="display: none;">
         <tr>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></div></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></div></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
         </tr>
         <tr>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
         </tr>
         <tr>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
         </tr>
         <tr>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
         </tr>
         <tr>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
         </tr>
         <tr>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
         </tr>
       </table>
 
       <!-- 4×9 -->
       <table style="display: none;">
         <tr>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
         </tr>
         <tr>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
         </tr>
         <tr>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
         </tr>
         <tr>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
         </tr>
       </table>
       <!-- 2階 -->
       <table style="display: none;">
         <tr>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
         </tr>
         <tr>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
         </tr>
         <tr>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
         </tr>
         <tr>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
         </tr>
       </table>
 
       <!-- 3×12 -->
       <table style="display: none;">
         <tr>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
         </tr>
         <tr>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
         </tr>
         <tr>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
         </tr>
       </table>
       <!-- 2階 -->
       <table style="display: none;">
         <tr>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
         </tr>
         <tr>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
         </tr>
         <tr>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
-          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
+          <td><img src=".././img/no.png" alt="no image" class="image" data-turn="0" data-floor="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0"></td>
         </tr>
       </table>
 
     </div>
     <p class="guide" id="guidetext">ただいま1階部分を作成中です</p>
-    <small class="copyright">Copyright&copy; 2021 TKN All Rights Reserved.</small>
+    <small class="copyright">Copyright&copy; 2021-2022 TKN All Rights Reserved.</small>
     <script type="text/javascript" src="script.js"></script>
     <script type="text/javascript" src="script2.js"></script>
   </body>

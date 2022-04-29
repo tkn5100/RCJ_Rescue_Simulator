@@ -4,11 +4,11 @@
     <meta charset="utf-8">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="destyle.css">
-    <title>ヘルプ -RoboCupJunior コート作成環境v1.1.3</title>
+    <title>ヘルプ -RoboCupJunior コート作成環境v2.0.0</title>
   </head>
 
   <body class="body" style="margin-left: 15%; margin-right: 15%;">
-      <h1 class="help_h1">ヘルプ - RoboCupJunior WRL<br>コート作成環境v1.1.3</h1>
+      <h1 class="help_h1">ヘルプ - RoboCupJunior WRL<br>コート作成環境v2.0.0</h1>
       <p class="help-sentence">このソフトウェアはロボカップジュニアジャパンワールドリーグレスキューラインのコースを作成できるものです。ルールは2022年版に準拠します。なお、シーソー、レスキューキット、被災者、避難場所を配置する機能はありません。</p>
       <p class="help-sentence">アプリケーション版の配布はv1.1.1をもって終了しました。なおv1.1.1以前でもアプリケーション版を利用すると思わぬ不具合が発生する場合がありますので、ブラウザ版(このソフトウェア)をご利用ください。</p>
       <br>
@@ -60,10 +60,25 @@
       <h3 class="help_h3">グリッドの表示/非表示ボタン</h3>
       <p class="help-sentence">コートのグリッドの表示・非表示を切り替えることができます。デフォルトではグリッドが表示されています。</p>
       <h3 class="help_h3">プロジェクトの保存ボタン</h3>
-      <p class="help-sentence">作成途中のコートを保存できます。保存したファイルはまたこのシミュレーターで読み込めます。拡張子は.rrlで、Windowsでは通常「ダウンロード」フォルダに保存されます。クリックするとファイル名を入力するダイアログが出るので、入力してください。拡張子の入力は不要です。</p>
+      <p class="help-sentence">作成途中のコートを保存できます。保存したファイルはまたこのシミュレーターで読み込めます。RRL形式のファイルが、Windowsでは通常「ダウンロード」フォルダに保存されます。クリックするとファイル名を入力するダイアログが出るので、入力してください。このとき拡張子の入力は不要です。</p>
       <h3 class="help_h3">プロジェクトの読み込みボタン</h3>
       <p class="help-sentence">作成途中のプロジェクトを読み込み、途中から編集作業を再開できます。クリックするとファイル選択画面が出るので、任意のファイルを選んでください。読み込むことができるファイルの拡張子は.rrlのみです。</p>
-      <p class="help-sentence">※保存と読み込みは同じバージョンで行ってください。違うバージョンで行った場合正常に読み込まれません。</p>
+      <p class="help-sentence">※保存と読み込みは基本的に同じバージョンで行ってください。違うバージョンで行った場合正常に読み込まれないことがあります。メジャーアップデートでRRLファイルの内部構造が変わった場合、新しいバージョンでは古いバージョンのファイルをサポートし、新しいバージョンのファイルに変更できるようにします。その場合は下の表に△で表されます。古いバージョンで作られたファイルのサポートは、次のメジャーアップデートで打ち切ります。</p>
+      <h4 class="help_h4">RRLファイルの互換性</h4>
+      <table class="help-table">
+        <tbody>
+          <tr><td rowspan="2" colspan="2"></td><td colspan="7">読み込み</td></tr>
+          <tr><td>v1.0.0</td><td>v1.0.1</td><td>v1.1.0</td><td>v1.1.1</td><td>v1.1.2</td><td>v1.1.3</td><td>v2.0.0</td></tr>
+          <tr><td rowspan="7">作成</td><td>v1.0.0</td><td>○</td><td>○</td><td>○</td><td>○</td><td>○</td><td>○</td><td>△</td></tr>
+          <tr><td>v1.0.1</td><td>○</td><td>○</td><td>○</td><td>○</td><td>○</td><td>○</td><td>△</td></tr>
+          <tr><td>v1.1.0</td><td>○</td><td>○</td><td>○</td><td>○</td><td>○</td><td>○</td><td>△</td></tr>
+          <tr><td>v1.1.1</td><td>○</td><td>○</td><td>○</td><td>○</td><td>○</td><td>○</td><td>△</td></tr>
+          <tr><td>v1.1.2</td><td>○</td><td>○</td><td>○</td><td>○</td><td>○</td><td>○</td><td>△</td></tr>
+          <tr><td>v1.1.3</td><td>○</td><td>○</td><td>○</td><td>○</td><td>○</td><td>○</td><td>△</td></tr>
+          <tr><td>v2.0.0</td><td>×</td><td>×</td><td>×</td><td>×</td><td>×</td><td>×</td><td>○</td></tr>
+        </tbody>
+      </table>
+      <p class="help-sentence">○…可能　△…可能だが非推奨　×…不可能</p>
       <h3 class="help_h3">自動保存データの読み込み</h3>
       <p class="help-sentence">前述の自動保存したデータを読み込みます。</p>
       <h3 class="help_h3">印刷ボタン</h3>
@@ -76,7 +91,7 @@
       <p class="help-sentence">コートの大きさを変更します。間違って変更してしまっても、入力していたコートの大きさに戻せば「オールクリアボタン」を押していない限り元に戻ります。なお4×9タイル、3×12タイルは被災者ゾーンの自動入力には対応していません。</p>
       <h3 class="help_h3">ヘルプボタン</h3>
       <p class="help-sentence">ヘルプ(このページ)を表示します。</p>
-      
+
       <h2 class="help_h2" style="margin-bottom: 0px;">3.動作環境</h2>
       <h3 class="help_h3">ディスプレイ</h3>
       <p class="help-sentence">600×600以上(900×700以上推奨)</p>
@@ -98,6 +113,14 @@
       <p class="help-sentence">※スマートフォンなどは画面が小さすぎるほか、ローカルhtmlファイルの起動ができません。</p>
 
       <h2 class="help_h2" style="margin-bottom: 0px;">4.変更履歴</h2>
+      <h4 class="help_h4">v2.0.0</h4>
+      <ul>
+        <li class="help-sentence">・2022.03.01公開</li>
+        <li class="help-sentence">・タイル選択部分のいくつかのタイルの上にマウスが移動すると、簡易的なガイドを表示する機能を追加</li>
+        <li class="help-sentence">・自動保存で、タイルの角度も保存するように変更</li>
+        <li class="help-sentence">・バンプを1つのタイルに複数個置けるように変更</li>
+        <li class="help-sentence">・ヘルプに「RRLファイルの互換性」を追加</li>
+      </ul>
       <h4 class="help_h4">v1.1.3</h4>
       <ul>
         <li class="help-sentence">・2022.02.22公開</li>
@@ -240,6 +263,12 @@
         <li class="help-sentence">・2022.01.01公開</li>
         <li class="help-sentence">・初版完成</li>
       </ul>
-      <small class="copyright-help">Copyright&copy; 2021 TKN All Rights Reserved.</small>
+
+      <h2 class="help_h2" style="margin-bottom: 0px;">6.このソフトウェアについて</h2>
+      <h3 class="help_h3">アプリケーションの調子が悪いときは</h3>
+      <p class="help-sentence">リロードせずに長時間使い続けると、動作が重くなったり不具合が出ることがあります。リロードボタンを押してリロードするか、「Ctrl+F5」を押してスーパーリロードしてください。ただし、プロジェクトを保存するのを忘れないでください。なお、スーパーリロードを行っても自動保存データは保持されます。</p>
+      <h3 class="help_h3">その他</h3>
+      <p class="help-sentence">無断での不特定多数への公開、商用利用は禁止します。</p>
+      <small class="copyright-help">Copyright&copy; 2021-2022 TKN All Rights Reserved.</small>
   </body>
 </html>

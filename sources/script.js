@@ -10,13 +10,11 @@
     const courseNrlLen = $course_nrl.length;
     const courseWrlLen = $course_wrl.length;
     const $tools = $doc.getElementsByClassName('tools');
-    const $main = $doc.getElementsByClassName('main');
-    const $menu = $doc.getElementsByClassName('menu');
-    const $toolbar = $doc.getElementsByClassName('toolbar');
     const $table = $doc.getElementsByTagName('table');
-    const $copyright = $doc.getElementsByClassName('copyright')[0];
     // const $index = document.getElementsByClassName('index')
     const $coursedata = $doc.getElementsByClassName('coursedata');
+    const $bump_input = document.getElementsByClassName('bump-input');
+    const $bump_input_div = document.querySelectorAll('#bump_settings > div');
     let nowturn = null;
     let src = null;
     let secondOrFirst = null;
@@ -24,22 +22,30 @@
     let newCheckMarker = null;
     let obOrUnob = null;
     let newObstacle = null;
-    let bumpOrUnbump = null;
+    let bumpOrUnbump_1 = null;
+    let bumpOrUnbump_2 = null;
+    let bumpOrUnbump_3 = null;
+    let bumpOrUnbump_4 = null;
     let newBump = null;
-    let bump_rotate = null;
-    let output_data = [[],[],[],[],[],[]];
+    let output_data = [[],[],[],[],[],[],[],[],[],[]];
     let csv_arrays = null
     let input_data_course = [];
     let input_data_turn = [];
     let input_data_border = [];
     let input_data_check = [];
     let input_data_obstacle = [];
-    let input_data_bump = [];
+    let input_data_bump1 = [];
+    let input_data_bump2 = [];
+    let input_data_bump3 = [];
+    let input_data_bump4 = [];
+    let bump_data = null;
     let file = null;
     // let course_show = 0;
     let data = null;
     let auto_save_tile = [];
-    let auto_save_input = [];
+    let auto_save_turn = [];
+    let auto_save_input_tile = [];
+    let auto_save_input_turn = [];
 
 
     function nomal_guide() {
@@ -57,12 +63,18 @@
     function auto_save(){
       for (let index = 0; index < imgLen; index++) {
         auto_save_tile.push(".././img/" + $img[index].src.slice(-6));
+        auto_save_turn.push($img[index].dataset.turn);
       }
-      if (localStorage.hasOwnProperty("rrl_auto-save")){
-        localStorage.removeItem("rrl_auto-save");
+      if (localStorage.hasOwnProperty("rrl_auto-save_tile")){
+        localStorage.removeItem("rrl_auto-save_tile");
       }
-      localStorage.setItem("rrl_auto-save", JSON.stringify(auto_save_tile));
+      if (localStorage.hasOwnProperty("rrl_auto-save_turn")){
+        localStorage.removeItem("rrl_auto-save_turn");
+      }
+      localStorage.setItem("rrl_auto-save_tile", JSON.stringify(auto_save_tile));
+      localStorage.setItem("rrl_auto-save_turn", JSON.stringify(auto_save_turn));
       auto_save_tile = [];
+      auto_save_turn = [];
     }
 
 
@@ -272,34 +284,42 @@
 
     //プロジェクトの保存
     function downloadCSV() {
-      output_data = [[],[],[],[],[],[]];
+      output_data = [[],[],[],[],[],[],[],[],[],[]];
       //ダウンロードするCSVファイル名を指定する
       const filename = window.prompt('ファイル名を入力:');
       if (filename) {
         //ダウンロードするタイルを配列に入れる
+        output_data[0].push("v2.0.0")
         for (let index = 0; index < imgLen; index++) {
-          output_data[0].push(".././img/" + $img[index].src.slice(-6));
-          output_data[1].push($img[index].dataset.turn);
+          output_data[1].push(".././img/" + $img[index].src.slice(-6));
+          output_data[2].push($img[index].dataset.turn);
           if ($img[index].style.border =="1px solid rgb(102, 51, 102)"){
-            output_data[2].push("solid 1px #663366");
+            output_data[3].push("solid 1px #663366");
           }else if ($img[index].style.border =="1px solid rgb(153, 51, 102)"){
-            output_data[2].push("solid 1px #993366");
+            output_data[3].push("solid 1px #993366");
           }else if ($img[index].style.border =="1px solid rgb(204, 51, 102)"){
-            output_data[2].push("solid 1px #CC3366");
+            output_data[3].push("solid 1px #CC3366");
           }else if ($img[index].style.border =="1px solid rgb(255, 51, 102)"){
-            output_data[2].push("solid 1px #FF3366");
+            output_data[3].push("solid 1px #FF3366");
           }else{
-            output_data[2].push("none");
+            output_data[3].push("none");
           }
-          output_data[3].push($img[index].dataset.check);
-          output_data[4].push($img[index].dataset.obstacle);
-          output_data[5].push($img[index].dataset.bump);
+          output_data[4].push($img[index].dataset.check);
+          output_data[5].push($img[index].dataset.obstacle);
+          output_data[6].push($img[index].dataset.bump1);
+          output_data[7].push($img[index].dataset.bump2);
+          output_data[8].push($img[index].dataset.bump3);
+          output_data[9].push($img[index].dataset.bump4);
         };
         output_data[0].push('\n');
         output_data[1].push('\n');
         output_data[2].push('\n');
         output_data[3].push('\n');
         output_data[4].push('\n');
+        output_data[5].push('\n');
+        output_data[6].push('\n');
+        output_data[7].push('\n');
+        output_data[8].push('\n');
         //BOMを付与する（Excelでの文字化け対策）
         const bom = new Uint8Array([0xef, 0xbb, 0xbf]);
         //Blobでデータを作成する
@@ -330,21 +350,55 @@
         file = document.getElementById('input_file').files[0];
         reader.readAsText(file);
         reader.onload = function () {
-          try{
-            csv_arrays = reader.result.split('\n');
-            input_data_course = csv_arrays[0].split(',');
-            input_data_turn = csv_arrays[1].split(',');
-            input_data_border = csv_arrays[2].split(',');
-            input_data_check = csv_arrays[3].split(',');
-            input_data_obstacle = csv_arrays[4].split(',');
-            input_data_bump = csv_arrays[5].split(',');
-          }catch (e){
-            window.alert('エラー:データの読み込みに失敗しました。ファイルが破損している可能性があります。ページを再読み込みします。')
-            window.location.reload();
+          csv_arrays = reader.result.split('\n');
+          if(csv_arrays[0] == "v2.0.0,"){
+            try{
+              input_data_course = csv_arrays[1].split(',');
+              input_data_turn = csv_arrays[2].split(',');
+              input_data_border = csv_arrays[3].split(',');
+              input_data_check = csv_arrays[4].split(',');
+              input_data_obstacle = csv_arrays[5].split(',');
+              input_data_bump1 = csv_arrays[6].split(',');
+              input_data_bump2 = csv_arrays[7].split(',');
+              input_data_bump3 = csv_arrays[8].split(',');
+              input_data_bump4 = csv_arrays[9].split(',');
+            }catch (e){
+              window.alert('エラー:データの読み込みに失敗しました。ファイルが破損している可能性があります。ページを再読み込みします。')
+              window.location.reload();
+            }
+          } else {
+            try{
+              input_data_course = csv_arrays[0].split(',');
+              input_data_course.unshift('');
+              input_data_turn = csv_arrays[1].split(',');
+              input_data_border = csv_arrays[2].split(',');
+              input_data_check = csv_arrays[3].split(',');
+              input_data_obstacle = csv_arrays[4].split(',');
+              input_data_bump1 = csv_arrays[5].split(',');
+            }catch (e){
+              window.alert('エラー:データの読み込みに失敗しました。ファイルが破損している可能性があります。ページを再読み込みします。')
+              window.location.reload();
+            }
+            for (let index = 1; index < input_data_bump1.length; index++) {
+              if(input_data_bump1[index] != '0'){
+                input_data_bump1[index] = '37a0a' + input_data_bump1[index]
+              }
+            }
+            input_data_bump2.push('');
+            input_data_bump3.push('');
+            input_data_bump4.push('');
+            for (let index = 1; index < input_data_bump1.length; index++) {
+              input_data_bump2.push('0');
+              input_data_bump3.push('0');
+              input_data_bump4.push('0');
+            }
+            console.log(input_data_bump2)
+            window.alert('このファイルはv1.1.2以前のバージョンで作成されたものです。もう1度書き出すとv1.2.0仕様になります。')
           }
+
           all_clear();
           for (let index = 0; index < imgLen; index++) {
-            $img[index].src = input_data_course[index];
+            $img[index].src = input_data_course[index + 1];
             $img[index].dataset.turn = input_data_turn[index + 1];
             $img[index].style.transform = 'rotate(' + input_data_turn[index + 1] + 'deg)';
             $img[index].style.border = input_data_border[index + 1];
@@ -364,14 +418,50 @@
               $img[index].dataset.obstacle = 1;
             }
             //バンプ
-            if(input_data_bump[index + 1] != 0){
+            if(input_data_bump1[index + 1] != 0){
               newBump = document.createElement("img");
               newBump.src = ".././img/bu.png";
               newBump.className = "bump";
-              bump_rotate = input_data_bump[index + 1];
-              newBump.setAttribute("style", "transform: rotate(" + bump_rotate + "deg)");
+              bump_data = input_data_bump1[index + 1].split('a');
+              newBump.setAttribute("style", "left: " + bump_data[0] + "px; top: " + bump_data[1] + "px; transform: rotate(" + bump_data[2] + "deg)");
               $img[index].parentElement.appendChild(newBump);
-              $img[index].dataset.bump = bump_rotate;
+              $img[index].dataset.bump1 = input_data_bump1[index + 1];
+              bump_data = null;
+              newBump = null;
+            }
+            if(input_data_bump2[index + 1] != 0){
+              console.log(index + 1)
+              newBump = document.createElement("img");
+              newBump.src = ".././img/bu.png";
+              newBump.className = "bump";
+              bump_data = input_data_bump2[index + 1].split('a');
+              newBump.setAttribute("style", "left: " + bump_data[0] + "px; top: " + bump_data[1] + "px; transform: rotate(" + bump_data[2] + "deg)");
+              $img[index].parentElement.appendChild(newBump);
+              $img[index].dataset.bump2 = input_data_bump2[index + 1];
+              bump_data = null;
+              newBump = null;
+            }
+            if(input_data_bump3[index + 1] != 0){
+              newBump = document.createElement("img");
+              newBump.src = ".././img/bu.png";
+              newBump.className = "bump";
+              bump_data = input_data_bump3[index + 1].split('a');
+              newBump.setAttribute("style", "left: " + bump_data[0] + "px; top: " + bump_data[1] + "px; transform: rotate(" + bump_data[2] + "deg)");
+              $img[index].parentElement.appendChild(newBump);
+              $img[index].dataset.bump3 = input_data_bump3[index + 1];
+              bump_data = null;
+              newBump = null;
+            }
+            if(input_data_bump4[index + 1] != 0){
+              newBump = document.createElement("img");
+              newBump.src = ".././img/bu.png";
+              newBump.className = "bump";
+              bump_data = input_data_bump4[index + 1].split('a');
+              newBump.setAttribute("style", "left: " + bump_data[0] + "px; top: " + bump_data[1] + "px; transform: rotate(" + bump_data[2] + "deg)");
+              $img[index].parentElement.appendChild(newBump);
+              $img[index].dataset.bump4 = input_data_bump4[index + 1];
+              bump_data = null;
+              newBump = null;
             }
           };
           document.getElementById('input_file').value = '';
@@ -386,13 +476,17 @@
     //自動保存の読み込み
     $tools[4].addEventListener('click', ()=> {
       if (window.confirm('最新の自動保存データを読み込みますか？このデータにはタイルのみが含まれます。詳細はヘルプをご覧ください。')) {
-        auto_save_input = localStorage.getItem("rrl_auto-save",);
-        if (auto_save_input == null){
+        auto_save_input_tile = localStorage.getItem("rrl_auto-save_tile");
+        auto_save_input_turn = localStorage.getItem("rrl_auto-save_turn");
+        if (auto_save_input_tile == null){
           window.alert('自動保存データがありません')
         }else{
-          auto_save_input = JSON.parse(auto_save_input)
+          auto_save_input_tile = JSON.parse(auto_save_input_tile);
+          auto_save_input_turn = JSON.parse(auto_save_input_turn);
           for (let index = 0; index < imgLen; index++) {
-            $img[index].src = auto_save_input[index];
+            $img[index].src = auto_save_input_tile[index];
+            $img[index].dataset.turn = auto_save_input_turn[index];
+            $img[index].style.transform = 'rotate(' + auto_save_input_turn[index] + 'deg)';
           }
         }
       }
@@ -451,9 +545,21 @@
         }else if ($img[index].dataset.obstacle == 1){
           $img[index].nextElementSibling.remove();
           $img[index].dataset.obstacle = 0;
-        }else if ($img[index].dataset.bump != 0){
+        }else if ($img[index].dataset.bump1 != 0){
           $img[index].nextElementSibling.remove();
-          $img[index].dataset.bump = 0;
+          $img[index].dataset.bump1 = 0;
+          if ($img[index].dataset.bump2 != 0){
+            $img[index].nextElementSibling.remove();
+            $img[index].dataset.bump2 = 0;
+          }
+          if ($img[index].dataset.bump3 != 0){
+            $img[index].nextElementSibling.remove();
+            $img[index].dataset.bump3 = 0;
+          }
+          if ($img[index].dataset.bump4 != 0){
+            $img[index].nextElementSibling.remove();
+            $img[index].dataset.bump4 = 0;
+          }
         }
       }
       $img[0].onclick = "";
@@ -546,10 +652,19 @@
         document.getElementsByClassName('contextmenu-title')[5].style.color = "#000000";
         document.getElementsByClassName('contextmenu-title')[5].style.cursor = "pointer";
         obOrUnob = 1;
-      }else if($img[arg].dataset.bump != 0){
+      }else if($img[arg].dataset.bump1 != 0){
         document.getElementsByClassName('contextmenu-title')[7].style.color = "#000000";
         document.getElementsByClassName('contextmenu-title')[7].style.cursor = "pointer";
-        bumpOrUnbump = 1;
+        bumpOrUnbump_1 = 1;
+        if ($img[arg].dataset.bump2 != 0){
+          bumpOrUnbump_2 = 1;
+        }
+        if ($img[arg].dataset.bump3 != 0){
+          bumpOrUnbump_3 = 1;
+        }
+        if ($img[arg].dataset.bump4 != 0){
+          bumpOrUnbump_4 = 1;
+        }
       }else{
         document.getElementsByClassName('contextmenu-title')[2].style.color = "#000000";
         document.getElementsByClassName('contextmenu-title')[2].style.cursor = "pointer";
@@ -559,7 +674,7 @@
         document.getElementsByClassName('contextmenu-title')[6].style.cursor = "pointer";
         checkOrUncheck = 0;
         obOrUnob = 0;
-        bumpOrUnbump = 0;
+        bumpOrUnbump_1 = 0;
       }
     }
 
@@ -586,6 +701,7 @@
           document.getElementById('contextmenu').style.left = e.pageX+"px";
           document.getElementById('contextmenu').style.right = "auto";
         }
+        
         //90度回転
         document.getElementsByClassName('contextmenu-title')[0].onclick= function() {
           nowturn = Number(e.target.dataset.turn);
@@ -609,59 +725,111 @@
         };
         narrow_down(index);
           //チェックマーカー
-          if (checkOrUncheck == 0){
-            document.getElementsByClassName('contextmenu-title')[2].onclick = function(){
-              newCheckMarker = document.createElement("div");
-              newCheckMarker.className = "check-marker";
-              $img[index].parentElement.appendChild(newCheckMarker);
-              $img[index].dataset.check = 1;
-            }
-            document.getElementsByClassName('contextmenu-title')[3].onclick = function(){}
-          } else {
-            document.getElementsByClassName('contextmenu-title')[3].onclick = function() {
-              $img[index].nextElementSibling.remove();
-              $img[index].dataset.check = 0;
-            };
-            document.getElementsByClassName('contextmenu-title')[2].onclick = function(){}
+        if (checkOrUncheck == 0){
+          document.getElementsByClassName('contextmenu-title')[2].onclick = function(){
+            newCheckMarker = document.createElement("div");
+            newCheckMarker.className = "check-marker";
+            $img[index].parentElement.appendChild(newCheckMarker);
+            $img[index].dataset.check = 1;
           }
-          //障害物
-          if (obOrUnob == 0){
-            document.getElementsByClassName('contextmenu-title')[4].onclick = function() {
-              newObstacle = document.createElement("img");
-              newObstacle.src = ".././img/ob.svg";
-              newObstacle.className = "obstacle";
-              $img[index].parentElement.appendChild(newObstacle);
-              $img[index].dataset.obstacle = 1;
-            };
-            document.getElementsByClassName('contextmenu-title')[5].onclick = function(){}
-          } else {
-            document.getElementsByClassName('contextmenu-title')[5].onclick= function() {
-              $img[index].nextElementSibling.remove();
-              $img[index].dataset.obstacle = 0;
-            };
-            document.getElementsByClassName('contextmenu-title')[4].onclick = function(){}
-          }
-          //バンプ
-          if (bumpOrUnbump == 0){
-            document.getElementsByClassName('contextmenu-title')[6].onclick = function() {
-              bump_rotate = prompt('バンプの角度を入力(0~180、0度で縦向き、半角数字ではない場合0度になります):');
-              if(bump_rotate){
+          document.getElementsByClassName('contextmenu-title')[3].onclick = function(){}
+        } else {
+          document.getElementsByClassName('contextmenu-title')[3].onclick = function() {
+            $img[index].nextElementSibling.remove();
+            $img[index].dataset.check = 0;
+          };
+          document.getElementsByClassName('contextmenu-title')[2].onclick = function(){}
+        }
+        //障害物
+        if (obOrUnob == 0){
+          document.getElementsByClassName('contextmenu-title')[4].onclick = function() {
+            newObstacle = document.createElement("img");
+            newObstacle.src = ".././img/ob.svg";
+            newObstacle.className = "obstacle";
+            $img[index].parentElement.appendChild(newObstacle);
+            $img[index].dataset.obstacle = 1;
+          };
+          document.getElementsByClassName('contextmenu-title')[5].onclick = function(){}
+        } else {
+          document.getElementsByClassName('contextmenu-title')[5].onclick= function() {
+            $img[index].nextElementSibling.remove();
+            $img[index].dataset.obstacle = 0;
+          };
+          document.getElementsByClassName('contextmenu-title')[4].onclick = function(){}
+        }
+        //バンプ
+        if (bumpOrUnbump_1 == 0){
+          document.getElementsByClassName('contextmenu-title')[6].onclick = function() {
+            document.getElementById('overlay').style.display = 'block';
+            document.getElementById('bump_settings').style.display = 'flex';
+            document.getElementById('image-preview').src = $img[index].src;
+            document.getElementById('bump_decide').onclick = function(){
+              newBump = document.createElement("img");
+              newBump.src = ".././img/bu.png";
+              newBump.className = "bump";
+              newBump.setAttribute("style", "left: " + $bump_input[0].value + "px; top: " + $bump_input[1].value + "px; transform: rotate(" + $bump_input[2].value + "deg)");
+              $img[index].parentElement.appendChild(newBump);
+              //aはただの区切り。and。
+              $img[index].dataset.bump1 = $bump_input[0].value + "a" + $bump_input[1].value + "a" + $bump_input[2].value;
+              newBump = null;
+              //2個目
+              if($bump_input_div[2].style.display == 'flex'){
                 newBump = document.createElement("img");
                 newBump.src = ".././img/bu.png";
                 newBump.className = "bump";
-                newBump.setAttribute("style", "transform: rotate(" + (Number(bump_rotate) + 180) + "deg)");
+                newBump.setAttribute("style", "left: " + $bump_input[3].value + "px; top: " + $bump_input[4].value + "px; transform: rotate(" + $bump_input[5].value + "deg)");
                 $img[index].parentElement.appendChild(newBump);
-                $img[index].dataset.bump = bump_rotate;
+                $img[index].dataset.bump2 = $bump_input[3].value + "a" + $bump_input[4].value + "a" + $bump_input[5].value;
+                newBump = null;
               }
-            };
-            document.getElementsByClassName('contextmenu-title')[7].onclick = function(){}
-          } else {
-            document.getElementsByClassName('contextmenu-title')[7].onclick= function() {
+              //3個目
+              if($bump_input_div[3].style.display == 'flex'){
+                newBump = document.createElement("img");
+                newBump.src = ".././img/bu.png";
+                newBump.className = "bump";
+                newBump.setAttribute("style", "left: " + $bump_input[6].value + "px; top: " + $bump_input[7].value + "px; transform: rotate(" + $bump_input[8].value + "deg)");
+                $img[index].parentElement.appendChild(newBump);
+                $img[index].dataset.bump3 = $bump_input[6].value + "a" + $bump_input[7].value + "a" + $bump_input[8].value;
+                newBump = null;
+              }
+              //4個目
+              if($bump_input_div[4].style.display == 'flex'){
+                newBump = document.createElement("img");
+                newBump.src = ".././img/bu.png";
+                newBump.className = "bump";
+                newBump.setAttribute("style", "left: " + $bump_input[9].value + "px; top: " + $bump_input[10].value + "px; transform: rotate(" + $bump_input[11].value + "deg)");
+                $img[index].parentElement.appendChild(newBump);
+                $img[index].dataset.bump4 = $bump_input[9].value + "a" + $bump_input[10].value + "a" + $bump_input[11].value;
+                newBump = null;
+              }
+              document.getElementById('overlay').style.display = 'none';
+              document.getElementById('bump_settings').style.display = 'none';
+            }
+            document.getElementById('bump_cancel').onclick = function(){
+              document.getElementById('overlay').style.display = 'none';
+              document.getElementById('bump_settings').style.display = 'none';
+            }
+          };
+          document.getElementsByClassName('contextmenu-title')[7].onclick = function(){}
+        } else {
+          document.getElementsByClassName('contextmenu-title')[7].onclick= function() {
+            $img[index].nextElementSibling.remove();
+            $img[index].dataset.bump1 = 0;
+            if ($img[index].dataset.bump2 != 0){
               $img[index].nextElementSibling.remove();
-              $img[index].dataset.bump = 0;
-            };
-            document.getElementsByClassName('contextmenu-title')[6].onclick = function(){}
-          }
+              $img[index].dataset.bump2 = 0;
+            }
+            if ($img[index].dataset.bump3 != 0){
+              $img[index].nextElementSibling.remove();
+              $img[index].dataset.bump3 = 0;
+            }
+            if ($img[index].dataset.bump4 != 0){
+              $img[index].nextElementSibling.remove();
+              $img[index].dataset.bump4 = 0;
+            }
+          };
+          document.getElementsByClassName('contextmenu-title')[6].onclick = function(){}
+        }
       });
     }
 
