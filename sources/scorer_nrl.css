@@ -593,7 +593,7 @@ td{
     visibility: visible;
     opacity: 1;
 }
-#league_nrl, #league_wrl, #rule_close{
+#league_nrl, #league_wrl, #rule_close, #statistics_close{
     position: absolute;
     width: 10vw;
     text-align: center;
@@ -606,7 +606,7 @@ td{
     right: 18vw;
     bottom: 3vw;
 }
-#league_wrl, #rule_close{
+#league_wrl, #rule_close, #statistics_close{
     right: 5vw;
     bottom: 3vw;
 }
@@ -614,7 +614,7 @@ td{
     visibility: visible;
     opacity: 1;
 }
-#rule{
+#rule, #statistics{
     visibility: collapse;
     opacity: 0;
     display: flex;
@@ -633,17 +633,17 @@ td{
     transition: all 0.3s 0s ease-out;
     z-index: 5;
 }
-#rule > h1{
+#rule > h1, #statistics > h1{
     font-size: 2.5vw;
     font-weight: 700;
     margin-bottom: 2vw;
 }
-#rule > h2{
+#rule > h2, #statistics > h2{
     font-size: 1.5vw;
     font-weight: 500;
     margin-top: 1vw;
 }
-#rule.active{
+#rule.active, #statistics.active{
     visibility: visible;
     opacity: 1;
 }
@@ -699,6 +699,13 @@ td{
     width: fit-content;
     height: fit-content;
 }
+#hazard_status{
+    font-size: 13px;
+    color: #888888;
+    text-decoration: underline solid 1px;
+    margin-bottom: 5px;
+    margin-left: 13px;
+}
 #hazard_clear, #hazard_clear2{
     margin-left: 20px;
     width: 100px;
@@ -745,51 +752,4 @@ td{
     color: #FFFFFF;
     border-radius: 50%;
     z-index: 1;
-}
-
-.container {
-    display: block;
-    position: relative;
-    padding-left: 2vw;
-    margin-bottom: 1vw;
-    cursor: pointer;
-    user-select: none;
-    padding-right: 2vw;
-}
-/* デフォルトのラジオボタンデザインを無効化 */
-.container input {
-    position: absolute;
-    opacity: 0;
-    cursor: pointer;
-}
-/* カスタムラジオボタンの作成 */
-.checkmark {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 1.5vw;
-    width: 1.5vw;
-    background-color: #DDDDDD;
-    border-radius: 50%;
-}
-/* チェックした時のカラーリング */
-.container input:checked ~ .checkmark {
-    background-color:#000000;
-}
-.checkmark:after {
-    content: "";
-    position: absolute;
-    display: none;
-}
-.container input:checked ~ .checkmark:after {
-    display: block;
-}
-.container .checkmark:after {
-    top: 5%;
-    left: 5%;
-    width: 90%;
-    height: 90%;
-    border: solid 0.3vw#F8F8F8;
-    border-radius: 50%;
-    background-color:#000000;
 }

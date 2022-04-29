@@ -5,7 +5,7 @@
     <link rel="icon" type="image/png" href="../img/simulator/ad.png">
     <link rel="stylesheet" href="scorer_nrl.css">
     <link rel="stylesheet" href="destyle.css">
-    <title>NRL得点計算 -RoboCupJunior コート作成環境v4.1.1</title>
+    <title>NRL得点計算 -RoboCupJunior コート作成環境v4.2.0</title>
   </head>
 
   <body class="body">
@@ -41,12 +41,31 @@
       <p>避難ゾーン脱出 : 30点</p>
       <button id="rule_close">閉じる</button>
     </div>
+    <div id="statistics">
+      <h1>競技詳細</h1>
+      <h2>ライントレース</h2>
+      <div id="statistics_line" style="margin-top: 5px;"></div>
+      <h2>ハザード</h2>
+      <p style="margin-top: 5px;">障害物　 : <span id="statistics_obstacle">15点 × 0個 = 0点</span></p>
+      <p>ギャップ : <span id="statistics_gap">10点 × 0個 = 0点</span></p>
+      <p>傾斜路　 : <span id="statistics_slope">10点 × 0個 = 0点</span></p>
+      <p>バンプ　 : <span id="statistics_bump">5点 × 0個 = 0点</span></p>
+      <h2>避難ゾーン</h2>
+      <p style="margin-top: 5px;">救助した緑の被災者 : <span id="statistics_green">30点 × 0人 = 0点</span></p>
+      <p>救助した黒の被災者 : <span id="statistics_black">15点 × 0人 = 0点</span></p>
+      <p>避難ゾーン脱出　　 : <span id="statistics_clear">脱出していません</span></p>
+      <h2>計</h2>
+      <p id="statistics_score">0点</p>
+      <button id="statistics_close">閉じる</button>
+    </div>
     <div id="overlay" class="active"></div>
     <div id="contextmenu">
       <ul>
           <li class="contextmenu-title" style="border-bottom: none;">チェックマーカーを置く</li>
           <li class="contextmenu-title">チェックマーカーを取る</li>
+          <li class="contextmenu-title">通過の取り消し</li>
           <li class="contextmenu-title_active" style="border-bottom: none;">競技進行の停止</li>
+          <li class="contextmenu-title_active">競技進行の停止を1回取り消し</li>
           <li class="contextmenu-title_active" style="border-bottom: none; cursor: default;">競技進行の停止数 : <span id="contextmenu_stop">0</span></li>
       </ul>
     </div>
@@ -55,6 +74,7 @@
         <div id="hazard_img"><img src="" alt="ハザード" class="" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div>
         <div>
           <p style="display: flex; align-items: center; margin: 10px;"><span id="hazard_name"></span><span id="hazard_score"></span></p>
+          <p id="hazard_status"></p>
           <button id="hazard_clear"></button>
           <button id="hazard_clear2" style="display: none;"></button>
         </div>
@@ -64,6 +84,7 @@
     <div class="toolbar">
       <div><img src="../img/tools/start.svg" alt="スタートへ" class="tools"><p>スタート画面へ戻る</p></div>
       <div><img src="../img/tools/grid.svg" alt="グリッドの表示・非表示" class="tools" data-grid="1"><p>グリッドの表示・非表示</p></div>
+      <div><img src="../img/tools/statistics.svg" alt="競技の詳細" class="tools"><p>競技の詳細</p></div>
       <!-- <div><img src="../img/tools/save.svg" alt="プロジェクトの保存" class="tools"><p>プロジェクトの保存</p></div> -->
       <div><img src="../img/tools/print.svg" alt="印刷" class="tools"><p>印刷</p></div>
       <div><img src="../img/tools/68.svg" alt="6×8タイル" class="tools"><p>6×8タイル</p></div>

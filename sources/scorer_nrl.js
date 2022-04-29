@@ -6,15 +6,12 @@
     const $tools = $doc.getElementsByClassName('tools');
     const $start_tools = $doc.getElementsByClassName('start_tools');
     const $table = $doc.getElementsByTagName('table');
-    const $bump_input = document.getElementsByClassName('bump-input');
     const $contextmenu_title = document.getElementsByTagName('li');
     const $contextmenu = document.getElementById('contextmenu');
-    let nowturn = null;
     let checkOrUncheck = null;
     let newCheckMarker = null;
     let newObstacle = null;
     let newBump = null;
-    // let output_data = [[],[],[],[],[],[],[],[],[],[],[]];
     let csv_arrays = null;
     let input_data_show = null;
     let input_data_course = [];
@@ -28,13 +25,6 @@
     let input_data_bump4 = [];
     let bump_data = null;
     let file = null;
-    // let course_show = 0;
-    let data = null;
-    //自動保存は今後追加する可能性あり。
-    // let auto_save_tile = [];
-    // let auto_save_turn = [];
-    // let auto_save_input_tile = [];
-    // let auto_save_input_turn = [];
     let time = 480;
     let show_second = null;
     let show_minute = null;
@@ -44,6 +34,15 @@
     let check_marker = 0;
     let stop_count = 0;
     let passed_tiles = 0;
+    //以下競技詳細用
+    let nowSection = 1; //の区間1,2,…の判定。
+    let newSectionTag = null;
+    let cleared_bumps= 0;
+    let cleared_obstacles = 0;
+    let cleared_gaps = 0;
+    let cleared_slopes = 0;
+    let cleared_green = 0; //緑の被災者
+    let cleared_black = 0;
 
 
     function nomal_guide() {
@@ -54,6 +53,7 @@
     function get_points(num) {
       score = score + num;
       document.getElementById('score').innerHTML = score + '<span id="added_score">+' + num + '</span>';
+      document.getElementById('statistics_score').textContent = score + '点';
       setTimeout(delete_points_guide, 2000);
       $guide.textContent = num + '点を獲得しました';
       setTimeout(nomal_guide, 2000);
@@ -61,6 +61,7 @@
     function lose_points(num) {
       score = score - num;
       document.getElementById('score').innerHTML = score + '<span id="added_score">-' + num + '</span>';
+      document.getElementById('statistics_score').textContent = score + '点';
       setTimeout(delete_points_guide, 2000);
       $guide.textContent = num + '点を取り消しました';
       setTimeout(nomal_guide, 2000);
@@ -90,6 +91,9 @@
       time = 480;
       document.getElementById("timer").textContent = "8:00";
       get_points(5);
+      newSectionTag = document.createElement("p");
+      newSectionTag.textContent = '区間0 : 5点(スタートタイル)';
+      document.getElementById('statistics_line').appendChild(newSectionTag);
     });
     document.getElementById('timer_stop').addEventListener('click', function () {
       clearInterval(TimerID);
@@ -155,13 +159,26 @@
           e.target.style.pointerEvents = 'none';
           if (stop_count == '0'){
             get_points(passed_tiles * 5);
+            newSectionTag = document.createElement("p");
+            newSectionTag.textContent = '区間' + nowSection + ' : 5点 × ' + passed_tiles + 'タイル = ' + passed_tiles * 5 + '点';
+            document.getElementById('statistics_line').appendChild(newSectionTag);
           } else if (stop_count == '1'){
-            get_points(passed_tiles * 3)
+            get_points(passed_tiles * 3);
+            newSectionTag = document.createElement("p");
+            newSectionTag.textContent = '区間' + nowSection + ' : 3点 × ' + passed_tiles + 'タイル = ' + passed_tiles * 3 + '点';
+            document.getElementById('statistics_line').appendChild(newSectionTag);
           } else if (stop_count == '2'){
-            get_points(passed_tiles * 1)
+            get_points(passed_tiles * 1);
+            newSectionTag = document.createElement("p");
+            newSectionTag.textContent = '区間' + nowSection + ' : 1点 × ' + passed_tiles + 'タイル = ' + passed_tiles * 1 + '点';
+            document.getElementById('statistics_line').appendChild(newSectionTag);
           } else {
-            window.alert('競技進行の停止が3回以上行われているので得点はありません。')
+            window.alert('競技進行の停止が3回以上行われているので得点はありません。');
+            newSectionTag = document.createElement("p");
+            newSectionTag.textContent = '区間' + nowSection + ' : 0点 × ' + passed_tiles + 'タイル = 0点';
+            document.getElementById('statistics_line').appendChild(newSectionTag);
           }
+          nowSection++;
           passed_tiles = 0;
           stop_count = 0;
           document.getElementById('stop_count').textContent = '0';
@@ -176,7 +193,7 @@
       document.querySelector('#hazard_img > img').style.boxShadow = '';
       document.getElementById('hazard_out').style.display = "block";
       //topとbottomの決定(もし下のスペースがなければメニューを上にずらす)
-      if (window.innerHeight - e.pageY < 130) {
+      if (window.innerHeight - e.pageY < 155) {
         document.getElementById('hazard_out').style.top = "auto";
         document.getElementById('hazard_out').style.bottom = window.innerHeight - e.pageY + "px";
       } else {
@@ -192,74 +209,84 @@
         document.getElementById('hazard_out').style.right = "auto";
       }
       if (e.target.classList.contains('bump')) {
-        document.getElementById('hazard_name').textContent = 'バンプ';
+        //バンプ
+        document.getElementById('hazard_name').textContent = '減速バンプ';
         document.getElementById('hazard_score').textContent = '5';
         document.querySelector('#hazard_img > img').src = '../img/simulator/bu.png';
-        if (e.target.classList.contains('cleared')) {
-          document.querySelector('#hazard_img > img').className = 'bump cleared';
-        } else {
+        if (e.target.dataset.cleared == '0') {
           document.querySelector('#hazard_img > img').className = 'bump';
+          document.getElementById('hazard_status').textContent = 'これからクリア';
+        } else {
+          document.querySelector('#hazard_img > img').className = 'bump cleared';
+          document.getElementById('hazard_status').textContent = 'クリア済';
         }
         document.getElementById('hazard_clear').textContent = 'クリア';
         document.getElementById('hazard_clear2').style.display = 'none';
-        hazard_clear(e.target);
+        hazard_clear(e.target,'バンプ');
       } else if (e.target.classList.contains('obstacle')) {
+        //障害物
         document.getElementById('hazard_name').textContent = '障害物';
         document.getElementById('hazard_score').textContent = '15';
         document.querySelector('#hazard_img > img').src = '../img/simulator/ob.svg';
-        if (e.target.classList.contains('cleared')) {
-          document.querySelector('#hazard_img > img').className = 'obstacle cleared';
-        } else {
+        if (e.target.dataset.cleared == '0') {
           document.querySelector('#hazard_img > img').className = 'obstacle';
+          document.getElementById('hazard_status').textContent = 'これからクリア';
+        } else {
+          document.querySelector('#hazard_img > img').className = 'obstacle cleared';
+          document.getElementById('hazard_status').textContent = 'クリア済';
         }
         document.getElementById('hazard_clear').textContent = 'クリア';
         document.getElementById('hazard_clear2').style.display = 'none';
-        hazard_clear(e.target);
+        hazard_clear(e.target,'障害物');
       } else if (e.target.src.slice(-6) == '03.png') {
+        //ギャップ1個
         document.getElementById('hazard_name').textContent = 'ギャップ';
         document.getElementById('hazard_score').textContent = '10';
         document.querySelector('#hazard_img > img').src = '../img/simulator/03.png';
         document.querySelector('#hazard_img > img').className = 'image_hazard';
+        if (e.target.dataset.cleared == '0'){
+          document.getElementById('hazard_status').textContent = 'これからクリア';
+        } else {
+          document.querySelector('#hazard_img > img').style.boxShadow = '0 0 5px #888888';
+          document.getElementById('hazard_status').textContent = 'クリア済';
+        }
         document.getElementById('hazard_clear').textContent = 'クリア';
         document.getElementById('hazard_clear2').style.display = 'none';
-        hazard_clear(e.target);
-      } else if (e.target.src.slice(-6) == '04.png') {
+        hazard_clear(e.target,'ギャップ');
+      } else if (e.target.src.slice(-6) == '04.png' || e.target.src.slice(-6) == '33.png') {
+        //ギャップ2個
         document.getElementById('hazard_name').textContent = 'ギャップ(2)';
         document.getElementById('hazard_score').textContent = '10';
-        document.querySelector('#hazard_img > img').src = '../img/simulator/04.png';
+        document.querySelector('#hazard_img > img').src = '../img/simulator/' + e.target.src.slice(-6);
         document.querySelector('#hazard_img > img').className = 'image_hazard';
-        if (e.target.style.boxShadow == 'rgb(136, 136, 136) 0px 0px 5px'){
+        if (e.target.dataset.cleared == '0'){
+          document.getElementById('hazard_status').textContent = 'これからクリア';
+        } else if (e.target.dataset.cleared == '1'){
+          document.getElementById('hazard_status').textContent = '1つクリア済み';
+        } else if (e.target.dataset.cleared == '2'){
           document.querySelector('#hazard_img > img').style.boxShadow = '0 0 5px #888888';
+          document.getElementById('hazard_status').textContent = 'すべてクリア済';
         }
         document.getElementById('hazard_clear').textContent = 'クリア(1)';
         document.getElementById('hazard_clear2').style.display = 'block';
         document.getElementById('hazard_clear2').textContent = 'クリア(2)';
-        hazard_clear(e.target);
-        hazard_clear2(e.target);
-      } else if (e.target.src.slice(-6) == '33.png') {
-        document.getElementById('hazard_name').textContent = 'ギャップ(2)';
-        document.getElementById('hazard_score').textContent = '10';
-        document.querySelector('#hazard_img > img').src = '../img/simulator/33.png';
-        document.querySelector('#hazard_img > img').className = 'image_hazard';
-        if (e.target.style.boxShadow == 'rgb(136, 136, 136) 0px 0px 5px'){
-          document.querySelector('#hazard_img > img').style.boxShadow = '0 0 5px #888888';
-        }
-        document.getElementById('hazard_clear').textContent = 'クリア(1)';
-        document.getElementById('hazard_clear2').style.display = 'block';
-        document.getElementById('hazard_clear2').textContent = 'クリア(2)';
-        hazard_clear(e.target);
+        hazard_clear(e.target,'ギャップ');
         hazard_clear2(e.target);
       } else if (e.target.style.border == "1px solid rgb(102, 51, 102)" || e.target.style.border == "1px solid rgb(204, 51, 102)") {
+        //傾斜路
         document.getElementById('hazard_name').textContent = '傾斜路';
         document.getElementById('hazard_score').textContent = '10';
         document.querySelector('#hazard_img > img').src = e.target.src;
         document.querySelector('#hazard_img > img').className = 'image_hazard';
-        if (e.target.style.boxShadow == 'rgb(136, 136, 136) 0px 0px 5px'){
+        if (e.target.dataset.cleared == '0'){
+          document.getElementById('hazard_status').textContent = 'これからクリア';
+        } else {
           document.querySelector('#hazard_img > img').style.boxShadow = '0 0 5px #888888';
+          document.getElementById('hazard_status').textContent = 'クリア済';
         }
         document.getElementById('hazard_clear').textContent = 'クリア';
         document.getElementById('hazard_clear2').style.display = 'none';
-        hazard_clear(e.target);
+        hazard_clear(e.target,'傾斜路');
       }
     }
 
@@ -277,27 +304,53 @@
       }
     }
 
-    function hazard_clear(element) {
+    function hazard_clear(element,type) {
       if (element.dataset.cleared == '0'){
         hazard_button(document.getElementById('hazard_clear'), null);
         document.getElementById('hazard_clear').onclick = function(){
           element.dataset.cleared = '1';
           element.classList.add('cleared');
-          if (element.style.border == "1px solid rgb(102, 51, 102)" || element.style.border == "1px solid rgb(204, 51, 102)") {
+          if (element.src.slice(-6) == '03.png' || element.style.border == "1px solid rgb(102, 51, 102)" || element.style.border == "1px solid rgb(204, 51, 102)") {
             element.style.boxShadow = '0 0 5px #888888';
           }
           get_points(Number(document.getElementById('hazard_score').textContent));
+          if (type == 'バンプ'){
+            cleared_bumps++;
+            document.getElementById('statistics_bump').textContent = '5点 × ' + cleared_bumps + '個 =  ' + cleared_bumps * 5 + '点';
+          } else if (type == '障害物'){
+            cleared_obstacles++;
+            document.getElementById('statistics_obstacle').textContent = '15点 × ' + cleared_obstacles + '個 =  ' + cleared_obstacles * 15 + '点';
+          } else if (type == 'ギャップ'){
+            cleared_gaps++;
+            document.getElementById('statistics_gap').textContent = '10点 × ' + cleared_gaps + '個 =  ' + cleared_gaps * 10 + '点';
+          } else if (type == '傾斜路'){
+            cleared_slopes++;
+            document.getElementById('statistics_slope').textContent = '10点 × ' + cleared_slopes + '個 =  ' + cleared_slopes * 10 + '点';
+          }
         };
       } else {
         hazard_button(document.getElementById('hazard_clear'),'cleared');
         document.getElementById('hazard_clear').textContent = '取り消し';
         document.getElementById('hazard_clear').onclick = function () {
           element.classList.remove('cleared');
-          if (element.style.border == "1px solid rgb(102, 51, 102)" || element.style.border == "1px solid rgb(204, 51, 102)") {
+          if (element.src.slice(-6) == '03.png' || element.style.border == "1px solid rgb(102, 51, 102)" || element.style.border == "1px solid rgb(204, 51, 102)") {
             element.style.boxShadow = '0 0 5px #FFD700';
           }
           element.dataset.cleared = '0';
           lose_points(Number(document.getElementById('hazard_score').textContent));
+          if (type == 'バンプ'){
+            cleared_bumps--;
+            document.getElementById('statistics_bump').textContent = '5点 × ' + cleared_bumps + '個 =  ' + cleared_bumps * 5 + '点';
+          } else if (type == '障害物'){
+            cleared_obstacles--;
+            document.getElementById('statistics_obstacle').textContent = '15点 × ' + cleared_obstacles + '個 =  ' + cleared_obstacles * 15 + '点';
+          } else if (type == 'ギャップ'){
+            cleared_gaps--;
+            document.getElementById('statistics_gap').textContent = '10点 × ' + cleared_gaps + '個 =  ' + cleared_gaps * 10 + '点';
+          } else if (type == '傾斜路'){
+            cleared_slopes--;
+            document.getElementById('statistics_slope').textContent = '10点 × ' + cleared_slopes + '個 =  ' + cleared_slopes * 10 + '点';
+          }
         }
       }
     };
@@ -312,7 +365,9 @@
         document.getElementById('hazard_clear2').onclick = function(){
           element.style.boxShadow = '0 0 5px #888888';
           element.dataset.cleared = '2';
-          get_points(Number(document.getElementById('hazard_score').textContent));
+          get_points(10);
+          cleared_gaps++;
+          document.getElementById('statistics_gap').textContent = '10点 × ' + cleared_gaps + '個 =  ' + cleared_gaps * 10 + '点';
         };
       } else {
         hazard_button(document.getElementById('hazard_clear2'),'cleared');
@@ -323,6 +378,8 @@
           element.dataset.cleared = '0';
           //このボタンはギャップ2個以外では表示されない
           lose_points(20);
+          cleared_gaps = cleared_gaps - 2;
+          document.getElementById('statistics_gap').textContent = '10点 × ' + cleared_gaps + '個 =  ' + cleared_gaps * 10 + '点';
         }
       }
     };
@@ -330,12 +387,17 @@
     //避難ゾーン
     document.getElementsByClassName('button_hinan')[0].addEventListener('click', () => {
       get_points(30);
+      cleared_green++;
+      document.getElementById('statistics_green').textContent = '30点 × ' + cleared_green + '人 = ' + cleared_green * 30 + '点';
     });
     document.getElementsByClassName('button_hinan')[1].addEventListener('click', () => {
       get_points(15);
+      cleared_black++;
+      document.getElementById('statistics_black').textContent = '15点 × ' + cleared_black + '人 = ' + cleared_black * 15 + '点';
     });
     document.getElementsByClassName('button_hinan')[2].addEventListener('click', () => {
       get_points(30);
+      document.getElementById('statistics_clear').textContent = '脱出済み 30点';
     });
 
 
@@ -378,89 +440,6 @@
       }
     });
 
-    // //プロジェクトの保存
-    // function downloadCSV() {
-    //   output_data = [[],[],[],[],[],[],[],[],[],[],[]];
-    //   //ダウンロードするCSVファイル名を指定する
-    //   const filename = window.prompt('ファイル名を入力:');
-    //   if (filename) {
-    //     //ダウンロードするタイルを配列に入れる
-    //     output_data[0].push("v4.1.1");
-    //     //どのコートを編集しいたか
-    //     if($table[0].style.display == 'block'){
-    //       output_data[1].push("0");
-    //     } else if ($table[1].style.display == 'block'){
-    //       output_data[1].push("1");
-    //     } else if ($table[2].style.display == 'block'){
-    //       output_data[1].push("2");
-    //     } else if ($table[3].style.display == 'block'){
-    //       output_data[1].push("3");
-    //     } else if ($table[4].style.display == 'block'){
-    //       output_data[1].push("4");
-    //     } else if ($table[5].style.display == 'block'){
-    //       output_data[1].push("5");
-    //     }
-    //     //NRLモードかWRLモードか
-    //     if(document.getElementById('nrl-tiles').style.display == 'block'){
-    //       output_data[1].push("nrl");
-    //     } else {
-    //       output_data[1].push("wrl");
-    //     }
-    //     //以下タイル
-    //     for (let index = 0; index < imgLen; index++) {
-    //       output_data[2].push("../img/simulator/" + $img[index].src.slice(-6));
-    //       output_data[3].push($img[index].dataset.turn);
-    //       if ($img[index].style.border =="1px solid rgb(102, 51, 102)"){
-    //         output_data[4].push("solid 1px #663366");
-    //       }else if ($img[index].style.border =="1px solid rgb(153, 51, 102)"){
-    //         output_data[4].push("solid 1px #993366");
-    //       }else if ($img[index].style.border =="1px solid rgb(204, 51, 102)"){
-    //         output_data[4].push("solid 1px #CC3366");
-    //       }else if ($img[index].style.border =="1px solid rgb(255, 51, 102)"){
-    //         output_data[4].push("solid 1px #FF3366");
-    //       }else{
-    //         output_data[4].push("none");
-    //       }
-    //       output_data[5].push($img[index].dataset.check);
-    //       output_data[6].push($img[index].dataset.obstacle);
-    //       output_data[7].push($img[index].dataset.bump1);
-    //       output_data[8].push($img[index].dataset.bump2);
-    //       output_data[9].push($img[index].dataset.bump3);
-    //       output_data[10].push($img[index].dataset.bump4);
-    //     };
-    //     output_data[0].push('\n');
-    //     output_data[1].push('\n');
-    //     output_data[2].push('\n');
-    //     output_data[3].push('\n');
-    //     output_data[4].push('\n');
-    //     output_data[5].push('\n');
-    //     output_data[6].push('\n');
-    //     output_data[7].push('\n');
-    //     output_data[8].push('\n');
-    //     output_data[9].push('\n');
-    //     //BOMを付与する（Excelでの文字化け対策）
-    //     const bom = new Uint8Array([0xef, 0xbb, 0xbf]);
-    //     //Blobでデータを作成する
-    //     const blob = new Blob([bom, output_data], { type: "text/csv" });
-    //     //BlobからオブジェクトURLを作成する
-    //     const url = (window.URL || window.webkitURL).createObjectURL(blob);
-    //     //ダウンロード用にリンクを作成する
-    //     const download = document.createElement("a");
-    //     //リンク先に上記で生成したURLを指定する
-    //     download.href = url;
-    //     //download属性にファイル名を指定する
-    //     download.download = filename + ".rrl";
-    //     //作成したリンクをクリックしてダウンロードを実行する
-    //     download.click();
-    //     //createObjectURLで作成したオブジェクトURLを開放する
-    //     (window.URL || window.webkitURL).revokeObjectURL(url);
-    //     $guide.textContent = 'プロジェクトを保存しました';
-    //     setTimeout(nomal_guide, 2000);
-    //   }
-    // }
-    // $tools[3].addEventListener('click', downloadCSV, false);
-
-
     //プロジェクトの読み込み
     function import_project() {
       for (let index = 0; index < imgLen; index++) {
@@ -469,7 +448,7 @@
         //NRL・WRL
         if(input_data_show[2] == 'nrl'){
         } else {
-          window.alert('この得点計算ツールはNRL専用です。v4.1.1時点でWRL用の得点ツールはありません。');
+          window.alert('この得点計算ツールはNRL専用です。v4.2.0時点でWRL用の得点ツールはありません。');
           break;
         }
         //タイル
@@ -592,7 +571,7 @@
         reader.readAsText(file);
         reader.onload = function () {
           csv_arrays = reader.result.split('\n');
-          if (csv_arrays[0] == "v4.0.0," || csv_arrays[0] == "v4.1.0," || csv_arrays[0] == "v4.1.1,") {
+          if (csv_arrays[0] == "v4.0.0," || csv_arrays[0] == "v4.1.0," || csv_arrays[0] == "v4.1.1," || csv_arrays[0] == "v4.2.0,") {
             try{
               input_data_show = csv_arrays[1].split(',');
               input_data_course = csv_arrays[2].split(',');
@@ -653,45 +632,25 @@
       }
     });
 
-    // //自動保存の読み込み
-    // $start_tools[2].addEventListener('click', ()=> {
-    //   if(window.confirm('このデータにはタイルのみが含まれます。詳しくはヘルプをご参照ください。')){
-    //     document.getElementById('overlay').className = "";
-    //     document.getElementById('start').className = "";
-    //     auto_save_input_tile = localStorage.getItem("rrl_auto-save_tile");
-    //     auto_save_input_turn = localStorage.getItem("rrl_auto-save_turn");
-    //     if (auto_save_input_tile == null){
-    //       window.alert('自動保存データがありません')
-    //     }else{
-    //       auto_save_input_tile = JSON.parse(auto_save_input_tile);
-    //       auto_save_input_turn = JSON.parse(auto_save_input_turn);
-    //       for (let index = 0; index < imgLen; index++) {
-    //         $img[index].src = auto_save_input_tile[index];
-    //         $img[index].dataset.turn = auto_save_input_turn[index];
-    //         $img[index].style.transform = 'rotate(' + auto_save_input_turn[index] + 'deg)';
-    //       }
-    //       if(localStorage.getItem("rrl_auto-save_league") == 'nrl'){
-    //         document.getElementById('wrl-tiles').style.display = 'none';
-    //         document.getElementById('nrl-tiles').style.display = 'block';
-    //         $tools[1].style.display = 'none';
-    //       } else {
-    //         document.getElementById('wrl-tiles').style.display = 'block';
-    //         document.getElementById('nrl-tiles').style.display = 'none';
-    //         $tools[1].style.display = 'block';
-    //       }
-    //     }
-    //   }
-    // });
-
     //再開
     $start_tools[1].addEventListener('click', () => {
       document.getElementById('overlay').className = "";
       document.getElementById('start').className = "";
     });
 
+    //競技詳細
+    $tools[2].addEventListener('click', () => {
+      document.getElementById('overlay').className = "active";
+      document.getElementById('statistics').className = "active";
+    });
+    document.getElementById('statistics_close').addEventListener('click', () => {
+    document.getElementById('overlay').className = "";
+    document.getElementById('statistics').className = "";
+    });
+
     //プリント
     function print() {
-      $tools[2].addEventListener('click', ()=> {
+      $tools[3].addEventListener('click', ()=> {
         window.alert('PDFとして印刷するにはプリンターを「PDFとして保存」にしてください。印刷するときはレイアウトを「横」にしてください。');
         window.print();
       });
@@ -730,28 +689,28 @@
     }
 
     //6×8タイル
-    $tools[3].addEventListener('click', ()=> {
+    $tools[4].addEventListener('click', ()=> {
       tile(0);
       $guide.textContent = '6×8タイルに切り替えました';
       setTimeout(nomal_guide, 2000);
     });
 
     //4×9タイル
-    $tools[4].addEventListener('click', ()=> {
+    $tools[5].addEventListener('click', ()=> {
       tile(2);
       $guide.textContent = '4×9タイルに切り替えました。このモードでは被災者ゾーンの自動入力機能は使えません。';
       setTimeout(nomal_guide, 2000);
     });
 
     //3×12タイル
-    $tools[5].addEventListener('click', ()=> {
+    $tools[6].addEventListener('click', ()=> {
       tile(4);
       $guide.textContent = '3×12タイルに切り替えました。このモードでは被災者ゾーンの自動入力機能は使えません。';
       setTimeout(nomal_guide, 2000);
     });
 
     //得点一覧
-    $tools[6].addEventListener('click', () => {
+    $tools[7].addEventListener('click', () => {
       document.getElementById('overlay').className = "active";
       document.getElementById('rule').className = "active";
     });
@@ -761,7 +720,7 @@
     });
 
     //ヘルプ
-    $tools[7].addEventListener('click', ()=> {
+    $tools[8].addEventListener('click', ()=> {
       window.open('help.html')
     });
     $start_tools[2].addEventListener('click', ()=> {
@@ -783,7 +742,7 @@
         e.preventDefault();
         $contextmenu.style.display = "block";
         //topとbottomの決定(もし下のスペースがなければメニューを上にずらす)
-        if (window.innerHeight - e.pageY < 120) {
+        if (window.innerHeight - e.pageY < 186) {
           $contextmenu.style.top = "auto";
           $contextmenu.style.bottom = "10px";
         } else {
@@ -791,47 +750,67 @@
           $contextmenu.style.bottom = "auto";
         }
         //rightとleftの決定(もし右のスペースがなければメニューを左にずらす)
-        if (window.innerWidth - e.pageX < 180) {
+        if (window.innerWidth - e.pageX < 225) {
           $contextmenu.style.right = (window.innerWidth - e.pageX) + "px";
           $contextmenu.style.left = "auto";
         } else {
           $contextmenu.style.left = e.pageX+"px";
           $contextmenu.style.right = "auto";
         }
-        $contextmenu_title[0].onclick = null;
-        $contextmenu_title[1].onclick = null;
-        $contextmenu_title[0].className = "contextmenu-title";
-        $contextmenu_title[1].className = "contextmenu-title";
+        //チェックマーカー
         document.getElementById('contextmenu_stop').textContent = e.target.dataset.stopped;
         if(e.target.dataset.check == 1){
+          $contextmenu_title[0].className = "contextmenu-title";
           $contextmenu_title[1].className = "contextmenu-title_active";
-          checkOrUncheck = 1;
-        }else{
+          $contextmenu_title[1].onclick = function() {
+            e.target.nextElementSibling.remove();
+            e.target.dataset.check = 0;
+          };
+          $contextmenu_title[0].onclick = null;
+        } else {
           $contextmenu_title[0].className = "contextmenu-title_active";
-          checkOrUncheck = 0;
-        }
-        //チェックマーカー
-        if (checkOrUncheck == 0){
+          $contextmenu_title[1].className = "contextmenu-title";
           $contextmenu_title[0].onclick = function() {
             newCheckMarker = document.createElement("div");
             newCheckMarker.className = "check-marker";
             e.target.parentElement.appendChild(newCheckMarker);
             e.target.dataset.check = 1;
           };
+          $contextmenu_title[1].onclick = null;
+        }
+        //通過の取り消し
+        if (e.target.dataset.passed == 0) {
+          $contextmenu_title[2].className = "contextmenu-title";
+          $contextmenu_title[2].onclick = null;
         } else {
-          $contextmenu_title[1].onclick = function() {
-            e.target.nextElementSibling.remove();
-            e.target.dataset.check = 0;
-          };
+          $contextmenu_title[2].className = "contextmenu-title_active";
+          $contextmenu_title[2].onclick = function () {
+            e.target.parentElement.style.backgroundColor = '';
+            e.target.dataset.passed = '0';
+          }
         }
         //競技進行の停止
-        $contextmenu_title[2].onclick = function() {
+        $contextmenu_title[3].onclick = function() {
           e.target.dataset.stopped = Number(e.target.dataset.stopped) + 1;
           e.target.parentElement.style.backgroundColor = '#FFCCCC';
           e.target.dataset.passed ='0';
           stop_count++;
           document.getElementById('stop_count').textContent = stop_count;
         };
+        if (e.target.dataset.stopped == 0) {
+          $contextmenu_title[4].className = "contextmenu-title";
+          $contextmenu_title[4].onclick = null;
+        } else {
+          $contextmenu_title[4].className = "contextmenu-title_active";
+          $contextmenu_title[4].onclick = function () {
+            e.target.dataset.stopped = Number(e.target.dataset.stopped) - 1;
+            stop_count--;
+            document.getElementById('stop_count').textContent = stop_count;
+            if (e.target.dataset.stopped == 0){
+              e.target.parentElement.style.backgroundColor = '';
+            }
+          }
+        }
       });
     }
 
