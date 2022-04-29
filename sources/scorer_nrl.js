@@ -34,6 +34,7 @@
     let check_marker = 0;
     let stop_count = 0;
     let passed_tiles = 0;
+    let escaped = 0;
     //以下競技詳細用
     let nowSection = 1; //の区間1,2,…の判定。
     let newSectionTag = null;
@@ -81,7 +82,6 @@
       document.getElementById("timer").textContent = show_minute + ":" + show_second;
       if (time <= 0) {
         clearInterval(TimerID);
-        document.getElementById("timer_start").disabled = false;
         setTimeout('alert("競技を終了して下さい")', 500);
       }
     }
@@ -110,6 +110,10 @@
     //チェックポイント 1-は、前のチェックポイントで1回分数えたということ
     for (let index = 1; index < imgLen; index++) {
       $img[index].addEventListener('click', function (e) {
+        if (document.getElementById("timer_start").hasAttribute('disabled')){
+        } else {
+          window.alert('先に競技を開始してください。')
+        }
         if (e.target.dataset.check == '0'){
           if (e.target.dataset.passed == '1' && e.target.src.slice(-6) == '25.png'){
             e.target.parentElement.style.backgroundColor = '#8EF1FF';
@@ -396,8 +400,13 @@
       document.getElementById('statistics_black').textContent = '15点 × ' + cleared_black + '人 = ' + cleared_black * 15 + '点';
     });
     document.getElementsByClassName('button_hinan')[2].addEventListener('click', () => {
-      get_points(30);
-      document.getElementById('statistics_clear').textContent = '脱出済み 30点';
+      if (escaped == 0){
+        escaped = 1;
+        get_points(30);
+        document.getElementById('statistics_clear').textContent = '脱出済み 30点';
+      } else {
+        window.alert('すでに避難ゾーンを脱出しています。');
+      }
     });
 
 
@@ -448,7 +457,7 @@
         //NRL・WRL
         if(input_data_show[2] == 'nrl'){
         } else {
-          window.alert('この得点計算ツールはNRL専用です。v4.2.1時点でWRL用の得点ツールはありません。');
+          window.alert('この得点計算ツールはNRL専用です。v4.2.2時点でWRL用の得点ツールはありません。');
           break;
         }
         //タイル
@@ -571,7 +580,7 @@
         reader.readAsText(file);
         reader.onload = function () {
           csv_arrays = reader.result.split('\n');
-          if (csv_arrays[0] == "v4.0.0," || csv_arrays[0] == "v4.1.0," || csv_arrays[0] == "v4.1.1," || csv_arrays[0] == "v4.2.0," || csv_arrays[0] == "v4.2.1,") {
+          if (csv_arrays[0] == "v4.0.0," || csv_arrays[0] == "v4.1.0," || csv_arrays[0] == "v4.1.1," || csv_arrays[0] == "v4.2.0," || csv_arrays[0] == "v4.2.1," || csv_arrays[0] == "v4.2.2,") {
             try{
               input_data_show = csv_arrays[1].split(',');
               input_data_course = csv_arrays[2].split(',');
@@ -791,6 +800,10 @@
         }
         //競技進行の停止
         $contextmenu_title[3].onclick = function() {
+          if (document.getElementById("timer_start").hasAttribute('disabled')){
+          } else {
+            window.alert('先に競技を開始してください。')
+          }
           e.target.dataset.stopped = Number(e.target.dataset.stopped) + 1;
           e.target.parentElement.style.backgroundColor = '#FFCCCC';
           e.target.dataset.passed ='0';

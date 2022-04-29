@@ -5,7 +5,7 @@
     <link rel="icon" type="image/png" href="../img/simulator/ad.png">
     <link rel="stylesheet" href="scorer_nrl.css">
     <link rel="stylesheet" href="destyle.css">
-    <title>NRL得点計算 -RoboCupJunior コート作成環境v4.2.1</title>
+    <title>NRL得点計算 -RoboCupJunior コート作成環境v4.2.2</title>
   </head>
 
   <body class="body">
@@ -81,7 +81,7 @@
         <h1 class="index">残りの競技時間</h1>
         <p id="timer">8:00</p>
         <div id="timer_buttons">
-          <button id="timer_start">競技開始</button>
+          <button id="timer_start">競技開始</button><!-- disabledはjs用 -->
           <button id="timer_stop">競技終了</button>
         </div>
         <h1 class="index">現在の得点</h1>
@@ -103,7 +103,7 @@
         </div>
         <div id="statistics">
           <h1>競技詳細</h1>
-          <h2>ライントレース</h2>
+          <h2 style="margin-top: 0;">ライントレース</h2>
           <div id="statistics_line" style="margin-top: 5px;"></div>
           <h2>ハザード</h2>
           <p style="margin-top: 5px;">障害物　 : <span id="statistics_obstacle">15点 × 0個 = 0点</span></p>
