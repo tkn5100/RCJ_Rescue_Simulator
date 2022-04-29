@@ -271,6 +271,9 @@
           }
         }
       } else {
+        for (let index = 0; index < imgLen; index++) {
+          $img[index].style.backgroundImage = "none";
+        }
         for (let index = 0; index < $table[arg + 1].firstElementChild.children.length; index++){
           for (let i = 0; i < $table[arg + 1].firstElementChild.children[index].children.length; i++){
             if($table[arg + 1].firstElementChild.children[index].children[i].firstElementChild.style.backgroundColor == 'rgb(255, 255, 255)'){
@@ -365,7 +368,7 @@
       const filename = window.prompt('ファイル名を入力:');
       if (filename) {
         //ダウンロードするタイルを配列に入れる
-        output_data[0].push("v4.3.0");
+        output_data[0].push("v4.3.1");
         //どのコートを編集しいたか
         if($table[0].style.display == 'block'){
           output_data[1].push("0");
@@ -599,7 +602,7 @@
         reader.readAsText(file);
         reader.onload = function () {
           csv_arrays = reader.result.split('\n');
-          if (csv_arrays[0] == "v4.0.0," || csv_arrays[0] == "v4.1.0," || csv_arrays[0] == "v4.1.1," || csv_arrays[0] == "v4.2.0," || csv_arrays[0] == "v4.2.1," || csv_arrays[0] == "v4.2.2," || csv_arrays[0] == "v4.3.0,") {
+          if (csv_arrays[0] == "v4.0.0," || csv_arrays[0] == "v4.1.0," || csv_arrays[0] == "v4.1.1," || csv_arrays[0] == "v4.2.0," || csv_arrays[0] == "v4.2.1," || csv_arrays[0] == "v4.2.2," || csv_arrays[0] == "v4.3.0," || csv_arrays[0] == "v4.3.1,") {
             try{
               input_data_show = csv_arrays[1].split(',');
               input_data_course = csv_arrays[2].split(',');
@@ -862,7 +865,7 @@
       $contextmenu_title[5].className = "contextmenu-title";
       $contextmenu_title[6].className = "contextmenu-title";
       $contextmenu_title[7].className = "contextmenu-title";
-      if(element.src.slice(-6) == 'se.png' || element.src.slice(-6) == 'no.png'){
+      if(element.src.slice(-6) == 'se.png' || element.src.slice(-6) == 'no.png' || element.style.backgroundColor == 'rgb(221, 221, 221)'){
         //シーソータイルは、得点要素のない直線のラインである
       } else if(element.dataset.check == 1){
         $contextmenu_title[3].className = "contextmenu-title_active";
@@ -924,6 +927,11 @@
           }else if (e.target.dataset.obstacle == 1){
             e.target.nextElementSibling.remove();
             e.target.dataset.obstacle = 0;
+          }
+          for (let index = 0; index < $table.length; index++) {
+            if($table[index].style.display == 'block'){
+              tile(index);
+            }
           }
         };
         narrow_down(e.target);
