@@ -29,14 +29,15 @@
      fit-margin-right="10"
      units="in"
      inkscape:zoom="1.28"
-     inkscape:cx="27.343749"
-     inkscape:cy="56.640624"
+     inkscape:cx="27.34375"
+     inkscape:cy="56.640625"
      inkscape:window-width="1366"
      inkscape:window-height="705"
      inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
-     inkscape:current-layer="layer1" />
+     inkscape:current-layer="layer1"
+     showguides="true" />
   <defs
      id="defs2">
     <inkscape:path-effect
@@ -105,5 +106,21 @@
        style="fill:#eeeeee;fill-opacity:1;stroke:none;stroke-width:5.19001e-06;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        d="m 117.07882,133.11651 -13.80958,12.00598 16.15685,-0.16702 z"
        id="path1863" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 92.563073,111.93168 c 17.999997,0 17.999997,0 17.999997,0"
+       id="path868" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 92.563071,118.93168 c 17.999999,0 17.999999,0 17.999999,0"
+       id="path868-5" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 92.563071,125.93168 c 17.999999,0 17.999999,0 17.999999,0"
+       id="path868-5-4" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 92.563072,132.93168 c 8.999998,0 8.999998,0 8.999998,0"
+       id="path868-5-4-8-4" />
   </g>
 </svg>

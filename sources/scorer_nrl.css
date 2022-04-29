@@ -403,7 +403,8 @@ td{
         overflow: visible;
     }
     .menu{
-        width: 340px;
+        width: 350px;
+        height: 600px;
         overflow: hidden;
     }
     .menu > p{
@@ -431,6 +432,48 @@ td{
         display: none;
     }
     #attention{
+        display: none;
+    }
+    #statistics{
+        display: block !important;
+        position: static !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        width: fit-content !important;
+        height: fit-content !important;
+        overflow: hidden !important;
+        padding: 0 !important;
+        background-color: #FFFFFF !important;
+        border-radius: 0 !important;
+        font-size: unset !important;
+        cursor: unset !important;
+        transition: none !important;
+        z-index: 1 !important;
+    }
+    #statistics > h1{
+        display: none;
+    }
+    #statistics > h2{
+        width: 300px;
+        font-size: 15px;
+        height: 35px;
+        padding: 10px;
+        margin-left: 10px;
+        font-size: 15px;
+        color: #FFFFFF;
+        background-color: #000000;
+        cursor: normal;
+    }
+    #statistics > h2:nth-of-type(4){
+        display: none;
+    }
+    #statistics_score{
+        display: none;
+    }
+    #statistics > p, #statistics > div{
+        margin-left: 15px;
+    }
+    #statistics_close{
         display: none;
     }
     .image{
@@ -551,7 +594,7 @@ td{
     opacity: 0;
     display: flex;
     flex-direction: column;
-    position: absolute;
+    position: fixed;
     top: 10vh;
     left: 10vw;
     width: 80vw;
@@ -570,7 +613,7 @@ td{
     opacity: 0;
     display: flex;
     flex-direction: column;
-    position: absolute;
+    position: fixed;
     top: 30vh;
     left: 30vw;
     width: 40vw;
@@ -619,7 +662,7 @@ td{
     opacity: 0;
     display: flex;
     flex-direction: column;
-    position: absolute;
+    position: fixed;
     top: 10vh;
     left: 15vw;
     width: 70vw;

@@ -237,7 +237,7 @@
       setTimeout(() => {document.querySelector('#download > img').src = '../img/converter/downloaded.svg';}, 1500)
     }
 
-    //v1.x.x→v4.2.0
+    //v1.x.x→v4.2.1
     function one_to_Four(file_name){
       $upload_guide.innerHTML = 'v1.3.3以前<br>お待ちください...';
       setTimeout(arrow_line, 125, 10)
@@ -268,7 +268,7 @@
       }
       setTimeout(arrow_line, 250, 20)
       output_data = [[],[],[],[],[],[],[],[],[],[],[]];
-      output_data[0].push("v4.2.0")
+      output_data[0].push("v4.2.1")
       for (let index = 0; index < input_data_course.length; index++) {
         output_data[2].push(input_data_course[index]);
         output_data[3].push(input_data_turn[index]);
@@ -309,13 +309,13 @@
           output_data[1].push('\n');
           document.getElementById('overlay').className = "";
           document.getElementById('league').className = "";
-          output(file_name,csv_arrays[0].slice(0,6),'v4.2.0');
+          output(file_name,csv_arrays[0].slice(0,6),'v4.2.1');
         } else {
           output_data[1].push('wrl');
           output_data[1].push('\n');
           document.getElementById('overlay').className = "";
           document.getElementById('league').className = "";
-          output(file_name,csv_arrays[0].slice(0,6),'v4.2.0')
+          output(file_name,csv_arrays[0].slice(0,6),'v4.2.1')
         }
       }
     }
@@ -484,7 +484,7 @@
       setTimeout(() => {document.querySelector('#download > img').src = '../img/converter/downloaded.svg';}, 1500)
     }
 
-    //v2.0.x→v4.2.0
+    //v2.0.x→v4.2.1
     function two_to_Four(file_name){
       $upload_guide.innerHTML = csv_arrays[0].slice(0,6) + '<br>お待ちください...';
       setTimeout(arrow_line, 125, 10)
@@ -507,7 +507,7 @@
       }
       setTimeout(arrow_line, 250, 20)
       output_data = [[],[],[],[],[],[],[],[],[],[],[]];
-      output_data[0].push("v4.2.0")
+      output_data[0].push("v4.2.1")
       output_data[1].push(0);
       for (let index = 0; index < input_data_course.length; index++) {
         output_data[2].push(input_data_course[index]);
@@ -550,13 +550,13 @@
           output_data[1].push('\n');
           document.getElementById('overlay').className = "";
           document.getElementById('league').className = "";
-          output(file_name,csv_arrays[0].slice(0,6),'v4.2.0');
+          output(file_name,csv_arrays[0].slice(0,6),'v4.2.1');
         } else {
           output_data[1].push('wrl');
           output_data[1].push('\n');
           document.getElementById('overlay').className = "";
           document.getElementById('league').className = "";
-          output(file_name,csv_arrays[0].slice(0,6),'v4.2.0')
+          output(file_name,csv_arrays[0].slice(0,6),'v4.2.1')
         }
       }
     }
@@ -644,7 +644,7 @@
       setTimeout(() => {document.querySelector('#download > img').src = '../img/converter/downloaded.svg';}, 1500)
     }
 
-    //v3.x.x→v4.2.0
+    //v3.x.x→v4.2.1
     function three_to_Four(file_name){
       $upload_guide.innerHTML = csv_arrays[0].slice(0,6) + '<br>お待ちください...';
       setTimeout(arrow_line, 125, 10)
@@ -665,7 +665,7 @@
       }
       setTimeout(arrow_line, 250, 20)
       output_data = [[],[],[],[],[],[],[],[],[],[],[]];
-      output_data[0].push("v4.2.0")
+      output_data[0].push("v4.2.1")
       output_data[1].push(input_data_show[0])
       for (let index = 0; index < input_data_course.length; index++) {
         output_data[2].push(input_data_course[index]);
@@ -708,18 +708,18 @@
           output_data[1].push('\n');
           document.getElementById('overlay').className = "";
           document.getElementById('league').className = "";
-          output(file_name,csv_arrays[0].slice(0,6),'v4.2.0');
+          output(file_name,csv_arrays[0].slice(0,6),'v4.2.1');
         } else {
           output_data[1].push('wrl');
           output_data[1].push('\n');
           document.getElementById('overlay').className = "";
           document.getElementById('league').className = "";
-          output(file_name,csv_arrays[0].slice(0,6),'v4.2.0')
+          output(file_name,csv_arrays[0].slice(0,6),'v4.2.1')
         }
       }
     }
 
-    //v4.0.0→v4.2.0
+    //v4.0.0→v4.2.1
     function four_to_Four(file_name){
       $upload_guide.innerHTML = csv_arrays[0].slice(0,6) + '<br>お待ちください...';
       setTimeout(arrow_line, 125, 10)
@@ -740,7 +740,7 @@
       }
       setTimeout(arrow_line, 250, 20)
       output_data = [[],[],[],[],[],[],[],[],[],[],[]];
-      output_data[0].push("v4.2.0")
+      output_data[0].push("v4.2.1")
       for (let index = 0; index < input_data_show.length; index++) {
         output_data[1].push(input_data_show[index])
       }
@@ -779,7 +779,7 @@
       output_data[9][output_data[9].length - 1] = '\n';
       output_data[10].pop();
       setTimeout(arrow_line, 625, 50)
-      output(file_name,csv_arrays[0].slice(0,6),'v4.2.0');
+      output(file_name,csv_arrays[0].slice(0,6),'v4.2.1');
     }
 
     let reader = new FileReader();
@@ -795,9 +795,9 @@
         reader.readAsText(file);
         reader.onload = function () {
           csv_arrays = reader.result.split('\n');
-          if (csv_arrays[0] == "v4.2.0,"){
+          if (csv_arrays[0] == "v4.2.1,"){
             window.alert('このファイルは最新版です。')
-          } else if (csv_arrays[0] == "v4.0.0," || csv_arrays[0] == "v4.1.0," || csv_arrays[0] == "v4.1.1,"){
+          } else if (csv_arrays[0] == "v4.0.0," || csv_arrays[0] == "v4.1.0," || csv_arrays[0] == "v4.1.1," || csv_arrays[0] == "v4.2.0," || csv_arrays[0] == "v4.2.1,"){
             four_to_Four(file.name);
           } else if (csv_arrays[0] == "v3.0.0," || csv_arrays[0] == "v3.0.1," || csv_arrays[0] == "v3.1.0," || csv_arrays[0] == "v3.1.1,"){
             three_to_Four(file.name);

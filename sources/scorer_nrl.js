@@ -218,7 +218,7 @@
           document.getElementById('hazard_status').textContent = 'これからクリア';
         } else {
           document.querySelector('#hazard_img > img').className = 'bump cleared';
-          document.getElementById('hazard_status').textContent = 'クリア済';
+          document.getElementById('hazard_status').textContent = 'クリア済み';
         }
         document.getElementById('hazard_clear').textContent = 'クリア';
         document.getElementById('hazard_clear2').style.display = 'none';
@@ -233,7 +233,7 @@
           document.getElementById('hazard_status').textContent = 'これからクリア';
         } else {
           document.querySelector('#hazard_img > img').className = 'obstacle cleared';
-          document.getElementById('hazard_status').textContent = 'クリア済';
+          document.getElementById('hazard_status').textContent = 'クリア済み';
         }
         document.getElementById('hazard_clear').textContent = 'クリア';
         document.getElementById('hazard_clear2').style.display = 'none';
@@ -248,7 +248,7 @@
           document.getElementById('hazard_status').textContent = 'これからクリア';
         } else {
           document.querySelector('#hazard_img > img').style.boxShadow = '0 0 5px #888888';
-          document.getElementById('hazard_status').textContent = 'クリア済';
+          document.getElementById('hazard_status').textContent = 'クリア済み';
         }
         document.getElementById('hazard_clear').textContent = 'クリア';
         document.getElementById('hazard_clear2').style.display = 'none';
@@ -265,7 +265,7 @@
           document.getElementById('hazard_status').textContent = '1つクリア済み';
         } else if (e.target.dataset.cleared == '2'){
           document.querySelector('#hazard_img > img').style.boxShadow = '0 0 5px #888888';
-          document.getElementById('hazard_status').textContent = 'すべてクリア済';
+          document.getElementById('hazard_status').textContent = 'すべてクリア済み';
         }
         document.getElementById('hazard_clear').textContent = 'クリア(1)';
         document.getElementById('hazard_clear2').style.display = 'block';
@@ -282,7 +282,7 @@
           document.getElementById('hazard_status').textContent = 'これからクリア';
         } else {
           document.querySelector('#hazard_img > img').style.boxShadow = '0 0 5px #888888';
-          document.getElementById('hazard_status').textContent = 'クリア済';
+          document.getElementById('hazard_status').textContent = 'クリア済み';
         }
         document.getElementById('hazard_clear').textContent = 'クリア';
         document.getElementById('hazard_clear2').style.display = 'none';
@@ -448,7 +448,7 @@
         //NRL・WRL
         if(input_data_show[2] == 'nrl'){
         } else {
-          window.alert('この得点計算ツールはNRL専用です。v4.2.0時点でWRL用の得点ツールはありません。');
+          window.alert('この得点計算ツールはNRL専用です。v4.2.1時点でWRL用の得点ツールはありません。');
           break;
         }
         //タイル
@@ -571,7 +571,7 @@
         reader.readAsText(file);
         reader.onload = function () {
           csv_arrays = reader.result.split('\n');
-          if (csv_arrays[0] == "v4.0.0," || csv_arrays[0] == "v4.1.0," || csv_arrays[0] == "v4.1.1," || csv_arrays[0] == "v4.2.0,") {
+          if (csv_arrays[0] == "v4.0.0," || csv_arrays[0] == "v4.1.0," || csv_arrays[0] == "v4.1.1," || csv_arrays[0] == "v4.2.0," || csv_arrays[0] == "v4.2.1,") {
             try{
               input_data_show = csv_arrays[1].split(',');
               input_data_course = csv_arrays[2].split(',');

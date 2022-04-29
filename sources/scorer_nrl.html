@@ -5,7 +5,7 @@
     <link rel="icon" type="image/png" href="../img/simulator/ad.png">
     <link rel="stylesheet" href="scorer_nrl.css">
     <link rel="stylesheet" href="destyle.css">
-    <title>NRL得点計算 -RoboCupJunior コート作成環境v4.2.0</title>
+    <title>NRL得点計算 -RoboCupJunior コート作成環境v4.2.1</title>
   </head>
 
   <body class="body">
@@ -40,23 +40,6 @@
       <p>緑の被災者救助 : 30点</p>
       <p>避難ゾーン脱出 : 30点</p>
       <button id="rule_close">閉じる</button>
-    </div>
-    <div id="statistics">
-      <h1>競技詳細</h1>
-      <h2>ライントレース</h2>
-      <div id="statistics_line" style="margin-top: 5px;"></div>
-      <h2>ハザード</h2>
-      <p style="margin-top: 5px;">障害物　 : <span id="statistics_obstacle">15点 × 0個 = 0点</span></p>
-      <p>ギャップ : <span id="statistics_gap">10点 × 0個 = 0点</span></p>
-      <p>傾斜路　 : <span id="statistics_slope">10点 × 0個 = 0点</span></p>
-      <p>バンプ　 : <span id="statistics_bump">5点 × 0個 = 0点</span></p>
-      <h2>避難ゾーン</h2>
-      <p style="margin-top: 5px;">救助した緑の被災者 : <span id="statistics_green">30点 × 0人 = 0点</span></p>
-      <p>救助した黒の被災者 : <span id="statistics_black">15点 × 0人 = 0点</span></p>
-      <p>避難ゾーン脱出　　 : <span id="statistics_clear">脱出していません</span></p>
-      <h2>計</h2>
-      <p id="statistics_score">0点</p>
-      <button id="statistics_close">閉じる</button>
     </div>
     <div id="overlay" class="active"></div>
     <div id="contextmenu">
@@ -117,6 +100,23 @@
           <h1 class="index">注意</h1>
           <p style="margin-top: 5px; margin-left: 20px;">傾斜路は1タイルごとに認識します。ただし連続している傾斜路は2タイルで10点と定められているので、その場合はどちらかのタイルでのみ「クリア」ボタンを押してください。</p>
           <p style="margin-top: 5px; margin-left: 20px;">その他注意点等はヘルプの「NRL得点計算」に書いてあります。よく読んでご使用ください。</p>
+        </div>
+        <div id="statistics">
+          <h1>競技詳細</h1>
+          <h2>ライントレース</h2>
+          <div id="statistics_line" style="margin-top: 5px;"></div>
+          <h2>ハザード</h2>
+          <p style="margin-top: 5px;">障害物　 : <span id="statistics_obstacle">15点 × 0個 = 0点</span></p>
+          <p>ギャップ : <span id="statistics_gap">10点 × 0個 = 0点</span></p>
+          <p>傾斜路　 : <span id="statistics_slope">10点 × 0個 = 0点</span></p>
+          <p>バンプ　 : <span id="statistics_bump">5点 × 0個 = 0点</span></p>
+          <h2>避難ゾーン</h2>
+          <p style="margin-top: 5px;">救助した緑の被災者 : <span id="statistics_green">30点 × 0人 = 0点</span></p>
+          <p>救助した黒の被災者 : <span id="statistics_black">15点 × 0人 = 0点</span></p>
+          <p>避難ゾーン脱出　　 : <span id="statistics_clear">脱出していません</span></p>
+          <h2>計</h2>
+          <p id="statistics_score">0点</p>
+          <button id="statistics_close">閉じる</button>
         </div>
       </div>
 
