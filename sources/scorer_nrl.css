@@ -9,114 +9,6 @@ body{
     bottom: 5px;
     right: 0;
 }
-/* help.html */
-.copyright-help{
-    margin-right: 0;
-    margin-left: auto;
-}
-/* home.html */
-.home-img{
-    margin: 3vw auto 3vw auto;
-    width: 80vw;
-    font-size: 5vw;
-}
-.home-link{
-    background: #000000;
-    color: #ffffff;
-    font-size: 1.5vw;
-    text-align: center;
-    line-height: 4vw;
-    height: 4vw;
-    width: 60vw;
-    margin: 1vw auto 1vw auto;
-    border-radius: 7px 7px 7px 7px;
-}
-/* help.html */
-.help_h1{
-    font-size: 40px;
-    font-weight: bold;
-    margin-top: 10px;
-    margin-bottom: 30px;
-}
-.help_h2{
-    font-size: 30px;
-    margin-top: 50px;
-    margin-bottom: 10px;
-}
-.help_h3{
-    font-size: 20px;
-    margin-top: 20px;
-    font-weight: 700;
-    text-indent: 1em;
-}
-.help_h4{
-    font-size: 20px;
-    text-decoration: underline solid 1px;
-    margin-top: 10px;
-    margin-bottom: 5px;
-    text-indent: 1em;
-}
-.help-sentence{
-    font-size: 20px;
-    text-indent: 1em;
-    padding-left: 20px;
-}
-.help-sentence-changes{
-    font-size: 20px;
-    text-indent: -1em;
-    padding-left: 50px;
-}
-.help_icon{
-    width: 25px;
-    display: inline;
-    margin-right: 10px;
-    border-radius: 30%;
-    padding: 3px;
-    background-color: #DDDDDD;
-}
-.help_img{
-    width: 80%;
-    height: auto;
-    padding-left: 20px;
-}
-.help-link-div{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-}
-.help-link{
-    width: 200px;
-    text-align: center;
-    background-color: #000000;
-    color: #f8f8f8;
-    padding: 10px;
-    border-radius: 8px;
-    margin-right: 15px;
-    margin-bottom: 15px;
-}
-.help-table {
-    margin-left: 0 !important;
-    border-collapse: collapse;
-    border: 1px solid #000000;
-}
-.help-table > tbody > tr > td{
-    background-color: #F8F8F8;
-    border: 1px solid #000000;
-    text-align: center;
-    vertical-align: middle;
-    padding: 3px;
-}
-@media screen and (min-width:920px){
-    .help-table {
-        width: 600px;
-    }
-}
-@media screen and (max-width:920px){
-    .help-table {
-        width: 60vw;
-    }
-}
-
 /* index.html */
 table{
     margin-left: 30px !important;
@@ -166,30 +58,110 @@ table{
     display: block;
 }
 .menu{
+    position: relative;
     display: flex;
     /* flex-wrap:wrap; */
     flex-direction: column !important;
-    align-items: center;
-    border-right: solid 5px #000000;
-    overflow: auto;
     max-height: 80vh;
+    overflow: auto;
+    border-right: solid 5px #000000;
 }
 .group{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
 }
+td{
+    position: relative;
+    border: 1px solid #AAAAAA;
+    background-color: #EEEEEE;
+}
+.index{
+    height: 35px;
+    padding: 10px;
+    margin-left: 10px;
+    font-size: 15px;
+    color: #FFFFFF;
+    background-color: #000000;
+    cursor: normal;
+}
+#timer_buttons{
+    display: flex;
+}
+#score{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#added_score{
+    background-color: #DDDDDD;
+    border-radius: 10px;
+    padding: 5px;
+    width: fit-content;
+    height: fit-content;
+}
+#stop_count{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 @media screen and (min-width:1040px){
     .menu{
         width: 340px;
     }
-    .index{
-        width: 270px;
+    .menu > p{
+        font-size: 15px;
     }
-    /* .index-plus{
-        padding-left: 180px;
-    } */
-    .image, #image-preview{
+    .index{
+        width: 300px;
+        font-size: 15px;
+    }
+    #timer, #score{
+        margin-top: 10px;
+        margin-left: 10px;
+        width: 300px;
+        text-align: center;
+        font-size: 50px;
+        font-weight: 700;
+    }
+    #timer_buttons{
+        flex-direction: row;
+    }
+    #timer_start, #timer_stop{
+        margin-left: 20px;
+        margin-bottom: 20px;
+        height: 35px;
+        width: 120px;
+        text-align: center;
+        background-color: #000000;
+        color: #f8f8f8;
+        padding: 10px;
+        border-radius: 10px;
+    }
+    #added_score{
+        margin-left: 2vw;
+        font-size: 1.5vw;
+        font-weight: 400;
+    }
+    #stop_count{
+        margin-left: 10px;
+        margin-bottom: 5px;
+        width: 300px;
+        font-size: 30px;
+        font-weight: 600;
+    }
+    .button_hinan{
+        margin-top: 10px;
+        margin-left: 20px;
+        height: 35px;
+        width: 150px;
+        text-align: center;
+        background-color: #000000;
+        color: #f8f8f8;
+        padding: 10px;
+        border-radius: 10px;
+    }
+    .image{
         height: 80px;
         width: 80px;
         cursor: pointer;
@@ -212,39 +184,79 @@ table{
         top: 80px;
         left: 30px;
     }
-    .menu-img-w, .menu-img-n{
-        height: 60px;
-        width: 60px;
-    }
-    .coursedata{
-        width: 60px;
-        height: 60px;
-    }
-    .check-marker{
+    .check-marker, .stop-marker{
         height: 17px;
         width: 17px;
+        font-size: 10px;
+        text-align: center;
     }
-    .obstacle{
+    .obstacle, .obstacle_cleared{
         height: 30px;
         width: 30px;
         left: 25px;
         top: 25px;
     }
-    .bump{
+    .bump, .bump_cleared{
         height: 80px;
     }
 }
 @media screen and (max-width:1040px) and (min-width:920px){
     .menu{
-        width: 270px;
+        width: 240px;
+    }
+    .menu > p{
+        font-size: 15px;
     }
     .index{
         width: 200px;
+        font-size: 15px;
     }
-    /* .index-plus{
-        padding-left: 110px;
-    } */
-    .image, #image-preview{
+    #timer, #score{
+        margin-top: 10px;
+        margin-left: 10px;
+        width: 200px;
+        text-align: center;
+        font-size: 50px;
+        font-weight: 700;
+    }
+    #timer_buttons{
+        flex-direction: column;
+        align-items: center;
+    }
+    #timer_start, #timer_stop{
+        margin-bottom: 10px;
+        height: 35px;
+        width: 120px;
+        text-align: center;
+        background-color: #000000;
+        color: #f8f8f8;
+        padding: 10px;
+        border-radius: 10px;
+    }
+    #added_score{
+        margin-left: 20px;
+        font-size: 15px;
+        font-weight: 400;
+    }
+    #stop_count{
+        margin-left: 10px;
+        margin-bottom: 5px;
+        width: 200px;
+        font-size: 30px;
+        font-weight: 600;
+    }
+    .button_hinan{
+        margin-top: 10px;
+        margin-left: 20px;
+        height: 35px;
+        width: 150px;
+        text-align: center;
+        background-color: #000000;
+        color: #f8f8f8;
+        padding: 10px;
+        border-radius: 10px;
+    }
+    .image{
         height: 80px;
         width: 80px;
         cursor: pointer;
@@ -267,25 +279,19 @@ table{
         top: 70px;
         left: 30px;
     }
-    .menu-img-w, .menu-img-n{
-        height: 60px;
-        width: 60px;
-    }
-    .coursedata{
-        width: 60px;
-        height: 60px;
-    }
-    .check-marker{
+    .check-marker, .stop-merker{
         height: 17px;
         width: 17px;
+        font-size: 10px;
+        text-align: center;
     }
-    .obstacle{
+    .obstacle, .obstacle_cleared{
         height: 30px;
         width: 30px;
         left: 25px;
         top: 25px;
     }
-    .bump{
+    .bump, .bump_cleared{
         height: 80px;
     }
 }
@@ -293,13 +299,61 @@ table{
     .menu{
         width: 25vw;
     }
+    .menu > p{
+        font-size: 1.5vw;
+    }
     .index{
         width: 20vw;
+        font-size: 1.5vw;
     }
-    /* .index-plus{
-        padding-left: 110px;
-    } */
-    .image, #image-preview{
+    #timer, #score{
+        margin-top: 10px;
+        margin-left: 10px;
+        width: 18vw;
+        text-align: center;
+        font-size: 5vw;
+        font-weight: 700;
+    }
+    #timer_buttons{
+        flex-direction: column;
+        align-items: center;
+    }
+    #timer_start, #timer_stop{
+        font-size: 1.5vw;
+        margin-bottom: 10px;
+        height: 3.5vw;
+        width: 15vw;
+        text-align: center;
+        background-color: #000000;
+        color: #f8f8f8;
+        padding: 10px;
+        border-radius: 10px;
+    }
+    #added_score{
+        margin-left: 20px;
+        font-size: 15px;
+        font-weight: 400;
+    }
+    #stop_count{
+        margin-left: 10px;
+        margin-bottom: 5px;
+        width: 18vw;
+        font-size: 3vw;
+        font-weight: 600;
+    }
+    .button_hinan{
+        margin-top: 10px;
+        margin-left: 20px;
+        height: 3.5vw;
+        width: 15vw;
+        font-size: 1.5vw;
+        text-align: center;
+        background-color: #000000;
+        color: #f8f8f8;
+        padding: 10px;
+        border-radius: 10px;
+    }
+    .image{
         height: 8vw;
         width: 8vw;
         cursor: pointer;
@@ -322,28 +376,22 @@ table{
         top: 7vw;
         left: 3vw;
     }
-    .menu-img-w, .menu-img-n{
-        height: 8vw;
-        width: 8vw;
-    }
-    .coursedata{
-        width: 8vw;
-        height: 8vw;
-    }
     .help-link{
         width: 20vw !important;
     }
-    .check-marker{
+    .check-marker, .stop-marker{
         height: 2vw;
         width: 2vw;
+        font-size: 1.5vw;
+        text-align: center;
     }
-    .obstacle{
+    .obstacle, .obstacle_cleared{
         height: 3vw;
         width: 3vw;
         left: 2.5vw;
         top: 2.5vw;
     }
-    .bump{
+    .bump, .bump_cleared{
         height: 8vw;
     }
 }
@@ -355,9 +403,36 @@ table{
         overflow: visible;
     }
     .menu{
+        width: 340px;
+    }
+    .menu > p{
+        font-size: 15px;
+    }
+    .index{
+        width: 300px;
+        font-size: 15px;
+    }
+    #timer, #score{
+        margin-top: 10px;
+        margin-left: 10px;
+        width: 300px;
+        text-align: center;
+        font-size: 50px;
+        font-weight: 700;
+    }
+    #timer_buttons{
         display: none;
     }
-    .image, #image-preview{
+    #stop{
+        display: none;
+    }
+    #hinan{
+        display: none;
+    }
+    #attention{
+        display: none;
+    }
+    .image{
         height: 80px;
         width: 80px;
         cursor: pointer;
@@ -365,17 +440,19 @@ table{
     .toolbar{
         display: none;
     }
-    .check-marker{
+    .check-marker, .stop-marker{
         height: 17px;
         width: 17px;
+        font-size: 10px;
+        text-align: center;
     }
-    .obstacle{
+    .obstacle, .obstacle_cleared{
         height: 30px;
         width: 30px;
         left: 25px;
         top: 25px;
     }
-    .bump{
+    .bump, .bump_cleared{
         height: 80px;
         left: 37px;
         top: 0px;
@@ -386,16 +463,6 @@ table{
     .copyright{
         display: none;
     }
-}
-.coursedata{
-    margin: 4px 4px 4px 4px;
-}
-.menu-img-w, .menu-img-n{
-    margin: 4px 4px 4px 4px;
-    border: solid 0.1px #AAAAAA;
-    background-color: #FFFFFF;
-    cursor: pointer;
-    z-index: 0;
 }
 .description{
     display: none;
@@ -408,25 +475,6 @@ table{
     color: #000000;
     background-color: #f8f8f8;
     z-index: 3;
-}
-.menu-img-w:hover + .description,
-.menu-img-n:hover + .description,
-.coursedata:hover ~ .description{
-    display: block;
-}
-td{
-    position: relative;
-    border: 1px solid #AAAAAA;
-    background-color: #FFFFFF;
-}
-.index{
-    height: 35px;
-    padding-top: 10px;
-    padding-left: 10px;
-    font-size: 15px;
-    color: #FFFFFF;
-    background-color: #000000;
-    cursor: normal;
 }
 .coursedata{
     font-size: 10px;
@@ -443,15 +491,21 @@ td{
     border-radius: 50%;
     z-index: 1;
 }
-.obstacle{
+.obstacle, .obstacle.cleared{
     display: block;
     position: absolute;
     z-index: 1;
 }
-.bump{
+.bump, .bump.cleared{
     display: block;
     position: absolute;
     z-index: 1;
+}
+.bump, .obstacle{
+    box-shadow: 0 0 5px #FFD700;
+}
+.bump.cleared, .obstacle.cleared{
+    box-shadow: 0 0 5px #888888;
 }
 .guide{
     position: absolute;
@@ -531,25 +585,64 @@ td{
 }
 #league > span{
     font-size: 1.3vw;
-    font-weight: 700;
+    font-weight: 500;
     padding-bottom: 1vw;
 }
 #league.active{
     visibility: visible;
     opacity: 1;
 }
-#league_decide{
+#league_nrl, #league_wrl, #rule_close{
     position: absolute;
-    right: 5vw;
-    bottom: 3vw;
-    width: 12vw;
+    width: 10vw;
     text-align: center;
     background-color: #000000;
     color: #f8f8f8;
-    padding: 1vw;
+    padding: 0.8vw;
     border-radius: 1vw;
 }
+#league_nrl{
+    right: 18vw;
+    bottom: 3vw;
+}
+#league_wrl, #rule_close{
+    right: 5vw;
+    bottom: 3vw;
+}
 #start.active{
+    visibility: visible;
+    opacity: 1;
+}
+#rule{
+    visibility: collapse;
+    opacity: 0;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 10vh;
+    left: 15vw;
+    width: 70vw;
+    height: 80vh;
+    overflow: auto;
+    padding: 2vw 5vw 2vw 5vw;
+    background-color: #F8F8F8;
+    border-radius: 20px;
+    font-size: 1.2vw;
+    cursor: default;
+    transition: all 0.3s 0s ease-out;
+    z-index: 5;
+}
+#rule > h1{
+    font-size: 2.5vw;
+    font-weight: 700;
+    margin-bottom: 2vw;
+}
+#rule > h2{
+    font-size: 1.5vw;
+    font-weight: 500;
+    margin-top: 1vw;
+}
+#rule.active{
     visibility: visible;
     opacity: 1;
 }
@@ -570,75 +663,89 @@ td{
     visibility: visible;
     opacity: 0.7;
 }
-/* バンプ設定 */
-#bump_settings{
-    visibility: collapse;
-    opacity: 0;
-    display: flex;
-    flex-direction: column;
+
+#hazard_out{
     position: absolute;
-    top: 10vh;
-    left: 10vw;
-    width: 80vw;
-    height: 80vh;
-    overflow: auto;
-    padding: 2vw 5vw 2vw 5vw;
-    background-color: #F8F8F8;
-    border-radius: 20px;
-    font-size: 1.2vw;
-    cursor: default;
-    transition: all 0.3s 0s ease-out;
-    z-index: 5;
 }
-#bump_settings.active{
-    visibility: visible;
-    opacity: 1;
-}
-#bump_settings > div{
+#hazard{
     display: flex;
     flex-direction: row;
-    height: 2vw;
-    margin-bottom: 1.2vw;
+    position: relative;
+    background-color: #F8F8F8;
+    padding: 10px;
+    border-radius: 15px;
+    cursor: default;
+    width: fit-content;
+    z-index: 3;
+    box-shadow: 0 0 10px #888888;
 }
-#bump_settings > p{
-    margin-bottom: 1vw;
+#hazard_img{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80px;
 }
-#bump_settings > div > span{
-    margin-right: 10px;
+#hazard_name{
+    font-size: 22px;
+    font-weight: 600;
 }
-.bump-input{
-    height: 2vw;
-    width: 7vw;
-    padding: 2px;
-    margin-right: 20px;
-    border: solid 1px #000000;
+#hazard_score{
+    background-color: #DDDDDD;
+    border-radius: 10px;
+    font-size: 12px;
+    margin-left: 10px;
+    padding: 5px;
+    width: fit-content;
+    height: fit-content;
+}
+#hazard_clear, #hazard_clear2{
+    margin-left: 20px;
+    width: 100px;
+    text-align: center;
+    background-color: #000000;
+    color: #f8f8f8;
+    box-shadow: 0 0 10px #FFD700;
+    padding: 5px;
     border-radius: 5px;
 }
-#image-preview{
-    cursor: default !important;
-}
-#bump_decide{
-    position: absolute;
-    right: 20vw;
-    bottom: 3vw;
-    width: 12vw;
-    text-align: center;
-    background-color: #000000;
+#hazard_clear.disabled, #hazard_clear2.disabled{
+    background-color: #888888;
+    box-shadow: 0 0 10px #FFD700;
     color: #f8f8f8;
-    padding: 1vw;
-    border-radius: 1vw;
 }
-#bump_cancel{
-    position: absolute;
-    right: 5vw;
-    bottom: 3vw;
-    width: 12vw;
-    text-align: center;
+#hazard_clear.cleared, #hazard_clear2.cleared{
     background-color: #000000;
+    box-shadow: 0 0 10px #888888;
     color: #f8f8f8;
-    padding: 1vw;
-    border-radius: 1vw;
 }
+#hazard_clear2{
+    margin-top: 10px;
+}
+.image_hazard{
+    height: 80px;
+    width: 80px;
+    box-shadow: 0 0 5px #FFD700;
+    cursor: default;
+}
+.image.hazard{
+    box-shadow: 0 0 5px #FFD700;
+}
+.image_hazard_cleared{
+    height: 80px;
+    width: 80px;
+    box-shadow: 0 0 5px #888888;
+    cursor: default;
+}
+.stop-marker{
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    background-color: #888888;
+    color: #FFFFFF;
+    border-radius: 50%;
+    z-index: 1;
+}
+
 .container {
     display: block;
     position: relative;

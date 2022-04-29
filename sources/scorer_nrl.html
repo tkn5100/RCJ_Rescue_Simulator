@@ -1,0 +1,421 @@
+﻿<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="icon" type="image/png" href="../img/simulator/ad.png">
+    <link rel="stylesheet" href="scorer_nrl.css">
+    <link rel="stylesheet" href="destyle.css">
+    <title>NRL得点計算 -RoboCupJunior コート作成環境v4.1.0</title>
+  </head>
+
+  <body class="body">
+    <div id="start" class="active">
+      <p style="font-size: 2.5vw; font-weight: 700; margin-bottom: 2vw;">読み込むプロジェクトを選択</p>
+      <div style="display: flex; flex-direction: row;">
+        <label><input type="file" id ="input_file" style="display: none;" accept=".rrl"><img src="../img/tools/read.svg" alt="プロジェクトの選択" class="start_tools"><p>プロジェクトの選択</p></label>
+        <div><img src="../img/tools/resume.svg" alt="再開" class="start_tools" style="display: none;"><p>再開</p></div>
+      </div>
+      <div style="position: absolute; top: 20px; right: 20px;"><div><img src="../img/tools/help.svg" alt="ヘルプ" class="start_tools" style="margin-right: 0; cursor: help;"><p>ヘルプ</p></div></div>
+    </div>
+    <div id="league">
+      <span>メジャーバージョン3で作成されたファイルには、NRL・WRLを判別するための情報がありません。<br><br>このファイルはNRLのものですか?</span>
+      <button id="league_nrl">はい</button>
+      <button id="league_wrl">いいえ</button>
+    </div>
+    <div id="rule">
+      <h1>得点要素の得点一覧</h1>
+      <p>詳細な規定は、日本リーグレスキューの2022ルールをご覧ください。</p>
+      <h2>ライントレース</h2>
+      <p>1回目　 : 5点/タイル</p>
+      <p>2回目　 : 3点/タイル</p>
+      <p>3回目　 : 1点/タイル</p>
+      <p>4回目～ : 0点/タイル</p>
+      <h2>ハザード</h2>
+      <p>障害物　 : 15点</p>
+      <p>ギャップ : 10点</p>
+      <p>傾斜路　 : 10点</p>
+      <p>バンプ　 :  5点</p>
+      <h2>避難ゾーン</h2>
+      <p>黒の被災者救助 : 15点</p>
+      <p>緑の被災者救助 : 30点</p>
+      <p>避難ゾーン脱出 : 30点</p>
+      <button id="rule_close">閉じる</button>
+    </div>
+    <div id="overlay" class="active"></div>
+    <div id="contextmenu">
+      <ul>
+          <li class="contextmenu-title" style="border-bottom: none;">チェックマーカーを置く</li>
+          <li class="contextmenu-title">チェックマーカーを取る</li>
+          <li class="contextmenu-title_active" style="border-bottom: none;">競技進行の停止</li>
+          <li class="contextmenu-title_active" style="border-bottom: none; cursor: default;">競技進行の停止数 : <span id="contextmenu_stop">0</span></li>
+      </ul>
+    </div>
+    <div id="hazard_out" style="display: none;"><!-- hazard_out ハザードの外側 -->
+      <div id="hazard">
+        <div id="hazard_img"><img src="" alt="ハザード" class="" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div>
+        <div>
+          <p style="display: flex; align-items: center; margin: 10px;"><span id="hazard_name"></span><span id="hazard_score"></span></p>
+          <button id="hazard_clear"></button>
+          <button id="hazard_clear2" style="display: none;"></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="toolbar">
+      <div><img src="../img/tools/start.svg" alt="スタートへ" class="tools"><p>スタート画面へ戻る</p></div>
+      <div><img src="../img/tools/grid.svg" alt="グリッドの表示・非表示" class="tools" data-grid="1"><p>グリッドの表示・非表示</p></div>
+      <!-- <div><img src="../img/tools/save.svg" alt="プロジェクトの保存" class="tools"><p>プロジェクトの保存</p></div> -->
+      <div><img src="../img/tools/print.svg" alt="印刷" class="tools"><p>印刷</p></div>
+      <div><img src="../img/tools/68.svg" alt="6×8タイル" class="tools"><p>6×8タイル</p></div>
+      <div><img src="../img/tools/49.svg" alt="4×9タイル" class="tools"><p>4×9タイル</p></div>
+      <div><img src="../img/tools/312.svg" alt="3×12タイル" class="tools"><p>3×12タイル</p></div>
+      <div><img src="../img/tools/rule.svg" alt="得点一覧" class="tools"><p>得点一覧</p></div>
+      <div><img src="../img/tools/help.svg" alt="ヘルプ" class="tools" style="cursor: help;"><p>ヘルプ</p></div>
+    </div>
+    <div class="main">
+      <div class="menu">
+        <h1 class="index">残りの競技時間</h1>
+        <p id="timer">8:00</p>
+        <div id="timer_buttons">
+          <button id="timer_start">競技開始</button>
+          <button id="timer_stop">競技終了</button>
+        </div>
+        <h1 class="index">現在の得点</h1>
+        <p id="score">0</p>
+        <div id="stop">
+          <h1 class="index">競技進行の停止(今の区間)</h1>
+          <p id="stop_count">0</p>
+        </div>
+        <div id="hinan">
+          <h1 class="index">避難ゾーン</h1>
+          <button class="button_hinan">緑の被災者救助</button>
+          <button class="button_hinan">黒の被災者救助</button>
+          <button class="button_hinan" style="margin-bottom: 10px;">避難ゾーン脱出</button>
+        </div>
+        <div id="attention">
+          <h1 class="index">注意</h1>
+          <p style="margin-top: 5px; margin-left: 20px;">傾斜路は1タイルごとに認識します。ただし連続している傾斜路は2タイルで10点と定められているので、その場合はどちらかのタイルでのみ「クリア」ボタンを押してください。</p>
+          <p style="margin-top: 5px; margin-left: 20px;">その他注意点等はヘルプの「NRL得点計算」に書いてあります。よく読んでご使用ください。</p>
+        </div>
+      </div>
+
+      <!-- data-clearedはギャップをクリアしているか、data-passedはそのタイルを通過しているか、data-stoppedは競技進行の停止数 -->
+      <!-- 6×8 -->
+      <table style="display: block;">
+        <tr>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+        </tr>
+        <tr>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+        </tr>
+        <tr>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+        </tr>
+        <tr>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+        </tr>
+        <tr>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+        </tr>
+        <tr>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+        </tr>
+      </table>
+      <!-- 2階 -->
+      <table style="display: none;">
+        <tr>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+        </tr>
+        <tr>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+        </tr>
+        <tr>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+        </tr>
+        <tr>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+        </tr>
+        <tr>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+        </tr>
+        <tr>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+        </tr>
+      </table>
+
+      <!-- 4×9 -->
+      <table style="display: none;">
+        <tr>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+        </tr>
+        <tr>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+        </tr>
+        <tr>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+        </tr>
+        <tr>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+        </tr>
+      </table>
+      <!-- 2階 -->
+      <table style="display: none;">
+        <tr>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+        </tr>
+        <tr>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+        </tr>
+        <tr>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+        </tr>
+        <tr>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+        </tr>
+      </table>
+
+      <!-- 3×12 -->
+      <table style="display: none;">
+        <tr>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+        </tr>
+        <tr>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+        </tr>
+        <tr>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+        </tr>
+      </table>
+      <!-- 2階 -->
+      <table style="display: none;">
+        <tr>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+        </tr>
+        <tr>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+        </tr>
+        <tr>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+          <td><img src="../img/simulator/no.png" alt="no image" class="image" data-turn="0" data-check="0" data-obstacle="0" data-bump1="0" data-bump2="0" data-bump3="0" data-bump4="0" data-cleared="0" data-passed="0" data-stopped="0"></div></td>
+        </tr>
+      </table>
+
+    </div>
+    <p class="guide" id="guidetext">ただいま1階部分を作成中です</p>
+    <small class="copyright">Copyright&copy; 2021-2022 TKN All Rights Reserved.</small>
+    <script type="text/javascript" src="scorer_nrl.js"></script>
+  </body>
+</html>

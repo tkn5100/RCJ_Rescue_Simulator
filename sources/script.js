@@ -21,7 +21,6 @@
     const $contextmenu = document.getElementById('contextmenu');
     let nowturn = null;
     let src = null;
-    let secondOrFirst = null;
     let checkOrUncheck = null;
     let newCheckMarker = null;
     let obOrUnob = null;
@@ -320,7 +319,7 @@
       const filename = window.prompt('ファイル名を入力:');
       if (filename) {
         //ダウンロードするタイルを配列に入れる
-        output_data[0].push("v4.0.0");
+        output_data[0].push("v4.1.0");
         //どのコートを編集しいたか
         if($table[0].style.display == 'block'){
           output_data[1].push("0");
@@ -345,13 +344,13 @@
         for (let index = 0; index < imgLen; index++) {
           output_data[2].push("../img/simulator/" + $img[index].src.slice(-6));
           output_data[3].push($img[index].dataset.turn);
-          if ($img[index].style.border =="1px solid rgb(102, 51, 102)"){
+          if ($img[index].style.border == "1px solid rgb(102, 51, 102)"){
             output_data[4].push("solid 1px #663366");
-          }else if ($img[index].style.border =="1px solid rgb(153, 51, 102)"){
+          }else if ($img[index].style.border == "1px solid rgb(153, 51, 102)"){
             output_data[4].push("solid 1px #993366");
-          }else if ($img[index].style.border =="1px solid rgb(204, 51, 102)"){
+          }else if ($img[index].style.border == "1px solid rgb(204, 51, 102)"){
             output_data[4].push("solid 1px #CC3366");
-          }else if ($img[index].style.border =="1px solid rgb(255, 51, 102)"){
+          }else if ($img[index].style.border == "1px solid rgb(255, 51, 102)"){
             output_data[4].push("solid 1px #FF3366");
           }else{
             output_data[4].push("none");
@@ -509,6 +508,34 @@
           newBump = null;
         }
       };
+      if(window.innerWidth < 920){
+        for (let index = 0; index < imgLen; index++) {
+          if ($img[index].dataset.bump1 != 0) {
+            bump_data = $img[index].dataset.bump1.split('a');
+            $img[index].parentElement.children[1].style.left = (Number(bump_data[0]) / 10) + "vw";
+            $img[index].parentElement.children[1].style.top = (Number(bump_data[1]) / 10) + "vw";
+            bump_data = null;
+          }
+          if ($img[index].dataset.bump2 != 0) {
+            bump_data = $img[index].dataset.bump2.split('a');
+            $img[index].parentElement.children[2].style.left = (Number(bump_data[0]) / 10) + "vw";
+            $img[index].parentElement.children[2].style.top = (Number(bump_data[1]) / 10) + "vw";
+            bump_data = null;
+          }
+          if ($img[index].dataset.bump3 != 0) {
+            bump_data = $img[index].dataset.bump3.split('a');
+            $img[index].parentElement.children[3].style.left = (Number(bump_data[0]) / 10) + "vw";
+            $img[index].parentElement.children[3].style.top = (Number(bump_data[1]) / 10) + "vw";
+            bump_data = null;
+          }
+          if ($img[index].dataset.bump4 != 0) {
+            bump_data = $img[index].dataset.bump4.split('a');
+            $img[index].parentElement.children[4].style.left = (Number(bump_data[0]) / 10) + "vw";
+            $img[index].parentElement.children[4].style.top = (Number(bump_data[1]) / 10) + "vw";
+            bump_data = null;
+          }
+        }
+      }
       document.getElementById('input_file').value = '';
       $guide.textContent = 'プロジェクトを読み込みました';
       setTimeout(nomal_guide, 2000);
@@ -523,7 +550,7 @@
         reader.readAsText(file);
         reader.onload = function () {
           csv_arrays = reader.result.split('\n');
-          if (csv_arrays[0] == "v4.0.0,") {
+          if (csv_arrays[0] == "v4.0.0," || csv_arrays[0] == "v4.1.0,") {
             try{
               input_data_show = csv_arrays[1].split(',');
               input_data_course = csv_arrays[2].split(',');
@@ -809,7 +836,6 @@
 
     //右クリックメニュー
     for (let index = 0; index < imgLen; index++) {
-      secondOrFirst = null;
       $img[index].addEventListener('contextmenu', (e) => {
         e.preventDefault();
         $contextmenu.style.display = "block";
@@ -842,7 +868,6 @@
           e.target.style.transform = 'rotate(0deg)';
           e.target.dataset.turn = 0;
           e.target.style.border = 'none';
-          e.target.dataset.floor = 0;
           if (e.target.dataset.check == 1){
             e.target.nextElementSibling.remove();
             e.target.dataset.check = 0;
