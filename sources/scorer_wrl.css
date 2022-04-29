@@ -29,7 +29,7 @@ table{
     background: #eeeeee;
     border: solid 1px #888888;
 }
-.toolbar > div, .toolbar > label, #start > div > div, #start > div > label{
+.toolbar > div, .toolbar > label, #start > div > div, #start > div > label, #tile_now > div > div, #tile_now > div > div > div{
     position: relative;
 }
 .tools, .start_tools{
@@ -40,10 +40,17 @@ table{
     margin-bottom: 3px;
     cursor: pointer;
 }
-.tools:hover, .start_tools:hover{
+.line_tools{
+    border-radius: 30%;
+    padding: 5px;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    cursor: pointer;
+}
+.tools:hover, .start_tools:hover, .line_tools:hover{
     background-color: #DDDDDD;
 }
-.tools + p, .start_tools + p{
+.tools + p, .start_tools + p, .line_tools + p{
     display: none;
     position: absolute;
     width: max-content;
@@ -54,10 +61,10 @@ table{
     box-shadow: 0 0 8px #888888;
     z-index: 3;
 }
-.tools:hover + p, .start_tools:hover + p{
+.tools:hover + p, .start_tools:hover + p, .line_tools:hover + p{
     display: block;
 }
-.menu{
+.menu, .menu_start{
     position: relative;
     display: flex;
     /* flex-wrap:wrap; */
@@ -74,7 +81,7 @@ table{
 td{
     position: relative;
     border: 1px solid #AAAAAA;
-    background-color: #EEEEEE;
+    background-color: #FFFFFF;
 }
 .index{
     height: 35px;
@@ -93,7 +100,7 @@ td{
     justify-content: center;
     align-items: center;
 }
-#added_score{
+#added_score, #tile_now_score{
     background-color: #DDDDDD;
     border-radius: 10px;
     padding: 5px;
@@ -105,11 +112,24 @@ td{
     justify-content: center;
     align-items: center;
 }
+#tile_now > div{
+    margin-left: 20px;
+}
+#tile_now_img{
+    position: relative;
+}
+#tile_now_name{
+    font-weight: 600;
+}
+#tile_now_status, #tile_now_stopped{
+    color: #888888;
+    text-decoration: underline solid 1px;
+}
 @media screen and (min-width:1040px){
-    .menu{
+    .menu, .menu_start{
         width: 340px;
     }
-    .menu > p{
+    .menu > p, .menu_start > p{
         font-size: 15px;
     }
     .index{
@@ -150,18 +170,30 @@ td{
         font-size: 30px;
         font-weight: 600;
     }
-    .button_hinan{
+    #tile_now_name{
+        font-size: 22px;
+    }
+    #tile_now_score{
+        font-size: 12px;
+        margin-left: 10px;
+    }
+    #tile_now_status, #tile_now_stopped{
+        font-size: 13px;
+        margin-bottom: 5px;
+        margin-left: 13px;
+    }
+    .button_hinan, .button_line, #route_finish{
         margin-top: 10px;
         margin-left: 20px;
-        height: 35px;
-        width: 150px;
+        height: fit-content;
+        width: 280px;
         text-align: center;
         background-color: #000000;
         color: #f8f8f8;
         padding: 10px;
         border-radius: 10px;
     }
-    .image{
+    .image, .image_tile_now{
         height: 80px;
         width: 80px;
         cursor: pointer;
@@ -171,12 +203,17 @@ td{
         height: 50px;
         margin-right: 25px;
     }
+    .line_tools{
+        width: 50px;
+        height: 50px;
+        margin-right: 10px;
+    }
     .start_tools{
         width: 90px;
         height: 90px;
         margin-right: 80px;
     }
-    .tools + p{
+    .tools + p, .line_tools + p{
         top: 50px;
         left: 20px;
     }
@@ -184,10 +221,11 @@ td{
         top: 80px;
         left: 30px;
     }
-    .check-marker{
+    .check-marker, .route_counter, .stop_counter{
         height: 17px;
         width: 17px;
-        font-size: 10px;
+        padding: 1px;
+        font-size: 12px;
         text-align: center;
     }
     .obstacle, .obstacle_cleared{
@@ -201,10 +239,10 @@ td{
     }
 }
 @media screen and (max-width:1040px) and (min-width:920px){
-    .menu{
+    .menu, .menu_start{
         width: 240px;
     }
-    .menu > p{
+    .menu > p, .menu_start > p{
         font-size: 15px;
     }
     .index{
@@ -245,18 +283,30 @@ td{
         font-size: 30px;
         font-weight: 600;
     }
-    .button_hinan{
+    #tile_now_name{
+        font-size: 22px;
+    }
+    #tile_now_score{
+        font-size: 12px;
+        margin-left: 10px;
+    }
+    #tile_now_status, #tile_now_stopped{
+        font-size: 13px;
+        margin-bottom: 5px;
+        margin-left: 13px;
+    }
+    .button_hinan, .button_line, #route_finish{
         margin-top: 10px;
         margin-left: 20px;
-        height: 35px;
-        width: 150px;
+        height: fit-content;
+        width: 180px;
         text-align: center;
         background-color: #000000;
         color: #f8f8f8;
         padding: 10px;
         border-radius: 10px;
     }
-    .image{
+    .image, .image_tile_now{
         height: 80px;
         width: 80px;
         cursor: pointer;
@@ -266,12 +316,16 @@ td{
         height: 50px;
         margin-right: 20px;
     }
+    .line_tools{
+        width: 45px;
+        height: 45px;
+    }
     .start_tools{
         width: 80px;
         height: 80px;
         margin-right: 80px;
     }
-    .tools + p{
+    .tools + p, .line_tools + p{
         top: 50px;
         left: 20px;
     }
@@ -279,10 +333,11 @@ td{
         top: 70px;
         left: 30px;
     }
-    .check-marker, .stop-merker{
+    .check-marker, .route_counter, .stop_counter{
         height: 17px;
         width: 17px;
-        font-size: 10px;
+        padding: 1px;
+        font-size: 12px;
         text-align: center;
     }
     .obstacle, .obstacle_cleared{
@@ -296,10 +351,10 @@ td{
     }
 }
 @media screen and (max-width:920px){
-    .menu{
+    .menu, .menu_start{
         width: 25vw;
     }
-    .menu > p{
+    .menu > p, .menu_start > p{
         font-size: 1.5vw;
     }
     .index{
@@ -331,7 +386,7 @@ td{
     }
     #added_score{
         margin-left: 20px;
-        font-size: 15px;
+        font-size: 1.5vw;
         font-weight: 400;
     }
     #stop_count{
@@ -341,11 +396,23 @@ td{
         font-size: 3vw;
         font-weight: 600;
     }
-    .button_hinan{
+    #tile_now_name{
+        font-size: 2.2vw;
+    }
+    #tile_now_score{
+        font-size: 1.2vw;
+        margin-left: 1vw;
+    }
+    #tile_now_status, #tile_now_stopped{
+        font-size: 1.3vw;
+        margin-bottom: 0.5vw;
+        margin-left: 13px;
+    }
+    .button_hinan, .button_line, #route_finish{
         margin-top: 10px;
         margin-left: 20px;
-        height: 3.5vw;
-        width: 15vw;
+        height: fit-content;
+        width: 18vw;
         font-size: 1.5vw;
         text-align: center;
         background-color: #000000;
@@ -353,7 +420,7 @@ td{
         padding: 10px;
         border-radius: 10px;
     }
-    .image{
+    .image, .image_tile_now{
         height: 8vw;
         width: 8vw;
         cursor: pointer;
@@ -363,12 +430,19 @@ td{
         height: 6vw;
         margin-right: 2vw;
     }
+    .line_tools{
+        width: 4.5vw;
+        height: 4.5vw;
+    }
+    .line_tools + p{
+        font-size: 1.5vw !important;
+    }
     .start_tools{
         width: 8vw;
         height: 8vw;
         margin-right: 8vw;
     }
-    .tools + p{
+    .tools + p, .line_tools + p{
         top: 5vw;
         left: 2vw;
     }
@@ -379,9 +453,10 @@ td{
     .help-link{
         width: 20vw !important;
     }
-    .check-marker{
+    .check-marker, .route_counter, .stop_counter{
         height: 2vw;
         width: 2vw;
+        padding: 0.1vw;
         font-size: 1.5vw;
         text-align: center;
     }
@@ -422,16 +497,7 @@ td{
         font-size: 50px;
         font-weight: 700;
     }
-    #timer_buttons{
-        display: none;
-    }
-    #stop{
-        display: none;
-    }
-    #hinan{
-        display: none;
-    }
-    #attention{
+    #timer_buttons, #stop, #hinan, #attention, #tile_now{
         display: none;
     }
     #statistics{
@@ -484,7 +550,7 @@ td{
     .toolbar{
         display: none;
     }
-    .check-marker{
+    .check-marker, .route_counter, .stop_counter{
         height: 17px;
         width: 17px;
         font-size: 10px;
@@ -528,7 +594,7 @@ td{
     border-radius: 7px 7px 7px 7px;   
 }
 .check-marker{
-    position: absolute;
+    position: absolute !important;
     left: 0px;
     top: 0px;
     background-color: #FFD700;
@@ -608,6 +674,10 @@ td{
     transition: all 0.3s 0s ease-out;
     z-index: 5;
 }
+#start.active{
+    visibility: visible;
+    opacity: 1;
+}
 #league{
     visibility: collapse;
     opacity: 0;
@@ -627,16 +697,35 @@ td{
     transition: all 0.3s 0s ease-out;
     z-index: 5;
 }
-#league > span{
+#level{
+    visibility: collapse;
+    opacity: 0;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 15vh;
+    left: 10vw;
+    width: 80vw;
+    height: 70vh;
+    overflow: auto;
+    padding: 2vw 5vw 2vw 5vw;
+    background-color: #F8F8F8;
+    border-radius: 20px;
+    font-size: 1.2vw;
+    cursor: default;
+    transition: all 0.3s 0s ease-out;
+    z-index: 5;
+}
+#league > p{
     font-size: 1.3vw;
     font-weight: 500;
     padding-bottom: 1vw;
 }
-#league.active{
+#league.active, #level.active{
     visibility: visible;
     opacity: 1;
 }
-#league_nrl, #league_wrl, #rule_close, #statistics_close{
+#league_nrl, #league_wrl, #rule_close, #statistics_close, #level_decide{
     position: absolute;
     width: 10vw;
     text-align: center;
@@ -645,17 +734,13 @@ td{
     padding: 0.8vw;
     border-radius: 1vw;
 }
-#league_nrl{
-    right: 18vw;
-    bottom: 3vw;
-}
-#league_wrl, #rule_close, #statistics_close{
+#league_nrl, #rule_close, #statistics_close, #level_decide{
     right: 5vw;
     bottom: 3vw;
 }
-#start.active{
-    visibility: visible;
-    opacity: 1;
+#league_wrl{
+    right: 18vw;
+    bottom: 3vw;
 }
 #rule, #statistics{
     visibility: collapse;
@@ -676,7 +761,7 @@ td{
     transition: all 0.3s 0s ease-out;
     z-index: 5;
 }
-#rule > h1, #statistics > h1{
+#rule > h1, #statistics > h1, #level > p{
     font-size: 2.5vw;
     font-weight: 700;
     margin-bottom: 2vw;
@@ -707,83 +792,72 @@ td{
     visibility: visible;
     opacity: 0.7;
 }
-
-#hazard_out{
-    position: absolute;
-}
-#hazard{
-    display: flex;
-    flex-direction: row;
-    position: relative;
-    background-color: #F8F8F8;
-    padding: 10px;
-    border-radius: 15px;
-    cursor: default;
-    width: fit-content;
-    z-index: 3;
-    box-shadow: 0 0 10px #888888;
-}
-#hazard_img{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 80px;
-}
-#hazard_name{
-    font-size: 22px;
-    font-weight: 600;
-}
-#hazard_score{
-    background-color: #DDDDDD;
-    border-radius: 10px;
-    font-size: 12px;
-    margin-left: 10px;
-    padding: 5px;
-    width: fit-content;
-    height: fit-content;
-}
-#hazard_status{
-    font-size: 13px;
-    color: #888888;
-    text-decoration: underline solid 1px;
-    margin-bottom: 5px;
-    margin-left: 13px;
-}
-#hazard_clear, #hazard_clear2{
-    margin-left: 20px;
-    width: 100px;
-    text-align: center;
-    background-color: #000000;
-    color: #f8f8f8;
-    box-shadow: 0 0 10px #FFD700;
-    padding: 5px;
-    border-radius: 5px;
-}
-#hazard_clear.disabled, #hazard_clear2.disabled{
-    background-color: #888888;
-    box-shadow: 0 0 10px #FFD700;
-    color: #f8f8f8;
-}
-#hazard_clear.cleared, #hazard_clear2.cleared{
-    background-color: #000000;
-    box-shadow: 0 0 10px #888888;
-    color: #f8f8f8;
-}
-#hazard_clear2{
-    margin-top: 10px;
-}
-.image_hazard{
-    height: 80px;
-    width: 80px;
-    box-shadow: 0 0 5px #FFD700;
-    cursor: default;
-}
 .image.hazard{
     box-shadow: 0 0 5px #FFD700;
 }
-.image_hazard_cleared{
-    height: 80px;
-    width: 80px;
-    box-shadow: 0 0 5px #888888;
-    cursor: default;
+.route_counter{
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    background-color: #888888;
+    color: #FFFFFF;
+    border-radius: 50%;
+    z-index: 0;
+}
+.stop_counter{
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    background-color: #DD0000;
+    color: #FFFFFF;
+    border-radius: 50%;
+    z-index: 0;
+}
+
+.container {
+    display: block;
+    position: relative;
+    padding-left: 2vw;
+    margin-bottom: 1vw;
+    cursor: pointer;
+    user-select: none;
+    padding-top: 0.5vw;
+    padding-left: 3vw;
+}
+/* デフォルトのラジオボタンデザインを無効化 */
+.container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+/* カスタムラジオボタンの作成 */
+.checkmark {
+    position: absolute;
+    top: 0.5vw;
+    left: 1vw;
+    height: 1.5vw;
+    width: 1.5vw;
+    background-color: #DDDDDD;
+    border-radius: 50%;
+}
+/* チェックした時のカラーリング */
+.container input:checked ~ .checkmark {
+    background-color:#000000;
+}
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+.container input:checked ~ .checkmark:after {
+    display: block;
+}
+.container .checkmark:after {
+    top: 5%;
+    left: 5%;
+    width: 90%;
+    height: 90%;
+    border: solid 0.3vw #F8F8F8;
+    border-radius: 50%;
+    background-color:#000000;
 }

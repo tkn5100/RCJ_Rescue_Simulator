@@ -270,6 +270,8 @@
             index2++;
           }
         }
+      } else if ($tools[1].style.display == 'none'){
+        //何もしない
       } else {
         for (let index = 0; index < imgLen; index++) {
           $img[index].style.backgroundImage = "none";
@@ -346,17 +348,17 @@
         for (let index = 0; index < imgLen; index++) {
           $doc.getElementsByTagName('td')[index].style.border = 'none';
         }
-        $tools[2].textContent = 'グリッドの表示';
+        $tools[2].nextElementSibling.textContent = 'グリッドの非表示';
         $tools[2].dataset.grid = 0;
-        $guide.textContent = 'グリッドを表示しています';
+        $guide.textContent = 'グリッドを非表示にしました';
         setTimeout(nomal_guide, 2000);
       }else{
         for (let index = 0; index < imgLen; index++) {
           $doc.getElementsByTagName('td')[index].style.border = '1px solid #AAAAAA';
         }
-        $tools[2].textContent = 'グリッドの非表示';
+        $tools[2].nextElementSibling.textContent = 'グリッドの表示';
         $tools[2].dataset.grid = 1;
-        $guide.textContent = 'グリッドを非表示にしました';
+        $guide.textContent = 'グリッドを表示しています';
         setTimeout(nomal_guide, 2000);
       }
     });
@@ -368,7 +370,7 @@
       const filename = window.prompt('ファイル名を入力:');
       if (filename) {
         //ダウンロードするタイルを配列に入れる
-        output_data[0].push("v4.3.1");
+        output_data[0].push("v4.4.0");
         //どのコートを編集しいたか
         if($table[0].style.display == 'block'){
           output_data[1].push("0");
@@ -391,7 +393,12 @@
         }
         //以下タイル
         for (let index = 0; index < imgLen; index++) {
-          output_data[2].push("../img/simulator/" + $img[index].src.slice(-6));
+          console.log($img[index].style.backgroundColor)
+          if ($img[index].style.backgroundColor == "rgb(221, 221, 221)"){
+            output_data[2].push("../img/simulator/no.png");
+          } else {
+            output_data[2].push("../img/simulator/" + $img[index].src.slice(-6));
+          }
           output_data[3].push($img[index].dataset.turn);
           if ($img[index].style.border == "1px solid rgb(102, 51, 102)"){
             output_data[4].push("solid 1px #663366");
@@ -468,19 +475,6 @@
     //プロジェクトの読み込み
     function import_project() {
       for (let index = 0; index < imgLen; index++) {
-        //コート
-        tile(input_data_show[1]);
-        if (input_data_show[1] == 1 || input_data_show[1] == 3 || input_data_show[1] == 5){
-          $coursedata[0].style.display = 'none';
-          $coursedata[1].style.display = 'none';
-          $coursedata[2].style.display = 'block';
-          $coursedata[3].style.display = 'block';
-          $coursedata[4].style.display = 'block';
-          $tools[1].src = '../img/tools/floor1.svg';
-          $tools[1].nextElementSibling.textContent = '1階部分の作成';
-          $tools[1].dataset.one = 2;
-          nomal_guide();
-        }
         //NRL・WRL
         if(input_data_show[2] == 'nrl'){
           document.getElementById('wrl-tiles').style.display = 'none';
@@ -490,6 +484,19 @@
           document.getElementById('wrl-tiles').style.display = 'block';
           document.getElementById('nrl-tiles').style.display = 'none';
           $tools[1].style.display = 'block';
+          //コート
+          tile(input_data_show[1]);
+          if (input_data_show[1] == 1 || input_data_show[1] == 3 || input_data_show[1] == 5){
+            $coursedata[0].style.display = 'none';
+            $coursedata[1].style.display = 'none';
+            $coursedata[2].style.display = 'block';
+            $coursedata[3].style.display = 'block';
+            $coursedata[4].style.display = 'block';
+            $tools[1].src = '../img/tools/floor1.svg';
+            $tools[1].nextElementSibling.textContent = '1階部分の作成';
+            $tools[1].dataset.one = 2;
+            nomal_guide();
+          }
         }
         //タイル
         $img[index].src = input_data_course[index + 1];
@@ -602,7 +609,7 @@
         reader.readAsText(file);
         reader.onload = function () {
           csv_arrays = reader.result.split('\n');
-          if (csv_arrays[0] == "v4.0.0," || csv_arrays[0] == "v4.1.0," || csv_arrays[0] == "v4.1.1," || csv_arrays[0] == "v4.2.0," || csv_arrays[0] == "v4.2.1," || csv_arrays[0] == "v4.2.2," || csv_arrays[0] == "v4.3.0," || csv_arrays[0] == "v4.3.1,") {
+          if (csv_arrays[0] == "v4.0.0," || csv_arrays[0] == "v4.1.0," || csv_arrays[0] == "v4.1.1," || csv_arrays[0] == "v4.2.0," || csv_arrays[0] == "v4.2.1," || csv_arrays[0] == "v4.2.2," || csv_arrays[0] == "v4.3.0," || csv_arrays[0] == "v4.3.1," || csv_arrays[0] == "v4.4.0,") {
             try{
               input_data_show = csv_arrays[1].split(',');
               input_data_course = csv_arrays[2].split(',');
@@ -788,21 +795,8 @@
       }
     });
 
-    //残り全部を白にする
-    $tools[6].addEventListener('click', ()=> {
-      for (let index = 0; index < imgLen; index++) {
-        if($img[index].src.lastIndexOf('no.png') !== -1){
-          $img[index].src = '../img/simulator/wt.png';
-        }
-      }
-      auto_save();
-      $guide.textContent = '未入力のタイルをすべて白色にしました';
-      setTimeout(nomal_guide, 2000);
-    });
-
-
     //6×8タイル
-    $tools[7].addEventListener('click', ()=> {
+    $tools[6].addEventListener('click', ()=> {
       tile(0);
       $tools[1].dataset.one = 1;
       $guide.textContent = '6×8タイルに切り替えました';
@@ -813,7 +807,7 @@
     });
 
     //4×9タイル
-    $tools[8].addEventListener('click', ()=> {
+    $tools[7].addEventListener('click', ()=> {
       tile(2);
       $tools[1].dataset.one = 1;
       $guide.textContent = '4×9タイルに切り替えました。このモードでは被災者ゾーンの自動入力機能は使えません。';
@@ -824,7 +818,7 @@
     });
 
     //3×12タイル
-    $tools[9].addEventListener('click', ()=> {
+    $tools[8].addEventListener('click', ()=> {
       tile(4);
       $tools[1].dataset.one = 1;
       $guide.textContent = '3×12タイルに切り替えました。このモードでは被災者ゾーンの自動入力機能は使えません。';
@@ -835,7 +829,7 @@
     });
 
     //ヘルプ
-    $tools[10].addEventListener('click', ()=> {
+    $tools[9].addEventListener('click', ()=> {
       window.open('help.html')
     });
     $start_tools[4].addEventListener('click', ()=> {
