@@ -289,7 +289,7 @@
       const filename = window.prompt('ファイル名を入力:');
       if (filename) {
         //ダウンロードするタイルを配列に入れる
-        output_data[0].push("v2.0.1")
+        output_data[0].push("v2.0.2")
         for (let index = 0; index < imgLen; index++) {
           output_data[1].push(".././img/" + $img[index].src.slice(-6));
           output_data[2].push($img[index].dataset.turn);
@@ -351,7 +351,7 @@
         reader.readAsText(file);
         reader.onload = function () {
           csv_arrays = reader.result.split('\n');
-          if(csv_arrays[0] == "v2.0.0," || csv_arrays[0] == "v2.0.1,"){
+          if(csv_arrays[0] == "v2.0.0," || csv_arrays[0] == "v2.0.1," || csv_arrays[0] == "v2.0.2,"){
             try{
               input_data_course = csv_arrays[1].split(',');
               input_data_turn = csv_arrays[2].split(',');
@@ -760,8 +760,8 @@
         //バンプ
         if (bumpOrUnbump_1 == 0){
           document.getElementsByClassName('contextmenu-title')[6].onclick = function() {
-            document.getElementById('overlay').style.display = 'block';
-            document.getElementById('bump_settings').style.display = 'flex';
+            document.getElementById('overlay').className = 'active';
+            document.getElementById('bump_settings').className = 'active';
             document.getElementById('image-preview').src = $img[index].src;
             document.getElementById('image-preview').style.transform = "rotate(" + $img[index].dataset.turn + "deg)"
             document.getElementById('bump_decide').onclick = function(){
@@ -804,12 +804,12 @@
                 $img[index].dataset.bump4 = $bump_input[9].value + "a" + ($bump_input[10].value - 37) + "a" + $bump_input[11].value;
                 newBump = null;
               }
-              document.getElementById('overlay').style.display = 'none';
-              document.getElementById('bump_settings').style.display = 'none';
+              document.getElementById('overlay').className = '';
+              document.getElementById('bump_settings').className = '';
             }
             document.getElementById('bump_cancel').onclick = function(){
-              document.getElementById('overlay').style.display = 'none';
-              document.getElementById('bump_settings').style.display = 'none';
+              document.getElementById('overlay').className = '';
+              document.getElementById('bump_settings').className = '';
             }
           };
           document.getElementsByClassName('contextmenu-title')[7].onclick = function(){}
