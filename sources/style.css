@@ -439,18 +439,26 @@ td{
     position: absolute;
     top: 0;
     left: 0;
-    cursor: pointer;
     background: #FFFFFF;
     padding: 10px 10px 10px 10px;
     border-radius: 5px 5px 5px 5px;
     box-shadow: 0 0 8px #888888;
     z-index: 2;
 }
-.contextmenu-title{
+.contextmenu-title_active, .contextmenu-title{
     padding-bottom: 5px;
     padding-top: 5px;
     font-size: 15px;
     border-bottom: solid 1px #AAAAAA;
+}
+.contextmenu-title{
+    color: #AAAAAA;
+    cursor: default;
+    pointer-events: none;
+}
+.contextmenu-title_active{
+    color: #000000;
+    cursor: pointer;
 }
 .index{
     height: 35px;

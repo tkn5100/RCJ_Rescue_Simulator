@@ -16,6 +16,8 @@
     const $coursedata = $doc.getElementsByClassName('coursedata');
     const $bump_input = document.getElementsByClassName('bump-input');
     const $bump_input_div = document.querySelectorAll('#bump_settings > div');
+    const $contextmenu_title = document.getElementsByTagName('li');
+    const $contextmenu = document.getElementById('contextmenu');
     let nowturn = null;
     let src = null;
     let secondOrFirst = null;
@@ -23,10 +25,7 @@
     let newCheckMarker = null;
     let obOrUnob = null;
     let newObstacle = null;
-    let bumpOrUnbump_1 = null;
-    let bumpOrUnbump_2 = null;
-    let bumpOrUnbump_3 = null;
-    let bumpOrUnbump_4 = null;
+    let bumpOrUnbump = null;
     let newBump = null;
     let output_data = [[],[],[],[],[],[],[],[],[],[],[]];
     let csv_arrays = null;
@@ -245,7 +244,7 @@
     //2階・半2階
     $tools[1].addEventListener('click', () => {
       if($tools[1].dataset.one == 1){
-        if($table[1].style.display == 'block'){
+        if($table[0].style.display == 'block'){
           tile(1);
         }else if ($table[2].style.display == 'block'){
           tile(3);
@@ -300,7 +299,7 @@
       const filename = window.prompt('ファイル名を入力:');
       if (filename) {
         //ダウンロードするタイルを配列に入れる
-        output_data[0].push("v3.1.0");
+        output_data[0].push("v3.1.1");
         if($table[0].style.display == 'block'){
           output_data[1].push("0");
         } else if ($table[1].style.display == 'block'){
@@ -404,7 +403,7 @@
         reader.readAsText(file);
         reader.onload = function () {
           csv_arrays = reader.result.split('\n');
-          if (csv_arrays[0] == "v3.0.0," || csv_arrays[0] == "v3.0.1," || csv_arrays[0] == "v3.1.0,") {
+          if (csv_arrays[0] == "v3.0.0," || csv_arrays[0] == "v3.0.1," || csv_arrays[0] == "v3.1.0," || csv_arrays[0] == "v3.1.1,") {
             try{
               input_data_show = csv_arrays[1].split(',')[1];
               input_data_course = csv_arrays[2].split(',');
@@ -713,51 +712,37 @@
 
 
     //チェックマーカー・障害物・バンプどれか1つに絞る
-    function narrow_down(arg){
-      document.getElementsByClassName('contextmenu-title')[2].style.color = "#AAAAAA";
-      document.getElementsByClassName('contextmenu-title')[2].style.cursor = "default";
-      document.getElementsByClassName('contextmenu-title')[3].style.color = "#AAAAAA";
-      document.getElementsByClassName('contextmenu-title')[3].style.cursor = "default";
-      document.getElementsByClassName('contextmenu-title')[4].style.color = "#AAAAAA";
-      document.getElementsByClassName('contextmenu-title')[4].style.cursor = "default";
-      document.getElementsByClassName('contextmenu-title')[5].style.color = "#AAAAAA";
-      document.getElementsByClassName('contextmenu-title')[5].style.cursor = "default";
-      document.getElementsByClassName('contextmenu-title')[6].style.color = "#AAAAAA";
-      document.getElementsByClassName('contextmenu-title')[6].style.cursor = "default";
-      document.getElementsByClassName('contextmenu-title')[7].style.color = "#AAAAAA";
-      document.getElementsByClassName('contextmenu-title')[7].style.cursor = "default";
 
-      if($img[arg].dataset.check == 1){
-        document.getElementsByClassName('contextmenu-title')[3].style.color = "#000000";
-        document.getElementsByClassName('contextmenu-title')[3].style.cursor = "pointer";
+    function narrow_down(element){
+      $contextmenu_title[2].onclick = null;
+      $contextmenu_title[3].onclick = null;
+      $contextmenu_title[4].onclick = null;
+      $contextmenu_title[5].onclick = null;
+      $contextmenu_title[6].onclick = null;
+      $contextmenu_title[7].onclick = null;
+      $contextmenu_title[2].className = "contextmenu-title";
+      $contextmenu_title[3].className = "contextmenu-title";
+      $contextmenu_title[4].className = "contextmenu-title";
+      $contextmenu_title[5].className = "contextmenu-title";
+      $contextmenu_title[6].className = "contextmenu-title";
+      $contextmenu_title[7].className = "contextmenu-title";
+
+      if(element.dataset.check == 1){
+        $contextmenu_title[3].className = "contextmenu-title_active";
         checkOrUncheck = 1;
-      }else if($img[arg].dataset.obstacle == 1){
-        document.getElementsByClassName('contextmenu-title')[5].style.color = "#000000";
-        document.getElementsByClassName('contextmenu-title')[5].style.cursor = "pointer";
+      }else if(element.dataset.obstacle == 1){
+        $contextmenu_title[5].className = "contextmenu-title_active";
         obOrUnob = 1;
-      }else if($img[arg].dataset.bump1 != 0){
-        document.getElementsByClassName('contextmenu-title')[7].style.color = "#000000";
-        document.getElementsByClassName('contextmenu-title')[7].style.cursor = "pointer";
-        bumpOrUnbump_1 = 1;
-        if ($img[arg].dataset.bump2 != 0){
-          bumpOrUnbump_2 = 1;
-        }
-        if ($img[arg].dataset.bump3 != 0){
-          bumpOrUnbump_3 = 1;
-        }
-        if ($img[arg].dataset.bump4 != 0){
-          bumpOrUnbump_4 = 1;
-        }
+      }else if(element.dataset.bump1 != 0){
+        $contextmenu_title[7].className = "contextmenu-title_active";
+        bumpOrUnbump = 1;
       }else{
-        document.getElementsByClassName('contextmenu-title')[2].style.color = "#000000";
-        document.getElementsByClassName('contextmenu-title')[2].style.cursor = "pointer";
-        document.getElementsByClassName('contextmenu-title')[4].style.color = "#000000";
-        document.getElementsByClassName('contextmenu-title')[4].style.cursor = "pointer";
-        document.getElementsByClassName('contextmenu-title')[6].style.color = "#000000";
-        document.getElementsByClassName('contextmenu-title')[6].style.cursor = "pointer";
+        $contextmenu_title[2].className = "contextmenu-title_active";
+        $contextmenu_title[4].className = "contextmenu-title_active";
+        $contextmenu_title[6].className = "contextmenu-title_active";
         checkOrUncheck = 0;
         obOrUnob = 0;
-        bumpOrUnbump_1 = 0;
+        bumpOrUnbump = 0;
       }
     }
 
@@ -767,86 +752,82 @@
       secondOrFirst = null;
       $img[index].addEventListener('contextmenu', (e) => {
         e.preventDefault();
-        document.getElementById('contextmenu').style.display = "block";
+        $contextmenu.style.display = "block";
         //topとbottomの決定(もし下のスペースがなければメニューを上にずらす)
         if (window.innerHeight - e.pageY < 250) {
-          document.getElementById('contextmenu').style.top = "auto";
-          document.getElementById('contextmenu').style.bottom = "10px";
+          $contextmenu.style.top = "auto";
+          $contextmenu.style.bottom = "10px";
         } else {
-          document.getElementById('contextmenu').style.top = e.pageY+"px";
-          document.getElementById('contextmenu').style.bottom = "auto";
+          $contextmenu.style.top = e.pageY+"px";
+          $contextmenu.style.bottom = "auto";
         }
         //rightとleftの決定(もし右のスペースがなければメニューを左にずらす)
         if (window.innerWidth - e.pageX < 180) {
-          document.getElementById('contextmenu').style.right = (window.innerWidth - e.pageX) + "px";
-          document.getElementById('contextmenu').style.left = "auto";
+          $contextmenu.style.right = (window.innerWidth - e.pageX) + "px";
+          $contextmenu.style.left = "auto";
         } else {
-          document.getElementById('contextmenu').style.left = e.pageX+"px";
-          document.getElementById('contextmenu').style.right = "auto";
+          $contextmenu.style.left = e.pageX+"px";
+          $contextmenu.style.right = "auto";
         }
         
         //90度回転
-        document.getElementsByClassName('contextmenu-title')[0].onclick= function() {
+        $contextmenu_title[0].onclick= function() {
           nowturn = Number(e.target.dataset.turn);
-          $img[index].style.transform = 'rotate(' + (90 + nowturn) +'deg)';
-          $img[index].dataset.turn = 90 + nowturn;
+          e.target.style.transform = 'rotate(' + (90 + nowturn) +'deg)';
+          e.target.dataset.turn = 90 + nowturn;
         };
         //タイル情報の削除
-        document.getElementsByClassName('contextmenu-title')[1].onclick= function() {
-          $img[index].src = "../img/simulator/no.png";
-          $img[index].style.transform = 'rotate(0deg)';
-          $img[index].dataset.turn = 0;
-          $img[index].style.border = 'none';
-          $img[index].dataset.floor = 0;
-          if ($img[index].dataset.check == 1){
-            $img[index].nextElementSibling.remove();
-            $img[index].dataset.check = 0;
-          }else if ($img[index].dataset.obstacle == 1){
-            $img[index].nextElementSibling.remove();
-            $img[index].dataset.obstacle = 0;
+        $contextmenu_title[1].onclick= function() {
+          e.target.src = "../img/simulator/no.png";
+          e.target.style.transform = 'rotate(0deg)';
+          e.target.dataset.turn = 0;
+          e.target.style.border = 'none';
+          e.target.dataset.floor = 0;
+          if (e.target.dataset.check == 1){
+            e.target.nextElementSibling.remove();
+            e.target.dataset.check = 0;
+          }else if (e.target.dataset.obstacle == 1){
+            e.target.nextElementSibling.remove();
+            e.target.dataset.obstacle = 0;
           }
         };
-        narrow_down(index);
-          //チェックマーカー
+        narrow_down(e.target);
+        //チェックマーカー
         if (checkOrUncheck == 0){
-          document.getElementsByClassName('contextmenu-title')[2].onclick = function(){
+          $contextmenu_title[2].onclick = function() {
             newCheckMarker = document.createElement("div");
             newCheckMarker.className = "check-marker";
-            $img[index].parentElement.appendChild(newCheckMarker);
-            $img[index].dataset.check = 1;
-          }
-          document.getElementsByClassName('contextmenu-title')[3].onclick = function(){}
-        } else {
-          document.getElementsByClassName('contextmenu-title')[3].onclick = function() {
-            $img[index].nextElementSibling.remove();
-            $img[index].dataset.check = 0;
+            e.target.parentElement.appendChild(newCheckMarker);
+            e.target.dataset.check = 1;
           };
-          document.getElementsByClassName('contextmenu-title')[2].onclick = function(){}
+        } else {
+          $contextmenu_title[3].onclick = function() {
+            e.target.nextElementSibling.remove();
+            e.target.dataset.check = 0;
+          };
         }
         //障害物
         if (obOrUnob == 0){
-          document.getElementsByClassName('contextmenu-title')[4].onclick = function() {
+          $contextmenu_title[4].onclick = function() {
             newObstacle = document.createElement("img");
             newObstacle.src = "../img/simulator/ob.svg";
             newObstacle.className = "obstacle";
-            $img[index].parentElement.appendChild(newObstacle);
-            $img[index].dataset.obstacle = 1;
+            e.target.parentElement.appendChild(newObstacle);
+            e.target.dataset.obstacle = 1;
           };
-          document.getElementsByClassName('contextmenu-title')[5].onclick = function(){}
         } else {
-          document.getElementsByClassName('contextmenu-title')[5].onclick= function() {
-            $img[index].nextElementSibling.remove();
-            $img[index].dataset.obstacle = 0;
+          $contextmenu_title[5].onclick= function() {
+            e.target.nextElementSibling.remove();
+            e.target.dataset.obstacle = 0;
           };
-          document.getElementsByClassName('contextmenu-title')[4].onclick = function(){}
         }
         //バンプ
-        if (bumpOrUnbump_1 == 0){
-          document.getElementsByClassName('contextmenu-title')[6].onclick = function() {
+        if (bumpOrUnbump == 0){
+          $contextmenu_title[6].onclick = function() {
             document.getElementById('overlay').className = 'active';
             document.getElementById('bump_settings').className = 'active';
-            document.getElementById('image-preview').src = $img[index].src;
-            document.getElementById('image-preview').style.transform = "rotate(" + $img[index].dataset.turn + "deg)"
+            document.getElementById('image-preview').src = e.target.src;
+            document.getElementById('image-preview').style.transform = "rotate(" + e.target.dataset.turn + "deg)"
             document.getElementById('bump_decide').onclick = function(){
               newBump = document.createElement("img");
               newBump.src = "../img/simulator/bu.png";
@@ -856,9 +837,9 @@
               } else {
                 newBump.setAttribute("style", "left: " + $bump_input[0].value + "px; top: " + ($bump_input[1].value - 37) + "px; transform: rotate(" + $bump_input[2].value + "deg)");
               }
-              $img[index].parentElement.appendChild(newBump);
+              e.target.parentElement.appendChild(newBump);
               //aはただの区切り。and。
-              $img[index].dataset.bump1 = $bump_input[0].value + "a" + ($bump_input[1].value - 37) + "a" + $bump_input[2].value;
+              e.target.dataset.bump1 = $bump_input[0].value + "a" + ($bump_input[1].value - 37) + "a" + $bump_input[2].value;
               newBump = null;
               //2個目
               if($bump_input_div[2].style.display == 'flex'){
@@ -870,8 +851,8 @@
                 } else {
                   newBump.setAttribute("style", "left: " + $bump_input[3].value + "px; top: " + ($bump_input[4].value - 37) + "px; transform: rotate(" + $bump_input[5].value + "deg)");
                 }
-                $img[index].parentElement.appendChild(newBump);
-                $img[index].dataset.bump2 = $bump_input[3].value + "a" + ($bump_input[4].value - 37) + "a" + $bump_input[5].value;
+                e.target.parentElement.appendChild(newBump);
+                e.target.dataset.bump2 = $bump_input[3].value + "a" + ($bump_input[4].value - 37) + "a" + $bump_input[5].value;
                 newBump = null;
               }
               //3個目
@@ -884,8 +865,8 @@
                 } else {
                   newBump.setAttribute("style", "left: " + $bump_input[6].value + "px; top: " + ($bump_input[7].value - 37) + "px; transform: rotate(" + $bump_input[8].value + "deg)");
                 }
-                $img[index].parentElement.appendChild(newBump);
-                $img[index].dataset.bump3 = $bump_input[6].value + "a" + ($bump_input[7].value - 37) + "a" + $bump_input[8].value;
+                e.target.parentElement.appendChild(newBump);
+                e.target.dataset.bump3 = $bump_input[6].value + "a" + ($bump_input[7].value - 37) + "a" + $bump_input[8].value;
                 newBump = null;
               }
               //4個目
@@ -898,8 +879,8 @@
                 } else {
                   newBump.setAttribute("style", "left: " + $bump_input[9].value + "px; top: " + ($bump_input[10].value - 37) + "px; transform: rotate(" + $bump_input[11].value + "deg)");
                 }
-                $img[index].parentElement.appendChild(newBump);
-                $img[index].dataset.bump4 = $bump_input[9].value + "a" + ($bump_input[10].value - 37) + "a" + $bump_input[11].value;
+                e.target.parentElement.appendChild(newBump);
+                e.target.dataset.bump4 = $bump_input[9].value + "a" + ($bump_input[10].value - 37) + "a" + $bump_input[11].value;
                 newBump = null;
               }
               document.getElementById('overlay').className = '';
@@ -908,34 +889,32 @@
             document.getElementById('bump_cancel').onclick = function(){
               document.getElementById('overlay').className = '';
               document.getElementById('bump_settings').className = '';
-            }
+            };
           };
-          document.getElementsByClassName('contextmenu-title')[7].onclick = function(){}
         } else {
-          document.getElementsByClassName('contextmenu-title')[7].onclick= function() {
-            $img[index].nextElementSibling.remove();
-            $img[index].dataset.bump1 = 0;
-            if ($img[index].dataset.bump2 != 0){
-              $img[index].nextElementSibling.remove();
-              $img[index].dataset.bump2 = 0;
+          $contextmenu_title[7].onclick= function() {
+            e.target.nextElementSibling.remove();
+            e.target.dataset.bump1 = 0;
+            if (e.target.dataset.bump2 != 0){
+              e.target.nextElementSibling.remove();
+              e.target.dataset.bump2 = 0;
             }
-            if ($img[index].dataset.bump3 != 0){
-              $img[index].nextElementSibling.remove();
-              $img[index].dataset.bump3 = 0;
+            if (e.target.dataset.bump3 != 0){
+              e.target.nextElementSibling.remove();
+              e.target.dataset.bump3 = 0;
             }
-            if ($img[index].dataset.bump4 != 0){
-              $img[index].nextElementSibling.remove();
-              $img[index].dataset.bump4 = 0;
+            if (e.target.dataset.bump4 != 0){
+              e.target.nextElementSibling.remove();
+              e.target.dataset.bump4 = 0;
             }
           };
-          document.getElementsByClassName('contextmenu-title')[6].onclick = function(){}
         }
       });
     }
 
     //右クリックメニュー非表示
     document.body.addEventListener('click',function (){
-      document.getElementById('contextmenu').style.display="none";
+      $contextmenu.style.display="none";
     });
 
 

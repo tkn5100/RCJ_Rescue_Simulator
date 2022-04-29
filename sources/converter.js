@@ -119,7 +119,7 @@
       setTimeout(() => {document.querySelector('#download > img').src = '../img/converter/downloaded.svg';}, 1500)
     }
 
-    //v1.x.x→v3.1.0
+    //v1.x.x→v3.1.1
     function one_to_Three(file_name){
       $upload_guide.innerHTML = 'v1.3.3以前<br>お待ちください...';
       setTimeout(arrow_line, 125, 10)
@@ -150,7 +150,7 @@
       }
       setTimeout(arrow_line, 250, 20)
       output_data = [[],[],[],[],[],[],[],[],[],[],[]];
-      output_data[0].push("v3.1.0")
+      output_data[0].push("v3.1.1")
       output_data[1].push(0);
       for (let index = 0; index < input_data_course.length; index++) {
         output_data[2].push(input_data_course[index]);
@@ -205,7 +205,7 @@
       setTimeout(() => {download.click();}, 1250)
       //createObjectURLで作成したオブジェクトURLを開放する
       setTimeout(() => {(window.URL || window.webkitURL).revokeObjectURL(url)}, 1500)
-      setTimeout(() => {$upload_guide.innerHTML = 'v1.3.3以前→v3.1.0<br>変換完了';}, 1500)
+      setTimeout(() => {$upload_guide.innerHTML = 'v1.3.3以前→v3.1.1<br>変換完了';}, 1500)
       setTimeout(() => {$download_guide.style.color = '#000000';}, 1500)
       setTimeout(() => {document.querySelector('#download > img').src = '../img/converter/downloaded.svg';}, 1500)
     }
@@ -289,7 +289,7 @@
       setTimeout(() => {document.querySelector('#download > img').src = '../img/converter/downloaded.svg';}, 1500)
     }
 
-    //v2.0.x→v3.1.0
+    //v2.0.x→v3.1.1
     function two_to_Three(file_name){
       $upload_guide.innerHTML = csv_arrays[0].slice(0,6) + '<br>お待ちください...';
       setTimeout(arrow_line, 125, 10)
@@ -312,7 +312,7 @@
       }
       setTimeout(arrow_line, 250, 20)
       output_data = [[],[],[],[],[],[],[],[],[],[],[]];
-      output_data[0].push("v3.1.0")
+      output_data[0].push("v3.1.1")
       output_data[1].push(0);
       for (let index = 0; index < input_data_course.length; index++) {
         output_data[2].push(input_data_course[index]);
@@ -369,12 +369,12 @@
       setTimeout(() => {download.click();}, 1250)
       //createObjectURLで作成したオブジェクトURLを開放する
       setTimeout(() => {(window.URL || window.webkitURL).revokeObjectURL(url)}, 1500)
-      setTimeout(() => {$upload_guide.innerHTML = csv_arrays[0].slice(0,6) + '→v3.1.0<br>変換完了';}, 1500)
+      setTimeout(() => {$upload_guide.innerHTML = csv_arrays[0].slice(0,6) + '→v3.1.1<br>変換完了';}, 1500)
       setTimeout(() => {$download_guide.style.color = '#000000';}, 1500)
       setTimeout(() => {document.querySelector('#download > img').src = '../img/converter/downloaded.svg';}, 1500)
     }
 
-    //v3.0.0→v3.1.0
+    //v3.x.x→v3.1.1
     function three_to_Three(file_name){
       $upload_guide.innerHTML = csv_arrays[0].slice(0,6) + '<br>お待ちください...';
       setTimeout(arrow_line, 125, 10)
@@ -395,7 +395,7 @@
       }
       setTimeout(arrow_line, 250, 20)
       output_data = [[],[],[],[],[],[],[],[],[],[],[]];
-      output_data[0].push("v3.1.0")
+      output_data[0].push("v3.1.1")
       output_data[1].push(input_data_show[0])
       for (let index = 0; index < input_data_course.length; index++) {
         output_data[2].push(input_data_course[index]);
@@ -452,7 +452,7 @@
       setTimeout(() => {download.click();}, 1250)
       //createObjectURLで作成したオブジェクトURLを開放する
       setTimeout(() => {(window.URL || window.webkitURL).revokeObjectURL(url)}, 1500)
-      setTimeout(() => {$upload_guide.innerHTML = csv_arrays[0].slice(0,6) + '→v3.1.0<br>変換完了';}, 1500)
+      setTimeout(() => {$upload_guide.innerHTML = csv_arrays[0].slice(0,6) + '→v3.1.1<br>変換完了';}, 1500)
       setTimeout(() => {$download_guide.style.color = '#000000';}, 1500)
       setTimeout(() => {document.querySelector('#download > img').src = '../img/converter/downloaded.svg';}, 1500)
     }
@@ -470,9 +470,9 @@
         reader.readAsText(file);
         reader.onload = function () {
           csv_arrays = reader.result.split('\n');
-          if (csv_arrays[0] == "v3.1.0,"){
+          if (csv_arrays[0] == "v3.1.1,"){
             window.alert('このファイルは最新版です。')
-          }else if (csv_arrays[0] == "v3.0.0," || csv_arrays[0] == "v3.0.1,"){
+          } else if (csv_arrays[0] == "v3.0.0," || csv_arrays[0] == "v3.0.1," || csv_arrays[0] == "v3.1.0,"){
             three_to_Three(file.name);
           } else if(csv_arrays[0] == "v2.0.2," || csv_arrays[0] == "v2.0.1," || csv_arrays[0] == "v2.0.0,"){
             two_to_Three(file.name);
