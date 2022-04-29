@@ -292,7 +292,7 @@
       const filename = window.prompt('ファイル名を入力:');
       if (filename) {
         //ダウンロードするタイルを配列に入れる
-        output_data[0].push("v3.0.0");
+        output_data[0].push("v3.0.1");
         if($table[0].style.display == 'block'){
           output_data[1].push("0");
         } else if ($table[1].style.display == 'block'){
@@ -368,7 +368,7 @@
         reader.readAsText(file);
         reader.onload = function () {
           csv_arrays = reader.result.split('\n');
-          if (csv_arrays[0] == "v3.0.0,") {
+          if (csv_arrays[0] == "v3.0.0," || csv_arrays[0] == "v3.0.1,") {
             try{
               input_data_show = csv_arrays[1].split(',')[1];
               input_data_course = csv_arrays[2].split(',');
@@ -405,7 +405,8 @@
             }
             window.alert('このファイルはv2.0.xで作成されたものです。もう1度プロジェクトを保存すると最新版相当になります。')
           } else {
-            window.alert('このファイルはv1.x.xで作成されたものです。利用するには最新版に変換してください。')
+            window.alert('このファイルはv1.x.xで作成されたものです。利用するには最新版に変換してください。ページを再読み込みします。')
+            window.location.reload();
           }
 
           all_clear();
@@ -451,7 +452,6 @@
               newBump = null;
             }
             if(input_data_bump2[index + 1] != 0){
-              console.log(index + 1)
               newBump = document.createElement("img");
               newBump.src = "../img/simulator/bu.png";
               newBump.className = "bump";
@@ -616,7 +616,9 @@
       $tools[0].dataset.one = 1;
       $guide.textContent = '6×8タイルに切り替えました';
       setTimeout(nomal_guide, 2000);
-      $tools[0].textContent = '2階・半2階部分の作成';
+      $tools[0].src = '../img/tools/floor2.svg';
+      $tools[0].nextElementSibling.textContent = '2階・半2階部分の作成';
+      $tools[0].dataset.one = 1;
     });
 
     //4×9タイル
@@ -625,7 +627,9 @@
       $tools[0].dataset.one = 1;
       $guide.textContent = '4×9タイルに切り替えました。このモードでは被災者ゾーンの自動入力機能は使えません。';
       setTimeout(nomal_guide, 2000);
-      $tools[0].textContent = '2階・半2階部分の作成';
+      $tools[0].src = '../img/tools/floor2.svg';
+      $tools[0].nextElementSibling.textContent = '2階・半2階部分の作成';
+      $tools[0].dataset.one = 1;
     });
 
     //3×12タイル
@@ -634,7 +638,9 @@
       $tools[0].dataset.one = 1;
       $guide.textContent = '3×12タイルに切り替えました。このモードでは被災者ゾーンの自動入力機能は使えません。';
       setTimeout(nomal_guide, 2000);
-      $tools[0].textContent = '2階・半2階部分の作成';
+      $tools[0].src = '../img/tools/floor2.svg';
+      $tools[0].nextElementSibling.textContent = '2階・半2階部分の作成';
+      $tools[0].dataset.one = 1;
     });
 
     //ヘルプ
@@ -789,7 +795,6 @@
               newBump = document.createElement("img");
               newBump.src = "../img/simulator/bu.png";
               newBump.className = "bump";
-              console.log("left: " + $bump_input[0].value + "px; top: " + ($bump_input[1].value - 37) + "px; transform: rotate(" + $bump_input[2].value + "deg)")
               newBump.setAttribute("style", "left: " + $bump_input[0].value + "px; top: " + ($bump_input[1].value - 37) + "px; transform: rotate(" + $bump_input[2].value + "deg)");
               $img[index].parentElement.appendChild(newBump);
               //aはただの区切り。and。
@@ -865,14 +870,12 @@
     document.getElementById('tab-nav').addEventListener('click', (e) => {
       e.preventDefault();
       if(document.getElementById('tab-nav').textContent == 'WRLタイルへ'){
-        console.log('a')
         document.getElementById('wrl-tiles').style.display = 'block';
         document.getElementById('nrl-tiles').style.display = 'none';
         document.getElementById('tab-nav').textContent ='NRLタイルへ';
         $tools[0].style.display = 'block';
         nomal_guide();
       } else {
-        console.log('b')
         document.getElementById('wrl-tiles').style.display = 'none';
         document.getElementById('nrl-tiles').style.display = 'block';
         document.getElementById('tab-nav').textContent ='WRLタイルへ';

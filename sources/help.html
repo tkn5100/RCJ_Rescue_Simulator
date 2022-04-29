@@ -4,12 +4,12 @@
     <meta charset="utf-8">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="destyle.css">
-    <title>ヘルプ -RoboCupJunior コート作成環境v3.0.0</title>
+    <title>ヘルプ -RoboCupJunior コート作成環境v3.0.1</title>
   </head>
 
   <body class="body" style="margin-left: 15%; margin-right: 15%;">
-      <h1 class="help_h1">ヘルプ - RoboCupJunior コート作成環境v3.0.0</h1>
-      <p class="help-sentence">このソフトウェアはロボカップジュニアジャパンレスキューラインのコースを作成できるものです。ルールは2022年版に準拠します。なお、シーソー、レスキューキット、被災者、避難場所を配置する機能はありません。</p>
+      <h1 class="help_h1">ヘルプ - RoboCupJunior コート作成環境v3.0.1</h1>
+      <p class="help-sentence">このソフトウェアはロボカップジュニアジャパンレスキューラインのコースを作成できるものです。ルールは2022年版に準拠します。なお、レスキューキット・被災者・避難場所等、得点走行毎に場所が異なるものを配置する機能はありません。</p>
       <p class="help-sentence">アプリケーション版の配布はv1.1.1をもって終了しました。なおv1.1.1以前でもアプリケーション版を利用すると思わぬ不具合が発生する場合がありますので、ブラウザ版(このソフトウェア)をご利用ください。</p>
       <br>
       <div class="help-link-div">
@@ -78,10 +78,10 @@
       <table class="help-table">
         <tbody>
           <tr><td rowspan="2" colspan="2"></td><td colspan="3">作成</td></tr>
-          <tr><td>v1.0.0~v1.1.3</td><td>v2.0.0~v2.0.2</td><td>v3.0.0</td></tr>
+          <tr><td>v1.0.0~v1.1.3</td><td>v2.0.0~v2.0.2</td><td>v3.0.0~v3.0.1</td></tr>
           <tr><td rowspan="3">読み込み</td><td>v1.0.0~<br>v1.1.3</td><td>○</td><td>×</td><td>×</td></tr>
           <tr><td>v2.0.0~<br>v2.0.2</td><td>△</td><td>○</td><td>×</td></tr>
-          <tr><td>v3.0.0</td><td>×</td><td>△</td><td>○</td></tr>
+          <tr><td>v3.0.0~<br>v3.0.1</td><td>×</td><td>△</td><td>○</td></tr>
         </tbody>
       </table>
       <p class="help-sentence">○…読み込み可能　△…読み込み可能だが非推奨　×…ファイル変換が必要</p>
@@ -106,6 +106,7 @@
       <h4 class="help_h4">② ファイル選択</h4>
       <h3 class="help_h3">使い方</h3>
       <p class="help-sentence">②をクリックすると、ファイル選択画面が出ます。RRL形式のファイルを開いてください。開くと自動で変換が始まります。②の下部にファイルの情報と現在の状態が表示されます。矢印がすべて黒くなったら、変換されたファイルが、Windowsでは通常「ダウンロード」フォルダに保存されます。</p>
+      <p class="help-sentence">書き出したバージョンと読み込むバージョンで、メジャーバージョンが同じなら変換しなくても利用できますが、同じメジャーバージョン内で最新のものにする機能もついています。</p>
       <h3 class="help_h3"><img src="../img/tools/save.svg" class="help_icon">もう1度変換ボタン</h3>
       <p class="help-sentence">②にあるファイルをもう1度変換できます。</p>
 
@@ -129,6 +130,13 @@
       <p class="help-sentence">※スマートフォンなどは画面が小さすぎるほか、ローカルhtmlファイルの起動ができません。</p>
 
       <h2 class="help_h2" id="changes" style="margin-bottom: 0px;">5.変更履歴</h2>
+      <h4 class="help_h4">v3.0.1</h4>
+      <ul>
+        <li class="help-sentence">・2022.03.14公開</li>
+        <li class="help-sentence">・1階・2階部分の表示がうまくいかない場合がある不具合を再度修正</li>
+        <li class="help-sentence">・ファイル変換にv3系旧版からv3系最新版への変換モードを追加</li>
+        <li class="help-sentence">・ヘルプの「このソフトウェアについて」に項目を追加</li>
+      </ul>
       <h4 class="help_h4">v3.0.0</h4>
       <ul>
         <li class="help-sentence">・2022.03.09公開</li>
@@ -304,6 +312,11 @@
       </ul>
 
       <h2 class="help_h2" id="about" style="margin-bottom: 0px;">7.このソフトウェアについて</h2>
+      <h3 class="help_h3">開発の経緯</h3>
+      <p class="help-sentence">2020年1月22日までは、同じくロボカップジュニアレスキューラインのコートを作成するソフトウェアとして「RoboCupJunior NRL コート作成環境」と「RoboCupJunior WRL コート作成環境」(以下2つ合わせて「旧ソフトウェア」と表記)を開発していました。しかし、アップデートを重ね機能がほぼ同じになってきたこと、またWRL向けのソフトウェアでNRLのコートも作成可能であることから、WRL版にNRL版を組み込む形で新たにこの「RoboCupJunior コート作成環境」を作成することとしました。2022年1月29日に公開したRC3版で動作が安定したことからそれをv1.0.0とし、UIの改善と機能追加を重ねています。</p>
+      <h3 class="help_h3">バージョンの命名規則</h3>
+      <p class="help-sentence">セマンティック・バージョニングを参考にしており、vX.Y.Zのようにつけます。Xはメジャーバージョンで、RRLファイルの互換性がなくなるなど大きな変更があった場合に数字を1つ上げます。Yはマイナーバージョンで、機能性を追加した場合に数字を1つ上げます。Zはパッチバージョンで、バグ修正など細かい変更の際に数字を1つ上げます。詳しくは下記URLをご覧ください(ただしAPIをインターネットに公開しているわけではありませんし、旧ソフトウェアは必ずしもこれに従っているわけではありません)。</p>
+      <a href="https://semver.org/lang/ja/" target="_blank" rel="noopener noreferrer" class="help-sentence" style="text-decoration: underline 1px; color: #4400FF;">セマンティック バージョニング 2.0.0(https://semver.org/lang/ja/)</a>
       <h3 class="help_h3">アプリケーションの調子が悪いときは</h3>
       <p class="help-sentence">リロードせずに長時間使い続けると、動作が重くなったり不具合が出ることがあります。リロードボタンを押してリロードするか、「Ctrl+F5」を押してスーパーリロードしてください。ただし、プロジェクトを保存するのを忘れないでください。なお、リロードを行っても自動保存データは保持されます。</p>
       <h3 class="help_h3">その他</h3>
