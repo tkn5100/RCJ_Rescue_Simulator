@@ -1,0 +1,81 @@
+body{
+    display: flex;
+    flex-direction: column;
+    background: #f8f8f8;
+    font-family: '游ゴシック';
+}
+.copyright{
+    position: absolute;
+    bottom: 5px;
+    right: 0;
+}
+.copyright-help{
+    margin-right: 0;
+    margin-left: auto;
+}
+
+/* converter.html */
+.main{
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+}
+.toolbar{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+    background: #eeeeee;
+    border: solid 1px #888888;
+}
+.toolbar > div{
+    position: relative;
+}
+.tools{
+    background-color: #EEEEEE;
+    border-radius: 30%;
+    width: 60px;
+    height: 60px;
+    margin: 3px 25px 3px 0px;
+    padding: 10px;
+}
+.tools:hover{
+    background-color: #DDDDDD;
+}
+.tools + p{
+    display: none;
+    position: absolute;
+    top: 60px;
+    left: 20px;
+    width: max-content;
+    background-color: #F8F8F8;
+    border-radius: 5px;
+    padding: 3px;
+    box-shadow: 0 0 8px #888888;
+    z-index: 3;
+}
+.tools:hover + p{
+    display: block;
+}
+.file_icons{
+    width: 16vw;
+}
+.arrow_line{
+    height: 10vw;
+    margin-top: 5vw;
+}
+#upload, #upload > label, #download{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    font-size: 1.3vw;
+}
+#upload{
+    margin-right: 3vw;
+}
+#upload > label{
+    color: #888888;
+    cursor: pointer;
+}
+#download{
+    margin-left: 3vw;
+}

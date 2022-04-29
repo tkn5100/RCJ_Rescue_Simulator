@@ -15,19 +15,18 @@ body{
 }
 /* home.html */
 .home-img{
-    margin: 5vw auto 5vw auto;
-    height: 15vw;
+    margin: 3vw auto 3vw auto;
     width: 80vw;
     font-size: 5vw;
 }
 .home-link{
     background: #000000;
     color: #ffffff;
-    font-size: 2vw;
+    font-size: 1.5vw;
     text-align: center;
-    line-height: 5vw;
-    height: 5vw;
-    width: 80vw;
+    line-height: 4vw;
+    height: 4vw;
+    width: 60vw;
     margin: 1vw auto 1vw auto;
     border-radius: 7px 7px 7px 7px;
 }
@@ -56,6 +55,15 @@ body{
 }
 .help-sentence{
     font-size: 20px;
+    text-indent: 1em;
+}
+.help_icon{
+    width: 25px;
+    display: inline;
+    margin-right: 10px;
+    border-radius: 30%;
+    padding: 3px;
+    background-color: #DDDDDD;
 }
 .help_img{
     width: 80%;
@@ -64,6 +72,7 @@ body{
 .help-link-div{
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
 }
 .help-link{
     width: 200px;
@@ -73,6 +82,7 @@ body{
     padding: 10px;
     border-radius: 8px;
     margin-right: 15px;
+    margin-bottom: 15px;
 }
 .help-table {
     margin-left: 0 !important;
@@ -101,6 +111,9 @@ body{
 table{
     margin-left: 30px !important;
     border-collapse: collapse;
+    overflow: scroll;
+	overflow-x: auto;
+	overflow-y: auto;
 }
 .main{
     display: flex;
@@ -113,12 +126,34 @@ table{
     background: #eeeeee;
     border: solid 1px #888888;
 }
+.toolbar > div, .toolbar > label{
+    position: relative;
+}
 .tools{
-    font-size: 10px;
-    text-align: center;
-    color: #ffffff;
-    background-color: #000000;
-    border-radius: 7px 7px 7px 7px;
+    background-color: #EEEEEE;
+    border-radius: 30%;
+    padding: 10px;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    cursor: pointer;
+}
+.tools:hover{
+    background-color: #DDDDDD;
+}
+.tools + p{
+    display: none;
+    position: absolute;
+    top: 50px;
+    left: 20px;
+    width: max-content;
+    background-color: #F8F8F8;
+    border-radius: 5px;
+    padding: 3px;
+    box-shadow: 0 0 8px #888888;
+    z-index: 3;
+}
+.tools:hover + p{
+    display: block;
 }
 .menu{
     display: flex;
@@ -145,9 +180,9 @@ table{
         cursor: pointer;
     }
     .tools{
-        width: 60px;
-        height: 60px;
-        margin: 5px 10px 5px 10px;
+        width: 50px;
+        height: 50px;
+        margin-right: 25px;
     }
     .menu-img-w, .menu-img-n{
         height: 60px;
@@ -189,9 +224,9 @@ table{
         cursor: pointer;
     }
     .tools{
-        width: 60px;
-        height: 60px;
-        margin: 5px 10px 5px 10px;
+        width: 50px;
+        height: 50px;
+        margin-right: 20px;
     }
     .menu-img-w, .menu-img-n{
         height: 60px;
@@ -233,9 +268,9 @@ table{
         cursor: pointer;
     }
     .tools{
-        width: 7vw;
-        height: 7vw;
-        margin: 0.5% 0.5% 0.5% 0.5%;
+        width: 6vw;
+        height: 6vw;
+        margin-right: 2vw;
     }
     .menu-img-w, .menu-img-n{
         height: 8vw;
@@ -266,6 +301,9 @@ table{
 @media print{
     body{
         background-color: #FFFFFF;
+    }
+    table{
+        overflow: visible;
     }
     .menu{
         display: none;

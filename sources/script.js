@@ -27,8 +27,9 @@
     let bumpOrUnbump_3 = null;
     let bumpOrUnbump_4 = null;
     let newBump = null;
-    let output_data = [[],[],[],[],[],[],[],[],[],[]];
-    let csv_arrays = null
+    let output_data = [[],[],[],[],[],[],[],[],[],[],[]];
+    let csv_arrays = null;
+    let input_data_show = null;
     let input_data_course = [];
     let input_data_turn = [];
     let input_data_border = [];
@@ -62,7 +63,7 @@
 
     function auto_save(){
       for (let index = 0; index < imgLen; index++) {
-        auto_save_tile.push(".././img/" + $img[index].src.slice(-6));
+        auto_save_tile.push("../img/simulator/" + $img[index].src.slice(-6));
         auto_save_turn.push($img[index].dataset.turn);
       }
       if (localStorage.hasOwnProperty("rrl_auto-save_tile")){
@@ -147,9 +148,9 @@
     course_data();
 
     // 被災者ゾーンの自動入力
-    const corner = '.././img/r1.png';
-    const wall = '.././img/r2.png';
-    const white = '.././img/wt.png';
+    const corner = '../img/simulator/r1.png';
+    const wall = '../img/simulator/r2.png';
+    const white = '../img/simulator/wt.png';
     let a = 0;
     function hisaisya(arg) {
       if (a === 0){
@@ -182,14 +183,14 @@
         a = 1
         auto_save();
         nomal_guide();
-      } else if (src != '.././img/r1.png'){} else{
+      } else if (src != '../img/simulator/r1.png'){} else{
         window.alert('コートに避難ゾーンは一つしか置けません。');
       }
     };
     
     $course_nrl[0].addEventListener('click', ()=>{
       //もしほかのタイルをクリックした後にこれを実行した時用
-      src = '.././img/r1.png';
+      src = '../img/simulator/r1.png';
       $guide.textContent = 'このタイルを一番左上、その3つ下、それらの3つ右のどこかに置くと被災者ゾーンを自動入力します';
       $img[0].onclick = function () {
         hisaisya(0);
@@ -206,7 +207,7 @@
     });
     $course_wrl[0].addEventListener('click', ()=>{
       //もしほかのタイルをクリックした後にこれを実行した時用
-      src = '.././img/r1.png';
+      src = '../img/simulator/r1.png';
       $guide.textContent = 'このタイルを一番左上、その3つ下、それらの3つ右のどこかに置くと被災者ゾーンを自動入力します';
       $img[0].onclick = function () {
         hisaisya(0);
@@ -243,7 +244,8 @@
         }else if($table[4].style.display == 'block'){
           tile(5);
         }
-        $tools[0].textContent = '1階部分の作成';
+        $tools[0].src = '../img/tools/floor1.svg';
+        $tools[0].nextElementSibling.textContent = '1階部分の作成';
         $tools[0].dataset.one = 2;
         nomal_guide();
       }else{
@@ -254,7 +256,8 @@
         }else if($table[5].style.display == 'block'){
           tile(4);
         }
-        $tools[0].textContent = '2階・半2階部分の作成';
+        $tools[0].src = '../img/tools/floor2.svg';
+        $tools[0].nextElementSibling.textContent = '2階・半2階部分の作成';
         $tools[0].dataset.one = 1;
         nomal_guide();
       }
@@ -284,32 +287,45 @@
 
     //プロジェクトの保存
     function downloadCSV() {
-      output_data = [[],[],[],[],[],[],[],[],[],[]];
+      output_data = [[],[],[],[],[],[],[],[],[],[],[]];
       //ダウンロードするCSVファイル名を指定する
       const filename = window.prompt('ファイル名を入力:');
       if (filename) {
         //ダウンロードするタイルを配列に入れる
-        output_data[0].push("v2.0.2")
+        output_data[0].push("v3.0.0");
+        if($table[0].style.display == 'block'){
+          output_data[1].push("0");
+        } else if ($table[1].style.display == 'block'){
+          output_data[1].push("1");
+        } else if ($table[2].style.display == 'block'){
+          output_data[1].push("2");
+        } else if ($table[3].style.display == 'block'){
+          output_data[1].push("3");
+        } else if ($table[4].style.display == 'block'){
+          output_data[1].push("4");
+        } else if ($table[5].style.display == 'block'){
+          output_data[1].push("5");
+        }
         for (let index = 0; index < imgLen; index++) {
-          output_data[1].push(".././img/" + $img[index].src.slice(-6));
-          output_data[2].push($img[index].dataset.turn);
+          output_data[2].push("../img/simulator/" + $img[index].src.slice(-6));
+          output_data[3].push($img[index].dataset.turn);
           if ($img[index].style.border =="1px solid rgb(102, 51, 102)"){
-            output_data[3].push("solid 1px #663366");
+            output_data[4].push("solid 1px #663366");
           }else if ($img[index].style.border =="1px solid rgb(153, 51, 102)"){
-            output_data[3].push("solid 1px #993366");
+            output_data[4].push("solid 1px #993366");
           }else if ($img[index].style.border =="1px solid rgb(204, 51, 102)"){
-            output_data[3].push("solid 1px #CC3366");
+            output_data[4].push("solid 1px #CC3366");
           }else if ($img[index].style.border =="1px solid rgb(255, 51, 102)"){
-            output_data[3].push("solid 1px #FF3366");
+            output_data[4].push("solid 1px #FF3366");
           }else{
-            output_data[3].push("none");
+            output_data[4].push("none");
           }
-          output_data[4].push($img[index].dataset.check);
-          output_data[5].push($img[index].dataset.obstacle);
-          output_data[6].push($img[index].dataset.bump1);
-          output_data[7].push($img[index].dataset.bump2);
-          output_data[8].push($img[index].dataset.bump3);
-          output_data[9].push($img[index].dataset.bump4);
+          output_data[5].push($img[index].dataset.check);
+          output_data[6].push($img[index].dataset.obstacle);
+          output_data[7].push($img[index].dataset.bump1);
+          output_data[8].push($img[index].dataset.bump2);
+          output_data[9].push($img[index].dataset.bump3);
+          output_data[10].push($img[index].dataset.bump4);
         };
         output_data[0].push('\n');
         output_data[1].push('\n');
@@ -320,6 +336,7 @@
         output_data[6].push('\n');
         output_data[7].push('\n');
         output_data[8].push('\n');
+        output_data[9].push('\n');
         //BOMを付与する（Excelでの文字化け対策）
         const bom = new Uint8Array([0xef, 0xbb, 0xbf]);
         //Blobでデータを作成する
@@ -351,7 +368,23 @@
         reader.readAsText(file);
         reader.onload = function () {
           csv_arrays = reader.result.split('\n');
-          if(csv_arrays[0] == "v2.0.0," || csv_arrays[0] == "v2.0.1," || csv_arrays[0] == "v2.0.2,"){
+          if (csv_arrays[0] == "v3.0.0,") {
+            try{
+              input_data_show = csv_arrays[1].split(',')[1];
+              input_data_course = csv_arrays[2].split(',');
+              input_data_turn = csv_arrays[3].split(',');
+              input_data_border = csv_arrays[4].split(',');
+              input_data_check = csv_arrays[5].split(',');
+              input_data_obstacle = csv_arrays[6].split(',');
+              input_data_bump1 = csv_arrays[7].split(',');
+              input_data_bump2 = csv_arrays[8].split(',');
+              input_data_bump3 = csv_arrays[9].split(',');
+              input_data_bump4 = csv_arrays[10].split(',');
+            }catch (e){
+              window.alert('エラー:データの読み込みに失敗しました。ファイルが破損している可能性があります。ページを再読み込みします。')
+              window.location.reload();
+            }
+          } else if (csv_arrays[0] == "v2.0.0," || csv_arrays[0] == "v2.0.1," || csv_arrays[0] == "v2.0.2,") {
             try{
               input_data_course = csv_arrays[1].split(',');
               input_data_turn = csv_arrays[2].split(',');
@@ -366,38 +399,26 @@
               window.alert('エラー:データの読み込みに失敗しました。ファイルが破損している可能性があります。ページを再読み込みします。')
               window.location.reload();
             }
+            input_data_show = 0;
+            for (let index = 0; index < input_data_course.length; index++){
+              input_data_course[index] = '../img/simulator/' + input_data_course[index].slice(-6);
+            }
+            window.alert('このファイルはv2.0.xで作成されたものです。もう1度プロジェクトを保存すると最新版相当になります。')
           } else {
-            try{
-              input_data_course = csv_arrays[0].split(',');
-              input_data_course.unshift('');
-              input_data_turn = csv_arrays[1].split(',');
-              input_data_border = csv_arrays[2].split(',');
-              input_data_check = csv_arrays[3].split(',');
-              input_data_obstacle = csv_arrays[4].split(',');
-              input_data_bump1 = csv_arrays[5].split(',');
-            }catch (e){
-              window.alert('エラー:データの読み込みに失敗しました。ファイルが破損している可能性があります。ページを再読み込みします。')
-              window.location.reload();
-            }
-            for (let index = 1; index < input_data_bump1.length; index++) {
-              if(input_data_bump1[index] != '0'){
-                input_data_bump1[index] = '37a0a' + input_data_bump1[index]
-              }
-            }
-            input_data_bump2.push('');
-            input_data_bump3.push('');
-            input_data_bump4.push('');
-            for (let index = 1; index < input_data_bump1.length; index++) {
-              input_data_bump2.push('0');
-              input_data_bump3.push('0');
-              input_data_bump4.push('0');
-            }
-            console.log(input_data_bump2)
-            window.alert('このファイルはv1.1.2以前のバージョンで作成されたものです。もう1度書き出すとv1.2.0仕様になります。')
+            window.alert('このファイルはv1.x.xで作成されたものです。利用するには最新版に変換してください。')
           }
 
           all_clear();
           for (let index = 0; index < imgLen; index++) {
+            //コート
+            tile(input_data_show);
+            if (input_data_show == 1 || input_data_show == 3 || input_data_show == 5){
+              $tools[0].src = '../img/tools/floor1.svg';
+              $tools[0].nextElementSibling.textContent = '1階部分の作成';
+              $tools[0].dataset.one = 2;
+              nomal_guide();
+            }
+            //タイル
             $img[index].src = input_data_course[index + 1];
             $img[index].dataset.turn = input_data_turn[index + 1];
             $img[index].style.transform = 'rotate(' + input_data_turn[index + 1] + 'deg)';
@@ -412,7 +433,7 @@
             //障害物
             if(input_data_obstacle[index + 1] == 1){
               newObstacle = document.createElement("img");
-              newObstacle.src = ".././img/ob.svg";
+              newObstacle.src = "../img/simulator/ob.svg";
               newObstacle.className = "obstacle";
               $img[index].parentElement.appendChild(newObstacle);
               $img[index].dataset.obstacle = 1;
@@ -420,7 +441,7 @@
             //バンプ
             if(input_data_bump1[index + 1] != 0){
               newBump = document.createElement("img");
-              newBump.src = ".././img/bu.png";
+              newBump.src = "../img/simulator/bu.png";
               newBump.className = "bump";
               bump_data = input_data_bump1[index + 1].split('a');
               newBump.setAttribute("style", "left: " + bump_data[0] + "px; top: " + bump_data[1] + "px; transform: rotate(" + bump_data[2] + "deg)");
@@ -432,7 +453,7 @@
             if(input_data_bump2[index + 1] != 0){
               console.log(index + 1)
               newBump = document.createElement("img");
-              newBump.src = ".././img/bu.png";
+              newBump.src = "../img/simulator/bu.png";
               newBump.className = "bump";
               bump_data = input_data_bump2[index + 1].split('a');
               newBump.setAttribute("style", "left: " + bump_data[0] + "px; top: " + bump_data[1] + "px; transform: rotate(" + bump_data[2] + "deg)");
@@ -443,7 +464,7 @@
             }
             if(input_data_bump3[index + 1] != 0){
               newBump = document.createElement("img");
-              newBump.src = ".././img/bu.png";
+              newBump.src = "../img/simulator/bu.png";
               newBump.className = "bump";
               bump_data = input_data_bump3[index + 1].split('a');
               newBump.setAttribute("style", "left: " + bump_data[0] + "px; top: " + bump_data[1] + "px; transform: rotate(" + bump_data[2] + "deg)");
@@ -454,7 +475,7 @@
             }
             if(input_data_bump4[index + 1] != 0){
               newBump = document.createElement("img");
-              newBump.src = ".././img/bu.png";
+              newBump.src = "../img/simulator/bu.png";
               newBump.className = "bump";
               bump_data = input_data_bump4[index + 1].split('a');
               newBump.setAttribute("style", "left: " + bump_data[0] + "px; top: " + bump_data[1] + "px; transform: rotate(" + bump_data[2] + "deg)");
@@ -537,7 +558,7 @@
     //オールクリア
     function all_clear(){
       for (let index = 0; index < imgLen; index++) {
-        $img[index].src = '.././img/no.png';
+        $img[index].src = '../img/simulator/no.png';
         $img[index].style = '';
         if($img[index].dataset.check == 1){
           $img[index].nextElementSibling.remove();
@@ -580,7 +601,7 @@
     $tools[7].addEventListener('click', ()=> {
       for (let index = 0; index < imgLen; index++) {
         if($img[index].src.lastIndexOf('no.png') !== -1){
-          $img[index].src = '.././img/wt.png';
+          $img[index].src = '../img/simulator/wt.png';
         }
       }
       auto_save();
@@ -710,7 +731,7 @@
         };
         //タイル情報の削除
         document.getElementsByClassName('contextmenu-title')[1].onclick= function() {
-          $img[index].src = ".././img/no.png";
+          $img[index].src = "../img/simulator/no.png";
           $img[index].style.transform = 'rotate(0deg)';
           $img[index].dataset.turn = 0;
           $img[index].style.border = 'none';
@@ -744,7 +765,7 @@
         if (obOrUnob == 0){
           document.getElementsByClassName('contextmenu-title')[4].onclick = function() {
             newObstacle = document.createElement("img");
-            newObstacle.src = ".././img/ob.svg";
+            newObstacle.src = "../img/simulator/ob.svg";
             newObstacle.className = "obstacle";
             $img[index].parentElement.appendChild(newObstacle);
             $img[index].dataset.obstacle = 1;
@@ -766,7 +787,7 @@
             document.getElementById('image-preview').style.transform = "rotate(" + $img[index].dataset.turn + "deg)"
             document.getElementById('bump_decide').onclick = function(){
               newBump = document.createElement("img");
-              newBump.src = ".././img/bu.png";
+              newBump.src = "../img/simulator/bu.png";
               newBump.className = "bump";
               console.log("left: " + $bump_input[0].value + "px; top: " + ($bump_input[1].value - 37) + "px; transform: rotate(" + $bump_input[2].value + "deg)")
               newBump.setAttribute("style", "left: " + $bump_input[0].value + "px; top: " + ($bump_input[1].value - 37) + "px; transform: rotate(" + $bump_input[2].value + "deg)");
@@ -777,7 +798,7 @@
               //2個目
               if($bump_input_div[2].style.display == 'flex'){
                 newBump = document.createElement("img");
-                newBump.src = ".././img/bu.png";
+                newBump.src = "../img/simulator/bu.png";
                 newBump.className = "bump";
                 newBump.setAttribute("style", "left: " + $bump_input[3].value + "px; top: " + ($bump_input[4].value - 37) + "px; transform: rotate(" + $bump_input[5].value + "deg)");
                 $img[index].parentElement.appendChild(newBump);
@@ -787,7 +808,7 @@
               //3個目
               if($bump_input_div[3].style.display == 'flex'){
                 newBump = document.createElement("img");
-                newBump.src = ".././img/bu.png";
+                newBump.src = "../img/simulator/bu.png";
                 newBump.className = "bump";
                 newBump.setAttribute("style", "left: " + $bump_input[6].value + "px; top: " + ($bump_input[7].value - 37) + "px; transform: rotate(" + $bump_input[8].value + "deg)");
                 $img[index].parentElement.appendChild(newBump);
@@ -797,7 +818,7 @@
               //4個目
               if($bump_input_div[4].style.display == 'flex'){
                 newBump = document.createElement("img");
-                newBump.src = ".././img/bu.png";
+                newBump.src = "../img/simulator/bu.png";
                 newBump.className = "bump";
                 newBump.setAttribute("style", "left: " + $bump_input[9].value + "px; top: " + ($bump_input[10].value - 37) + "px; transform: rotate(" + $bump_input[11].value + "deg)");
                 $img[index].parentElement.appendChild(newBump);
