@@ -404,6 +404,7 @@ td{
     }
     .menu{
         width: 340px;
+        overflow: hidden;
     }
     .menu > p{
         font-size: 15px;

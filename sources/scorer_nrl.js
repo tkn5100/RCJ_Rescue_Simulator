@@ -93,9 +93,14 @@
     });
     document.getElementById('timer_stop').addEventListener('click', function () {
       clearInterval(TimerID);
-      document.getElementById("timer_start").disabled = false;
-      $guide.textContent = '競技を終了しました';
-      setTimeout(nomal_guide, 2000);
+      document.getElementById("timer_stop").disabled = true;
+      document.getElementsByClassName('button_hinan')[0].disabled = true;
+      document.getElementsByClassName('button_hinan')[1].disabled = true;
+      document.getElementsByClassName('button_hinan')[2].disabled = true;
+      for (let index = 1; index < imgLen; index++) {
+        $img[index].style.pointerEvents = 'none';
+      }
+      $guide.textContent = '競技を終了しました。コートの編集はロックされています。新しく競技を開始するには再読み込みしてください。';
     });
 
     //チェックポイント 1-は、前のチェックポイントで1回分数えたということ
@@ -380,7 +385,7 @@
     //   const filename = window.prompt('ファイル名を入力:');
     //   if (filename) {
     //     //ダウンロードするタイルを配列に入れる
-    //     output_data[0].push("v4.1.0");
+    //     output_data[0].push("v4.1.1");
     //     //どのコートを編集しいたか
     //     if($table[0].style.display == 'block'){
     //       output_data[1].push("0");
@@ -464,7 +469,7 @@
         //NRL・WRL
         if(input_data_show[2] == 'nrl'){
         } else {
-          window.alert('この得点計算ツールはNRL専用です。v4.1.0時点でWRL用の得点ツールはありません。');
+          window.alert('この得点計算ツールはNRL専用です。v4.1.1時点でWRL用の得点ツールはありません。');
           break;
         }
         //タイル
@@ -587,7 +592,7 @@
         reader.readAsText(file);
         reader.onload = function () {
           csv_arrays = reader.result.split('\n');
-          if (csv_arrays[0] == "v4.0.0," || csv_arrays[0] == "v4.1.0,") {
+          if (csv_arrays[0] == "v4.0.0," || csv_arrays[0] == "v4.1.0," || csv_arrays[0] == "v4.1.1,") {
             try{
               input_data_show = csv_arrays[1].split(',');
               input_data_course = csv_arrays[2].split(',');
