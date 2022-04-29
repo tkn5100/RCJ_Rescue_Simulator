@@ -5,11 +5,11 @@
     <link rel="icon" type="image/png" href="../img/simulator/ad.png">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="destyle.css">
-    <title>ヘルプ -RoboCupJunior コート作成環境v4.2.2</title>
+    <title>ヘルプ -RoboCupJunior コート作成環境v4.3.0</title>
   </head>
 
   <body class="body" style="margin-left: 15%; margin-right: 15%; cursor: default;">
-    <h1 class="help_h1">ヘルプ - RoboCupJunior コート作成環境v4.2.2</h1>
+    <h1 class="help_h1">ヘルプ - RoboCupJunior コート作成環境v4.3.0</h1>
     <p class="help-sentence">このソフトウェアはロボカップジュニアジャパンレスキューラインのコースを作成できるものです。ルールは2022年版に準拠します。なお、レスキューキット・被災者・避難場所等、得点走行毎に場所が異なるものを配置する機能はありません。</p>
     <p class="help-sentence">アプリケーション版の配布はv1.1.1をもって終了しました。なおv1.1.1以前でもアプリケーション版を利用すると思わぬ不具合が発生する場合がありますので、ブラウザ版(このソフトウェア)をご利用ください。</p>
     <br>
@@ -48,11 +48,11 @@
     <table class="help-table">
       <tbody>
         <tr><td rowspan="2" colspan="2"></td><td colspan="4">作成</td></tr>
-        <tr><td>v1.0.0~v1.1.3</td><td>v2.0.0~v2.0.2</td><td>v3.0.0~v3.1.1</td><td>v4.0.0~v4.2.2</td></tr>
+        <tr><td>v1.0.0~v1.1.3</td><td>v2.0.0~v2.0.2</td><td>v3.0.0~v3.1.1</td><td>v4.0.0~v4.3.0</td></tr>
         <tr><td rowspan="4">読み込み</td><td>v1.0.0~<br>v1.1.3</td><td>○</td><td>-</td><td>-</td><td>-</td></tr>
         <tr><td>v2.0.0~<br>v2.0.2</td><td>△</td><td>○</td><td>-</td><td>-</td></tr>
         <tr><td>v3.0.0~<br>v3.1.1</td><td>×</td><td>△</td><td>○</td><td>-</td></tr>
-        <tr><td>v4.0.0~<br>v4.2.2</td><td>×</td><td>×</td><td>△</td><td>○</td></tr>
+        <tr><td>v4.0.0~<br>v4.3.0</td><td>×</td><td>×</td><td>△</td><td>○</td></tr>
       </tbody>
     </table>
     <p class="help-sentence">○…読み込み可能　△…読み込み可能だが非推奨　×…ファイル変換が必要　-…不可能</p>
@@ -81,7 +81,7 @@
     <p class="help-sentence">ブラウザの予期せぬクラッシュなどに備えるため、作ったタイルは自動保存されます。保存されるのはタイルのみで、得点要素などは保存されません。すべてを保存するには「プロジェクトの保存」をしてください。コートを変更するごとに自動保存は上書きされ、それ以前の記録は消されます。</p>
     <h3 class="help_h3">右クリックメニュー</h3>
     <img src="../img/help/右クリックメニュー.png" alt="右クリックメニュー" style="width: 20vw; padding-left: 20px;">
-    <p class="help-sentence">③のタイルのどこかをクリックすると右クリックメニューが表示されます。「このタイルの情報を削除」を押すと、そのタイルにある全ての情報が削除されます。</p>
+    <p class="help-sentence">③のタイルのどこかをクリックすると右クリックメニューが表示されます。「このタイルの情報を削除」を押すと、そのタイルにある全ての情報が削除されます。未作成のタイルでは、下の3つの機能は停止されます。</p>
     <h4 class="help_h4">チェックマーカー</h4>
     <p class="help-sentence">「チェックマーカーを置く」を押すとクリックしたタイルの右上にチェックマーカーが置かれます。ラインとかぶることがあります。「チェックマーカーを取る」で削除できます。</p>
     <h4 class="help_h4">障害物</h4>  
@@ -90,8 +90,7 @@
     <img  src="../img/help/バンプ設定.png" alt="バンプ設定"  class="help_img" style="margin-bottom: 10px;">
     <p class="help-sentence">「バンプを置く」を押すと、上のような設定画面が出ます。まずバンプの個数を選びます。すると個数に合わせた入力欄が表示されるので、左側のスペース、上側のスペース、バンプの回転角度を半角数字で入力します。左側と上側のスペースは0~74で、37を指定すると中央に来ます。回転は-90~90で、0度を指定すると縦向きになり、数字が大きいほど右側に傾きます。下側のプレビューに現在の状態が反映されます。「決定」ボタンを押すと、クリックしたタイルにプレビューの通りにバンプが置かれます。右クリックメニューの「バンプを取る」を押すとすべて削除されます。</p>
     <h4 class="help_h4">得点要素とチェックマーカー</h4>
-    <p class="help-sentence">得点要素があるタイルにはチェックマーカーは配置できないため、1つのタイルにはチェックマーカー・障害物・バンプのうちどれかしか置けません。</p>
-    </p>
+    <p class="help-sentence">得点要素があるタイルにはチェックマーカーは配置できないため、1つのタイルにはチェックマーカー・障害物・バンプのうちどれか1つしか配置できません。またシーソータイルは、得点要素のない直線のラインであるため、チェックマーカー・障害物・バンプは配置できません。</p>
     
     <h3 class="help_h3"><img src="../img/tools/start.svg" class="help_icon">スタート画面へ戻るボタン</h3>
     <p class="help-sentence">スタート画面に戻ることができます。スタート画面に戻ったら「再開」ボタンが追加されているので、それを押すと元に戻ることができます。</p>
@@ -200,7 +199,7 @@
     <h3 class="help_h3">ディスプレイ</h3>
     <p class="help-sentence">630×500以上(630×600以上推奨)</p>
     <h3 class="help_h3">正常動作確認済みの環境</h3>
-    <p class="help-sentence">Windows10 Home 21H2(Microsoft Edge v100.0.1185.29,Google Chrome v100.0.4896.75)</p>
+    <p class="help-sentence">Windows10 Home 21H2(Microsoft Edge v100.0.1185.39,Google Chrome v100.0.4896.88)</p>
     <h3 class="help_h3">正常動作可能と思われる環境</h3>
     <p class="help-sentence">Windows10(Microsoft Edge,Google Chrome,FireFox各最新版)</p>
     <p class="help-sentence">Windows11(Microsoft Edge,Google Chrome,FireFox各最新版)</p>
@@ -216,6 +215,15 @@
     <p class="help-sentence">※スマートフォンなどは画面が小さすぎるほか、ローカルhtmlファイルの起動ができません。</p>
 
     <h2 class="help_h2" id="changes" style="margin-bottom: 0px;">6.変更履歴</h2>
+    <h4 class="help_h4">v4.3.0</h4>
+    <ul>
+      <li class="help-sentence-changes">・2022.04.12公開</li>
+      <li class="help-sentence-changes">・コート作成で、未作成タイルにチェックマーカー・ハザードを配置できないよう変更</li>
+      <li class="help-sentence-changes">・コート作成で、シーソータイルにチェックマーカー・ハザードを配置できる事象を修正</li>
+      <li class="help-sentence-changes">・コート作成で2階・半2階部分の切り替え時に、ユーザーが操作せずともで2階部分のタイルを配置できるよう変更</li>
+      <li class="help-sentence-changes">・コート作成で1階部分を作成中に、2階部分があるタイルに柱を表示するよう変更</li>
+      <li class="help-sentence-changes">・コート作成で2階・半2階部分を作成中に、2階部分がない場所では1階部分のタイルを灰色で表示するよう変更</li>
+    </ul>
     <h4 class="help_h4">v4.2.2</h4>
     <ul>
       <li class="help-sentence-changes">・2022.04.07公開</li>

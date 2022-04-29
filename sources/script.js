@@ -47,6 +47,8 @@
     let auto_save_turn = [];
     let auto_save_input_tile = [];
     let auto_save_input_turn = [];
+    let first_floor = [];
+    let second_floor = [];
 
 
     function nomal_guide() {
@@ -54,9 +56,9 @@
         $guide.textContent = 'タイルをダブルクリックすると時計回りに90度回転します';
       } else {
         if($tools[1].dataset.one == 1){
-          $guide.textContent = 'ただいま1階部分を作成中です';
+          $guide.textContent = 'ただいま1階部分を作成中です。2階部分があると柱が表示されます。';
         }else{
-          $guide.textContent = 'ただいま2階・半2階部分を作成中です';
+          $guide.textContent = 'ただいま2階・半2階部分を作成中です。1階はタイルのみ灰色で表示されています。';
         }
       }
     };
@@ -115,6 +117,7 @@
           for (let index = 0; index < imgLen; index++) {
             $img[index].addEventListener('click', (e)=> {
               e.target.src = src;
+              e.target.style.backgroundColor = "#FFFFFF";
               auto_save();
             });
           }
@@ -132,6 +135,7 @@
           for (let index = 0; index < imgLen; index++) {
             $img[index].addEventListener('click', (e)=> {
               e.target.src = src;
+              e.target.style.backgroundColor = "#FFFFFF";
               auto_save();
             });
           }
@@ -141,15 +145,16 @@
     course_input();
 
     //タイル情報
+    data = 'none';
     function course_data() {
       for (let index = 0; index < $coursedata.length; index++) {
         $coursedata[index].addEventListener('click', (e) => {
           data = e.target.style.border
-          for (let i = 0; i < imgLen; i++) {
-            $img[i].addEventListener('click', (e)=> {
-              e.target.style.border = data;
-            });
-          }
+        });
+      }
+      for (let i = 0; i < imgLen; i++) {
+        $img[i].addEventListener('click', (e)=> {
+          e.target.style.border = data;
         });
       }
     }
@@ -239,7 +244,9 @@
       $start_tools[3].style.display = 'block';
     });
 
+    let index2 = 0;
     function tile(arg) {
+      arg = Number(arg);
       $table[0].style.display = 'none';
       $table[1].style.display = 'none';
       $table[2].style.display = 'none';
@@ -247,6 +254,45 @@
       $table[4].style.display = 'none';
       $table[5].style.display = 'none';
       $table[arg].style.display = 'block';
+      if(arg == 1 || arg== 3 || arg == 5){
+        for (let index = 0; index < $table[arg - 1].firstElementChild.children.length; index++){
+          for (let i = 0; i < $table[arg - 1].firstElementChild.children[index].children.length; i++){
+            first_floor.push(["../img/simulator/" + $table[arg - 1].firstElementChild.children[index].children[i].firstElementChild.src.slice(-6), $table[arg - 1].firstElementChild.children[index].children[i].firstElementChild.dataset.turn])
+          }
+        }
+        for (let index = 0; index < $table[arg].firstElementChild.children.length; index++){
+          for (let i = 0; i < $table[arg].firstElementChild.children[index].children.length; i++){
+            if ($table[arg].firstElementChild.children[index].children[i].firstElementChild.style.backgroundColor != 'rgb(255, 255, 255)' || $table[arg].firstElementChild.children[index].children[i].firstElementChild.src.slice(-6) == 'no.png'){
+              $table[arg].firstElementChild.children[index].children[i].firstElementChild.src = first_floor[index2][0];
+              $table[arg].firstElementChild.children[index].children[i].firstElementChild.style.transform = "rotate(" + first_floor[index2][1] + "deg)";
+              $table[arg].firstElementChild.children[index].children[i].firstElementChild.style.backgroundColor = "#DDDDDD";
+            }
+            index2++;
+          }
+        }
+      } else {
+        for (let index = 0; index < $table[arg + 1].firstElementChild.children.length; index++){
+          for (let i = 0; i < $table[arg + 1].firstElementChild.children[index].children.length; i++){
+            if($table[arg + 1].firstElementChild.children[index].children[i].firstElementChild.style.backgroundColor == 'rgb(255, 255, 255)'){
+              second_floor.push(1);
+            } else {
+              second_floor.push(0);
+            }
+          }
+        }
+        for (let index = 0; index < $table[arg].firstElementChild.children.length; index++){
+          for (let i = 0; i < $table[arg].firstElementChild.children[index].children.length; i++){
+            if(second_floor[index2] == 1){
+              $table[arg].firstElementChild.children[index].children[i].firstElementChild.style.backgroundImage = "url(../img/simulator/po.png)";
+              $table[arg].firstElementChild.children[index].children[i].firstElementChild.style.backgroundSize = "100%";
+            }
+            index2++;
+          }
+        }
+      }
+      first_floor = [];
+      second_floor = [];
+      index2 = 0;
     }
 
     //2階・半2階
@@ -264,7 +310,7 @@
         $coursedata[2].style.display = 'block';
         $coursedata[3].style.display = 'block';
         $coursedata[4].style.display = 'block';
-        data = null;
+        data = 'solid 1px #FF3366';
         $tools[1].src = '../img/tools/floor1.svg';
         $tools[1].nextElementSibling.textContent = '1階部分の作成';
         $tools[1].dataset.one = 2;
@@ -282,7 +328,7 @@
         $coursedata[2].style.display = 'none';
         $coursedata[3].style.display = 'none';
         $coursedata[4].style.display = 'none';
-        data = null;
+        data = 'none';
         $tools[1].src = '../img/tools/floor2.svg';
         $tools[1].nextElementSibling.textContent = '2階・半2階部分の作成';
         $tools[1].dataset.one = 1;
@@ -319,7 +365,7 @@
       const filename = window.prompt('ファイル名を入力:');
       if (filename) {
         //ダウンロードするタイルを配列に入れる
-        output_data[0].push("v4.2.2");
+        output_data[0].push("v4.3.0");
         //どのコートを編集しいたか
         if($table[0].style.display == 'block'){
           output_data[1].push("0");
@@ -444,6 +490,9 @@
         }
         //タイル
         $img[index].src = input_data_course[index + 1];
+        if(input_data_course[index + 1] != '../img/simulator/no.png'){
+          $img[index].style.backgroundColor = '#FFFFFF';
+        }
         $img[index].dataset.turn = input_data_turn[index + 1];
         $img[index].style.transform = 'rotate(' + input_data_turn[index + 1] + 'deg)';
         $img[index].style.border = input_data_border[index + 1];
@@ -550,7 +599,7 @@
         reader.readAsText(file);
         reader.onload = function () {
           csv_arrays = reader.result.split('\n');
-          if (csv_arrays[0] == "v4.0.0," || csv_arrays[0] == "v4.1.0," || csv_arrays[0] == "v4.1.1," || csv_arrays[0] == "v4.2.0," || csv_arrays[0] == "v4.2.1," || csv_arrays[0] == "v4.2.2,") {
+          if (csv_arrays[0] == "v4.0.0," || csv_arrays[0] == "v4.1.0," || csv_arrays[0] == "v4.1.1," || csv_arrays[0] == "v4.2.0," || csv_arrays[0] == "v4.2.1," || csv_arrays[0] == "v4.2.2," || csv_arrays[0] == "v4.3.0,") {
             try{
               input_data_show = csv_arrays[1].split(',');
               input_data_course = csv_arrays[2].split(',');
@@ -813,8 +862,9 @@
       $contextmenu_title[5].className = "contextmenu-title";
       $contextmenu_title[6].className = "contextmenu-title";
       $contextmenu_title[7].className = "contextmenu-title";
-
-      if(element.dataset.check == 1){
+      if(element.src.slice(-6) == 'se.png' || element.src.slice(-6) == 'no.png'){
+        //シーソータイルは、得点要素のない直線のラインである
+      } else if(element.dataset.check == 1){
         $contextmenu_title[3].className = "contextmenu-title_active";
         checkOrUncheck = 1;
       }else if(element.dataset.obstacle == 1){

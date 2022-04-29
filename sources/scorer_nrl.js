@@ -457,7 +457,7 @@
         //NRL・WRL
         if(input_data_show[2] == 'nrl'){
         } else {
-          window.alert('この得点計算ツールはNRL専用です。v4.2.2時点でWRL用の得点ツールはありません。');
+          window.alert('この得点計算ツールはNRL専用です。WRL向けの得点計算をご利用ください。');
           break;
         }
         //タイル
@@ -472,6 +472,7 @@
           start_tile++;
         }
         if (input_data_course[index + 1] == '../img/simulator/r1.png' || input_data_course[index + 1] == '../img/simulator/r2.png' || input_data_course[index + 1] == '../img/simulator/r3.png' || input_data_course[index + 1] == '../img/simulator/r4.png' || input_data_course[index + 1] == '../img/simulator/r5.png' || input_data_course[index + 1] == '../img/simulator/wt.png' || input_data_course[index + 1] == '../img/simulator/no.png'){
+          $img[index].parentElement.style.backgroundColor = '#FFFFFF';
           $img[index].style.pointerEvents = 'none';
         }
         $img[index].dataset.turn = input_data_turn[index + 1];
@@ -580,7 +581,7 @@
         reader.readAsText(file);
         reader.onload = function () {
           csv_arrays = reader.result.split('\n');
-          if (csv_arrays[0] == "v4.0.0," || csv_arrays[0] == "v4.1.0," || csv_arrays[0] == "v4.1.1," || csv_arrays[0] == "v4.2.0," || csv_arrays[0] == "v4.2.1," || csv_arrays[0] == "v4.2.2,") {
+          if (csv_arrays[0] == "v4.0.0," || csv_arrays[0] == "v4.1.0," || csv_arrays[0] == "v4.1.1," || csv_arrays[0] == "v4.2.0," || csv_arrays[0] == "v4.2.1," || csv_arrays[0] == "v4.2.2," || csv_arrays[0] == "v4.3.0,") {
             try{
               input_data_show = csv_arrays[1].split(',');
               input_data_course = csv_arrays[2].split(',');
