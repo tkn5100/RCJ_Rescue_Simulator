@@ -58,7 +58,7 @@
     function bump_previewFunc(){
       for (let index = 0; index < $bump_input.length; index += 3){
         //左
-        if(0 <= $bump_input[index].value && $bump_input[index].value <= 80){
+        if(0 <= $bump_input[index].value && $bump_input[index].value <= 74){
           $bump_input[index].style.border = 'solid 1px #000000';
           if(window.innerWidth < 920){
             $bump_preview[index / 3].style.left = ($bump_input[index].value / 10) + "vw";
@@ -70,12 +70,12 @@
           $bump_input[index].value = '';
         }
         //上
-        if(-37 <= $bump_input[index + 1].value && $bump_input[index + 1].value <= 37){
+        if(0 <= $bump_input[index + 1].value && $bump_input[index + 1].value <= 74){
           $bump_input[index + 1].style.border = 'solid 1px #000000';
           if(window.innerWidth < 920){
-            $bump_preview[index / 3].style.top = ($bump_input[index + 1].value / 10) + "vw";
+            $bump_preview[index / 3].style.top = (($bump_input[index + 1].value - 37) / 10) + "vw";
           } else {
-            $bump_preview[index / 3].style.top = $bump_input[index + 1].value + "px";
+            $bump_preview[index / 3].style.top = ($bump_input[index + 1].value - 37) + "px";
           }
         } else {
           $bump_input[index + 1].style.border = 'solid 1px #FF0000';
@@ -91,6 +91,8 @@
         }
       }
     }
+    //初めに一回
+    bump_previewFunc();
 
     for (let index = 0; index < $bump_input.length; index += 1){
       $bump_input[index].addEventListener('change',() => {
@@ -126,8 +128,8 @@
           bump_data = null;
         }
         for (let index = 0; index < $bump_input.length; index += 3){
-          $bump_preview[index / 3].style.left = ($bump_input[index].value / 10) + "vw";
-          $bump_preview[index / 3].style.top = ($bump_input[index + 1].value / 10) + "vw";
+          $bump_preview[index / 3].style.left = $bump_input[index].value / 10 + "vw";
+          $bump_preview[index / 3].style.top = ($bump_input[index + 1].value - 37) / 10 + "vw";
         }
       }
     }
@@ -161,7 +163,7 @@
         }
         for (let index = 0; index < $bump_input.length; index += 3){
           $bump_preview[index / 3].style.left = $bump_input[index].value + "px";
-          $bump_preview[index / 3].style.top = $bump_input[index + 1].value + "px";
+          $bump_preview[index / 3].style.top = ($bump_input[index + 1].value - 37) + "px";
         }
       }
     }

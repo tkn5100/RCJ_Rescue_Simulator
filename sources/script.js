@@ -289,7 +289,7 @@
       const filename = window.prompt('ファイル名を入力:');
       if (filename) {
         //ダウンロードするタイルを配列に入れる
-        output_data[0].push("v2.0.0")
+        output_data[0].push("v2.0.1")
         for (let index = 0; index < imgLen; index++) {
           output_data[1].push(".././img/" + $img[index].src.slice(-6));
           output_data[2].push($img[index].dataset.turn);
@@ -351,7 +351,7 @@
         reader.readAsText(file);
         reader.onload = function () {
           csv_arrays = reader.result.split('\n');
-          if(csv_arrays[0] == "v2.0.0,"){
+          if(csv_arrays[0] == "v2.0.0," || csv_arrays[0] == "v2.0.1,"){
             try{
               input_data_course = csv_arrays[1].split(',');
               input_data_turn = csv_arrays[2].split(',');
@@ -763,23 +763,25 @@
             document.getElementById('overlay').style.display = 'block';
             document.getElementById('bump_settings').style.display = 'flex';
             document.getElementById('image-preview').src = $img[index].src;
+            document.getElementById('image-preview').style.transform = "rotate(" + $img[index].dataset.turn + "deg)"
             document.getElementById('bump_decide').onclick = function(){
               newBump = document.createElement("img");
               newBump.src = ".././img/bu.png";
               newBump.className = "bump";
-              newBump.setAttribute("style", "left: " + $bump_input[0].value + "px; top: " + $bump_input[1].value + "px; transform: rotate(" + $bump_input[2].value + "deg)");
+              console.log("left: " + $bump_input[0].value + "px; top: " + ($bump_input[1].value - 37) + "px; transform: rotate(" + $bump_input[2].value + "deg)")
+              newBump.setAttribute("style", "left: " + $bump_input[0].value + "px; top: " + ($bump_input[1].value - 37) + "px; transform: rotate(" + $bump_input[2].value + "deg)");
               $img[index].parentElement.appendChild(newBump);
               //aはただの区切り。and。
-              $img[index].dataset.bump1 = $bump_input[0].value + "a" + $bump_input[1].value + "a" + $bump_input[2].value;
+              $img[index].dataset.bump1 = $bump_input[0].value + "a" + ($bump_input[1].value - 37) + "a" + $bump_input[2].value;
               newBump = null;
               //2個目
               if($bump_input_div[2].style.display == 'flex'){
                 newBump = document.createElement("img");
                 newBump.src = ".././img/bu.png";
                 newBump.className = "bump";
-                newBump.setAttribute("style", "left: " + $bump_input[3].value + "px; top: " + $bump_input[4].value + "px; transform: rotate(" + $bump_input[5].value + "deg)");
+                newBump.setAttribute("style", "left: " + $bump_input[3].value + "px; top: " + ($bump_input[4].value - 37) + "px; transform: rotate(" + $bump_input[5].value + "deg)");
                 $img[index].parentElement.appendChild(newBump);
-                $img[index].dataset.bump2 = $bump_input[3].value + "a" + $bump_input[4].value + "a" + $bump_input[5].value;
+                $img[index].dataset.bump2 = $bump_input[3].value + "a" + ($bump_input[4].value - 37) + "a" + $bump_input[5].value;
                 newBump = null;
               }
               //3個目
@@ -787,9 +789,9 @@
                 newBump = document.createElement("img");
                 newBump.src = ".././img/bu.png";
                 newBump.className = "bump";
-                newBump.setAttribute("style", "left: " + $bump_input[6].value + "px; top: " + $bump_input[7].value + "px; transform: rotate(" + $bump_input[8].value + "deg)");
+                newBump.setAttribute("style", "left: " + $bump_input[6].value + "px; top: " + ($bump_input[7].value - 37) + "px; transform: rotate(" + $bump_input[8].value + "deg)");
                 $img[index].parentElement.appendChild(newBump);
-                $img[index].dataset.bump3 = $bump_input[6].value + "a" + $bump_input[7].value + "a" + $bump_input[8].value;
+                $img[index].dataset.bump3 = $bump_input[6].value + "a" + ($bump_input[7].value - 37) + "a" + $bump_input[8].value;
                 newBump = null;
               }
               //4個目
@@ -797,9 +799,9 @@
                 newBump = document.createElement("img");
                 newBump.src = ".././img/bu.png";
                 newBump.className = "bump";
-                newBump.setAttribute("style", "left: " + $bump_input[9].value + "px; top: " + $bump_input[10].value + "px; transform: rotate(" + $bump_input[11].value + "deg)");
+                newBump.setAttribute("style", "left: " + $bump_input[9].value + "px; top: " + ($bump_input[10].value - 37) + "px; transform: rotate(" + $bump_input[11].value + "deg)");
                 $img[index].parentElement.appendChild(newBump);
-                $img[index].dataset.bump4 = $bump_input[9].value + "a" + $bump_input[10].value + "a" + $bump_input[11].value;
+                $img[index].dataset.bump4 = $bump_input[9].value + "a" + ($bump_input[10].value - 37) + "a" + $bump_input[11].value;
                 newBump = null;
               }
               document.getElementById('overlay').style.display = 'none';
