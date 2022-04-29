@@ -2,9 +2,10 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <link rel="icon" type="image/png" href="../img/simulator/ad.png">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="destyle.css">
-    <title>RoboCupJunior コート作成環境v3.1.1</title>
+    <title>RoboCupJunior コート作成環境v4.0.0</title>
   </head>
 
   <body class="body">
@@ -18,10 +19,16 @@
       </div>
       <div>
         <span>リーグを選択:</span>
-        <label class="container">NRL<input type="radio" checked="checked" name="league" value="0"><span class="checkmark"></span></label>
-        <label class="container">WRL<input type="radio" name="league" value="1"><span class="checkmark"></span></label>
+        <label class="container">NRL<input type="radio" name="league" value="0"><span class="checkmark"></span></label>
+        <label class="container">WRL<input type="radio" checked="checked" name="league" value="1"><span class="checkmark"></span></label>
       </div>
       <div style="position: absolute; top: 20px; right: 20px;"><div><img src="../img/tools/help.svg" alt="ヘルプ" class="start_tools" style="margin-right: 0; cursor: help;"><p>ヘルプ</p></div></div>
+    </div>
+    <div id="league">
+      <span>このファイルはどちらのリーグのものですか?</span>
+      <label class="container">NRL<input type="radio" name="league2" value="0"><span class="checkmark"></span></label>
+      <label class="container">WRL<input type="radio" checked="checked" name="league2" value="1"><span class="checkmark"></span></label>
+      <button id="league_decide">決定</button>
     </div>
     <div id="contextmenu">
       <ul>
@@ -82,7 +89,7 @@
     </div>
     <div id="overlay" class="active"></div>
     <div class="toolbar">
-      <div><img src="../img/tools/start.svg" alt="スタートへ" class="tools" data-one="1"><p>スタート画面へ戻る</p></div>
+      <div><img src="../img/tools/start.svg" alt="スタートへ" class="tools"><p>スタート画面へ戻る</p></div>
       <div><img src="../img/tools/floor2.svg" alt="1階・2階の切り替え" class="tools" data-one="1"><p>2階・半2階部分の作成</p></div>
       <div><img src="../img/tools/grid.svg" alt="グリッドの表示・非表示" class="tools" data-grid="1"><p>グリッドの表示・非表示</p></div>
       <div><img src="../img/tools/save.svg" alt="プロジェクトの保存" class="tools"><p>プロジェクトの保存</p></div>
@@ -97,9 +104,9 @@
     <div class="main">
       <div class="menu">
         <!-- <button class="help-link" id="tab-nav" style="margin-bottom: 5px;">NRLタイルへ</button> -->
-        <div id="wrl-tiles">
+        <div id="wrl-tiles" style="display: block;">
           <!-- <p class="index">タイル<span class="index-plus">+</span></p> -->
-          <p class="index">通常タイル</p>
+          <h1 class="index">通常タイル</h1>
           <div class="group">
             <img src="../img/simulator/r0.png" alt="course" class="menu-img-w">
             <p class="description">被災者ゾーンの自動入力</p>
@@ -157,7 +164,7 @@
             <img src="../img/simulator/m1.png" alt="course" class="menu-img-w">
             <img src="../img/simulator/wt.png" alt="course" class="menu-img-w">
           </div>
-          <p class="index">特殊タイル</p>
+          <h1 class="index">特殊タイル</h1>
           <div class="group">
             <img src="../img/simulator/aa.png" alt="course" class="menu-img-w">
             <img src="../img/simulator/ab.png" alt="course" class="menu-img-w">
@@ -176,19 +183,19 @@
             <img src="../img/simulator/se.png" alt="course" class="menu-img-w">
             <p class="description">シーソー/15点</p>
           </div>
-          <p class="index">タイル情報</p>
+          <h1 class="index">タイル情報</h1>
           <div class="group">
             <button class="coursedata" style="border: none;">1階のタイル</button>
             <button class="coursedata" style="border: solid 1px #663366">1階→半2階の坂</button>
-            <button class="coursedata" style="border: solid 1px #993366">半2階のタイル</button>
-            <button class="coursedata" style="border: solid 1px #CC3366">半2階→2階の坂</button>
-            <button class="coursedata" style="border: solid 1px #FF3366">2階のタイル</button>
+            <button class="coursedata" style="display: none; border: solid 1px #993366">半2階のタイル</button>
+            <button class="coursedata" style="display: none; border: solid 1px #CC3366">半2階→2階の坂</button>
+            <button class="coursedata" style="display: none; border: solid 1px #FF3366">2階のタイル</button>
             <p class="description">タイルは前回選択時のものが引き継がれます</p>
           </div>
         </div>
 
         <div id="nrl-tiles" style="display: none;">
-          <p class="index">通常タイル</p>
+          <h1 class="index">通常タイル</h1>
           <div class="group">
             <img src="../img/simulator/r0.png" alt="course" class="menu-img-n">
             <p class="description">被災者ゾーンの自動入力</p>
@@ -239,7 +246,7 @@
             <img src="../img/simulator/m1.png" alt="course" class="menu-img-n">
             <img src="../img/simulator/wt.png" alt="course" class="menu-img-n">
           </div>
-          <p class="index">タイル情報</p>
+          <h1 class="index">タイル情報</h1>
           <div class="group">
             <button class="coursedata" style="border: none;">1階のタイル</button>
             <button class="coursedata" style="border: solid 1px #663366">1階→半2階の坂</button>

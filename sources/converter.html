@@ -2,12 +2,20 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <link rel="icon" type="image/png" href="../img/simulator/ad.png">
     <link rel="stylesheet" href="converter.css">
     <link rel="stylesheet" href="destyle.css">
-    <title>RoboCupJunior コート作成環境v3.1.1</title>
+    <title>RoboCupJunior コート作成環境v4.0.0</title>
   </head>
 
   <body class="body">
+    <div id="league">
+      <span>このファイルはどちらのリーグのものですか?</span>
+      <label class="container">NRL<input type="radio" name="league2" value="0"><span class="checkmark"></span></label>
+      <label class="container">WRL<input type="radio" checked="checked" name="league2" value="1"><span class="checkmark"></span></label>
+      <button id="league_decide">決定</button>
+    </div>
+    <div id="overlay"></div>
     <div class="toolbar">
       <div><img src="../img/tools/save.svg" alt="もう1度変換" class="tools"><p>もう1度変換</p></div>
       <div><img src="../img/tools/help.svg" alt="ヘルプ" class="tools"><p>ヘルプ</p></div>

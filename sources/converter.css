@@ -79,3 +79,104 @@ body{
 #download{
     margin-left: 3vw;
 }
+#league{
+    visibility: collapse;
+    opacity: 0;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 30vh;
+    left: 30vw;
+    width: 40vw;
+    height: 40vh;
+    overflow: auto;
+    padding: 2vw 5vw 2vw 5vw;
+    background-color: #F8F8F8;
+    border-radius: 20px;
+    font-size: 1.2vw;
+    cursor: default;
+    transition: all 0.3s 0s ease-out;
+    z-index: 5;
+}
+#league > span{
+    font-size: 1.3vw;
+    font-weight: 700;
+    padding-bottom: 1vw;
+}
+#league.active{
+    visibility: visible;
+    opacity: 1;
+}
+#league_decide{
+    position: absolute;
+    right: 5vw;
+    bottom: 3vw;
+    width: 12vw;
+    text-align: center;
+    background-color: #000000;
+    color: #f8f8f8;
+    padding: 1vw;
+    border-radius: 1vw;
+}
+#overlay{
+    visibility: collapse;
+    position:absolute;
+    left:0;
+    top:0;
+    width:100vw;
+    height:100vh;
+    background-color: #555555;
+    opacity: 0;
+    transition: all 0.3s 0s ease-out;
+    z-index: 4;
+}
+#overlay.active{
+    visibility: visible;
+    opacity: 0.7;
+}
+.container {
+    display: block;
+    position: relative;
+    padding-left: 2vw;
+    margin-bottom: 1vw;
+    cursor: pointer;
+    user-select: none;
+    padding-right: 2vw;
+}
+/* デフォルトのラジオボタンデザインを無効化 */
+.container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+/* カスタムラジオボタンの作成 */
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 1.5vw;
+    width: 1.5vw;
+    background-color: #DDDDDD;
+    border-radius: 50%;
+}
+/* チェックした時のカラーリング */
+.container input:checked ~ .checkmark {
+    background-color:#000000;
+}
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+.container input:checked ~ .checkmark:after {
+    display: block;
+}
+.container .checkmark:after {
+    top: 5%;
+    left: 5%;
+    width: 90%;
+    height: 90%;
+    border: solid 0.3vw#F8F8F8;
+    border-radius: 50%;
+    background-color:#000000;
+}

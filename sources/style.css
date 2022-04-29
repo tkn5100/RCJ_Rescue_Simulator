@@ -162,6 +162,11 @@ table{
     border-right: solid 5px #000000;
     overflow: auto;
 }
+.group{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
 @media screen and (min-width:1040px){
     .menu{
         width: 340px;
@@ -201,7 +206,6 @@ table{
         width: 60px;
     }
     .coursedata{
-        margin: 5px 10px 5px 10px;
         width: 60px;
         height: 60px;
     }
@@ -258,7 +262,6 @@ table{
         width: 60px;
     }
     .coursedata{
-        margin: 5px 10px 5px 10px;
         width: 60px;
         height: 60px;
     }
@@ -315,7 +318,6 @@ table{
         width: 8vw;
     }
     .coursedata{
-        margin: 1vw;
         width: 8vw;
         height: 8vw;
     }
@@ -376,8 +378,11 @@ table{
         display: none;
     }
 }
+.coursedata{
+    margin: 4px 4px 4px 4px;
+}
 .menu-img-w, .menu-img-n{
-    margin: 1px 1px 1px 1px;
+    margin: 4px 4px 4px 4px;
     border: solid 0.1px #AAAAAA;
     background-color: #FFFFFF;
     cursor: pointer;
@@ -404,6 +409,22 @@ td{
     position: relative;
     border: 1px solid #AAAAAA;
     background-color: #FFFFFF;
+}
+.index{
+    height: 35px;
+    padding-top: 10px;
+    padding-left: 10px;
+    font-size: 15px;
+    color: #FFFFFF;
+    background-color: #000000;
+    cursor: normal;
+}
+.coursedata{
+    font-size: 10px;
+    text-align: center;
+    color: #000000;
+    background-color: #CCCCCC;
+    border-radius: 7px 7px 7px 7px;   
 }
 .check-marker{
     position: absolute;
@@ -460,22 +481,6 @@ td{
     color: #000000;
     cursor: pointer;
 }
-.index{
-    height: 35px;
-    padding-top: 10px;
-    padding-left: 10px;
-    font-size: 15px;
-    color: #FFFFFF;
-    background-color: #000000;
-    cursor: normal;
-}
-.coursedata{
-    font-size: 10px;
-    text-align: center;
-    color: #000000;
-    background-color: #CCCCCC;
-    border-radius: 7px 7px 7px 7px;   
-}
 
 #start{
     visibility: collapse;
@@ -495,6 +500,45 @@ td{
     cursor: default;
     transition: all 0.3s 0s ease-out;
     z-index: 5;
+}
+#league{
+    visibility: collapse;
+    opacity: 0;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 30vh;
+    left: 30vw;
+    width: 40vw;
+    height: 40vh;
+    overflow: auto;
+    padding: 2vw 5vw 2vw 5vw;
+    background-color: #F8F8F8;
+    border-radius: 20px;
+    font-size: 1.2vw;
+    cursor: default;
+    transition: all 0.3s 0s ease-out;
+    z-index: 5;
+}
+#league > span{
+    font-size: 1.3vw;
+    font-weight: 700;
+    padding-bottom: 1vw;
+}
+#league.active{
+    visibility: visible;
+    opacity: 1;
+}
+#league_decide{
+    position: absolute;
+    right: 5vw;
+    bottom: 3vw;
+    width: 12vw;
+    text-align: center;
+    background-color: #000000;
+    color: #f8f8f8;
+    padding: 1vw;
+    border-radius: 1vw;
 }
 #start.active{
     visibility: visible;

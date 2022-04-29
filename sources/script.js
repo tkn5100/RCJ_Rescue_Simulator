@@ -10,7 +10,8 @@
     const courseWrlLen = $course_wrl.length;
     const $tools = $doc.getElementsByClassName('tools');
     const $start_tools = $doc.getElementsByClassName('start_tools');
-    const $league = $doc.getElementsByName('league');
+    const $radio_league = $doc.getElementsByName('league');
+    const $radio_league2 = $doc.getElementsByName('league2')
     const $table = $doc.getElementsByTagName('table');
     // const $index = document.getElementsByClassName('index')
     const $coursedata = $doc.getElementsByClassName('coursedata');
@@ -71,6 +72,14 @@
       }
       if (localStorage.hasOwnProperty("rrl_auto-save_turn")){
         localStorage.removeItem("rrl_auto-save_turn");
+      }
+      if (localStorage.hasOwnProperty("rrl_auto-save_league")){
+        localStorage.removeItem("rrl_auto-save_league");
+      }
+      if (document.getElementById('nrl-tiles').style.display == "block"){
+        localStorage.setItem("rrl_auto-save_league", "nrl");
+      } else {
+        localStorage.setItem("rrl_auto-save_league", "wrl");
       }
       localStorage.setItem("rrl_auto-save_tile", JSON.stringify(auto_save_tile));
       localStorage.setItem("rrl_auto-save_turn", JSON.stringify(auto_save_turn));
@@ -251,6 +260,12 @@
         }else if($table[4].style.display == 'block'){
           tile(5);
         }
+        $coursedata[0].style.display = 'none';
+        $coursedata[1].style.display = 'none';
+        $coursedata[2].style.display = 'block';
+        $coursedata[3].style.display = 'block';
+        $coursedata[4].style.display = 'block';
+        data = null;
         $tools[1].src = '../img/tools/floor1.svg';
         $tools[1].nextElementSibling.textContent = '1階部分の作成';
         $tools[1].dataset.one = 2;
@@ -263,6 +278,12 @@
         }else if($table[5].style.display == 'block'){
           tile(4);
         }
+        $coursedata[0].style.display = 'block';
+        $coursedata[1].style.display = 'block';
+        $coursedata[2].style.display = 'none';
+        $coursedata[3].style.display = 'none';
+        $coursedata[4].style.display = 'none';
+        data = null;
         $tools[1].src = '../img/tools/floor2.svg';
         $tools[1].nextElementSibling.textContent = '2階・半2階部分の作成';
         $tools[1].dataset.one = 1;
@@ -299,7 +320,8 @@
       const filename = window.prompt('ファイル名を入力:');
       if (filename) {
         //ダウンロードするタイルを配列に入れる
-        output_data[0].push("v3.1.1");
+        output_data[0].push("v4.0.0");
+        //どのコートを編集しいたか
         if($table[0].style.display == 'block'){
           output_data[1].push("0");
         } else if ($table[1].style.display == 'block'){
@@ -313,6 +335,13 @@
         } else if ($table[5].style.display == 'block'){
           output_data[1].push("5");
         }
+        //NRLモードかWRLモードか
+        if(document.getElementById('nrl-tiles').style.display == 'block'){
+          output_data[1].push("nrl");
+        } else {
+          output_data[1].push("wrl");
+        }
+        //以下タイル
         for (let index = 0; index < imgLen; index++) {
           output_data[2].push("../img/simulator/" + $img[index].src.slice(-6));
           output_data[3].push($img[index].dataset.turn);
@@ -372,18 +401,13 @@
       document.getElementById('overlay').className = "";
       document.getElementById('start').className = "";
       all_clear();
-      for (let index = 0; index < $league.length; index++) {
-        if ($league[index].checked) {
-          if (localStorage.hasOwnProperty("rrl_auto-save_league")){
-            localStorage.removeItem("rrl_auto-save_league");
-          }
+      for (let index = 0; index < $radio_league.length; index++) {
+        if ($radio_league[index].checked) {
           if(index == 0){
-            localStorage.setItem("rrl_auto-save_league", "nrl");
             document.getElementById('wrl-tiles').style.display = 'none';
             document.getElementById('nrl-tiles').style.display = 'block';
             $tools[1].style.display = 'none';
           } else {
-            localStorage.setItem("rrl_auto-save_league", "wrl");
             document.getElementById('wrl-tiles').style.display = 'block';
             document.getElementById('nrl-tiles').style.display = 'none';
             $tools[1].style.display = 'block';
@@ -394,6 +418,102 @@
 
 
     //プロジェクトの読み込み
+    function import_project() {
+      for (let index = 0; index < imgLen; index++) {
+        //コート
+        tile(input_data_show[1]);
+        if (input_data_show[1] == 1 || input_data_show[1] == 3 || input_data_show[1] == 5){
+          $coursedata[0].style.display = 'none';
+          $coursedata[1].style.display = 'none';
+          $coursedata[2].style.display = 'block';
+          $coursedata[3].style.display = 'block';
+          $coursedata[4].style.display = 'block';
+          $tools[1].src = '../img/tools/floor1.svg';
+          $tools[1].nextElementSibling.textContent = '1階部分の作成';
+          $tools[1].dataset.one = 2;
+          nomal_guide();
+        }
+        //NRL・WRL
+        if(input_data_show[2] == 'nrl'){
+          document.getElementById('wrl-tiles').style.display = 'none';
+          document.getElementById('nrl-tiles').style.display = 'block';
+          $tools[1].style.display = 'none';
+        } else {
+          document.getElementById('wrl-tiles').style.display = 'block';
+          document.getElementById('nrl-tiles').style.display = 'none';
+          $tools[1].style.display = 'block';
+        }
+        //タイル
+        $img[index].src = input_data_course[index + 1];
+        $img[index].dataset.turn = input_data_turn[index + 1];
+        $img[index].style.transform = 'rotate(' + input_data_turn[index + 1] + 'deg)';
+        $img[index].style.border = input_data_border[index + 1];
+        //チェックマーカー
+        if(input_data_check[index + 1] == 1){
+          newCheckMarker = document.createElement("div");
+          newCheckMarker.className = "check-marker";
+          $img[index].parentElement.appendChild(newCheckMarker);
+          $img[index].dataset.check = 1;
+        }
+        //障害物
+        if(input_data_obstacle[index + 1] == 1){
+          newObstacle = document.createElement("img");
+          newObstacle.src = "../img/simulator/ob.svg";
+          newObstacle.className = "obstacle";
+          $img[index].parentElement.appendChild(newObstacle);
+          $img[index].dataset.obstacle = 1;
+        }
+        //バンプ
+        if(input_data_bump1[index + 1] != 0){
+          newBump = document.createElement("img");
+          newBump.src = "../img/simulator/bu.png";
+          newBump.className = "bump";
+          bump_data = input_data_bump1[index + 1].split('a');
+          newBump.setAttribute("style", "left: " + bump_data[0] + "px; top: " + bump_data[1] + "px; transform: rotate(" + bump_data[2] + "deg)");
+          $img[index].parentElement.appendChild(newBump);
+          $img[index].dataset.bump1 = input_data_bump1[index + 1];
+          bump_data = null;
+          newBump = null;
+        }
+        if(input_data_bump2[index + 1] != 0){
+          newBump = document.createElement("img");
+          newBump.src = "../img/simulator/bu.png";
+          newBump.className = "bump";
+          bump_data = input_data_bump2[index + 1].split('a');
+          newBump.setAttribute("style", "left: " + bump_data[0] + "px; top: " + bump_data[1] + "px; transform: rotate(" + bump_data[2] + "deg)");
+          $img[index].parentElement.appendChild(newBump);
+          $img[index].dataset.bump2 = input_data_bump2[index + 1];
+          bump_data = null;
+          newBump = null;
+        }
+        if(input_data_bump3[index + 1] != 0){
+          newBump = document.createElement("img");
+          newBump.src = "../img/simulator/bu.png";
+          newBump.className = "bump";
+          bump_data = input_data_bump3[index + 1].split('a');
+          newBump.setAttribute("style", "left: " + bump_data[0] + "px; top: " + bump_data[1] + "px; transform: rotate(" + bump_data[2] + "deg)");
+          $img[index].parentElement.appendChild(newBump);
+          $img[index].dataset.bump3 = input_data_bump3[index + 1];
+          bump_data = null;
+          newBump = null;
+        }
+        if(input_data_bump4[index + 1] != 0){
+          newBump = document.createElement("img");
+          newBump.src = "../img/simulator/bu.png";
+          newBump.className = "bump";
+          bump_data = input_data_bump4[index + 1].split('a');
+          newBump.setAttribute("style", "left: " + bump_data[0] + "px; top: " + bump_data[1] + "px; transform: rotate(" + bump_data[2] + "deg)");
+          $img[index].parentElement.appendChild(newBump);
+          $img[index].dataset.bump4 = input_data_bump4[index + 1];
+          bump_data = null;
+          newBump = null;
+        }
+      };
+      document.getElementById('input_file').value = '';
+      $guide.textContent = 'プロジェクトを読み込みました';
+      setTimeout(nomal_guide, 2000);
+    }
+
     let reader = new FileReader();
     document.getElementById('input_file').addEventListener('change', () => {
       if (document.getElementById('input_file').files[0].name.slice(-3) === 'rrl') {
@@ -403,9 +523,9 @@
         reader.readAsText(file);
         reader.onload = function () {
           csv_arrays = reader.result.split('\n');
-          if (csv_arrays[0] == "v3.0.0," || csv_arrays[0] == "v3.0.1," || csv_arrays[0] == "v3.1.0," || csv_arrays[0] == "v3.1.1,") {
+          if (csv_arrays[0] == "v4.0.0,") {
             try{
-              input_data_show = csv_arrays[1].split(',')[1];
+              input_data_show = csv_arrays[1].split(',');
               input_data_course = csv_arrays[2].split(',');
               input_data_turn = csv_arrays[3].split(',');
               input_data_border = csv_arrays[4].split(',');
@@ -419,110 +539,50 @@
               window.alert('エラー:データの読み込みに失敗しました。ファイルが破損している可能性があります。ページを再読み込みします。')
               window.location.reload();
             }
-          } else if (csv_arrays[0] == "v2.0.0," || csv_arrays[0] == "v2.0.1," || csv_arrays[0] == "v2.0.2,") {
+            all_clear();
+            import_project();
+          } else if (csv_arrays[0] == "v3.0.0," || csv_arrays[0] == "v3.0.1," || csv_arrays[0] == "v3.1.0," || csv_arrays[0] == "v3.1.1,") {
             try{
-              input_data_course = csv_arrays[1].split(',');
-              input_data_turn = csv_arrays[2].split(',');
-              input_data_border = csv_arrays[3].split(',');
-              input_data_check = csv_arrays[4].split(',');
-              input_data_obstacle = csv_arrays[5].split(',');
-              input_data_bump1 = csv_arrays[6].split(',');
-              input_data_bump2 = csv_arrays[7].split(',');
-              input_data_bump3 = csv_arrays[8].split(',');
-              input_data_bump4 = csv_arrays[9].split(',');
+              input_data_show = csv_arrays[1].split(',');
+              input_data_course = csv_arrays[2].split(',');
+              input_data_turn = csv_arrays[3].split(',');
+              input_data_border = csv_arrays[4].split(',');
+              input_data_check = csv_arrays[5].split(',');
+              input_data_obstacle = csv_arrays[6].split(',');
+              input_data_bump1 = csv_arrays[7].split(',');
+              input_data_bump2 = csv_arrays[8].split(',');
+              input_data_bump3 = csv_arrays[9].split(',');
+              input_data_bump4 = csv_arrays[10].split(',');
             }catch (e){
               window.alert('エラー:データの読み込みに失敗しました。ファイルが破損している可能性があります。ページを再読み込みします。')
               window.location.reload();
             }
-            input_data_show = 0;
+            input_data_show.pop();
             for (let index = 0; index < input_data_course.length; index++){
               input_data_course[index] = '../img/simulator/' + input_data_course[index].slice(-6);
             }
-            window.alert('このファイルはv2.0.xで作成されたものです。もう1度プロジェクトを保存すると最新版相当になります。')
+            window.alert('このファイルはv3.x.xで作成されたものです。もう1度プロジェクトを保存すると最新版相当になります。')
+            document.getElementById('overlay').className = "active";
+            document.getElementById('league').className = "active";
+            document.getElementById('league_decide').onclick = function () {
+              if ($radio_league2[0].checked) {
+                input_data_show.push('nrl');
+                document.getElementById('overlay').className = "";
+                document.getElementById('league').className = "";
+                all_clear();
+                import_project();
+              } else {
+                input_data_show.push('wrl');
+                document.getElementById('overlay').className = "";
+                document.getElementById('league').className = "";
+                all_clear();
+                import_project();
+              }
+            }
           } else {
-            window.alert('このファイルはv1.x.xで作成されたものです。利用するには最新版に変換してください。ページを再読み込みします。')
+            window.alert('このファイルはメジャーバージョン2以前のソフトウェアによって作成されたものです。最新版に変換してから利用してください。ページを再読み込みします。')
             window.location.reload();
           }
-
-          all_clear();
-          for (let index = 0; index < imgLen; index++) {
-            //コート
-            tile(input_data_show);
-            if (input_data_show == 1 || input_data_show == 3 || input_data_show == 5){
-              $tools[1].src = '../img/tools/floor1.svg';
-              $tools[1].nextElementSibling.textContent = '1階部分の作成';
-              $tools[1].dataset.one = 2;
-              nomal_guide();
-            }
-            //タイル
-            $img[index].src = input_data_course[index + 1];
-            $img[index].dataset.turn = input_data_turn[index + 1];
-            $img[index].style.transform = 'rotate(' + input_data_turn[index + 1] + 'deg)';
-            $img[index].style.border = input_data_border[index + 1];
-            //チェックマーカー
-            if(input_data_check[index + 1] == 1){
-              newCheckMarker = document.createElement("div");
-              newCheckMarker.className = "check-marker";
-              $img[index].parentElement.appendChild(newCheckMarker);
-              $img[index].dataset.check = 1;
-            }
-            //障害物
-            if(input_data_obstacle[index + 1] == 1){
-              newObstacle = document.createElement("img");
-              newObstacle.src = "../img/simulator/ob.svg";
-              newObstacle.className = "obstacle";
-              $img[index].parentElement.appendChild(newObstacle);
-              $img[index].dataset.obstacle = 1;
-            }
-            //バンプ
-            if(input_data_bump1[index + 1] != 0){
-              newBump = document.createElement("img");
-              newBump.src = "../img/simulator/bu.png";
-              newBump.className = "bump";
-              bump_data = input_data_bump1[index + 1].split('a');
-              newBump.setAttribute("style", "left: " + bump_data[0] + "px; top: " + bump_data[1] + "px; transform: rotate(" + bump_data[2] + "deg)");
-              $img[index].parentElement.appendChild(newBump);
-              $img[index].dataset.bump1 = input_data_bump1[index + 1];
-              bump_data = null;
-              newBump = null;
-            }
-            if(input_data_bump2[index + 1] != 0){
-              newBump = document.createElement("img");
-              newBump.src = "../img/simulator/bu.png";
-              newBump.className = "bump";
-              bump_data = input_data_bump2[index + 1].split('a');
-              newBump.setAttribute("style", "left: " + bump_data[0] + "px; top: " + bump_data[1] + "px; transform: rotate(" + bump_data[2] + "deg)");
-              $img[index].parentElement.appendChild(newBump);
-              $img[index].dataset.bump2 = input_data_bump2[index + 1];
-              bump_data = null;
-              newBump = null;
-            }
-            if(input_data_bump3[index + 1] != 0){
-              newBump = document.createElement("img");
-              newBump.src = "../img/simulator/bu.png";
-              newBump.className = "bump";
-              bump_data = input_data_bump3[index + 1].split('a');
-              newBump.setAttribute("style", "left: " + bump_data[0] + "px; top: " + bump_data[1] + "px; transform: rotate(" + bump_data[2] + "deg)");
-              $img[index].parentElement.appendChild(newBump);
-              $img[index].dataset.bump3 = input_data_bump3[index + 1];
-              bump_data = null;
-              newBump = null;
-            }
-            if(input_data_bump4[index + 1] != 0){
-              newBump = document.createElement("img");
-              newBump.src = "../img/simulator/bu.png";
-              newBump.className = "bump";
-              bump_data = input_data_bump4[index + 1].split('a');
-              newBump.setAttribute("style", "left: " + bump_data[0] + "px; top: " + bump_data[1] + "px; transform: rotate(" + bump_data[2] + "deg)");
-              $img[index].parentElement.appendChild(newBump);
-              $img[index].dataset.bump4 = input_data_bump4[index + 1];
-              bump_data = null;
-              newBump = null;
-            }
-          };
-          document.getElementById('input_file').value = '';
-          $guide.textContent = 'プロジェクトを読み込みました';
-          setTimeout(nomal_guide, 2000);
         }
       }else{
         window.alert('拡張子は.rrlしか対応していません。')
