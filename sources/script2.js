@@ -1,6 +1,5 @@
 (()=>{
     //デザイン・アニメーション・レスポンシブ対応のためのjsファイル
-
     const $doc = document;
     const $img = $doc.getElementsByClassName('image');
     const imgLen = $img.length;

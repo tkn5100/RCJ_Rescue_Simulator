@@ -4,11 +4,11 @@
     <meta charset="utf-8">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="destyle.css">
-    <title>ヘルプ -RoboCupJunior コート作成環境v3.0.1</title>
+    <title>ヘルプ -RoboCupJunior コート作成環境v3.1.0</title>
   </head>
 
   <body class="body" style="margin-left: 15%; margin-right: 15%;">
-      <h1 class="help_h1">ヘルプ - RoboCupJunior コート作成環境v3.0.1</h1>
+      <h1 class="help_h1">ヘルプ - RoboCupJunior コート作成環境v3.1.0</h1>
       <p class="help-sentence">このソフトウェアはロボカップジュニアジャパンレスキューラインのコースを作成できるものです。ルールは2022年版に準拠します。なお、レスキューキット・被災者・避難場所等、得点走行毎に場所が異なるものを配置する機能はありません。</p>
       <p class="help-sentence">アプリケーション版の配布はv1.1.1をもって終了しました。なおv1.1.1以前でもアプリケーション版を利用すると思わぬ不具合が発生する場合がありますので、ブラウザ版(このソフトウェア)をご利用ください。</p>
       <br>
@@ -32,17 +32,38 @@
       <a href="#about" class="help_h4" style="color: #4400FF;">7.このソフトウェアについて</a>
 
       <h2 class="help_h2" id="simulator">2.コート作成</h2>
+      <h3 class="help_h3">スタート</h3>
+      <p class="help-sentence">起動するとこのような画面が出ます。いずれかを選んでコートを作成します。</p>
+      <img src="../img/help/スタート.png" alt="スタート" class="help_img">
+      <h4 class="help_h4"><img src="../img/tools/new.svg" class="help_icon">新規作成</h4>
+      <p class="help-sentence">コートを新規作成します。下の「リーグを選択」でNRLかWRLを選んでください。コート作成画面でリーグを変更することはできません。</p>
+      <h4 class="help_h4"><img src="../img/tools/read.svg" class="help_icon">プロジェクトの読み込み</h4>
+      <p class="help-sentence">作成途中のプロジェクトを読み込み、途中から編集作業を再開できます。クリックするとファイル選択画面が出るので、任意のファイルを選んでください。読み込むことができるファイルの拡張子は.rrlのみです。</p>
+      <p class="help-sentence">※保存と読み込みは基本的に同じバージョンで行ってください。違うバージョンで行った場合正常に読み込まれないことがあります。メジャーアップデートでRRLファイルの内部構造が変わった場合、新しいバージョンでは古いバージョンのファイルをサポートし、新しいバージョンのファイルに変更できるようにします。その場合は下の表に△で表されます。古いバージョンで作られたファイルのサポートは、次のメジャーアップデートで打ち切ります。サポート打ち切り後はファイル変換をご利用ください。</p>
+      <h4 class="help_h4">RRLファイルの互換性</h4>
+      <table class="help-table">
+        <tbody>
+          <tr><td rowspan="2" colspan="2"></td><td colspan="3">作成</td></tr>
+          <tr><td>v1.0.0~v1.1.3</td><td>v2.0.0~v2.0.2</td><td>v3.0.0~v3.1.0</td></tr>
+          <tr><td rowspan="3">読み込み</td><td>v1.0.0~<br>v1.1.3</td><td>○</td><td>-</td><td>-</td></tr>
+          <tr><td>v2.0.0~<br>v2.0.2</td><td>△</td><td>○</td><td>-</td></tr>
+          <tr><td>v3.0.0~<br>v3.1.0</td><td>×</td><td>△</td><td>○</td></tr>
+        </tbody>
+      </table>
+      <p class="help-sentence">○…読み込み可能　△…読み込み可能だが非推奨　×…ファイル変換が必要　-…不可能</p>
+      <h4 class="help_h4"><img src="../img/tools/auto_read.svg" class="help_icon">自動保存データの読み込み</h4>
+      <p class="help-sentence">後述の自動保存したデータを読み込みます。</p>
+      <h4 class="help_h4"><img src="../img/tools/help.svg" class="help_icon">ヘルプボタン</h4>
+      <p class="help-sentence">ヘルプ(このページ)を表示します。</p>
       <h3 class="help_h3">画面構成</h3><br>
       <img src="../img/help/シミュレーター.png" alt="画面" class="help_img">
       <h4 class="help_h4">① ツールバー</h4>
       <p class="help-sentence">コート作成のためのツールを実行するボタンやヘルプがあります。</p>
-      <h4 class="help_h4">② モード切替</h4>
-      <p class="help-sentence">NRL/WRLを切り替えます。</p>
-      <h4 class="help_h4">③ タイル選択</h4>
+      <h4 class="help_h4">② タイル選択</h4>
       <p class="help-sentence">コートに配置するタイルを選ぶことができます。この部分をスクロールすると「特殊タイル」や「タイル情報」があります。</p>
-      <h4 class="help_h4">④ コート</h4>
+      <h4 class="help_h4">③ コート</h4>
       <p class="help-sentence">作ったコートを表示します。</p>
-      <h4 class="help_h4">⑤ ガイド</h4>
+      <h4 class="help_h4">④ ガイド</h4>
       <p class="help-sentence">コート作成に役立つガイドを表示します。</p>
       <h3 class="help_h3">使い方</h3>
       <h4 class="help_h4">タイルの配置</h4>
@@ -59,34 +80,20 @@
       <h4 class="help_h4">障害物</h4>  
       <p class="help-sentence">「障害物を置く」を押すとクリックしたタイルの中央に障害物が置かれます。「障害物を取る」で削除できます。</p>
       <h4 class="help_h4">バンプ</h4>
-      <img  src="../img/help/バンプ設定.png" alt="バンプ設定" style="width: 60vw; border: solid 1px #888888; border-radius: 2vw; margin-bottom: 5px;">
+      <img  src="../img/help/バンプ設定.png" alt="バンプ設定"  class="help_img" style="margin-bottom: 10px;">
       <p class="help-sentence">「バンプを置く」を押すと、上のような設定画面が出ます。まずバンプの個数を選びます。すると個数に合わせた入力欄が表示されるので、左側のスペース、上側のスペース、バンプの回転角度を半角数字で入力します。左側と上側のスペースは0~74で、37を指定すると中央に来ます。回転は-90~90で、0度を指定すると縦向きになり、数字が大きいほど右側に傾きます。下側のプレビューに現在の状態が反映されます。「決定」ボタンを押すと、クリックしたタイルにプレビューの通りにバンプが置かれます。右クリックメニューの「バンプを取る」を押すとすべて削除されます。</p>
       <h4 class="help_h4">得点要素とチェックマーカー</h4>
       <p class="help-sentence">得点要素があるタイルにはチェックマーカーは配置できないため、1つのタイルにはチェックマーカー・障害物・バンプのうちどれかしか置けません。</p>
       </p>
       
+      <h3 class="help_h3"><img src="../img/tools/start.svg" class="help_icon">スタート画面へ戻るボタン</h3>
+      <p class="help-sentence">スタート画面に戻ることができます。スタート画面に戻ったら「再開」ボタンが追加されているので、それを押すと元に戻ることができます。</p>
       <h3 class="help_h3"><img src="../img/tools/floor2.svg" class="help_icon">1階部分の作成/2階・半2階部分の作成ボタン</h3>
       <p class="help-sentence">1階部分の作成と2階・半2階部分の作成を切り替えることができます。いまどちらを作成しているかはガイドに表示されています。</p>
       <h3 class="help_h3"><img src="../img/tools/grid.svg" class="help_icon">グリッドの表示/非表示ボタン</h3>
       <p class="help-sentence">コートのグリッドの表示・非表示を切り替えることができます。デフォルトではグリッドが表示されています。</p>
       <h3 class="help_h3"><img src="../img/tools/save.svg" class="help_icon">プロジェクトの保存ボタン</h3>
       <p class="help-sentence">作成途中のコートを保存できます。保存したファイルはまたこのシミュレーターで読み込めます。RRL形式のファイルが、Windowsでは通常「ダウンロード」フォルダに保存されます。クリックするとファイル名を入力するダイアログが出るので、入力してください。このとき拡張子の入力は不要です。</p>
-      <h3 class="help_h3"><img src="../img/tools/read.svg" class="help_icon">プロジェクトの読み込みボタン</h3>
-      <p class="help-sentence">作成途中のプロジェクトを読み込み、途中から編集作業を再開できます。クリックするとファイル選択画面が出るので、任意のファイルを選んでください。読み込むことができるファイルの拡張子は.rrlのみです。</p>
-      <p class="help-sentence">※保存と読み込みは基本的に同じバージョンで行ってください。違うバージョンで行った場合正常に読み込まれないことがあります。メジャーアップデートでRRLファイルの内部構造が変わった場合、新しいバージョンでは古いバージョンのファイルをサポートし、新しいバージョンのファイルに変更できるようにします。その場合は下の表に△で表されます。古いバージョンで作られたファイルのサポートは、次のメジャーアップデートで打ち切ります。サポート打ち切り後はファイル変換をご利用ください。</p>
-      <h4 class="help_h4">RRLファイルの互換性</h4>
-      <table class="help-table">
-        <tbody>
-          <tr><td rowspan="2" colspan="2"></td><td colspan="3">作成</td></tr>
-          <tr><td>v1.0.0~v1.1.3</td><td>v2.0.0~v2.0.2</td><td>v3.0.0~v3.0.1</td></tr>
-          <tr><td rowspan="3">読み込み</td><td>v1.0.0~<br>v1.1.3</td><td>○</td><td>×</td><td>×</td></tr>
-          <tr><td>v2.0.0~<br>v2.0.2</td><td>△</td><td>○</td><td>×</td></tr>
-          <tr><td>v3.0.0~<br>v3.0.1</td><td>×</td><td>△</td><td>○</td></tr>
-        </tbody>
-      </table>
-      <p class="help-sentence">○…読み込み可能　△…読み込み可能だが非推奨　×…ファイル変換が必要</p>
-      <h3 class="help_h3"><img src="../img/tools/auto_read.svg" class="help_icon">自動保存データの読み込み</h3>
-      <p class="help-sentence">前述の自動保存したデータを読み込みます。</p>
       <h3 class="help_h3"><img src="../img/tools/print.svg" class="help_icon">印刷ボタン</h3>
       <p class="help-sentence">作成したコートのみを印刷できます。</p>
       <h3 class="help_h3"><img src="../img/tools/clear.svg" class="help_icon">オールクリアボタン</h3>
@@ -130,6 +137,14 @@
       <p class="help-sentence">※スマートフォンなどは画面が小さすぎるほか、ローカルhtmlファイルの起動ができません。</p>
 
       <h2 class="help_h2" id="changes" style="margin-bottom: 0px;">5.変更履歴</h2>
+      <h4 class="help_h4">v3.1.0</h4>
+      <ul>
+        <li class="help-sentence">・2022.03.15公開</li>
+        <li class="help-sentence">・コート作成を起動したときに「コート作成方法を選択」画面が出るよう変更</li>
+        <li class="help-sentence">・上の変更に伴いNRL/WRL切り替えボタンを廃止</li>
+        <li class="help-sentence">・ディスプレイの横幅が920px以下の時にバンプを配置すると、設定が正しく反映されない事象を修正</li>
+        <li class="help-sentence">・ディスプレイの横幅が920px以下の時、ツールバーのアイコンをホバーしたときに出るガイドの位置がずれる事象を修正</li>
+      </ul>
       <h4 class="help_h4">v3.0.1</h4>
       <ul>
         <li class="help-sentence">・2022.03.14公開</li>
@@ -313,12 +328,12 @@
 
       <h2 class="help_h2" id="about" style="margin-bottom: 0px;">7.このソフトウェアについて</h2>
       <h3 class="help_h3">開発の経緯</h3>
-      <p class="help-sentence">2020年1月22日までは、同じくロボカップジュニアレスキューラインのコートを作成するソフトウェアとして「RoboCupJunior NRL コート作成環境」と「RoboCupJunior WRL コート作成環境」(以下2つ合わせて「旧ソフトウェア」と表記)を開発していました。しかし、アップデートを重ね機能がほぼ同じになってきたこと、またWRL向けのソフトウェアでNRLのコートも作成可能であることから、WRL版にNRL版を組み込む形で新たにこの「RoboCupJunior コート作成環境」を作成することとしました。2022年1月29日に公開したRC3版で動作が安定したことからそれをv1.0.0とし、UIの改善と機能追加を重ねています。</p>
+      <p class="help-sentence">2020年1月22日までは、同じくロボカップジュニアレスキューラインのコートを作成するソフトウェアとして「RoboCupJunior NRL コート作成環境」と「RoboCupJunior WRL コート作成環境」(ヘルプでは2つ合わせて「旧ソフトウェア」と表記)を開発していました。しかし、アップデートを重ね機能がほぼ同じになってきたこと、またWRL向けのソフトウェアでNRLのコートも作成可能であることから、WRL版にNRL版を組み込む形で新たにこの「RoboCupJunior コート作成環境」を作成することとしました。2022年1月29日に公開したRC3版で動作が安定したことからそれをv1.0.0とし、UIの改善と機能追加を重ねています。</p>
       <h3 class="help_h3">バージョンの命名規則</h3>
       <p class="help-sentence">セマンティック・バージョニングを参考にしており、vX.Y.Zのようにつけます。Xはメジャーバージョンで、RRLファイルの互換性がなくなるなど大きな変更があった場合に数字を1つ上げます。Yはマイナーバージョンで、機能性を追加した場合に数字を1つ上げます。Zはパッチバージョンで、バグ修正など細かい変更の際に数字を1つ上げます。詳しくは下記URLをご覧ください(ただしAPIをインターネットに公開しているわけではありませんし、旧ソフトウェアは必ずしもこれに従っているわけではありません)。</p>
       <a href="https://semver.org/lang/ja/" target="_blank" rel="noopener noreferrer" class="help-sentence" style="text-decoration: underline 1px; color: #4400FF;">セマンティック バージョニング 2.0.0(https://semver.org/lang/ja/)</a>
       <h3 class="help_h3">アプリケーションの調子が悪いときは</h3>
-      <p class="help-sentence">リロードせずに長時間使い続けると、動作が重くなったり不具合が出ることがあります。リロードボタンを押してリロードするか、「Ctrl+F5」を押してスーパーリロードしてください。ただし、プロジェクトを保存するのを忘れないでください。なお、リロードを行っても自動保存データは保持されます。</p>
+      <p class="help-sentence">リロードせずに長時間使い続けると、動作が重くなったり不具合が出ることがあります。再読み込みするか、「Ctrl+F5」を押してスーパーリロードしてください。ただし、プロジェクトを保存するのを忘れないでください。なお、再読み込みを行っても自動保存データは保持されます。</p>
       <h3 class="help_h3">その他</h3>
       <p class="help-sentence">無断での不特定多数への公開、商用利用は禁止します。</p>
       <small class="copyright-help">Copyright&copy; 2021-2022 TKN All Rights Reserved.</small>

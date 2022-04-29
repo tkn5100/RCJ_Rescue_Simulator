@@ -4,10 +4,25 @@
     <meta charset="utf-8">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="destyle.css">
-    <title>RoboCupJunior コート作成環境v3.0.1</title>
+    <title>RoboCupJunior コート作成環境v3.1.0</title>
   </head>
 
   <body class="body">
+    <div id="start" class="active">
+      <p style="font-size: 2.5vw; font-weight: 700; margin-bottom: 2vw;">コート作成方法の選択</p>
+      <div style="display: flex; flex-direction: row;">
+        <div><img src="../img/tools/new.svg" alt="新規作成" class="start_tools"><p>新規作成</p></div>
+        <label><input type="file" id ="input_file" style="display: none;" accept=".rrl"><img src="../img/tools/read.svg" alt="プロジェクトの読み込み" class="start_tools"><p>プロジェクトの読み込み</p></label>
+        <div><img src="../img/tools/auto_read.svg" alt="自動保存データの読み込み" class="start_tools"><p>自動保存データの読み込み</p></div>
+        <div><img src="../img/tools/resume.svg" alt="再開" class="start_tools" style="display: none;"><p>再開</p></div>
+      </div>
+      <div>
+        <span>リーグを選択:</span>
+        <label class="container">NRL<input type="radio" checked="checked" name="league" value="0"><span class="checkmark"></span></label>
+        <label class="container">WRL<input type="radio" name="league" value="1"><span class="checkmark"></span></label>
+      </div>
+      <div style="position: absolute; top: 20px; right: 20px;"><div><img src="../img/tools/help.svg" alt="ヘルプ" class="start_tools" style="margin-right: 0;"><p>ヘルプ</p></div></div>
+    </div>
     <div id="contextmenu">
       <ul>
           <li class="contextmenu-title">時計回りに90度回転</li>
@@ -65,13 +80,12 @@
       <button id="bump_decide">決定</button>
       <button id="bump_cancel">キャンセル</button>
     </div>
-    <div id="overlay"></div>
+    <div id="overlay" class="active"></div>
     <div class="toolbar">
+      <div><img src="../img/tools/start.svg" alt="スタートへ" class="tools" data-one="1"><p>スタート画面へ戻る</p></div>
       <div><img src="../img/tools/floor2.svg" alt="1階・2階の切り替え" class="tools" data-one="1"><p>2階・半2階部分の作成</p></div>
       <div><img src="../img/tools/grid.svg" alt="グリッドの表示・非表示" class="tools" data-grid="1"><p>グリッドの表示・非表示</p></div>
       <div><img src="../img/tools/save.svg" alt="プロジェクトの保存" class="tools"><p>プロジェクトの保存</p></div>
-      <label><input type="file" id ="input_file" style="display: none;" accept=".rrl"><img src="../img/tools/read.svg" alt="プロジェクトの読み込み" class="tools"><p>プロジェクトの読み込み</p></label>
-      <div><img src="../img/tools/auto_read.svg" alt="自動保存データの読み込み" class="tools"><p>自動保存データの読み込み</p></div>
       <div><img src="../img/tools/print.svg" alt="印刷" class="tools"><p>印刷</p></div>
       <div><img src="../img/tools/clear.svg" alt="オールクリア" class="tools"><p>オールクリア</p></div>
       <div><img src="../img/tools/white.svg" alt="残り全部を白にする" class="tools"><p>残り全部を白にする</p></div>
@@ -82,7 +96,7 @@
     </div>
     <div class="main">
       <div class="menu">
-        <button class="help-link" id="tab-nav" style="margin-bottom: 5px;">NRLタイルへ</button>
+        <!-- <button class="help-link" id="tab-nav" style="margin-bottom: 5px;">NRLタイルへ</button> -->
         <div id="wrl-tiles">
           <!-- <p class="index">タイル<span class="index-plus">+</span></p> -->
           <p class="index">通常タイル</p>

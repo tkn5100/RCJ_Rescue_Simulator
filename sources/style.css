@@ -126,10 +126,10 @@ table{
     background: #eeeeee;
     border: solid 1px #888888;
 }
-.toolbar > div, .toolbar > label{
+.toolbar > div, .toolbar > label, #start > div > div, #start > div > label{
     position: relative;
 }
-.tools{
+.tools, .start_tools{
     background-color: #EEEEEE;
     border-radius: 30%;
     padding: 10px;
@@ -137,22 +137,21 @@ table{
     margin-bottom: 3px;
     cursor: pointer;
 }
-.tools:hover{
+.tools:hover, .start_tools:hover{
     background-color: #DDDDDD;
 }
-.tools + p{
+.tools + p, .start_tools + p{
     display: none;
     position: absolute;
-    top: 50px;
-    left: 20px;
     width: max-content;
+    font-size: 15px;
     background-color: #F8F8F8;
     border-radius: 5px;
     padding: 3px;
     box-shadow: 0 0 8px #888888;
     z-index: 3;
 }
-.tools:hover + p{
+.tools:hover + p, .start_tools:hover + p{
     display: block;
 }
 .menu{
@@ -183,6 +182,19 @@ table{
         width: 50px;
         height: 50px;
         margin-right: 25px;
+    }
+    .start_tools{
+        width: 90px;
+        height: 90px;
+        margin-right: 80px;
+    }
+    .tools + p{
+        top: 50px;
+        left: 20px;
+    }
+    .start_tools + p{    
+        top: 80px;
+        left: 30px;
     }
     .menu-img-w, .menu-img-n{
         height: 60px;
@@ -228,6 +240,19 @@ table{
         height: 50px;
         margin-right: 20px;
     }
+    .start_tools{
+        width: 80px;
+        height: 80px;
+        margin-right: 80px;
+    }
+    .tools + p{
+        top: 50px;
+        left: 20px;
+    }
+    .start_tools + p{    
+        top: 70px;
+        left: 30px;
+    }
     .menu-img-w, .menu-img-n{
         height: 60px;
         width: 60px;
@@ -271,6 +296,19 @@ table{
         width: 6vw;
         height: 6vw;
         margin-right: 2vw;
+    }
+    .start_tools{
+        width: 8vw;
+        height: 8vw;
+        margin-right: 8vw;
+    }
+    .tools + p{
+        top: 5vw;
+        left: 2vw;
+    }
+    .start_tools + p{    
+        top: 7vw;
+        left: 3vw;
     }
     .menu-img-w, .menu-img-n{
         height: 8vw;
@@ -431,6 +469,29 @@ td{
     border-radius: 7px 7px 7px 7px;   
 }
 
+#start{
+    visibility: collapse;
+    opacity: 0;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 10vh;
+    left: 10vw;
+    width: 80vw;
+    height: 80vh;
+    overflow: auto;
+    padding: 2vw 5vw 2vw 5vw;
+    background-color: #F8F8F8;
+    border-radius: 20px;
+    font-size: 1.2vw;
+    cursor: default;
+    transition: all 0.3s 0s ease-out;
+    z-index: 5;
+}
+#start.active{
+    visibility: visible;
+    opacity: 1;
+}
 
 #overlay{
     visibility: collapse;

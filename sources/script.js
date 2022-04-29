@@ -1,6 +1,5 @@
 (()=>{
     //メインプログラムのためのjsファイル
-
     const $doc = document;
     const $guide = $doc.getElementById('guidetext');
     const $img = $doc.getElementsByClassName('image');
@@ -10,6 +9,8 @@
     const courseNrlLen = $course_nrl.length;
     const courseWrlLen = $course_wrl.length;
     const $tools = $doc.getElementsByClassName('tools');
+    const $start_tools = $doc.getElementsByClassName('start_tools');
+    const $league = $doc.getElementsByName('league');
     const $table = $doc.getElementsByTagName('table');
     // const $index = document.getElementsByClassName('index')
     const $coursedata = $doc.getElementsByClassName('coursedata');
@@ -50,10 +51,10 @@
 
 
     function nomal_guide() {
-      if(document.getElementById('tab-nav').textContent == 'WRLタイルへ'){
+      if(document.getElementById('nrl-tiles').style.display == 'block'){
         $guide.textContent = 'タイルをダブルクリックすると時計回りに90度回転します';
       } else {
-        if($tools[0].dataset.one == 1){
+        if($tools[1].dataset.one == 1){
           $guide.textContent = 'ただいま1階部分を作成中です';
         }else{
           $guide.textContent = 'ただいま2階・半2階部分を作成中です';
@@ -224,6 +225,13 @@
     });
 
 
+    //スタート画面に戻る
+    $tools[0].addEventListener('click', () => {
+      document.getElementById('overlay').className = "active";
+      document.getElementById('start').className = "active";
+      $start_tools[3].style.display = 'block';
+    });
+
     function tile(arg) {
       $table[0].style.display = 'none';
       $table[1].style.display = 'none';
@@ -235,18 +243,18 @@
     }
 
     //2階・半2階
-    $tools[0].addEventListener('click', () => {
-      if($tools[0].dataset.one == 1){
-        if($table[0].style.display == 'block'){
+    $tools[1].addEventListener('click', () => {
+      if($tools[1].dataset.one == 1){
+        if($table[1].style.display == 'block'){
           tile(1);
         }else if ($table[2].style.display == 'block'){
           tile(3);
         }else if($table[4].style.display == 'block'){
           tile(5);
         }
-        $tools[0].src = '../img/tools/floor1.svg';
-        $tools[0].nextElementSibling.textContent = '1階部分の作成';
-        $tools[0].dataset.one = 2;
+        $tools[1].src = '../img/tools/floor1.svg';
+        $tools[1].nextElementSibling.textContent = '1階部分の作成';
+        $tools[1].dataset.one = 2;
         nomal_guide();
       }else{
         if($table[1].style.display == 'block'){
@@ -256,30 +264,30 @@
         }else if($table[5].style.display == 'block'){
           tile(4);
         }
-        $tools[0].src = '../img/tools/floor2.svg';
-        $tools[0].nextElementSibling.textContent = '2階・半2階部分の作成';
-        $tools[0].dataset.one = 1;
+        $tools[1].src = '../img/tools/floor2.svg';
+        $tools[1].nextElementSibling.textContent = '2階・半2階部分の作成';
+        $tools[1].dataset.one = 1;
         nomal_guide();
       }
     });
 
     //グリッドの表示・非表示
-    $tools[1].addEventListener('click', () => {
-      if($tools[1].dataset.grid == 1){
+    $tools[2].addEventListener('click', () => {
+      if($tools[2].dataset.grid == 1){
         //tdとimgの数は一緒
         for (let index = 0; index < imgLen; index++) {
           $doc.getElementsByTagName('td')[index].style.border = 'none';
         }
-        $tools[1].textContent = 'グリッドの表示';
-        $tools[1].dataset.grid = 0;
+        $tools[2].textContent = 'グリッドの表示';
+        $tools[2].dataset.grid = 0;
         $guide.textContent = 'グリッドを表示しています';
         setTimeout(nomal_guide, 2000);
       }else{
         for (let index = 0; index < imgLen; index++) {
           $doc.getElementsByTagName('td')[index].style.border = '1px solid #AAAAAA';
         }
-        $tools[1].textContent = 'グリッドの非表示';
-        $tools[1].dataset.grid = 1;
+        $tools[2].textContent = 'グリッドの非表示';
+        $tools[2].dataset.grid = 1;
         $guide.textContent = 'グリッドを非表示にしました';
         setTimeout(nomal_guide, 2000);
       }
@@ -292,7 +300,7 @@
       const filename = window.prompt('ファイル名を入力:');
       if (filename) {
         //ダウンロードするタイルを配列に入れる
-        output_data[0].push("v3.0.1");
+        output_data[0].push("v3.1.0");
         if($table[0].style.display == 'block'){
           output_data[1].push("0");
         } else if ($table[1].style.display == 'block'){
@@ -357,18 +365,46 @@
         setTimeout(nomal_guide, 2000);
       }
     }
-    $tools[2].addEventListener('click', downloadCSV, false);
+    $tools[3].addEventListener('click', downloadCSV, false);
+
+
+    //新規作成
+    $start_tools[0].addEventListener('click', () => {
+      document.getElementById('overlay').className = "";
+      document.getElementById('start').className = "";
+      all_clear();
+      for (let index = 0; index < $league.length; index++) {
+        if ($league[index].checked) {
+          if (localStorage.hasOwnProperty("rrl_auto-save_league")){
+            localStorage.removeItem("rrl_auto-save_league");
+          }
+          if(index == 0){
+            localStorage.setItem("rrl_auto-save_league", "nrl");
+            document.getElementById('wrl-tiles').style.display = 'none';
+            document.getElementById('nrl-tiles').style.display = 'block';
+            $tools[1].style.display = 'none';
+          } else {
+            localStorage.setItem("rrl_auto-save_league", "wrl");
+            document.getElementById('wrl-tiles').style.display = 'block';
+            document.getElementById('nrl-tiles').style.display = 'none';
+            $tools[1].style.display = 'block';
+          }
+        }
+      }
+    });
 
 
     //プロジェクトの読み込み
     let reader = new FileReader();
     document.getElementById('input_file').addEventListener('change', () => {
       if (document.getElementById('input_file').files[0].name.slice(-3) === 'rrl') {
+        document.getElementById('overlay').className = "";
+        document.getElementById('start').className = "";
         file = document.getElementById('input_file').files[0];
         reader.readAsText(file);
         reader.onload = function () {
           csv_arrays = reader.result.split('\n');
-          if (csv_arrays[0] == "v3.0.0," || csv_arrays[0] == "v3.0.1,") {
+          if (csv_arrays[0] == "v3.0.0," || csv_arrays[0] == "v3.0.1," || csv_arrays[0] == "v3.1.0,") {
             try{
               input_data_show = csv_arrays[1].split(',')[1];
               input_data_course = csv_arrays[2].split(',');
@@ -414,9 +450,9 @@
             //コート
             tile(input_data_show);
             if (input_data_show == 1 || input_data_show == 3 || input_data_show == 5){
-              $tools[0].src = '../img/tools/floor1.svg';
-              $tools[0].nextElementSibling.textContent = '1階部分の作成';
-              $tools[0].dataset.one = 2;
+              $tools[1].src = '../img/tools/floor1.svg';
+              $tools[1].nextElementSibling.textContent = '1階部分の作成';
+              $tools[1].dataset.one = 2;
               nomal_guide();
             }
             //タイル
@@ -495,8 +531,10 @@
     });
 
     //自動保存の読み込み
-    $tools[4].addEventListener('click', ()=> {
-      if (window.confirm('最新の自動保存データを読み込みますか？このデータにはタイルのみが含まれます。詳細はヘルプをご覧ください。')) {
+    $start_tools[2].addEventListener('click', ()=> {
+      if(window.confirm('このデータにはタイルのみが含まれます。詳しくはヘルプをご参照ください。')){
+        document.getElementById('overlay').className = "";
+        document.getElementById('start').className = "";
         auto_save_input_tile = localStorage.getItem("rrl_auto-save_tile");
         auto_save_input_turn = localStorage.getItem("rrl_auto-save_turn");
         if (auto_save_input_tile == null){
@@ -509,13 +547,28 @@
             $img[index].dataset.turn = auto_save_input_turn[index];
             $img[index].style.transform = 'rotate(' + auto_save_input_turn[index] + 'deg)';
           }
+          if(localStorage.getItem("rrl_auto-save_league") == 'nrl'){
+            document.getElementById('wrl-tiles').style.display = 'none';
+            document.getElementById('nrl-tiles').style.display = 'block';
+            $tools[1].style.display = 'none';
+          } else {
+            document.getElementById('wrl-tiles').style.display = 'block';
+            document.getElementById('nrl-tiles').style.display = 'none';
+            $tools[1].style.display = 'block';
+          }
         }
       }
     });
 
+    //再開
+    $start_tools[3].addEventListener('click', () => {
+      document.getElementById('overlay').className = "";
+      document.getElementById('start').className = "";
+    });
+
     //プリント
     function print() {
-      $tools[5].addEventListener('click', ()=> {
+      $tools[4].addEventListener('click', ()=> {
         window.alert('PDFとして印刷するにはプリンターを「PDFとして保存」にしてください。印刷するときはレイアウトを「横」にしてください。');
         if($table[0].style.display == 'block'){
           $table[1].style.display = 'block';
@@ -589,7 +642,7 @@
       $img[28].onclick = "";
       a = 0;
     }
-    $tools[6].addEventListener('click', ()=> {
+    $tools[5].addEventListener('click', ()=> {
       if(window.confirm('すべてのコースデータを削除しますか?この作業は取り消しできません。')){
         all_clear();
         $guide.textContent = 'すべてのコースデータを削除しました';
@@ -598,7 +651,7 @@
     });
 
     //残り全部を白にする
-    $tools[7].addEventListener('click', ()=> {
+    $tools[6].addEventListener('click', ()=> {
       for (let index = 0; index < imgLen; index++) {
         if($img[index].src.lastIndexOf('no.png') !== -1){
           $img[index].src = '../img/simulator/wt.png';
@@ -611,40 +664,43 @@
 
 
     //6×8タイル
-    $tools[8].addEventListener('click', ()=> {
+    $tools[7].addEventListener('click', ()=> {
       tile(0);
-      $tools[0].dataset.one = 1;
+      $tools[1].dataset.one = 1;
       $guide.textContent = '6×8タイルに切り替えました';
       setTimeout(nomal_guide, 2000);
-      $tools[0].src = '../img/tools/floor2.svg';
-      $tools[0].nextElementSibling.textContent = '2階・半2階部分の作成';
-      $tools[0].dataset.one = 1;
+      $tools[1].src = '../img/tools/floor2.svg';
+      $tools[1].nextElementSibling.textContent = '2階・半2階部分の作成';
+      $tools[1].dataset.one = 1;
     });
 
     //4×9タイル
-    $tools[9].addEventListener('click', ()=> {
+    $tools[8].addEventListener('click', ()=> {
       tile(2);
-      $tools[0].dataset.one = 1;
+      $tools[1].dataset.one = 1;
       $guide.textContent = '4×9タイルに切り替えました。このモードでは被災者ゾーンの自動入力機能は使えません。';
       setTimeout(nomal_guide, 2000);
-      $tools[0].src = '../img/tools/floor2.svg';
-      $tools[0].nextElementSibling.textContent = '2階・半2階部分の作成';
-      $tools[0].dataset.one = 1;
+      $tools[1].src = '../img/tools/floor2.svg';
+      $tools[1].nextElementSibling.textContent = '2階・半2階部分の作成';
+      $tools[1].dataset.one = 1;
     });
 
     //3×12タイル
-    $tools[10].addEventListener('click', ()=> {
+    $tools[9].addEventListener('click', ()=> {
       tile(4);
-      $tools[0].dataset.one = 1;
+      $tools[1].dataset.one = 1;
       $guide.textContent = '3×12タイルに切り替えました。このモードでは被災者ゾーンの自動入力機能は使えません。';
       setTimeout(nomal_guide, 2000);
-      $tools[0].src = '../img/tools/floor2.svg';
-      $tools[0].nextElementSibling.textContent = '2階・半2階部分の作成';
-      $tools[0].dataset.one = 1;
+      $tools[1].src = '../img/tools/floor2.svg';
+      $tools[1].nextElementSibling.textContent = '2階・半2階部分の作成';
+      $tools[1].dataset.one = 1;
     });
 
     //ヘルプ
-    $tools[11].addEventListener('click', ()=> {
+    $tools[10].addEventListener('click', ()=> {
+      window.open('help.html')
+    });
+    $start_tools[4].addEventListener('click', ()=> {
       window.open('help.html')
     });
     //ヘルプ(F1キー)
@@ -795,7 +851,11 @@
               newBump = document.createElement("img");
               newBump.src = "../img/simulator/bu.png";
               newBump.className = "bump";
-              newBump.setAttribute("style", "left: " + $bump_input[0].value + "px; top: " + ($bump_input[1].value - 37) + "px; transform: rotate(" + $bump_input[2].value + "deg)");
+              if(window.innerWidth < 920){
+                newBump.setAttribute("style", "left: " + ($bump_input[0].value / 10) + "vw; top: " + (($bump_input[1].value - 37) / 10) + "vw; transform: rotate(" + $bump_input[2].value + "deg)");
+              } else {
+                newBump.setAttribute("style", "left: " + $bump_input[0].value + "px; top: " + ($bump_input[1].value - 37) + "px; transform: rotate(" + $bump_input[2].value + "deg)");
+              }
               $img[index].parentElement.appendChild(newBump);
               //aはただの区切り。and。
               $img[index].dataset.bump1 = $bump_input[0].value + "a" + ($bump_input[1].value - 37) + "a" + $bump_input[2].value;
@@ -805,7 +865,11 @@
                 newBump = document.createElement("img");
                 newBump.src = "../img/simulator/bu.png";
                 newBump.className = "bump";
-                newBump.setAttribute("style", "left: " + $bump_input[3].value + "px; top: " + ($bump_input[4].value - 37) + "px; transform: rotate(" + $bump_input[5].value + "deg)");
+                if(window.innerWidth < 920){
+                  newBump.setAttribute("style", "left: " + ($bump_input[3].value / 10) + "vw; top: " + (($bump_input[4].value - 37) / 10) + "vw; transform: rotate(" + $bump_input[5].value + "deg)");
+                } else {
+                  newBump.setAttribute("style", "left: " + $bump_input[3].value + "px; top: " + ($bump_input[4].value - 37) + "px; transform: rotate(" + $bump_input[5].value + "deg)");
+                }
                 $img[index].parentElement.appendChild(newBump);
                 $img[index].dataset.bump2 = $bump_input[3].value + "a" + ($bump_input[4].value - 37) + "a" + $bump_input[5].value;
                 newBump = null;
@@ -815,7 +879,11 @@
                 newBump = document.createElement("img");
                 newBump.src = "../img/simulator/bu.png";
                 newBump.className = "bump";
-                newBump.setAttribute("style", "left: " + $bump_input[6].value + "px; top: " + ($bump_input[7].value - 37) + "px; transform: rotate(" + $bump_input[8].value + "deg)");
+                if(window.innerWidth < 920){
+                  newBump.setAttribute("style", "left: " + ($bump_input[6].value / 10) + "vw; top: " + (($bump_input[7].value - 37) / 10) + "vw; transform: rotate(" + $bump_input[8].value + "deg)");
+                } else {
+                  newBump.setAttribute("style", "left: " + $bump_input[6].value + "px; top: " + ($bump_input[7].value - 37) + "px; transform: rotate(" + $bump_input[8].value + "deg)");
+                }
                 $img[index].parentElement.appendChild(newBump);
                 $img[index].dataset.bump3 = $bump_input[6].value + "a" + ($bump_input[7].value - 37) + "a" + $bump_input[8].value;
                 newBump = null;
@@ -825,7 +893,11 @@
                 newBump = document.createElement("img");
                 newBump.src = "../img/simulator/bu.png";
                 newBump.className = "bump";
-                newBump.setAttribute("style", "left: " + $bump_input[9].value + "px; top: " + ($bump_input[10].value - 37) + "px; transform: rotate(" + $bump_input[11].value + "deg)");
+                if(window.innerWidth < 920){
+                  newBump.setAttribute("style", "left: " + ($bump_input[9].value / 10) + "vw; top: " + (($bump_input[10].value - 37) / 10) + "vw; transform: rotate(" + $bump_input[11].value + "deg)");
+                } else {
+                  newBump.setAttribute("style", "left: " + $bump_input[9].value + "px; top: " + ($bump_input[10].value - 37) + "px; transform: rotate(" + $bump_input[11].value + "deg)");
+                }
                 $img[index].parentElement.appendChild(newBump);
                 $img[index].dataset.bump4 = $bump_input[9].value + "a" + ($bump_input[10].value - 37) + "a" + $bump_input[11].value;
                 newBump = null;
@@ -866,22 +938,5 @@
       document.getElementById('contextmenu').style.display="none";
     });
 
-    //NRL・WRL切り替え
-    document.getElementById('tab-nav').addEventListener('click', (e) => {
-      e.preventDefault();
-      if(document.getElementById('tab-nav').textContent == 'WRLタイルへ'){
-        document.getElementById('wrl-tiles').style.display = 'block';
-        document.getElementById('nrl-tiles').style.display = 'none';
-        document.getElementById('tab-nav').textContent ='NRLタイルへ';
-        $tools[0].style.display = 'block';
-        nomal_guide();
-      } else {
-        document.getElementById('wrl-tiles').style.display = 'none';
-        document.getElementById('nrl-tiles').style.display = 'block';
-        document.getElementById('tab-nav').textContent ='WRLタイルへ';
-        $tools[0].style.display = 'none';
-        nomal_guide();
-      }
-    });
 
   })();
