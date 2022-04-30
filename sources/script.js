@@ -627,7 +627,7 @@
 
     let reader = new FileReader();
     document.getElementById('input_file').addEventListener('change', () => {
-      if (document.getElementById('input_file').files[0].name.slice(-3) === 'rrl') {
+      if (document.getElementById('input_file').files[0].name.slice(-3) === 'rrl' || document.getElementById('input_file').files[0].name.slice(-3) === 'csv') {
         document.getElementById('overlay').className = "";
         document.getElementById('start').className = "";
         file = document.getElementById('input_file').files[0];
@@ -904,173 +904,190 @@
         bumpOrUnbump = 0;
       }
     }
-
-
-    //右クリックメニュー
-    for (let index = 0; index < imgLen; index++) {
-      $img[index].addEventListener('contextmenu', (e) => {
-        e.preventDefault();
-        $contextmenu.style.display = "block";
-        //topとbottomの決定(もし下のスペースがなければメニューを上にずらす)
-        if (window.innerHeight - e.pageY < 250) {
-          $contextmenu.style.top = "auto";
-          $contextmenu.style.bottom = "10px";
-        } else {
-          $contextmenu.style.top = e.pageY+"px";
-          $contextmenu.style.bottom = "auto";
+    function contextmenu (e) {
+      $contextmenu.style.display = "block";
+      //topとbottomの決定(もし下のスペースがなければメニューを上にずらす)
+      if (window.innerHeight - e.pageY < 250) {
+        $contextmenu.style.top = "auto";
+        $contextmenu.style.bottom = "10px";
+      } else {
+        $contextmenu.style.top = e.pageY+"px";
+        $contextmenu.style.bottom = "auto";
+      }
+      //rightとleftの決定(もし右のスペースがなければメニューを左にずらす)
+      if (window.innerWidth - e.pageX < 180) {
+        $contextmenu.style.right = (window.innerWidth - e.pageX) + "px";
+        $contextmenu.style.left = "auto";
+      } else {
+        $contextmenu.style.left = e.pageX+"px";
+        $contextmenu.style.right = "auto";
+      }
+      
+      //90度回転
+      $contextmenu_title[0].onclick= function() {
+        nowturn = Number(e.target.dataset.turn);
+        e.target.style.transform = 'rotate(' + (90 + nowturn) +'deg)';
+        e.target.dataset.turn = 90 + nowturn;
+      };
+      //タイル情報の削除
+      $contextmenu_title[1].onclick= function() {
+        e.target.src = "../img/simulator/no.png";
+        e.target.style.transform = 'rotate(0deg)';
+        e.target.dataset.turn = 0;
+        e.target.style.border = 'none';
+        if (e.target.dataset.check == 1){
+          e.target.nextElementSibling.remove();
+          e.target.dataset.check = 0;
+        }else if (e.target.dataset.obstacle == 1){
+          e.target.nextElementSibling.remove();
+          e.target.dataset.obstacle = 0;
         }
-        //rightとleftの決定(もし右のスペースがなければメニューを左にずらす)
-        if (window.innerWidth - e.pageX < 180) {
-          $contextmenu.style.right = (window.innerWidth - e.pageX) + "px";
-          $contextmenu.style.left = "auto";
-        } else {
-          $contextmenu.style.left = e.pageX+"px";
-          $contextmenu.style.right = "auto";
-        }
-        
-        //90度回転
-        $contextmenu_title[0].onclick= function() {
-          nowturn = Number(e.target.dataset.turn);
-          e.target.style.transform = 'rotate(' + (90 + nowturn) +'deg)';
-          e.target.dataset.turn = 90 + nowturn;
-        };
-        //タイル情報の削除
-        $contextmenu_title[1].onclick= function() {
-          e.target.src = "../img/simulator/no.png";
-          e.target.style.transform = 'rotate(0deg)';
-          e.target.dataset.turn = 0;
-          e.target.style.border = 'none';
-          if (e.target.dataset.check == 1){
-            e.target.nextElementSibling.remove();
-            e.target.dataset.check = 0;
-          }else if (e.target.dataset.obstacle == 1){
-            e.target.nextElementSibling.remove();
-            e.target.dataset.obstacle = 0;
+        for (let index = 0; index < $table.length; index++) {
+          if($table[index].style.display == 'block'){
+            tile(index);
           }
-          for (let index = 0; index < $table.length; index++) {
-            if($table[index].style.display == 'block'){
-              tile(index);
+        }
+      };
+      narrow_down(e.target);
+      //チェックマーカー
+      if (checkOrUncheck == 0){
+        $contextmenu_title[2].onclick = function() {
+          newCheckMarker = document.createElement("div");
+          newCheckMarker.className = "check-marker";
+          e.target.parentElement.appendChild(newCheckMarker);
+          e.target.dataset.check = 1;
+        };
+      } else {
+        $contextmenu_title[3].onclick = function() {
+          e.target.nextElementSibling.remove();
+          e.target.dataset.check = 0;
+        };
+      }
+      //障害物
+      if (obOrUnob == 0){
+        $contextmenu_title[4].onclick = function() {
+          newObstacle = document.createElement("img");
+          newObstacle.src = "../img/simulator/ob.svg";
+          newObstacle.className = "obstacle";
+          e.target.parentElement.appendChild(newObstacle);
+          e.target.dataset.obstacle = 1;
+        };
+      } else {
+        $contextmenu_title[5].onclick= function() {
+          e.target.nextElementSibling.remove();
+          e.target.dataset.obstacle = 0;
+        };
+      }
+      //バンプ
+      if (bumpOrUnbump == 0){
+        $contextmenu_title[6].onclick = function() {
+          document.getElementById('overlay').className = 'active';
+          document.getElementById('bump_settings').className = 'active';
+          document.getElementById('image-preview').src = e.target.src;
+          document.getElementById('image-preview').style.transform = "rotate(" + e.target.dataset.turn + "deg)"
+          document.getElementById('bump_decide').onclick = function(){
+            newBump = document.createElement("img");
+            newBump.src = "../img/simulator/bu.png";
+            newBump.className = "bump";
+            if(window.innerWidth < 920){
+              newBump.setAttribute("style", "left: " + ($bump_input[0].value / 10) + "vw; top: " + (($bump_input[1].value - 37) / 10) + "vw; transform: rotate(" + $bump_input[2].value + "deg)");
+            } else {
+              newBump.setAttribute("style", "left: " + $bump_input[0].value + "px; top: " + ($bump_input[1].value - 37) + "px; transform: rotate(" + $bump_input[2].value + "deg)");
             }
-          }
-        };
-        narrow_down(e.target);
-        //チェックマーカー
-        if (checkOrUncheck == 0){
-          $contextmenu_title[2].onclick = function() {
-            newCheckMarker = document.createElement("div");
-            newCheckMarker.className = "check-marker";
-            e.target.parentElement.appendChild(newCheckMarker);
-            e.target.dataset.check = 1;
-          };
-        } else {
-          $contextmenu_title[3].onclick = function() {
-            e.target.nextElementSibling.remove();
-            e.target.dataset.check = 0;
-          };
-        }
-        //障害物
-        if (obOrUnob == 0){
-          $contextmenu_title[4].onclick = function() {
-            newObstacle = document.createElement("img");
-            newObstacle.src = "../img/simulator/ob.svg";
-            newObstacle.className = "obstacle";
-            e.target.parentElement.appendChild(newObstacle);
-            e.target.dataset.obstacle = 1;
-          };
-        } else {
-          $contextmenu_title[5].onclick= function() {
-            e.target.nextElementSibling.remove();
-            e.target.dataset.obstacle = 0;
-          };
-        }
-        //バンプ
-        if (bumpOrUnbump == 0){
-          $contextmenu_title[6].onclick = function() {
-            document.getElementById('overlay').className = 'active';
-            document.getElementById('bump_settings').className = 'active';
-            document.getElementById('image-preview').src = e.target.src;
-            document.getElementById('image-preview').style.transform = "rotate(" + e.target.dataset.turn + "deg)"
-            document.getElementById('bump_decide').onclick = function(){
+            e.target.parentElement.appendChild(newBump);
+            //aはただの区切り。and。
+            e.target.dataset.bump1 = $bump_input[0].value + "a" + ($bump_input[1].value - 37) + "a" + $bump_input[2].value;
+            newBump = null;
+            //2個目
+            if($bump_input_div[2].style.display == 'flex'){
               newBump = document.createElement("img");
               newBump.src = "../img/simulator/bu.png";
               newBump.className = "bump";
               if(window.innerWidth < 920){
-                newBump.setAttribute("style", "left: " + ($bump_input[0].value / 10) + "vw; top: " + (($bump_input[1].value - 37) / 10) + "vw; transform: rotate(" + $bump_input[2].value + "deg)");
+                newBump.setAttribute("style", "left: " + ($bump_input[3].value / 10) + "vw; top: " + (($bump_input[4].value - 37) / 10) + "vw; transform: rotate(" + $bump_input[5].value + "deg)");
               } else {
-                newBump.setAttribute("style", "left: " + $bump_input[0].value + "px; top: " + ($bump_input[1].value - 37) + "px; transform: rotate(" + $bump_input[2].value + "deg)");
+                newBump.setAttribute("style", "left: " + $bump_input[3].value + "px; top: " + ($bump_input[4].value - 37) + "px; transform: rotate(" + $bump_input[5].value + "deg)");
               }
               e.target.parentElement.appendChild(newBump);
-              //aはただの区切り。and。
-              e.target.dataset.bump1 = $bump_input[0].value + "a" + ($bump_input[1].value - 37) + "a" + $bump_input[2].value;
+              e.target.dataset.bump2 = $bump_input[3].value + "a" + ($bump_input[4].value - 37) + "a" + $bump_input[5].value;
               newBump = null;
-              //2個目
-              if($bump_input_div[2].style.display == 'flex'){
-                newBump = document.createElement("img");
-                newBump.src = "../img/simulator/bu.png";
-                newBump.className = "bump";
-                if(window.innerWidth < 920){
-                  newBump.setAttribute("style", "left: " + ($bump_input[3].value / 10) + "vw; top: " + (($bump_input[4].value - 37) / 10) + "vw; transform: rotate(" + $bump_input[5].value + "deg)");
-                } else {
-                  newBump.setAttribute("style", "left: " + $bump_input[3].value + "px; top: " + ($bump_input[4].value - 37) + "px; transform: rotate(" + $bump_input[5].value + "deg)");
-                }
-                e.target.parentElement.appendChild(newBump);
-                e.target.dataset.bump2 = $bump_input[3].value + "a" + ($bump_input[4].value - 37) + "a" + $bump_input[5].value;
-                newBump = null;
-              }
-              //3個目
-              if($bump_input_div[3].style.display == 'flex'){
-                newBump = document.createElement("img");
-                newBump.src = "../img/simulator/bu.png";
-                newBump.className = "bump";
-                if(window.innerWidth < 920){
-                  newBump.setAttribute("style", "left: " + ($bump_input[6].value / 10) + "vw; top: " + (($bump_input[7].value - 37) / 10) + "vw; transform: rotate(" + $bump_input[8].value + "deg)");
-                } else {
-                  newBump.setAttribute("style", "left: " + $bump_input[6].value + "px; top: " + ($bump_input[7].value - 37) + "px; transform: rotate(" + $bump_input[8].value + "deg)");
-                }
-                e.target.parentElement.appendChild(newBump);
-                e.target.dataset.bump3 = $bump_input[6].value + "a" + ($bump_input[7].value - 37) + "a" + $bump_input[8].value;
-                newBump = null;
-              }
-              //4個目
-              if($bump_input_div[4].style.display == 'flex'){
-                newBump = document.createElement("img");
-                newBump.src = "../img/simulator/bu.png";
-                newBump.className = "bump";
-                if(window.innerWidth < 920){
-                  newBump.setAttribute("style", "left: " + ($bump_input[9].value / 10) + "vw; top: " + (($bump_input[10].value - 37) / 10) + "vw; transform: rotate(" + $bump_input[11].value + "deg)");
-                } else {
-                  newBump.setAttribute("style", "left: " + $bump_input[9].value + "px; top: " + ($bump_input[10].value - 37) + "px; transform: rotate(" + $bump_input[11].value + "deg)");
-                }
-                e.target.parentElement.appendChild(newBump);
-                e.target.dataset.bump4 = $bump_input[9].value + "a" + ($bump_input[10].value - 37) + "a" + $bump_input[11].value;
-                newBump = null;
-              }
-              document.getElementById('overlay').className = '';
-              document.getElementById('bump_settings').className = '';
             }
-            document.getElementById('bump_cancel').onclick = function(){
-              document.getElementById('overlay').className = '';
-              document.getElementById('bump_settings').className = '';
-            };
+            //3個目
+            if($bump_input_div[3].style.display == 'flex'){
+              newBump = document.createElement("img");
+              newBump.src = "../img/simulator/bu.png";
+              newBump.className = "bump";
+              if(window.innerWidth < 920){
+                newBump.setAttribute("style", "left: " + ($bump_input[6].value / 10) + "vw; top: " + (($bump_input[7].value - 37) / 10) + "vw; transform: rotate(" + $bump_input[8].value + "deg)");
+              } else {
+                newBump.setAttribute("style", "left: " + $bump_input[6].value + "px; top: " + ($bump_input[7].value - 37) + "px; transform: rotate(" + $bump_input[8].value + "deg)");
+              }
+              e.target.parentElement.appendChild(newBump);
+              e.target.dataset.bump3 = $bump_input[6].value + "a" + ($bump_input[7].value - 37) + "a" + $bump_input[8].value;
+              newBump = null;
+            }
+            //4個目
+            if($bump_input_div[4].style.display == 'flex'){
+              newBump = document.createElement("img");
+              newBump.src = "../img/simulator/bu.png";
+              newBump.className = "bump";
+              if(window.innerWidth < 920){
+                newBump.setAttribute("style", "left: " + ($bump_input[9].value / 10) + "vw; top: " + (($bump_input[10].value - 37) / 10) + "vw; transform: rotate(" + $bump_input[11].value + "deg)");
+              } else {
+                newBump.setAttribute("style", "left: " + $bump_input[9].value + "px; top: " + ($bump_input[10].value - 37) + "px; transform: rotate(" + $bump_input[11].value + "deg)");
+              }
+              e.target.parentElement.appendChild(newBump);
+              e.target.dataset.bump4 = $bump_input[9].value + "a" + ($bump_input[10].value - 37) + "a" + $bump_input[11].value;
+              newBump = null;
+            }
+            document.getElementById('overlay').className = '';
+            document.getElementById('bump_settings').className = '';
+          }
+          document.getElementById('bump_cancel').onclick = function(){
+            document.getElementById('overlay').className = '';
+            document.getElementById('bump_settings').className = '';
           };
-        } else {
-          $contextmenu_title[7].onclick= function() {
+        };
+      } else {
+        $contextmenu_title[7].onclick= function() {
+          e.target.nextElementSibling.remove();
+          e.target.dataset.bump1 = 0;
+          if (e.target.dataset.bump2 != 0){
             e.target.nextElementSibling.remove();
-            e.target.dataset.bump1 = 0;
-            if (e.target.dataset.bump2 != 0){
-              e.target.nextElementSibling.remove();
-              e.target.dataset.bump2 = 0;
-            }
-            if (e.target.dataset.bump3 != 0){
-              e.target.nextElementSibling.remove();
-              e.target.dataset.bump3 = 0;
-            }
-            if (e.target.dataset.bump4 != 0){
-              e.target.nextElementSibling.remove();
-              e.target.dataset.bump4 = 0;
-            }
-          };
-        }
+            e.target.dataset.bump2 = 0;
+          }
+          if (e.target.dataset.bump3 != 0){
+            e.target.nextElementSibling.remove();
+            e.target.dataset.bump3 = 0;
+          }
+          if (e.target.dataset.bump4 != 0){
+            e.target.nextElementSibling.remove();
+            e.target.dataset.bump4 = 0;
+          }
+        };
+      }
+    }
+
+
+    //右クリックメニュー
+    let count = 0;
+    for (let index = 0; index < imgLen; index++) {
+      $img[index].addEventListener('contextmenu', (e) => {
+        e.preventDefault();
+        contextmenu(e);
+      });
+      $img[index].addEventListener('touchstart', (e) => {
+        long_tap_timer = setInterval(() => {
+          console.log(count)
+          count++;
+          if (count > 10){
+            contextmenu(e.changedTouches[0]);
+          }
+        }, 100);
+      })
+      $img[index].addEventListener('touchend', () => {
+        clearInterval(long_tap_timer);
+        count = 0;
       });
     }
 
