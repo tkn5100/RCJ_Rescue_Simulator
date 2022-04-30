@@ -45,6 +45,27 @@
     let cleared_green = 0; //緑の被災者
     let cleared_black = 0;
 
+    const agent = window.navigator.userAgent.toLowerCase();
+    let what_browser = null;
+
+    if (agent.indexOf('msie') != -1 || agent.indexOf('trident') != -1) {
+      window.alert('このブラウザではアプリケーションが正しく動作しません。')
+    } else if (agent.indexOf('edg') != -1) {
+      what_browser = 'Edge';
+    } else if (agent.indexOf('edge') != -1) {
+      window.alert('このブラウザではアプリケーションが正しく動作しません。')
+    } else if (agent.indexOf('opr') != -1) {
+      what_browser = 'Opera';
+    } else if (agent.indexOf('opera') != -1) {
+      window.alert('このブラウザではアプリケーションが正しく動作しません。')
+    } else if (agent.indexOf('chrome') != -1) {
+      what_browser = 'Chrome';
+    } else if (agent.indexOf('safari') != -1) {
+      what_browser = 'Safari';
+      document.getElementById('input_file').accept=".rrl, .csv"
+    } else if (agent.indexOf('firefox') != -1) {
+      what_browser = 'FireFox';
+    }
 
     function nomal_guide() {
       $guide.textContent = 'タイルをクリックすると通過済み(青)になります。';
@@ -574,7 +595,7 @@
 
     let reader = new FileReader();
     document.getElementById('input_file').addEventListener('change', () => {
-      if (document.getElementById('input_file').files[0].name.slice(-3) === 'rrl') {
+      if (document.getElementById('input_file').files[0].name.slice(-3) === 'rrl' || document.getElementById('input_file').files[0].name.slice(-3) === 'csv') {
         document.getElementById('overlay').className = "";
         document.getElementById('start').className = "";
         file = document.getElementById('input_file').files[0];
@@ -746,85 +767,104 @@
 
 
     //右クリックメニュー
+    function contextmenu_show (e){
+      $contextmenu.style.display = "block";
+      //topとbottomの決定(もし下のスペースがなければメニューを上にずらす)
+      if (window.innerHeight - e.pageY < 186) {
+        $contextmenu.style.top = "auto";
+        $contextmenu.style.bottom = "10px";
+      } else {
+        $contextmenu.style.top = e.pageY+"px";
+        $contextmenu.style.bottom = "auto";
+      }
+      //rightとleftの決定(もし右のスペースがなければメニューを左にずらす)
+      if (window.innerWidth - e.pageX < 225) {
+        $contextmenu.style.right = (window.innerWidth - e.pageX) + "px";
+        $contextmenu.style.left = "auto";
+      } else {
+        $contextmenu.style.left = e.pageX+"px";
+        $contextmenu.style.right = "auto";
+      }
+      //チェックマーカー
+      document.getElementById('contextmenu_stop').textContent = e.target.dataset.stopped;
+      if(e.target.dataset.check == 1){
+        $contextmenu_title[0].className = "contextmenu-title";
+        $contextmenu_title[1].className = "contextmenu-title_active";
+        $contextmenu_title[1].onclick = function() {
+          e.target.nextElementSibling.remove();
+          e.target.dataset.check = 0;
+        };
+        $contextmenu_title[0].onclick = null;
+      } else {
+        $contextmenu_title[0].className = "contextmenu-title_active";
+        $contextmenu_title[1].className = "contextmenu-title";
+        $contextmenu_title[0].onclick = function() {
+          newCheckMarker = document.createElement("div");
+          newCheckMarker.className = "check-marker";
+          e.target.parentElement.appendChild(newCheckMarker);
+          e.target.dataset.check = 1;
+        };
+        $contextmenu_title[1].onclick = null;
+      }
+      //通過の取り消し
+      if (e.target.dataset.passed == 0) {
+        $contextmenu_title[2].className = "contextmenu-title";
+        $contextmenu_title[2].onclick = null;
+      } else {
+        $contextmenu_title[2].className = "contextmenu-title_active";
+        $contextmenu_title[2].onclick = function () {
+          e.target.parentElement.style.backgroundColor = '';
+          e.target.dataset.passed = '0';
+        }
+      }
+      //競技進行の停止
+      $contextmenu_title[3].onclick = function() {
+        if (document.getElementById("timer_start").hasAttribute('disabled')){
+        } else {
+          window.alert('先に競技を開始してください。')
+        }
+        e.target.dataset.stopped = Number(e.target.dataset.stopped) + 1;
+        e.target.parentElement.style.backgroundColor = '#FFCCCC';
+        e.target.dataset.passed ='0';
+        stop_count++;
+        document.getElementById('stop_count').textContent = stop_count;
+      };
+      if (e.target.dataset.stopped == 0) {
+        $contextmenu_title[4].className = "contextmenu-title";
+        $contextmenu_title[4].onclick = null;
+      } else {
+        $contextmenu_title[4].className = "contextmenu-title_active";
+        $contextmenu_title[4].onclick = function () {
+          e.target.dataset.stopped = Number(e.target.dataset.stopped) - 1;
+          stop_count--;
+          document.getElementById('stop_count').textContent = stop_count;
+          if (e.target.dataset.stopped == 0){
+            e.target.parentElement.style.backgroundColor = '';
+          }
+        }
+      }
+    }
+    let count_tap = 0;
+    let contextmenu_showed = 0;
     for (let index = 0; index < imgLen; index++) {
       secondOrFirst = null;
       $img[index].addEventListener('contextmenu', (e) => {
         e.preventDefault();
-        $contextmenu.style.display = "block";
-        //topとbottomの決定(もし下のスペースがなければメニューを上にずらす)
-        if (window.innerHeight - e.pageY < 186) {
-          $contextmenu.style.top = "auto";
-          $contextmenu.style.bottom = "10px";
-        } else {
-          $contextmenu.style.top = e.pageY+"px";
-          $contextmenu.style.bottom = "auto";
-        }
-        //rightとleftの決定(もし右のスペースがなければメニューを左にずらす)
-        if (window.innerWidth - e.pageX < 225) {
-          $contextmenu.style.right = (window.innerWidth - e.pageX) + "px";
-          $contextmenu.style.left = "auto";
-        } else {
-          $contextmenu.style.left = e.pageX+"px";
-          $contextmenu.style.right = "auto";
-        }
-        //チェックマーカー
-        document.getElementById('contextmenu_stop').textContent = e.target.dataset.stopped;
-        if(e.target.dataset.check == 1){
-          $contextmenu_title[0].className = "contextmenu-title";
-          $contextmenu_title[1].className = "contextmenu-title_active";
-          $contextmenu_title[1].onclick = function() {
-            e.target.nextElementSibling.remove();
-            e.target.dataset.check = 0;
-          };
-          $contextmenu_title[0].onclick = null;
-        } else {
-          $contextmenu_title[0].className = "contextmenu-title_active";
-          $contextmenu_title[1].className = "contextmenu-title";
-          $contextmenu_title[0].onclick = function() {
-            newCheckMarker = document.createElement("div");
-            newCheckMarker.className = "check-marker";
-            e.target.parentElement.appendChild(newCheckMarker);
-            e.target.dataset.check = 1;
-          };
-          $contextmenu_title[1].onclick = null;
-        }
-        //通過の取り消し
-        if (e.target.dataset.passed == 0) {
-          $contextmenu_title[2].className = "contextmenu-title";
-          $contextmenu_title[2].onclick = null;
-        } else {
-          $contextmenu_title[2].className = "contextmenu-title_active";
-          $contextmenu_title[2].onclick = function () {
-            e.target.parentElement.style.backgroundColor = '';
-            e.target.dataset.passed = '0';
+        contextmenu_show(e);
+      });
+      $img[index].addEventListener('touchstart', (e) => {
+        long_tap_timer = setInterval(() => {
+          count_tap++;
+          if (count_tap > 10 && contextmenu_showed == 0){
+            contextmenu_show(e.changedTouches[0]);
+            contextmenu_showed = 1;
           }
-        }
-        //競技進行の停止
-        $contextmenu_title[3].onclick = function() {
-          if (document.getElementById("timer_start").hasAttribute('disabled')){
-          } else {
-            window.alert('先に競技を開始してください。')
-          }
-          e.target.dataset.stopped = Number(e.target.dataset.stopped) + 1;
-          e.target.parentElement.style.backgroundColor = '#FFCCCC';
-          e.target.dataset.passed ='0';
-          stop_count++;
-          document.getElementById('stop_count').textContent = stop_count;
-        };
-        if (e.target.dataset.stopped == 0) {
-          $contextmenu_title[4].className = "contextmenu-title";
-          $contextmenu_title[4].onclick = null;
-        } else {
-          $contextmenu_title[4].className = "contextmenu-title_active";
-          $contextmenu_title[4].onclick = function () {
-            e.target.dataset.stopped = Number(e.target.dataset.stopped) - 1;
-            stop_count--;
-            document.getElementById('stop_count').textContent = stop_count;
-            if (e.target.dataset.stopped == 0){
-              e.target.parentElement.style.backgroundColor = '';
-            }
-          }
-        }
+        }, 100);
+      })
+      $img[index].addEventListener('touchend', () => {
+        clearInterval(long_tap_timer);
+        count_tap = 0;
+        contextmenu_showed = 0;
       });
     }
 

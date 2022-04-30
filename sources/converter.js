@@ -21,6 +21,27 @@
     let input_data_bump4 = [];
     let output_data = null;
 
+    const agent = window.navigator.userAgent.toLowerCase();
+    let what_browser = null;
+
+    if (agent.indexOf('msie') != -1 || agent.indexOf('trident') != -1) {
+      window.alert('このブラウザではアプリケーションが正しく動作しません。')
+    } else if (agent.indexOf('edg') != -1) {
+      what_browser = 'Edge';
+    } else if (agent.indexOf('edge') != -1) {
+      window.alert('このブラウザではアプリケーションが正しく動作しません。')
+    } else if (agent.indexOf('opr') != -1) {
+      what_browser = 'Opera';
+    } else if (agent.indexOf('opera') != -1) {
+      window.alert('このブラウザではアプリケーションが正しく動作しません。')
+    } else if (agent.indexOf('chrome') != -1) {
+      what_browser = 'Chrome';
+    } else if (agent.indexOf('safari') != -1) {
+      what_browser = 'Safari';
+      $uploaded_file.accept=".rrl, .csv"
+    } else if (agent.indexOf('firefox') != -1) {
+      what_browser = 'FireFox';
+    }
 
     function arrow_line(percent) {
       if(percent == 'reset'){
@@ -51,7 +72,11 @@
       download.href = url;
       setTimeout(arrow_line, 1125 ,90)
       //download属性にファイル名を指定する
-      download.download = file_name.slice(0, -4) + '_converted.rrl';
+      if(what_browser == 'Safari'){
+        download.download = file_name.slice(0, -4) + '_converted';
+      } else {
+        download.download = file_name.slice(0, -4) + '_converted.rrl';
+      }
       setTimeout(arrow_line, 1250 ,100);
       //作成したリンクをクリックしてダウンロードを実行する
       setTimeout(() => {download.click();}, 1250)
@@ -784,7 +809,7 @@
 
     let reader = new FileReader();
     $uploaded_file.addEventListener('change', () => {
-      if ($uploaded_file.files[0].name.slice(-3) === 'rrl') {
+      if ($uploaded_file.files[0].name.slice(-3) === 'rrl' || $uploaded_file.files[0].name.slice(-3) === 'csv') {
         file = $uploaded_file.files[0];
         arrow_line('reset');
         $uploaded_file.nextElementSibling.textContent = file.name;

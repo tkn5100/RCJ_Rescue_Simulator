@@ -904,7 +904,9 @@
         bumpOrUnbump = 0;
       }
     }
-    function contextmenu (e) {
+
+    //右クリックメニュー
+    function contextmenu_show (e) {
       $contextmenu.style.display = "block";
       //topとbottomの決定(もし下のスペースがなければメニューを上にずらす)
       if (window.innerHeight - e.pageY < 250) {
@@ -1068,26 +1070,26 @@
       }
     }
 
-
-    //右クリックメニュー
-    let count = 0;
+    let count_tap = 0;
+    let contextmenu_showed = 0;
     for (let index = 0; index < imgLen; index++) {
       $img[index].addEventListener('contextmenu', (e) => {
         e.preventDefault();
-        contextmenu(e);
+        contextmenu_show(e);
       });
       $img[index].addEventListener('touchstart', (e) => {
         long_tap_timer = setInterval(() => {
-          console.log(count)
-          count++;
-          if (count > 10){
-            contextmenu(e.changedTouches[0]);
+          count_tap++;
+          if (count_tap > 10 && contextmenu_showed == 0){
+            contextmenu_show(e.changedTouches[0]);
+            contextmenu_showed = 1;
           }
         }, 100);
       })
       $img[index].addEventListener('touchend', () => {
         clearInterval(long_tap_timer);
-        count = 0;
+        count_tap = 0;
+        contextmenu_showed = 0;
       });
     }
 
