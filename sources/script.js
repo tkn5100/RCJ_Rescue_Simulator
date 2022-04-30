@@ -50,6 +50,27 @@
     let first_floor = [];
     let second_floor = [];
 
+    const agent = window.navigator.userAgent.toLowerCase();
+    let what_browser = null;
+
+    if (agent.indexOf('msie') != -1 || agent.indexOf('trident') != -1) {
+      window.alert('このブラウザではアプリケーションが正しく動作しません。')
+    } else if (agent.indexOf('edg') != -1) {
+      what_browser = 'Edge';
+    } else if (agent.indexOf('edge') != -1) {
+      window.alert('このブラウザではアプリケーションが正しく動作しません。')
+    } else if (agent.indexOf('opr') != -1) {
+      what_browser = 'Opera';
+    } else if (agent.indexOf('opera') != -1) {
+      window.alert('このブラウザではアプリケーションが正しく動作しません。')
+    } else if (agent.indexOf('chrome') != -1) {
+      what_browser = 'Chrome';
+    } else if (agent.indexOf('safari') != -1) {
+      what_browser = 'Safari';
+      document.getElementById('input_file').accept=".rrl, .csv"
+    } else if (agent.indexOf('firefox') != -1) {
+      what_browser = 'FireFox';
+    }
 
     function nomal_guide() {
       if(document.getElementById('nrl-tiles').style.display == 'block'){
@@ -439,7 +460,11 @@
         //リンク先に上記で生成したURLを指定する
         download.href = url;
         //download属性にファイル名を指定する
-        download.download = filename + ".rrl";
+        if(what_browser == 'Safari'){
+          download.download = filename;
+        } else {
+          download.download = filename + ".rrl";
+        }
         //作成したリンクをクリックしてダウンロードを実行する
         download.click();
         //createObjectURLで作成したオブジェクトURLを開放する
@@ -885,7 +910,6 @@
     for (let index = 0; index < imgLen; index++) {
       $img[index].addEventListener('contextmenu', (e) => {
         e.preventDefault();
-        e.stopPropagation();
         $contextmenu.style.display = "block";
         //topとbottomの決定(もし下のスペースがなければメニューを上にずらす)
         if (window.innerHeight - e.pageY < 250) {
@@ -1047,7 +1071,6 @@
             }
           };
         }
-        return false;
       });
     }
 
