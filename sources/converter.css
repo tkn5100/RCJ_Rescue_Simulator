@@ -3,6 +3,9 @@ body{
     flex-direction: column;
     background: #f8f8f8;
     font-family: "游ゴシック", "ヒラギノ角ゴ ProN", sans-serif;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
 }
 .copyright{
     position: absolute;
@@ -176,7 +179,7 @@ body{
     left: 5%;
     width: 90%;
     height: 90%;
-    border: solid 0.3vw#F8F8F8;
+    border: solid 0.3vw #F8F8F8;
     border-radius: 50%;
     background-color:#000000;
 }
