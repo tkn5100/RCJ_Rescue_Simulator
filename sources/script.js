@@ -885,6 +885,7 @@
     for (let index = 0; index < imgLen; index++) {
       $img[index].addEventListener('contextmenu', (e) => {
         e.preventDefault();
+        e.stopPropagation();
         $contextmenu.style.display = "block";
         //topとbottomの決定(もし下のスペースがなければメニューを上にずらす)
         if (window.innerHeight - e.pageY < 250) {
@@ -1046,6 +1047,7 @@
             }
           };
         }
+        return false;
       });
     }
 
