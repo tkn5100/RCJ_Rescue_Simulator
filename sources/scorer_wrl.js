@@ -1315,6 +1315,38 @@
             }
           }
         }
+        $img[index].ontouchstart = function(e){
+          if(route.at(-1) == e.target){
+            window.alert('同じタイルを連続で通過することはできません。')
+          } else {
+            route.push(e.target)
+            e.target.style.backgroundColor = '#C2EEFF';
+            if (e.target.dataset.pass == 0){
+              e.target.dataset.pass = "1";
+              newRouteCounter = document.createElement("div");
+              newRouteCounter.className = "route_counter";
+              newRouteCounter.textContent = "1";
+              e.target.parentElement.appendChild(newRouteCounter);
+            } else {
+              e.target.dataset.pass = Number(e.target.dataset.pass) + 1;
+              if(input_data_check[index + 1] == 1){
+                e.target.nextElementSibling.nextElementSibling.textContent = e.target.dataset.pass;
+              } else if(input_data_obstacle[index + 1] == 1){
+                e.target.nextElementSibling.nextElementSibling.textContent = e.target.dataset.pass;
+              } else if(input_data_bump1[index + 1] != 0){
+                e.target.nextElementSibling.nextElementSibling.textContent = e.target.dataset.pass;
+              } else if(input_data_bump2[index + 1] != 0){
+                e.target.nextElementSibling.nextElementSibling.nextElementSibling.textContent = e.target.dataset.pass;
+              } else if(input_data_bump3[index + 1] != 0){
+                e.target.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent = e.target.dataset.pass;
+              } else if(input_data_bump4[index + 1] != 0){
+                e.target.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent = e.target.dataset.pass;
+              } else {
+                e.target.nextElementSibling.textContent = e.target.dataset.pass;
+              }
+            }
+          }
+        }
       }
       document.getElementById('route_finish').addEventListener('click', () => {
         if(window.confirm('走行順序を決定してもよろしいですか?')){
