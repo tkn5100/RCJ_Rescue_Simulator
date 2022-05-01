@@ -2,7 +2,7 @@ body{
     display: flex;
     flex-direction: column;
     background: #f8f8f8;
-    font-family: "游ゴシック", "ヒラギノ角ゴ ProN", sans-serif;
+    font-family: "游ゴシック", "ヒラギノ角ゴシック", sans-serif;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     user-select: none;

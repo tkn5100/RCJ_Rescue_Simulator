@@ -6,11 +6,9 @@
 [RCJ コート作成環境の最新版](https://tkn5100.github.io/RCJ_Rescue_Simulator/ "RCJ コート作成環境")  
 
 ### ご注意
-**最新版には不具合が含まれる場合や一部不完全な部分がある場合があります。**
-
 **画像を多用したソフトウェアであるため、上のリンクからWeb上で利用される場合には通信量が大きくなることがあります。**
 
-上記2つの問題を解決するため、またインターネットに接続せずにこのソフトウェアを利用するためには、最新リリースからZipファイルをダウンロードして適当なフォルダに展開してください。「index.html」をクリックするとブラウザが起動して、ソフトウェアを利用できます。ただしiPhoneやiPadでは、このためには、外部css・jsファイルを使用したローカルHTMLファイルを表示できる専用のソフトウェアが必要となります。
+インターネットに接続せずにこのソフトウェアを利用するためには、最新リリースからZipファイルをダウンロードして適当なフォルダに展開してください。「index.html」をクリックするとブラウザが起動して、ソフトウェアを利用できます。ただしiPhoneやiPadでは、このためには、外部css・jsファイルを使用したローカルHTMLファイルを表示できる専用のソフトウェアが必要となります。
 
 ### お願い
 スマートフォン、iPadではブラウザの**タブを非表示**にしてお使いください。操作に支障をきたすおそれがあります。  
@@ -34,20 +32,22 @@
 
 ### 動作環境
 #### 正常動作確認済みの環境
-Windows10 Home 21H2(Microsoft Edge v100.0.1185.39,Google Chrome v100.0.4896.88)
+Windows10 Home 21H2(Microsoft Edge v101.0.1210.32,Google Chrome v101.0.4951.41)  
+iPadOS 15.3.1(Safari v605.1.15)
 #### 正常動作可能と思われる環境
-Windows10(Microsoft Edge,Google Chrome,FireFox各最新版)  
-Windows11(Microsoft Edge,Google Chrome,FireFox各最新版)  
-Mac OS(Microsoft Edge,Google Chrome,FireFox,Safari各最新版)  
-Linux OS(Microsoft Edge,Google Chrome,FireFox,Safari各最新版)  
-Chrome OS(Google Chrome,FireFox各最新版)  
-AndroidOS
+Windows10(Microsoft Edge,Google Chrome,Opera各最新版)  
+Windows11(Microsoft Edge,Google Chrome,Opera各最新版)  
+Mac OS(Safari,Google Chrome,Microsoft Edge,Opera各最新版)  
+Linux OS(Google Chrome,Microsoft Edge,Safari,Opera各最新版)  
+Chrome OS(Google Chrome,Opera各最新版)  
+AndroidOS(Google Chrome,Microsoft Edge,Safari,Opera各最新版)
 #### Web上でのみ動作可能な環境
-iOS  
-iPadOS
+iOS(Safari,Google Chrome,Microsoft Edge,Opera各最新版)  
+iPadOS(Safari,Google Chrome,Microsoft Edge,Opera各最新版)
 #### 動作不可能である環境
 Windows10(旧Microsoft Edge,Internet Explorer)  
-その他PC向け旧OS
+その他PC向け旧OS  
+**FireFox**では一部機能が正常に動作しなかったりデザインが崩れたりする恐れがありますが、基本的な機能はご利用いただけます。
 
 ### アプリケーションの調子が悪いときは
 リロードせずに長時間使い続けると、動作が重くなったり不具合が出ることがあります。再読み込みするか、「Ctrl+F5」を押してスーパーリロードしてください。ただし、プロジェクトを保存するのを忘れないでください。なお、再読み込みを行っても自動保存データは保持されます。

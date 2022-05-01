@@ -26,13 +26,13 @@
       <p>レベル選択</p>
       <div>
         <p>避難場所のレベルを選んでください:</p>
-        <label class="container">レベル1 (黒色に塗られ、壁に接していない辺に高さ5mmのバンプがある)<input type="radio" checked="checked" name="evacuation_point" value="1"><span class="checkmark"></span></label>
-        <label class="container">レベル2 (黒色に塗られ、高さ6cmで中がくり抜かれている)<input type="radio" name="evacuation_point" value="2"><span class="checkmark"></span></label>
+        <label class="container">レベル1 (黒色に塗られ、壁に接していない辺に高さ5mmのバンプがある)<input type="radio" checked="checked" name="evacuation_point"><span class="checkmark"></span></label>
+        <label class="container">レベル2 (黒色に塗られ、高さ6cmで中がくり抜かれている)<input type="radio" name="evacuation_point"><span class="checkmark"></span></label>
       </div>
       <div style="margin-top: 1vw;">
         <p>レスキューキットのレベルを選んでください:</p>
-        <label class="container">レベル1 (レスキューキットをロボットに搭載してスタートし、避難場所に運ぶ)<input type="radio" checked="checked" name="rescue_kit" value="1"><span class="checkmark"></span></label>
-        <label class="container">レベル2 (避難ゾーンへ向かう経路上に置かれたレスキューキットを、避難場所に運ぶ)<input type="radio" name="rescue_kit" value="2"><span class="checkmark"></span></label>
+        <label class="container">レベル1 (レスキューキットをロボットに搭載してスタートし、避難場所に運ぶ)<input type="radio" checked="checked" name="rescue_kit"><span class="checkmark"></span></label>
+        <label class="container">レベル2 (避難ゾーンへ向かう経路上に置かれたレスキューキットを、避難場所に運ぶ)<input type="radio" name="rescue_kit"><span class="checkmark"></span></label>
       </div>
       <button id="level_decide">決定</button>
     </div>
@@ -137,11 +137,8 @@
           <h1 class="index">避難ゾーン</h1>
           <button class="button_hinan">銀の被災者救助</button>
           <button class="button_hinan">黒の被災者救助</button>
-          <button class="button_hinan">レスキューキット配置</button>
-          <button class="button_hinan" style="margin-bottom: 10px;">避難ゾーン脱出</button>
+          <button class="button_hinan" style="margin-bottom: 10px;">レスキューキット配置</button>
           <p id="show_multiplier" style="margin-top: 5px; margin-left: 20px;">現在獲得した乗数:<br>なし</p>
-          <br>
-          <p style="margin-top: 5px; margin-left: 20px;">乗数は避難ゾーンを脱出して最初のチェックポイント(もしくはゴール)に着いたときに得点にかけられます。</p>
         </div>
         <div id="attention">
           <h1 class="index">注意</h1>
@@ -157,8 +154,8 @@
           <p>ギャップ : <span id="statistics_gap">10点 × 0個 = 0点</span></p>
           <p>傾斜路　 : <span id="statistics_slope">10点 × 0個 = 0点</span></p>
           <p>バンプ　 : <span id="statistics_bump">5点 × 0個 = 0点</span></p>
-          <h2>避難ゾーン</h2>
-          <p>避難ゾーン脱出　　 : <span id="statistics_clear">脱出していません</span></p>
+          <h2>脱出得点</h2>
+          <p id="statistics_clear">競技が終了していません</p>
           <h2>計</h2>
           <p id="statistics_score">0点</p>
           <button id="statistics_close">閉じる</button>

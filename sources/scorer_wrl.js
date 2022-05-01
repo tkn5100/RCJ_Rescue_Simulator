@@ -36,7 +36,6 @@
     let stop_count = 0;
     let stop_count_all = 0;
     let passed_tiles = 0;
-    let escaped = 0;
     //以下競技詳細用
     let nowSection = 1; //の区間1,2,…の判定。
     let newSectionTag = null;
@@ -47,13 +46,19 @@
     let cleared_crossings = 0;
     let first_floor = [];
     let second_floor = [];
+    let final_score = '';
     // 以下ライントレース関連
     let route = [];
     let newRouteCounter = null;
     let newStopCounter = null;
     // 以下避難ゾーン関連
     let multiplier = [];
+    let multiply_section = 0; //乗数をいじる区間
+    let multiply_all = 1;
     let num_of_living_victims = 0;
+    let evacuation_point = null;
+    let rescue_kit = null;
+    let rescue_kit_set = 0;
 
     const agent = window.navigator.userAgent.toLowerCase();
     let what_browser = null;
@@ -77,6 +82,14 @@
       what_browser = 'FireFox';
     }
 
+    let few = '';
+    function round(value){
+      few = '';
+      value = Math.round(value*1000) + '';
+      few = ('000' + value.slice(-3)).slice(-3);
+      return Number(value.slice(0,-3) + '.' + few)
+    }
+
     function nomal_guide() {
       $guide.textContent = 'チェックマーカーはいつでも追加できます。';
     };
@@ -89,13 +102,6 @@
       $guide.textContent = num + '点を獲得しました';
       setTimeout(nomal_guide, 2000);
     }
-    function multiply_points(num) {
-      score = score * num;
-      document.getElementById('score').innerHTML = score + '<span id="added_score">×' + num + '</span>';
-      setTimeout(delete_points_guide, 2000);
-      $guide.textContent = '得点を' + num + '倍しました';
-      setTimeout(nomal_guide, 2000);
-    }
     function lose_points(num) {
       score = score - num;
       document.getElementById('score').innerHTML = score + '<span id="added_score">-' + num + '</span>';
@@ -105,6 +111,15 @@
     }
     function delete_points_guide (){
       document.getElementById('score').innerHTML = score;
+    }
+    function multiply_points() {
+      for (let index = 0; index < multiplier.length; index++){
+        multiply_all = multiply_all * multiplier[index][1];
+      }
+      score = round(score * multiply_all)
+      document.getElementById('score').innerHTML = score;
+      final_score = final_score + multiply_all + ' = ' + score + '点'
+      document.getElementById('statistics_score').textContent = final_score
     }
 
     //タイマー
@@ -124,6 +139,7 @@
     document.getElementById('timer_start').addEventListener('click', function () {
       TimerID = setInterval(count, 1000);
       document.getElementById("timer_start").disabled = true;
+      document.getElementById("timer_start").style.backgroundColor = "#888888";
       time = 480;
       document.getElementById("timer").textContent = "8:00";
       get_points(5);
@@ -134,9 +150,13 @@
     document.getElementById('timer_stop').addEventListener('click', function () {
       clearInterval(TimerID);
       document.getElementById("timer_stop").disabled = true;
+      document.getElementById("timer_stop").style.backgroundColor = "#888888";
       document.getElementsByClassName('button_hinan')[0].disabled = true;
+      document.getElementsByClassName('button_hinan')[0].style.backgroundColor = "#888888";
       document.getElementsByClassName('button_hinan')[1].disabled = true;
+      document.getElementsByClassName('button_hinan')[1].style.backgroundColor = "#888888";
       document.getElementsByClassName('button_hinan')[2].disabled = true;
+      document.getElementsByClassName('button_hinan')[2].style.backgroundColor = "#888888";
       for (let index = 0; index < $line_tools.length; index++) {
         $line_tools[index].style.pointerEvents = 'none';
       }
@@ -484,6 +504,7 @@
               nowSection++;
               passed_tiles = 0;
               stop_count = 0;
+              multiply_section = 1;
               document.getElementById('stop_count').textContent = '0';
             }
           } else{
@@ -525,12 +546,30 @@
               stop_count = 0;
               document.getElementById('stop_count').textContent = '0';
             }
+            //脱出得点
+            final_score = '(ライントレース ' + score + '点 + 脱出得点';
+            if (60 - (5 * stop_count_all) <= 0){
+              window.alert('今までの競技進行の停止総数が12回以上であるため得点はありません。')
+              document.getElementById('statistics_clear').textContent = '脱出済み 0点(競技進行の停止総数が' + stop_count_all + '回であるため)';
+            } else {
+              get_points(60 - (5 * stop_count_all));
+              final_score = final_score + (60 - (5 * stop_count_all)) + '点) × 乗数'
+              document.getElementById('statistics_clear').textContent = '脱出済み 60 - 5 × ' + stop_count_all + ' = ' + (60 - (5 * stop_count_all)) + '点';
+            }
+            //最終タイルでは乗数をかける
+            if(multiplier.length > 0){
+              multiply_points();
+            }
             //競技終了処理
             clearInterval(TimerID);
             document.getElementById("timer_stop").disabled = true;
+            document.getElementById("timer_stop").style.backgroundColor = "#888888";
             document.getElementsByClassName('button_hinan')[0].disabled = true;
+            document.getElementsByClassName('button_hinan')[0].style.backgroundColor = "#888888";
             document.getElementsByClassName('button_hinan')[1].disabled = true;
+            document.getElementsByClassName('button_hinan')[1].style.backgroundColor = "#888888";
             document.getElementsByClassName('button_hinan')[2].disabled = true;
+            document.getElementsByClassName('button_hinan')[2].style.backgroundColor = "#888888";
             for (let index = 0; index < $line_tools.length; index++) {
               $line_tools[index].style.pointerEvents = 'none';
             }
@@ -585,6 +624,16 @@
             stop_count_all++;
             document.getElementById('stop_count').textContent = stop_count;
           }
+          if(multiplier.length > 0 && multiply_section == 0){
+            for (let index = 0; index < multiplier.length; index++){
+              if(evacuation_point == 1 && multiplier[index][1] - 0.025 >= 1){
+                multiplier[index][1] = round(multiplier[index][1] - 0.025);
+              } else if(evacuation_point == 2 && multiplier[index][1] - 0.05 >= 1){
+                multiplier[index][1] = round(multiplier[index][1] - 0.05);
+              }
+            }
+            show_multiplier();
+          }
           tile_now(route[count_index]);
         } else {
           window.alert('先に競技を開始してください。')
@@ -602,7 +651,18 @@
               document.getElementById('stop-' + count_index).textContent = route[count_index].dataset.stopped;
             }
             stop_count--;
+            stop_count_all--;
             document.getElementById('stop_count').textContent = stop_count;
+          }
+          if(multiplier.length > 0 && multiply_section == 0){
+            for (let index = 0; index < multiplier.length; index++){
+              if(evacuation_point == 1){
+                multiplier[index][1] = round(multiplier[index][1] + 0.025);
+              } else {
+                multiplier[index][1] = round(multiplier[index][1] + 0.05);
+              }
+            }
+            show_multiplier();
           }
           tile_now(route[count_index]);
         } else {
@@ -889,41 +949,90 @@
     }
 
     document.getElementsByClassName('button_hinan')[0].addEventListener('click', () => {
-      get_points(30);
-      multiplier.push(['living', 1.4]);
-      show_multiplier();
+      if (document.getElementById("timer_start").hasAttribute('disabled')){
+        if(evacuation_point == 1 && stop_count <= 16){
+          multiplier.push(['living', round(1.4 - (stop_count * 0.025))]);
+        } else if(evacuation_point == 2 && stop_count <= 8){
+          multiplier.push(['living', round(1.4 - (stop_count * 0.05))]);
+        } else {
+          multiplier.push(['living', 1]);
+        }
+        show_multiplier();
+      } else {
+        window.alert('先に競技を開始してください。')
+      }
     });
     document.getElementsByClassName('button_hinan')[1].addEventListener('click', () => {
-      get_points(15);
-      if (multiplier.length < 2){
-        multiplier.push(['dead', 1]);
-      } else {
-        for (let index = 0; index < multiplier.length; index++){
-          if (multiplier[index][0] == 'living'){
-            num_of_living_victims++;
-          }
-        }
-        if(num_of_living_victims < 2){
+      if (document.getElementById("timer_start").hasAttribute('disabled')){
+        if (multiplier.length < 2){
           multiplier.push(['dead', 1]);
         } else {
-          multiplier.push(['dead', 1.4]);
+          for (let index = 0; index < multiplier.length; index++){
+            if (multiplier[index][0] == 'living'){
+              num_of_living_victims++;
+            }
+          }
+          if(num_of_living_victims < 2){
+            multiplier.push(['dead', 1]);
+          } else {
+            if(evacuation_point == 1 && stop_count <= 16){
+              multiplier.push(['dead', round(1.4 - (stop_count * 0.025))]);
+            } else if(evacuation_point == 2 && stop_count <= 8){
+              multiplier.push(['dead', round(1.4 - (stop_count * 0.05))]);
+            } else {
+              multiplier.push(['dead', 1]);
+            }
+          }
         }
-      }
-      num_of_living_victims = 0;
-      show_multiplier();
-    });
-    document.getElementsByClassName('button_hinan')[3].addEventListener('click', () => {
-      if (escaped == 0){
-        escaped = 1;
-        if(60 - (5 * stop_count_all) <= 0){
-          window.alert('今までの競技進行の停止総数が12回以上であるため得点はありません。')
-          document.getElementById('statistics_clear').textContent = '脱出済み 0点(競技進行の停止総数が' + stop_count_all + '回であるため)';
-        } else {
-          get_points(60 - (5 * stop_count_all));
-          document.getElementById('statistics_clear').textContent = '脱出済み 60 - 5 * ' + stop_count_all + ' = ' + 60 - (5 * stop_count_all) + '点';
-        }
+        num_of_living_victims = 0;
+        show_multiplier();
       } else {
-        window.alert('すでに避難ゾーンを脱出しています。');
+        window.alert('先に競技を開始してください。')
+      }
+    });
+    document.getElementsByClassName('button_hinan')[2].addEventListener('click', () => {
+      if (document.getElementById("timer_start").hasAttribute('disabled')){
+        if (rescue_kit_set == 0){
+          if (evacuation_point == 1 && rescue_kit == 1){
+            if(evacuation_point == 1 && stop_count <= 4){
+              multiplier.push(['rescue_kit', round(1.1 - (stop_count * 0.025))]);
+            } else if(evacuation_point == 2 && stop_count <= 2){
+              multiplier.push(['rescue_kit', round(1.1 - (stop_count * 0.05))]);
+            } else {
+              multiplier.push(['rescue_kit', 1]);
+            }
+          } else if (evacuation_point == 1 && rescue_kit == 2){
+            if(evacuation_point == 1 && stop_count <= 12){
+              multiplier.push(['rescue_kit', round(1.3 - (stop_count * 0.025))]);
+            } else if(evacuation_point == 2 && stop_count <= 6){
+              multiplier.push(['rescue_kit', round(1.3 - (stop_count * 0.05))]);
+            } else {
+              multiplier.push(['rescue_kit', 1]);
+            }
+          } else if (evacuation_point == 2 && rescue_kit == 1){
+            if(evacuation_point == 1 && stop_count <= 8){
+              multiplier.push(['rescue_kit', round(1.2 - (stop_count * 0.025))]);
+            } else if(evacuation_point == 2 && stop_count <= 4){
+              multiplier.push(['rescue_kit', round(1.2 - (stop_count * 0.05))]);
+            } else {
+              multiplier.push(['rescue_kit', 1]);
+            }
+          } else if (evacuation_point == 2 && rescue_kit == 2){
+            if(evacuation_point == 1 && stop_count <= 24){
+              multiplier.push(['rescue_kit', round(1.6 - (stop_count * 0.025))]);
+            } else if(evacuation_point == 2 && stop_count <= 12){
+              multiplier.push(['rescue_kit', round(1.6 - (stop_count * 0.05))]);
+            } else {
+              multiplier.push(['rescue_kit', 1]);
+            }
+          }
+          rescue_kit_set = 1;
+        } else {
+          window.alert('レスキューキットはすでに置かれています。')
+        }
+        show_multiplier();
+      } else {
+        window.alert('先に競技を開始してください。')
       }
     });
 
@@ -1238,6 +1347,22 @@
             import_project();
             contextmenu();
             count_tile();
+            document.getElementById('level').className = "active";
+            document.getElementById('overlay').className = "active";
+            document.getElementById('level_decide').addEventListener('click', () => {
+              if(document.getElementsByName('evacuation_point')[0].checked){
+                evacuation_point = 1;
+              } else {
+                evacuation_point = 2;
+              }
+              if(document.getElementsByName('rescue_kit')[0].checked){
+                rescue_kit = 1;
+              } else {
+                rescue_kit = 2;
+              }
+              document.getElementById('level').className = "";
+              document.getElementById('overlay').className = "";
+            });
           }
         }
       });
@@ -1359,7 +1484,9 @@
       if (document.getElementsByClassName('menu')[0].style.display == 'none'){
         window.alert('この機能は走行順序を決定するとご利用いただけます。');
       } else {
-        document.getElementById('statistics_score').textContent = score + '点';
+        if(document.getElementById("timer_stop").disabled == true){}else{
+          document.getElementById('statistics_score').textContent = score + '点';
+        }
         document.getElementById('statistics_bump').textContent = '5点 × ' + cleared_bumps + '個 =  ' + cleared_bumps * 5 + '点';
         document.getElementById('statistics_obstacle').textContent = '15点 × ' + cleared_obstacles + '個 =  ' + cleared_obstacles * 15 + '点';
         document.getElementById('statistics_slope').textContent = '10点 × ' + cleared_slopes + '個 =  ' + cleared_slopes * 10 + '点';
