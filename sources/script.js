@@ -461,9 +461,9 @@
         download.href = url;
         //download属性にファイル名を指定する
         if(what_browser == 'Safari'){
-          download.download = filename;
+          download.download = filename + '.csv';
         } else {
-          download.download = filename + ".rrl";
+          download.download = filename + '.rrl';
         }
         //作成したリンクをクリックしてダウンロードを実行する
         download.click();

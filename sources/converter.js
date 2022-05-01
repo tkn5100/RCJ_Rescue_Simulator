@@ -73,7 +73,7 @@
       setTimeout(arrow_line, 1125 ,90)
       //download属性にファイル名を指定する
       if(what_browser == 'Safari'){
-        download.download = file_name.slice(0, -4) + '_converted';
+        download.download = file_name.slice(0, -4) + '_converted.csv';
       } else {
         download.download = file_name.slice(0, -4) + '_converted.rrl';
       }
