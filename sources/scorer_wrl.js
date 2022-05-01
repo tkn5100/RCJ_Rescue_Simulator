@@ -1283,7 +1283,7 @@
       document.getElementsByClassName('menu_start')[0].style.display = 'block';
       document.getElementsByClassName('menu')[0].style.display = 'none';
       for (let index = 0; index < imgLen; index++) {
-        $img[index].onclick = function (e) {
+        $img[index].addEventListener('click', () => {
           if(route.at(-1) == e.target){
             window.alert('同じタイルを連続で通過することはできません。')
           } else {
@@ -1314,7 +1314,7 @@
               }
             }
           }
-        }
+        });
       }
       document.getElementById('route_finish').addEventListener('click', () => {
         if(window.confirm('走行順序を決定してもよろしいですか?')){
