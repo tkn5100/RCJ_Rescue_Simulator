@@ -1120,7 +1120,7 @@
         }
         data = 'solid 1px #FF3366';
         $tools[1].src = '../img/tools/floor1.svg';
-        $tools[1].nextElementSibling.textContent = '1階部分の作成';
+        $tools[1].nextElementSibling.textContent = '1階部分の表示';
         $tools[1].dataset.one = 2;
         nomal_guide();
       }else{
@@ -1133,7 +1133,7 @@
         }
         data = 'none';
         $tools[1].src = '../img/tools/floor2.svg';
-        $tools[1].nextElementSibling.textContent = '2階・半2階部分の作成';
+        $tools[1].nextElementSibling.textContent = '2階・半2階部分の表示';
         $tools[1].dataset.one = 1;
         nomal_guide();
       }

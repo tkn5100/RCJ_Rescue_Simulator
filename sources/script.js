@@ -1097,6 +1097,4 @@
     document.body.addEventListener('click',function (){
       $contextmenu.style.display="none";
     });
-
-
   })();
