@@ -220,42 +220,48 @@
     <h3 class="help_h3">使い方</h3>
     <img src="../img/help/WRL得点計算_競技中.png" alt="画面" class="help_img">
     <p class="help-sentence">競技中の画面の一例。</p>
-    <p class="help-sentence">オレンジ色に光っているものはハザードです。クリックすると詳細が表示され、「クリア」を押すと得点が加算されます。すでにクリアしている場合、ハザードは灰色に光ります。競技の進行は、タイルやハザードをクリックするのではなく、すべて左側のメニューで行います。</p>
+    <p class="help-sentence">オレンジ色に光っているものは得点要素です。すでにクリアしている場合、ハザードは光りません。競技の進行は、タイルやハザードをクリックするのではなく、すべて左側のメニューで行います。</p>
     <h4 class="help_h4">競技開始・終了</h4>
     <p class="help-sentence">「競技開始」を押すとタイマーがスタートし、無条件に5点加算されます。「競技終了」を押すとタイマーがストップします。もし競技が続行しているのに8分が経過した場合、競技を終了するようアラートが出ます。</p>
     <h4 class="help_h4">現在走行中のタイル</h4>
     <img src="../img/help/WRL得点計算_現在走行中のタイル.png" alt="画面" class="help_img" style="width: 40vw;">
     <p class="help-sentence">現在ロボットが走行中のタイル)には、青の影がついています(場合によっては見えにくいこともあります)。</p>
-    <p class="help-sentence">①得点要素が何もない場合は「通常のタイル」、得点要素があればその名前が表示されます。</p>
-    <p class="help-sentence">②そのタイルにある得点要素をすべてクリアした場合の得点合計が表示されます(チェックマーカーの得点も含む)。</p>
-    <p class="help-sentence">③ハザードがあればクリア状況が灰色文字・下線で表示されます。</p>
-    <p class="help-sentence">④競技進行の停止数が灰色文字・下線で表示されます。</p>
-    <p class="help-sentence">⑤現在走行中のタイルと同じものを拡大表示しています。</p>
-    <p class="help-sentence">⑥ハザードがあれば、それに関連するツールが表示されます。</p>
-    <p class="help-sentence">⑦競技を進めるうえで必須のツールが常に表示されています。</p>
-    <h4 class="help_h4">現在走行中のタイル ⑦常時表示しているツール</h4>
-    <h3 class="help-sentence" style="text-indent: 0; margin-top: 10px;"><img src="../img/scorer/pass.svg" class="help_icon">このタイルを通過ボタン</h3>
-    <p class="help-sentence">現在走行中のタイルを通過扱いにします。チェックマーカーがある場合は、それを押した時点で得点が加算されます(詳細は下の「チェックポイントでの得点」を参照)。チェックポイントでの得点加算後は、そのタイルには戻れません。</p>
-    <h3 class="help-sentence" style="text-indent: 0; margin-top: 10px;"><img src="../img/scorer/pass_cancel.svg" class="help_icon">直前の通過を取り消しボタン</h3>
-    <p class="help-sentence">直前の通過をもとに戻します。ハザードの状態は元のまま維持されています。プログラムの誤動作防止のため、2つ以上前のタイルには戻れません。</p>
-    <h3 class="help-sentence" style="text-indent: 0; margin-top: 10px;"><img src="../img/scorer/stop.svg" class="help_icon">このタイルで競技進行の停止ボタン</h3>
-    <p class="help-sentence">このタイルで競技進行の停止を行います。タイルの右上に赤丸が表示され、そのタイルでの競技進行の停止数が表示されます。もし避難ゾーンを出た後最初のチェックポイント(ない場合ゴール)に着いていなければ、乗数から数値(避難場所のレベルによる)が引かれます。</p>
-    <h3 class="help-sentence" style="text-indent: 0; margin-top: 10px;"><img src="../img/scorer/stop_cancel.svg" class="help_icon">このタイルの競技進行の停止を1回取り消しボタン</h3>
-    <p class="help-sentence">このタイルの競技進行の停止を1回取り消します。乗数も元に戻ります。</p>
-    <h4 class="help_h4">現在走行中のタイル ⑥ハザードのためのツール</h4>
-    <h3 class="help-sentence" style="text-indent: 0; margin-top: 10px;"><img src="../img/scorer/gap_1_clear.svg" class="help_icon"><img src="../img/scorer/gap_1_cancel.svg" class="help_icon"><img src="../img/scorer/gap_2_clear.svg" class="help_icon"><img src="../img/scorer/gap_2_cancel.svg" class="help_icon">ギャップのクリア・取り消しボタン</h3>
-    <p class="help-sentence">ギャップが含まれるタイルの場合のみ表示され、ギャップのクリア・取り消しを行います。1タイルに2つギャップがある場合、先にロボットが通るほうが1つ目と考えて「クリア」を押してください。2つクリアした後は「取り消し」ボタンが1個のみ表示され、クリックすると2つ分が取り消されます。</p>
-    <h3 class="help-sentence" style="text-indent: 0; margin-top: 10px;"><img src="../img/scorer/obstacle_clear.svg" class="help_icon"><img src="../img/scorer/obstacle_cancel.svg" class="help_icon">障害物のクリア・取り消しボタン</h3>
+    <h4 class="help_h4">①タイルの要約</h4>
+    <p class="help-sentence">得点要素が何もない場合は「通常のタイル」、得点要素があればその名前が表示されます。</p>
+    <h4 class="help_h4">②得点合計</h4>
+    <p class="help-sentence">そのタイルにある得点要素をすべてクリアした場合の得点合計が表示されます(チェックマーカーの得点も含む)。</p>
+    <h4 class="help_h4">③クリア状況</h4>
+    <p class="help-sentence">ハザードがあればクリア状況が灰色文字・下線で表示されます。</p>
+    <h4 class="help_h4">④競技進行の停止数</h4>
+    <p class="help-sentence">競技進行の停止数が灰色文字・下線で表示されます。</p>
+    <h4 class="help_h4">⑤走行中のタイルの画像</h4>
+    <p class="help-sentence">現在走行中のタイルと同じものを拡大表示しています。</p>
+    <h4 class="help_h4">⑥ハザードを扱うツール</h4>
+    <p class="help-sentence">ハザードがあれば、それに関連するツールが表示されます。</p>
+    <h3 class="help-sentence" style="text-indent: 0; margin-top: 10px;"><img src="../img/scorer/gap_1_clear.svg" class="help_icon"><img src="../img/scorer/gap_1_cancel.svg" class="help_icon"><img src="../img/scorer/gap_2_clear.svg" class="help_icon"><img src="../img/scorer/gap_2_cancel.svg" class="help_icon">ギャップのクリア・取り消し</h3>
+    <p class="help-sentence">ギャップが含まれるタイルの場合のみ表示され、ギャップのクリア・取り消しを行います。1タイルに2つギャップがある場合、先にロボットが通るほうが1つ目と考えて「クリア」を押してください。2つクリアした後は「取り消し」が1個のみ表示され、クリックすると2つ分が取り消されます。</p>
+    <h3 class="help-sentence" style="text-indent: 0; margin-top: 10px;"><img src="../img/scorer/obstacle_clear.svg" class="help_icon"><img src="../img/scorer/obstacle_cancel.svg" class="help_icon">障害物のクリア・取り消し</h3>
     <p class="help-sentence">障害物が含まれるタイルの場合のみ表示され、障害物のクリア・取り消しを行います。</p>
-    <h3 class="help-sentence" style="text-indent: 0; margin-top: 10px;"><img src="../img/scorer/bump_1_clear.svg" class="help_icon"><img src="../img/scorer/bump_1_cancel.svg" class="help_icon"><img src="../img/scorer/bump_2_clear.svg" class="help_icon"><img src="../img/scorer/bump_2_cancel.svg" class="help_icon"><img src="../img/scorer/bump_3_clear.svg" class="help_icon"><img src="../img/scorer/bump_3_cancel.svg" class="help_icon"><img src="../img/scorer/bump_4_clear.svg" class="help_icon"><img src="../img/scorer/bump_4_cancel.svg" class="help_icon">バンプのクリア・取り消しボタン</h3>
+    <h3 class="help-sentence" style="text-indent: 0; margin-top: 10px;"><img src="../img/scorer/bump_1_clear.svg" class="help_icon"><img src="../img/scorer/bump_1_cancel.svg" class="help_icon"><img src="../img/scorer/bump_2_clear.svg" class="help_icon"><img src="../img/scorer/bump_2_cancel.svg" class="help_icon"><img src="../img/scorer/bump_3_clear.svg" class="help_icon"><img src="../img/scorer/bump_3_cancel.svg" class="help_icon"><img src="../img/scorer/bump_4_clear.svg" class="help_icon"><img src="../img/scorer/bump_4_cancel.svg" class="help_icon">バンプのクリア・取り消し</h3>
     <p class="help-sentence">バンプが含まれるタイルの場合のみ表示され、バンプのクリア・取り消しを行います。バンプの番号は、コート作成時のバンプ作成画面で指定した番号です。ただし、各バンプは独立してクリア・未クリアの状態を扱っているため、必ずしも順番通りにクリアする必要はありません。</p>
-    <h3 class="help-sentence" style="text-indent: 0; margin-top: 10px;"><img src="../img/scorer/slope_clear.svg" class="help_icon"><img src="../img/scorer/slope_clear_cancel.svg" class="help_icon">傾斜路のクリア・取り消しボタン</h3>
+    <h3 class="help-sentence" style="text-indent: 0; margin-top: 10px;"><img src="../img/scorer/slope_clear.svg" class="help_icon"><img src="../img/scorer/slope_clear_cancel.svg" class="help_icon">傾斜路のクリア・取り消し</h3>
     <p class="help-sentence">傾斜路が含まれるタイルの場合のみ表示され、傾斜路のクリア・取り消しを行います。</p>
-    <h3 class="help-sentence" style="text-indent: 0; margin-top: 10px;"><img src="../img/scorer/slope_skip.svg" class="help_icon"><img src="../img/scorer/slope_skip_cancel.svg" class="help_icon">傾斜路のスキップ・取り消しボタン</h3>
-    <p class="help-sentence">傾斜路が含まれるタイルの場合のみ表示され、傾斜路のスキップ・取り消しを行います。傾斜路は1タイルごとに認識しますが、連続している傾斜路は2タイルで10点と定められているので、その場合はどちらかのタイルで「傾斜路をスキップ」ボタンを押してください。</p>
-    <h3 class="help-sentence" style="text-indent: 0; margin-top: 10px;"><img src="../img/scorer/cross_1_clear.svg" class="help_icon"><img src="../img/scorer/cross_1_cancel.svg" class="help_icon"><img src="../img/scorer/cross_2_clear.svg" class="help_icon"><img src="../img/scorer/cross_2_cancel.svg" class="help_icon">交差点のクリア・取り消しボタン</h3>
-    <p class="help-sentence">交差点が含まれるタイルの場合のみ表示され、ギャップのクリア・取り消しを行います。1タイルに2つ交差点がある場合、先にロボットが通るほうが1つ目と考えて「クリア」を押してください。2つクリアした後は「取り消し」ボタンが1個のみ表示され、クリックすると2つ分が取り消されます。</p>
-
+    <h3 class="help-sentence" style="text-indent: 0; margin-top: 10px;"><img src="../img/scorer/slope_skip.svg" class="help_icon"><img src="../img/scorer/slope_skip_cancel.svg" class="help_icon">傾斜路のスキップ・取り消し</h3>
+    <p class="help-sentence">傾斜路が含まれるタイルの場合のみ表示され、傾斜路のスキップ・取り消しを行います。傾斜路は1タイルごとに認識しますが、連続している傾斜路は2タイルで10点と定められているので、その場合はどちらかのタイルで「傾斜路をスキップ」を押してください。</p>
+    <h3 class="help-sentence" style="text-indent: 0; margin-top: 10px;"><img src="../img/scorer/cross_1_clear.svg" class="help_icon"><img src="../img/scorer/cross_1_cancel.svg" class="help_icon"><img src="../img/scorer/cross_2_clear.svg" class="help_icon"><img src="../img/scorer/cross_2_cancel.svg" class="help_icon">交差点のクリア・取り消し</h3>
+    <p class="help-sentence">交差点が含まれるタイルの場合のみ表示され、ギャップのクリア・取り消しを行います。1タイルに2つ交差点がある場合、先にロボットが通るほうが1つ目と考えて「クリア」を押してください。2つクリアした後は「取り消し」が1個のみ表示され、クリックすると2つ分が取り消されます。</p>
+    <h3 class="help-sentence" style="text-indent: 0; margin-top: 10px;"><img src="../img/scorer/seesaw_clear.svg" class="help_icon"><img src="../img/scorer/seesaw_cancel.svg" class="help_icon">シーソーのクリア・取り消し</h3>
+    <p class="help-sentence">シーソーが含まれるタイルの場合のみ表示され、シーソーのクリア・取り消しを行います。</p>
+    <h4 class="help_h4">⑦ライントレースを進めるツール</h4>
+    <p class="help-sentence">ライントレースを進めるためのツールが常に表示されます。</p>
+    <h3 class="help-sentence" style="text-indent: 0; margin-top: 10px;"><img src="../img/scorer/pass.svg" class="help_icon">このタイルを通過</h3>
+    <p class="help-sentence">現在走行中のタイルを通過扱いにします。チェックマーカーがある場合は、それを押した時点で得点が加算されます(詳細は下の「チェックポイントでの得点」を参照)。チェックポイントでの得点加算後は、そのタイルには戻れません。</p>
+    <h3 class="help-sentence" style="text-indent: 0; margin-top: 10px;"><img src="../img/scorer/pass_cancel.svg" class="help_icon">直前の通過を取り消し</h3>
+    <p class="help-sentence">直前の通過をもとに戻します。ハザードの状態は元のまま維持されています。プログラムの誤動作防止のため、2つ以上前のタイルには戻れません。</p>
+    <h3 class="help-sentence" style="text-indent: 0; margin-top: 10px;"><img src="../img/scorer/stop.svg" class="help_icon">このタイルで競技進行の停止</h3>
+    <p class="help-sentence">このタイルで競技進行の停止を行います。タイルの右上に赤丸が表示され、そのタイルでの競技進行の停止数が表示されます。もし避難ゾーンを出た後最初のチェックポイント(ない場合ゴール)に着いていなければ、乗数から数値(避難場所のレベルによる)が引かれます。</p>
+    <h3 class="help-sentence" style="text-indent: 0; margin-top: 10px;"><img src="../img/scorer/stop_cancel.svg" class="help_icon">このタイルの競技進行の停止を1回取り消し</h3>
+    <p class="help-sentence">このタイルの競技進行の停止を1回取り消します。乗数も元に戻ります。</p>
     <h4 class="help_h4">チェックポイントでの得点</h4>
     <p class="help-sentence">チェックマーカーがあるタイルを通過すると、それまでの通過済みタイル数と競技進行の停止数から得られる点数を加算し、通過したタイルは白色になります。白色になったタイルでは、そこにある得点要素も含め得点の変更ができなくなります。</p>
     <p class="help-sentence">ロボットが2回以上通過するタイルは、チェックポイントを通過しても、その競技中の最後の通過まで白色になりません。</p>
