@@ -531,7 +531,7 @@ td{
         font-size: 15px;
         color: #FFFFFF;
         background-color: #000000;
-        cursor: normal;
+        cursor: default;
     }
     #statistics > h2:nth-of-type(4){
         display: none;

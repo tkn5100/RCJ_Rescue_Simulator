@@ -855,12 +855,12 @@
       $img[index].addEventListener('touchstart', (e) => {
         long_tap_timer = setInterval(() => {
           count_tap++;
-          if (count_tap > 10 && contextmenu_showed == 0){
+          if (count_tap > 5 && contextmenu_showed == 0){
             contextmenu_show(e.changedTouches[0]);
             contextmenu_showed = 1;
           }
         }, 100);
-      })
+      },{passive:true})
       $img[index].addEventListener('touchend', () => {
         clearInterval(long_tap_timer);
         count_tap = 0;

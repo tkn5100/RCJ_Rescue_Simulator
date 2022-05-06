@@ -44,6 +44,7 @@
     let cleared_gaps = 0;
     let cleared_slopes = 0;
     let cleared_crossings = 0;
+    let cleared_seesaws = 0;
     let first_floor = [];
     let second_floor = [];
     let final_score = '';
@@ -192,6 +193,8 @@
       $line_tools[19].style.display = "none";
       $line_tools[20].style.display = "none";
       $line_tools[21].style.display = "none";
+      $line_tools[22].style.display = "none";
+      $line_tools[23].style.display = "none";
       if(document.querySelector('#tile_now_img > img').dataset.check == 1){
         document.querySelector('#tile_now_img > img').nextElementSibling.remove();
         document.querySelector('#tile_now_img > img').dataset.check = 0;
@@ -264,7 +267,6 @@
         document.querySelector('#tile_now_img > img').style.boxShadow = '0 0 5px #C2EEFF';
         document.getElementById('tile_now_name').textContent = '通常のタイル';
         document.getElementById('tile_now_score').textContent = Number(document.getElementById('tile_now_score').textContent) + 15;
-        document.getElementById('tile_now_status').textContent = '';
         if (element.nextElementSibling.dataset.cleared == "0"){
           document.getElementById('tile_now_status').textContent = 'これからクリア';
           $line_tools[4].style.display = "block";
@@ -358,9 +360,11 @@
         document.getElementById('tile_now_score').textContent = Number(document.getElementById('tile_now_score').textContent) + 10;
         document.querySelector('#tile_now_img > img').style.boxShadow = '0 0 5px #FFD700';
         if (element.dataset.cleared == "0"){
+          element.classList.add('hazard');
           document.getElementById('tile_now_status').textContent = 'これからクリア';
           $line_tools[0].style.display = "block";
         } else {
+          element.classList.remove('hazard');
           document.querySelector('#tile_now_img > img').style.boxShadow = '0 0 5px #888888';
           document.getElementById('tile_now_status').textContent = 'クリア済み';
           $line_tools[1].style.display = "block";
@@ -372,14 +376,17 @@
         document.getElementById('tile_now_score').textContent = Number(document.getElementById('tile_now_score').textContent) + 20;
         document.querySelector('#tile_now_img > img').style.boxShadow = '0 0 5px #FFD700';
         if (element.dataset.cleared == "0"){
+          element.classList.add('hazard');
           document.getElementById('tile_now_status').textContent = 'これからクリア';
           $line_tools[0].style.display = "block";
           $line_tools[2].style.display = "block";
         } else if (element.dataset.cleared == '1'){
+          element.classList.add('hazard');
           document.getElementById('tile_now_status').textContent = '1つクリア済み';
           $line_tools[1].style.display = "block";
           $line_tools[2].style.display = "block";
         } else if (element.dataset.cleared == '2'){
+          element.classList.remove('hazard');
           document.querySelector('#tile_now_img > img').style.boxShadow = '0 0 5px #888888';
           document.getElementById('tile_now_status').textContent = 'すべてクリア済み';
           $line_tools[1].style.display = "block";
@@ -392,15 +399,18 @@
         document.getElementById('tile_now_name').textContent = '傾斜路';
         document.getElementById('tile_now_score').textContent = Number(document.getElementById('tile_now_score').textContent) + 10;
         if (element.dataset.cleared == "0"){
+          element.classList.add('hazard');
           document.querySelector('#tile_now_img > img').style.boxShadow = '0 0 5px #FFD700';
           document.getElementById('tile_now_status').textContent = 'これからクリア・スキップ';
           $line_tools[14].style.display = "block";
           $line_tools[16].style.display = "block";
         } else if (element.dataset.cleared == "skipped"){
+          element.classList.remove('hazard');
           document.querySelector('#tile_now_img > img').style.boxShadow = '0 0 5px #888888';
           document.getElementById('tile_now_status').textContent = 'スキップ済み';
           $line_tools[17].style.display = "block";
         } else {
+          element.classList.remove('hazard');
           document.querySelector('#tile_now_img > img').style.boxShadow = '0 0 5px #888888';
           document.getElementById('tile_now_status').textContent = 'クリア済み';
           $line_tools[15].style.display = "block";
@@ -413,10 +423,12 @@
         document.getElementById('tile_now_score').textContent = Number(document.getElementById('tile_now_score').textContent) + 10;
         document.querySelector('#tile_now_img > img').style.boxShadow = '0 0 5px #FFD700';
         if (element.dataset.cleared== "0"){
+          element.classList.add('hazard');
           document.getElementById('tile_now_status').textContent = 'これからクリア';
           $line_tools[18].style.display = "block";
         } else if(element.dataset.cleared== "1"){
-          document.querySelector('#tile_now_img > img').style.boxShadow = '0 0 5px #FFD700';
+          element.classList.remove('hazard');
+          document.querySelector('#tile_now_img > img').style.boxShadow = '0 0 5px #888888';
           document.getElementById('tile_now_status').textContent = 'クリア済み';
           $line_tools[19].style.display = "block";
         }
@@ -427,18 +439,38 @@
         document.getElementById('tile_now_score').textContent = Number(document.getElementById('tile_now_score').textContent) + 20;
         document.querySelector('#tile_now_img > img').style.boxShadow = '0 0 5px #FFD700';
         if (element.dataset.cleared == "0"){
+          element.classList.add('hazard');
           document.getElementById('tile_now_status').textContent = 'これからクリア';
           $line_tools[18].style.display = "block";
           $line_tools[20].style.display = "block";
         } else if (element.dataset.cleared == '1'){
+          element.classList.add('hazard');
           document.getElementById('tile_now_status').textContent = '1つクリア済み';
           $line_tools[19].style.display = "block";
           $line_tools[20].style.display = "block";
         } else if (element.dataset.cleared == '2'){
+          element.classList.remove('hazard');
           document.querySelector('#tile_now_img > img').style.boxShadow = '0 0 5px #888888';
           document.getElementById('tile_now_status').textContent = 'すべてクリア済み';
           $line_tools[19].style.display = "block";
           $line_tools[21].style.display = "block";
+        }
+      }
+      if (element.src.slice(-6) == 'se.png'){
+        not_default = 1;
+        //シーソー
+        document.getElementById('tile_now_name').textContent = 'シーソータイル';
+        document.getElementById('tile_now_score').textContent = Number(document.getElementById('tile_now_score').textContent) + 15;
+        if (element.dataset.cleared == "0"){
+          element.classList.add('hazard');
+          document.querySelector('#tile_now_img > img').style.boxShadow = '0 0 5px #FFD700';
+          document.getElementById('tile_now_status').textContent = 'これからクリア';
+          $line_tools[22].style.display = "block";
+        } else {
+          element.classList.remove('hazard');
+          document.querySelector('#tile_now_img > img').style.boxShadow = '0 0 5px #888888';
+          document.getElementById('tile_now_status').textContent = 'クリア済み';
+          $line_tools[23].style.display = "block";
         }
       }
       if (not_default == 0){
@@ -454,7 +486,7 @@
     let redo_pass = 0; //直前にしか戻れないようにする。チェックポイントを超えて戻ることを防ぐため。
     function count_tile(){
       tile_now(route[0]);
-      $line_tools[22].addEventListener('click', () => {
+      $line_tools[24].addEventListener('click', () => {
         if (document.getElementById("timer_start").hasAttribute('disabled')){
           redo_pass = 0;
           route[count_index].style.backgroundColor = "#C2EEFF";
@@ -584,7 +616,7 @@
           window.alert('先に競技を開始してください。')
         }
       });
-      $line_tools[23].addEventListener('click', () => {
+      $line_tools[25].addEventListener('click', () => {
         if (document.getElementById("timer_start").hasAttribute('disabled')){
           if (redo_pass == 1) {
             window.alert('取り消すことができるのは直前の操作のみです。')
@@ -605,7 +637,7 @@
           window.alert('先に競技を開始してください。')
         }
       });
-      $line_tools[24].addEventListener('click', () => {
+      $line_tools[26].addEventListener('click', () => {
         if (document.getElementById("timer_start").hasAttribute('disabled')){
           if (route[count_index].dataset.stopped == 0){
             route[count_index].dataset.stopped = "1";
@@ -639,7 +671,7 @@
           window.alert('先に競技を開始してください。')
         }
       });
-      $line_tools[25].addEventListener('click', () => {
+      $line_tools[27].addEventListener('click', () => {
         if (document.getElementById("timer_start").hasAttribute('disabled')){
           if (route[count_index].dataset.stopped == 0){
             window.alert('このタイルでは競技進行の停止をしたことがありません。')
@@ -924,6 +956,27 @@
             lose_points(10);
             route[count_index].dataset.cleared = "1";
             cleared_crossings--;
+          tile_now(route[count_index]);
+        } else {
+          window.alert('先に競技を開始してください。')
+        }
+      });
+      //シーソー
+      $line_tools[22].addEventListener('click', () => {
+        if (document.getElementById("timer_start").hasAttribute('disabled')){
+          route[count_index].dataset.cleared = "1";
+          get_points(15);
+          cleared_seesaws++;
+          tile_now(route[count_index]);
+        } else {
+          window.alert('先に競技を開始してください。')
+        }
+      });
+      $line_tools[23].addEventListener('click', () => {
+        if (document.getElementById("timer_start").hasAttribute('disabled')){
+          route[count_index].dataset.cleared = "0";
+          lose_points(15);
+          cleared_seesaws--;
           tile_now(route[count_index]);
         } else {
           window.alert('先に競技を開始してください。')
@@ -1371,33 +1424,30 @@
     //プロジェクトの読み込み
     function import_project() {
       for (let index = 0; index < imgLen; index++) {
+        //特にハザードごとに分ける理由はないが見やすいので分けた。
         if (input_data_course[index + 1] == '../img/simulator/03.png' || input_data_course[index + 1] == '../img/simulator/04.png' || input_data_course[index + 1] == '../img/simulator/33.png'){
-          //十字路
+          //ギャップ
+          $img[index].classList.add('hazard');
+        }
+        if (input_data_border[index + 1] == 'solid 1px #663366' || input_data_border[index + 1] == 'solid 1px #CC3366'){
+          //傾斜路
+          $img[index].classList.add('hazard');
+        }
+        if (input_data_course[index + 1] == '../img/simulator/aa.png' || input_data_course[index + 1] == '../img/simulator/ab.png' || input_data_course[index + 1] == '../img/simulator/ac.png' || input_data_course[index + 1] == '../img/simulator/ad.png' || input_data_course[index + 1] == '../img/simulator/ae.png' || input_data_course[index + 1] == '../img/simulator/af.png' || input_data_course[index + 1] == '../img/simulator/ag.png' || input_data_course[index + 1] == '../img/simulator/ah.png'){
+          //交差点(1)
+          $img[index].classList.add('hazard');
+        }
+        if (input_data_course[index + 1] == '../img/simulator/ai.png' || input_data_course[index + 1] == '../img/simulator/aj.png' || input_data_course[index + 1] == '../img/simulator/ak.png' || input_data_course[index + 1] == '../img/simulator/al.png'){
+          //交差点(2)
+          $img[index].classList.add('hazard');
+        }
+        if (input_data_course[index + 1] == '../img/simulator/se.png'){
+          //シーソー
           $img[index].classList.add('hazard');
         }
         $img[index].dataset.turn = input_data_turn[index + 1];
         $img[index].style.transform = 'rotate(' + input_data_turn[index + 1] + 'deg)';
         $img[index].style.border = input_data_border[index + 1];
-        if (input_data_border[index + 1] == 'solid 1px #663366' || input_data_border[index + 1] == 'solid 1px #CC3366'){
-          $img[index].classList.add('hazard');
-        }
-        //障害物
-        if(input_data_obstacle[index + 1] == 1){
-          $img[index].nextElementSibling.addEventListener('click', function(e){hazard_dialog(e)});
-        }
-        //バンプ
-        if(input_data_bump1[index + 1] != 0){
-          $img[index].nextElementSibling.addEventListener('click', function(e){hazard_dialog(e)});
-        }
-        if(input_data_bump2[index + 1] != 0){
-          $img[index].nextElementSibling.nextElementSibling.addEventListener('click', function(e){hazard_dialog(e)});
-        }
-        if(input_data_bump3[index + 1] != 0){
-          $img[index].nextElementSibling.nextElementSibling.nextElementSibling.addEventListener('click', function(e){hazard_dialog(e)});
-        }
-        if(input_data_bump4[index + 1] != 0){
-          $img[index].nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.addEventListener('click', function(e){hazard_dialog(e)});
-        }
       };
       document.getElementById('input_file').value = '';
     }
@@ -1640,12 +1690,12 @@
         $img[index].addEventListener('touchstart', (e) => {
           long_tap_timer = setInterval(() => {
             count_tap++;
-            if (count_tap > 10 && contextmenu_showed == 0){
+            if (count_tap > 5 && contextmenu_showed == 0){
               contextmenu_show(e.changedTouches[0]);
               contextmenu_showed = 1;
             }
           }, 100);
-        })
+        },{passive:true})
         $img[index].addEventListener('touchend', () => {
           clearInterval(long_tap_timer);
           count_tap = 0;
