@@ -823,7 +823,13 @@
           if (csv_arrays[0] == "v4.4.0,"){
             window.alert('このファイルは最新版です。')
           } else if (csv_arrays[0] == "v4.0.0," || csv_arrays[0] == "v4.1.0," || csv_arrays[0] == "v4.1.1," || csv_arrays[0] == "v4.2.0," || csv_arrays[0] == "v4.2.1," || csv_arrays[0] == "v4.2.2," || csv_arrays[0] == "v4.3.0," || csv_arrays[0] == "v4.3.1,"){
-            four_to_Four(file.name);
+            if (csv_arrays[0] == "v4.3.0," || csv_arrays[0] == "v4.3.1,") {
+              if(window.confirm('v4.3.0とv4.3.1で作成したファイルは、2階部分がうまく保存されていません。このまま変換しますか?')){
+                four_to_Four(file.name);
+              }
+            } else {
+              four_to_Four(file.name);
+            }
           } else if (csv_arrays[0] == "v3.0.0," || csv_arrays[0] == "v3.0.1," || csv_arrays[0] == "v3.1.0," || csv_arrays[0] == "v3.1.1,"){
             three_to_Four(file.name);
           } else if(csv_arrays[0] == "v2.0.2," || csv_arrays[0] == "v2.0.1," || csv_arrays[0] == "v2.0.0,"){

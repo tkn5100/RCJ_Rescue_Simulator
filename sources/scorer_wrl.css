@@ -519,6 +519,9 @@ td{
         transition: none !important;
         z-index: 1 !important;
     }
+    #statistics > div{
+        overflow-y: visible !important;
+    }
     #statistics > h1{
         display: none;
     }
@@ -533,7 +536,7 @@ td{
         background-color: #000000;
         cursor: default;
     }
-    #statistics > h2:nth-of-type(4){
+    #statistics > div > h2:nth-of-type(5){
         display: none;
     }
     #statistics_score{
@@ -769,10 +772,13 @@ td{
     font-weight: 700;
     margin-bottom: 2vw;
 }
-#rule > h2, #statistics > h2{
+#rule > div > h2, #statistics > div > h2{
     font-size: 1.5vw;
     font-weight: 500;
     margin-top: 1vw;
+}
+#rule > div > ul > li{
+    text-indent: 1em;
 }
 #rule.active, #statistics.active{
     visibility: visible;

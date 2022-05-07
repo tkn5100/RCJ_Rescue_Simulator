@@ -38,21 +38,38 @@
     </div>
     <div id="rule">
       <h1>得点要素の得点一覧</h1>
-      <p>詳細な規定は、日本リーグレスキューの2022ルールをご覧ください。</p>
-      <h2>ライントレース</h2>
-      <p>1回目　 : 5点/タイル</p>
-      <p>2回目　 : 3点/タイル</p>
-      <p>3回目　 : 1点/タイル</p>
-      <p>4回目～ : 0点/タイル</p>
-      <h2>ハザード</h2>
-      <p>障害物　 : 15点</p>
-      <p>ギャップ : 10点</p>
-      <p>傾斜路　 : 10点</p>
-      <p>バンプ　 :  5点</p>
-      <h2>避難ゾーン</h2>
-      <p>黒の被災者救助 : 15点</p>
-      <p>緑の被災者救助 : 30点</p>
-      <p>避難ゾーン脱出 : 30点</p>
+      <div style="max-height: 50vh; overflow-y: scroll;">
+        <p>詳細な規定は、日本リーグレスキューの2022ルールをご覧ください。</p>
+        <h2>ライントレース</h2>
+        <p>1回目　 : 5点/タイル</p>
+        <p>2回目　 : 3点/タイル</p>
+        <p>3回目　 : 1点/タイル</p>
+        <p>4回目～ : 0点/タイル</p>
+        <h2>ハザード</h2>
+        <p>障害物　 : 15点</p>
+        <p>シーソー : 15点</p>
+        <p>ギャップ : 10点</p>
+        <p>傾斜路　 : 10点</p>
+        <p>交差点　 : 10点</p>
+        <p>バンプ　 :  5点</p>
+        <h2>避難ゾーン</h2>
+        <p>1) レベル1の避難場所:</p>
+        <ul>
+          <li>生きている被災者 : x1.2</li>
+          <li>死亡した被災者　 : x1.2 (2人の生きている被災者を救出している場合)</li>
+          <li>レスキューキット(レベル1) : x1.1</li>
+          <li>レスキューキット(レベル2) : x1.3</li>
+        </ul>
+        <p>2) レベル2の避難場所:</p>
+        <ul>
+          <li>生きている被災者 : x1.4</li>
+          <li>死亡した被災者　 : x1.4 (2人の生きている被災者を救出している場合)</li>
+          <li>レスキューキット(レベル1) : x1.2</li>
+          <li>レスキューキット(レベル2) : x1.6</li>
+        </ul>
+        <h2>脱出得点</h2>
+        <p>脱出得点(ゴールタイルに到達) : 60 - 5 × (競技進行の停止数)点</p>
+      </div>
       <button id="rule_close">閉じる</button>
     </div>
     <div id="overlay" class="active"></div>
@@ -140,7 +157,8 @@
           <button class="button_hinan">銀の被災者救助</button>
           <button class="button_hinan">黒の被災者救助</button>
           <button class="button_hinan" style="margin-bottom: 10px;">レスキューキット配置</button>
-          <p id="show_multiplier" style="margin-top: 5px; margin-left: 20px;">現在獲得した乗数:<br>なし</p>
+          <p style="margin-top: 5px; margin-left: 20px;">現在獲得した乗数:</p>
+          <p id="show_multiplier">なし</p>
         </div>
         <div id="attention">
           <h1 class="index">注意</h1>
@@ -149,17 +167,24 @@
         </div>
         <div id="statistics">
           <h1>競技詳細</h1>
-          <h2 style="margin-top: 0;">ライントレース</h2>
-          <div id="statistics_line" style="margin-top: 5px;"></div>
-          <h2>ハザード</h2>
-          <p style="margin-top: 5px;">障害物　 : <span id="statistics_obstacle">15点 × 0個 = 0点</span></p>
-          <p>ギャップ : <span id="statistics_gap">10点 × 0個 = 0点</span></p>
-          <p>傾斜路　 : <span id="statistics_slope">10点 × 0個 = 0点</span></p>
-          <p>バンプ　 : <span id="statistics_bump">5点 × 0個 = 0点</span></p>
-          <h2>脱出得点</h2>
-          <p id="statistics_clear">脱出得点はまだありません</p>
-          <h2>計</h2>
-          <p id="statistics_score">0点</p>
+          <div style="max-height: 50vh; overflow-y: scroll;">
+            <h2 style="margin-top: 0;">ライントレース</h2>
+            <div id="statistics_line" style="margin-top: 5px;"></div>
+            <h2>ハザード</h2>
+            <p style="margin-top: 5px;">障害物　 : <span id="statistics_obstacle">15点 × 0個 = 0点</span></p>
+            <p>シーソー : <span id="statistics_seesaw">15点 × 0個 = 0点</span></p>
+            <p>ギャップ : <span id="statistics_gap">10点 × 0個 = 0点</span></p>
+            <p>傾斜路　 : <span id="statistics_slope">10点 × 0個 = 0点</span></p>
+            <p>交差点　 : <span id="statistics_crossing">10点 × 0個 = 0点</span></p>
+            <p>バンプ　 : <span id="statistics_bump">5点 × 0個 = 0点</span></p>
+            <h2>避難ゾーン</h2>
+            <p>現在獲得した乗数:</p>
+            <p id="statistics_multiplier">なし</p>
+            <h2>脱出得点</h2>
+            <p id="statistics_clear">脱出得点はまだありません</p>
+            <h2>計</h2>
+            <p id="statistics_score">0点</p>
+          </div>
           <button id="statistics_close">閉じる</button>
         </div>
       </div>

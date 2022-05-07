@@ -149,22 +149,26 @@
       document.getElementById('statistics_line').appendChild(newSectionTag);
     });
     document.getElementById('timer_stop').addEventListener('click', function () {
-      clearInterval(TimerID);
-      document.getElementById("timer_stop").disabled = true;
-      document.getElementById("timer_stop").style.backgroundColor = "#888888";
-      document.getElementsByClassName('button_hinan')[0].disabled = true;
-      document.getElementsByClassName('button_hinan')[0].style.backgroundColor = "#888888";
-      document.getElementsByClassName('button_hinan')[1].disabled = true;
-      document.getElementsByClassName('button_hinan')[1].style.backgroundColor = "#888888";
-      document.getElementsByClassName('button_hinan')[2].disabled = true;
-      document.getElementsByClassName('button_hinan')[2].style.backgroundColor = "#888888";
-      for (let index = 0; index < $line_tools.length; index++) {
-        $line_tools[index].style.pointerEvents = 'none';
+      if (document.getElementById("timer_start").hasAttribute('disabled')){
+        clearInterval(TimerID);
+        document.getElementById("timer_stop").disabled = true;
+        document.getElementById("timer_stop").style.backgroundColor = "#888888";
+        document.getElementsByClassName('button_hinan')[0].disabled = true;
+        document.getElementsByClassName('button_hinan')[0].style.backgroundColor = "#888888";
+        document.getElementsByClassName('button_hinan')[1].disabled = true;
+        document.getElementsByClassName('button_hinan')[1].style.backgroundColor = "#888888";
+        document.getElementsByClassName('button_hinan')[2].disabled = true;
+        document.getElementsByClassName('button_hinan')[2].style.backgroundColor = "#888888";
+        for (let index = 0; index < $line_tools.length; index++) {
+          $line_tools[index].style.pointerEvents = 'none';
+        }
+        for (let index = 1; index < imgLen; index++) {
+          $img[index].style.pointerEvents = 'none';
+        }
+        $guide.textContent = '競技を終了しました。コートの編集はロックされています。新しく競技を開始するには再読み込みしてください。';
+      } else {
+        window.alert('競技が開始されていません。')
       }
-      for (let index = 1; index < imgLen; index++) {
-        $img[index].style.pointerEvents = 'none';
-      }
-      $guide.textContent = '競技を終了しました。コートの編集はロックされています。新しく競技を開始するには再読み込みしてください。';
     });
 
 
@@ -578,15 +582,18 @@
               stop_count = 0;
               document.getElementById('stop_count').textContent = '0';
             }
-            //脱出得点
-            final_score = '(ライントレース ' + score + '点 + 脱出得点';
-            if (60 - (5 * stop_count_all) <= 0){
-              window.alert('今までの競技進行の停止総数が12回以上であるため得点はありません。')
-              document.getElementById('statistics_clear').textContent = '脱出済み 0点(競技進行の停止総数が' + stop_count_all + '回であるため)';
-            } else {
-              get_points(60 - (5 * stop_count_all));
-              final_score = final_score + (60 - (5 * stop_count_all)) + '点) × 乗数'
-              document.getElementById('statistics_clear').textContent = '脱出済み 60 - 5 × ' + stop_count_all + ' = ' + (60 - (5 * stop_count_all)) + '点';
+            //ゴールタイルだった時
+            if (route[count_index].src.slice(-6) == 'an.png'){
+              //脱出得点
+              final_score = '(ライントレース ' + score + '点 + 脱出得点';
+              if (60 - (5 * stop_count_all) <= 0){
+                window.alert('今までの競技進行の停止総数が12回以上であるため得点はありません。')
+                document.getElementById('statistics_clear').textContent = '脱出済み 0点(競技進行の停止総数が' + stop_count_all + '回であるため)';
+              } else {
+                get_points(60 - (5 * stop_count_all));
+                final_score = final_score + (60 - (5 * stop_count_all)) + '点) × 乗数'
+                document.getElementById('statistics_clear').textContent = '脱出済み 60 - 5 × ' + stop_count_all + ' = ' + (60 - (5 * stop_count_all)) + '点';
+              }
             }
             //最終タイルでは乗数をかける
             if(multiplier.length > 0){
@@ -986,19 +993,20 @@
 
 
     //避難ゾーン
-    let show_multiplier_innerhtml = '現在獲得した乗数:<br>';
+    let show_multiplier_innerhtml = '';
     function show_multiplier(){
       for (let index = 0; index < multiplier.length; index++){
         if (multiplier[index][0] == 'living'){
-          show_multiplier_innerhtml = show_multiplier_innerhtml + '生きている被災者: x' + multiplier[index][1] + '<br>';
+          show_multiplier_innerhtml = show_multiplier_innerhtml + '生きている被災者 : x' + multiplier[index][1] + '<br>';
         } else if (multiplier[index][0] == 'dead'){
-          show_multiplier_innerhtml = show_multiplier_innerhtml + '死んでいる被災者: x' + multiplier[index][1] + '<br>';
+          show_multiplier_innerhtml = show_multiplier_innerhtml + '死んでいる被災者 : x' + multiplier[index][1] + '<br>';
         } else if (multiplier[index][0] == 'rescue_kit'){
-          show_multiplier_innerhtml = show_multiplier_innerhtml + 'レスキューキット: x' + multiplier[index][1] + '<br>';
+          show_multiplier_innerhtml = show_multiplier_innerhtml + 'レスキューキット : x' + multiplier[index][1] + '<br>';
         }
       }
       document.getElementById('show_multiplier').innerHTML = show_multiplier_innerhtml;
-      show_multiplier_innerhtml = '現在獲得した乗数:<br>';
+      document.getElementById('statistics_multiplier').innerHTML = show_multiplier_innerhtml;
+      show_multiplier_innerhtml = '';
     }
 
     document.getElementsByClassName('button_hinan')[0].addEventListener('click', () => {
@@ -1448,6 +1456,7 @@
         $img[index].dataset.turn = input_data_turn[index + 1];
         $img[index].style.transform = 'rotate(' + input_data_turn[index + 1] + 'deg)';
         $img[index].style.border = input_data_border[index + 1];
+        $img[index].style.cursor = "default";
       };
       document.getElementById('input_file').value = '';
     }
@@ -1462,6 +1471,9 @@
         reader.onload = function () {
           csv_arrays = reader.result.split('\n');
           if (csv_arrays[0] == "v4.0.0," || csv_arrays[0] == "v4.1.0," || csv_arrays[0] == "v4.1.1," || csv_arrays[0] == "v4.2.0," || csv_arrays[0] == "v4.2.1," || csv_arrays[0] == "v4.2.2," || csv_arrays[0] == "v4.3.0," || csv_arrays[0] == "v4.3.1," || csv_arrays[0] == "v4.4.0,") {
+            if (csv_arrays[0] == "v4.3.0," || csv_arrays[0] == "v4.3.1,") {
+              window.alert('v4.3.0とv4.3.1で作成したファイルは、2階部分がうまく保存されていません。')
+            }
             try{
               input_data_show = csv_arrays[1].split(',');
               input_data_course = csv_arrays[2].split(',');
@@ -1537,10 +1549,12 @@
         if(document.getElementById("timer_stop").disabled == true){}else{
           document.getElementById('statistics_score').textContent = score + '点';
         }
-        document.getElementById('statistics_bump').textContent = '5点 × ' + cleared_bumps + '個 =  ' + cleared_bumps * 5 + '点';
         document.getElementById('statistics_obstacle').textContent = '15点 × ' + cleared_obstacles + '個 =  ' + cleared_obstacles * 15 + '点';
-        document.getElementById('statistics_slope').textContent = '10点 × ' + cleared_slopes + '個 =  ' + cleared_slopes * 10 + '点';
+        document.getElementById('statistics_seesaw').textContent = '15点 × ' + cleared_seesaws + '個 =  ' + cleared_seesaws * 15 + '点';
         document.getElementById('statistics_gap').textContent = '10点 × ' + cleared_gaps + '個 =  ' + cleared_gaps * 10 + '点';
+        document.getElementById('statistics_slope').textContent = '10点 × ' + cleared_slopes + '個 =  ' + cleared_slopes * 10 + '点';
+        document.getElementById('statistics_crossing').textContent = '10点 × ' + cleared_crossings + '個 =  ' + cleared_crossings * 10 + '点';
+        document.getElementById('statistics_bump').textContent = '5点 × ' + cleared_bumps + '個 =  ' + cleared_bumps * 5 + '点';
         document.getElementById('overlay').className = "active";
         document.getElementById('statistics').className = "active";
       }
@@ -1553,7 +1567,7 @@
     //プリント
     function print() {
       $tools[4].addEventListener('click', ()=> {
-        window.alert('PDFとして印刷するにはプリンターを「PDFとして保存」にしてください。印刷するときはレイアウトを「横」にしてください。');
+        window.alert('※救出した被災者が多い場合印刷画面に収まらないことがあります。\nPDFとして印刷するにはプリンターを「PDFとして保存」にしてください。印刷するときはレイアウトを「横」にしてください。');
         window.print();
       });
     }
