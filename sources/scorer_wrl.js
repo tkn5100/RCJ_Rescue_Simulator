@@ -7,7 +7,7 @@
     const $start_tools = $doc.getElementsByClassName('start_tools');
     const $line_tools = $doc.getElementsByClassName('line_tools');
     const $table = $doc.getElementsByTagName('table');
-    const $contextmenu_title = document.getElementsByTagName('li');
+    const $contextmenu_title = document.querySelectorAll('#contextmenu > ul > li');
     const $contextmenu = document.getElementById('contextmenu');
     let checkOrUncheck = null;
     let newCheckMarker = null;
@@ -83,12 +83,9 @@
       what_browser = 'FireFox';
     }
 
-    let few = '';
     function round(value){
-      few = '';
       value = Math.round(value*1000) + '';
-      few = ('000' + value.slice(-3)).slice(-3);
-      return Number(value.slice(0,-3) + '.' + few)
+      return Number(value.slice(0,-3) + '.' + value.slice(-3))
     }
 
     function nomal_guide() {
@@ -151,6 +148,10 @@
     document.getElementById('timer_stop').addEventListener('click', function () {
       if (document.getElementById("timer_start").hasAttribute('disabled')){
         clearInterval(TimerID);
+        //乗数をかける
+        if(multiplier.length > 0){
+          multiply_points();
+        }
         document.getElementById("timer_stop").disabled = true;
         document.getElementById("timer_stop").style.backgroundColor = "#888888";
         document.getElementsByClassName('button_hinan')[0].disabled = true;
@@ -357,6 +358,9 @@
           }
         }
       }
+      if(window.innerWidth < 920){
+        less_920();
+      }
       if (element.src.slice(-6) == '03.png') {
         not_default = 1;
         //ギャップ1個
@@ -540,7 +544,9 @@
               nowSection++;
               passed_tiles = 0;
               stop_count = 0;
-              multiply_section = 1;
+              if(multiplier.length > 0){
+                multiply_section = 1;
+              }
               document.getElementById('stop_count').textContent = '0';
             }
           } else{
@@ -665,10 +671,10 @@
           }
           if(multiplier.length > 0 && multiply_section == 0){
             for (let index = 0; index < multiplier.length; index++){
-              if(evacuation_point == 1 && multiplier[index][1] - 0.025 >= 1){
-                multiplier[index][1] = round(multiplier[index][1] - 0.025);
-              } else if(evacuation_point == 2 && multiplier[index][1] - 0.05 >= 1){
-                multiplier[index][1] = round(multiplier[index][1] - 0.05);
+              if(evacuation_point == 1 && multiplier[index][2] - 0.025 >= 1){
+                multiplier[index][2] = round(multiplier[index][2] - 0.025);
+              } else if(evacuation_point == 2 && multiplier[index][2] - 0.05 >= 1){
+                multiplier[index][2] = round(multiplier[index][2] - 0.05);
               }
             }
             show_multiplier();
@@ -692,16 +698,16 @@
             stop_count--;
             stop_count_all--;
             document.getElementById('stop_count').textContent = stop_count;
-          }
-          if(multiplier.length > 0 && multiply_section == 0){
-            for (let index = 0; index < multiplier.length; index++){
-              if(evacuation_point == 1){
-                multiplier[index][1] = round(multiplier[index][1] + 0.025);
-              } else {
-                multiplier[index][1] = round(multiplier[index][1] + 0.05);
+            if(multiplier.length > 0 && multiply_section == 0){
+              for (let index = 0; index < multiplier.length; index++){
+                if(evacuation_point == 1 && multiplier[index][1] > multiplier[index][2]){
+                  multiplier[index][2] = round(multiplier[index][2] + 0.025);
+                } else if(evacuation_point == 2 && multiplier[index][1] > multiplier[index][2]){
+                  multiplier[index][2] = round(multiplier[index][2] + 0.05);
+                }
               }
+              show_multiplier();
             }
-            show_multiplier();
           }
           tile_now(route[count_index]);
         } else {
@@ -997,11 +1003,11 @@
     function show_multiplier(){
       for (let index = 0; index < multiplier.length; index++){
         if (multiplier[index][0] == 'living'){
-          show_multiplier_innerhtml = show_multiplier_innerhtml + '生きている被災者 : x' + multiplier[index][1] + '<br>';
+          show_multiplier_innerhtml = show_multiplier_innerhtml + '生きている被災者 : x' + multiplier[index][2] + '<br>';
         } else if (multiplier[index][0] == 'dead'){
-          show_multiplier_innerhtml = show_multiplier_innerhtml + '死んでいる被災者 : x' + multiplier[index][1] + '<br>';
+          show_multiplier_innerhtml = show_multiplier_innerhtml + '死んでいる被災者 : x' + multiplier[index][2] + '<br>';
         } else if (multiplier[index][0] == 'rescue_kit'){
-          show_multiplier_innerhtml = show_multiplier_innerhtml + 'レスキューキット : x' + multiplier[index][1] + '<br>';
+          show_multiplier_innerhtml = show_multiplier_innerhtml + 'レスキューキット : x' + multiplier[index][2] + '<br>';
         }
       }
       document.getElementById('show_multiplier').innerHTML = show_multiplier_innerhtml;
@@ -1011,12 +1017,14 @@
 
     document.getElementsByClassName('button_hinan')[0].addEventListener('click', () => {
       if (document.getElementById("timer_start").hasAttribute('disabled')){
-        if(evacuation_point == 1 && stop_count <= 16){
-          multiplier.push(['living', round(1.4 - (stop_count * 0.025))]);
+        if(evacuation_point == 1 && stop_count <= 8){
+          multiplier.push(['living', 1.2, round(1.2 - (stop_count * 0.025))]); //[種類, 本来の乗数, 実際の乗数(=競技進行の停止で引かれた後の乗数)]
         } else if(evacuation_point == 2 && stop_count <= 8){
-          multiplier.push(['living', round(1.4 - (stop_count * 0.05))]);
-        } else {
-          multiplier.push(['living', 1]);
+          multiplier.push(['living', 1.4, round(1.4 - (stop_count * 0.05))]);
+        } else if (evacuation_point == 1 && stop_count > 8){
+          multiplier.push(['living', 1.2, 1]);
+        } else if (evacuation_point == 2 && stop_count > 8){
+          multiplier.push(['living', 1.4, 1]);
         }
         show_multiplier();
       } else {
@@ -1026,7 +1034,7 @@
     document.getElementsByClassName('button_hinan')[1].addEventListener('click', () => {
       if (document.getElementById("timer_start").hasAttribute('disabled')){
         if (multiplier.length < 2){
-          multiplier.push(['dead', 1]);
+          multiplier.push(['dead', 1, 1]);
         } else {
           for (let index = 0; index < multiplier.length; index++){
             if (multiplier[index][0] == 'living'){
@@ -1034,14 +1042,16 @@
             }
           }
           if(num_of_living_victims < 2){
-            multiplier.push(['dead', 1]);
+            multiplier.push(['dead', 1, 1]);
           } else {
-            if(evacuation_point == 1 && stop_count <= 16){
-              multiplier.push(['dead', round(1.4 - (stop_count * 0.025))]);
+            if(evacuation_point == 1 && stop_count <= 8){
+              multiplier.push(['dead', 1.2, round(1.2 - (stop_count * 0.025))]);
             } else if(evacuation_point == 2 && stop_count <= 8){
-              multiplier.push(['dead', round(1.4 - (stop_count * 0.05))]);
-            } else {
-              multiplier.push(['dead', 1]);
+              multiplier.push(['dead', 1.4, round(1.4 - (stop_count * 0.05))]);
+            } else if (evacuation_point == 1 && stop_count > 8){
+              multiplier.push(['dead', 1.2, 1]);
+            } else if (evacuation_point == 2 && stop_count > 8){
+              multiplier.push(['dead', 1.4, 1]);
             }
           }
         }
@@ -1055,36 +1065,28 @@
       if (document.getElementById("timer_start").hasAttribute('disabled')){
         if (rescue_kit_set == 0){
           if (evacuation_point == 1 && rescue_kit == 1){
-            if(evacuation_point == 1 && stop_count <= 4){
-              multiplier.push(['rescue_kit', round(1.1 - (stop_count * 0.025))]);
-            } else if(evacuation_point == 2 && stop_count <= 2){
-              multiplier.push(['rescue_kit', round(1.1 - (stop_count * 0.05))]);
-            } else {
-              multiplier.push(['rescue_kit', 1]);
+            if(stop_count <= 4){
+              multiplier.push(['rescue_kit', 1.1, round(1.1 - (stop_count * 0.025))]);
+            }else {
+              multiplier.push(['rescue_kit', 1.1, 1]);
             }
           } else if (evacuation_point == 1 && rescue_kit == 2){
-            if(evacuation_point == 1 && stop_count <= 12){
-              multiplier.push(['rescue_kit', round(1.3 - (stop_count * 0.025))]);
-            } else if(evacuation_point == 2 && stop_count <= 6){
-              multiplier.push(['rescue_kit', round(1.3 - (stop_count * 0.05))]);
+            if(stop_count <= 12){
+              multiplier.push(['rescue_kit', 1.3, round(1.3 - (stop_count * 0.025))]);
             } else {
-              multiplier.push(['rescue_kit', 1]);
+              multiplier.push(['rescue_kit', 1.3, 1]);
             }
           } else if (evacuation_point == 2 && rescue_kit == 1){
-            if(evacuation_point == 1 && stop_count <= 8){
-              multiplier.push(['rescue_kit', round(1.2 - (stop_count * 0.025))]);
-            } else if(evacuation_point == 2 && stop_count <= 4){
-              multiplier.push(['rescue_kit', round(1.2 - (stop_count * 0.05))]);
+            if(stop_count <= 4){
+              multiplier.push(['rescue_kit', 1.2, round(1.2 - (stop_count * 0.05))]);
             } else {
-              multiplier.push(['rescue_kit', 1]);
+              multiplier.push(['rescue_kit', 1.2, 1]);
             }
           } else if (evacuation_point == 2 && rescue_kit == 2){
-            if(evacuation_point == 1 && stop_count <= 24){
-              multiplier.push(['rescue_kit', round(1.6 - (stop_count * 0.025))]);
-            } else if(evacuation_point == 2 && stop_count <= 12){
-              multiplier.push(['rescue_kit', round(1.6 - (stop_count * 0.05))]);
+            if(stop_count <= 12){
+              multiplier.push(['rescue_kit', 1.6, round(1.6 - (stop_count * 0.05))]);
             } else {
-              multiplier.push(['rescue_kit', 1]);
+              multiplier.push(['rescue_kit', 1.6, 1]);
             }
           }
           rescue_kit_set = 1;
@@ -1456,7 +1458,6 @@
         $img[index].dataset.turn = input_data_turn[index + 1];
         $img[index].style.transform = 'rotate(' + input_data_turn[index + 1] + 'deg)';
         $img[index].style.border = input_data_border[index + 1];
-        $img[index].style.cursor = "default";
       };
       document.getElementById('input_file').value = '';
     }
@@ -1751,6 +1752,30 @@
           bump_data = null;
         }
       }
+      if(document.getElementsByClassName('image_tile_now')[0].dataset.bump1 != 0){
+        bump_data = document.getElementsByClassName('image_tile_now')[0].dataset.bump1.split('a');
+        document.getElementsByClassName('image_tile_now')[0].parentElement.children[1].style.left = (Number(bump_data[0]) / 10) + "vw";
+        document.getElementsByClassName('image_tile_now')[0].parentElement.children[1].style.top = (Number(bump_data[1]) / 10) + "vw";
+        bump_data = null;
+      }
+      if(document.getElementsByClassName('image_tile_now')[0].dataset.bump2 != 0){
+        bump_data = document.getElementsByClassName('image_tile_now')[0].dataset.bump1.split('a');
+        document.getElementsByClassName('image_tile_now')[0].parentElement.children[2].style.left = (Number(bump_data[0]) / 10) + "vw";
+        document.getElementsByClassName('image_tile_now')[0].parentElement.children[2].style.top = (Number(bump_data[1]) / 10) + "vw";
+        bump_data = null;
+      }
+      if(document.getElementsByClassName('image_tile_now')[0].dataset.bump3 != 0){
+        bump_data = document.getElementsByClassName('image_tile_now')[0].dataset.bump1.split('a');
+        document.getElementsByClassName('image_tile_now')[0].parentElement.children[3].style.left = (Number(bump_data[0]) / 10) + "vw";
+        document.getElementsByClassName('image_tile_now')[0].parentElement.children[3].style.top = (Number(bump_data[1]) / 10) + "vw";
+        bump_data = null;
+      }
+      if(document.getElementsByClassName('image_tile_now')[0].dataset.bump4 != 0){
+        bump_data = document.getElementsByClassName('image_tile_now')[0].dataset.bump1.split('a');
+        document.getElementsByClassName('image_tile_now')[0].parentElement.children[4].style.left = (Number(bump_data[0]) / 10) + "vw";
+        document.getElementsByClassName('image_tile_now')[0].parentElement.children[4].style.top = (Number(bump_data[1]) / 10) + "vw";
+        bump_data = null;
+      }
     }
 
     function more_920(){
@@ -1779,6 +1804,30 @@
           $img[index].parentElement.children[4].style.top = bump_data[1] + "px";
           bump_data = null;
         }
+      }
+      if(document.getElementsByClassName('image_tile_now')[0].dataset.bump1 != 0){
+        bump_data = document.getElementsByClassName('image_tile_now')[0].dataset.bump1.split('a');
+        document.getElementsByClassName('image_tile_now')[0].parentElement.children[1].style.left = bump_data[0] + "px";
+        document.getElementsByClassName('image_tile_now')[0].parentElement.children[1].style.top = bump_data[1] + "px";
+        bump_data = null;
+      }
+      if(document.getElementsByClassName('image_tile_now')[0].dataset.bump2 != 0){
+        bump_data = document.getElementsByClassName('image_tile_now')[0].dataset.bump1.split('a');
+        document.getElementsByClassName('image_tile_now')[0].parentElement.children[2].style.left = bump_data[0] + "px";
+        document.getElementsByClassName('image_tile_now')[0].parentElement.children[2].style.top = bump_data[1] + "px";
+        bump_data = null;
+      }
+      if(document.getElementsByClassName('image_tile_now')[0].dataset.bump3 != 0){
+        bump_data = document.getElementsByClassName('image_tile_now')[0].dataset.bump1.split('a');
+        document.getElementsByClassName('image_tile_now')[0].parentElement.children[3].style.left = bump_data[0] + "px";
+        document.getElementsByClassName('image_tile_now')[0].parentElement.children[3].style.top = bump_data[1] + "px";
+        bump_data = null;
+      }
+      if(document.getElementsByClassName('image_tile_now')[0].dataset.bump4 != 0){
+        bump_data = document.getElementsByClassName('image_tile_now')[0].dataset.bump1.split('a');
+        document.getElementsByClassName('image_tile_now')[0].parentElement.children[4].style.left = bump_data[0] + "px";
+        document.getElementsByClassName('image_tile_now')[0].parentElement.children[4].style.top = bump_data[1] + "px";
+        bump_data = null;
       }
     }
 
