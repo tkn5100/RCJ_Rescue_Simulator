@@ -112,7 +112,7 @@
     }
     function multiply_points() {
       for (let index = 0; index < multiplier.length; index++){
-        multiply_all = multiply_all * multiplier[index][1];
+        multiply_all = multiply_all * multiplier[index][2];
       }
       score = round(score * multiply_all)
       document.getElementById('score').innerHTML = score;
@@ -149,8 +149,12 @@
       if (document.getElementById("timer_start").hasAttribute('disabled')){
         clearInterval(TimerID);
         //乗数をかける
+        final_score = 'ライントレース:' + score + '点 × 乗数';
         if(multiplier.length > 0){
           multiply_points();
+        } else {
+          final_score = final_score + '0 = ' + score + '点';
+          document.getElementById('statistics_score').textContent = final_score
         }
         document.getElementById("timer_stop").disabled = true;
         document.getElementById("timer_stop").style.backgroundColor = "#888888";
@@ -597,13 +601,18 @@
                 document.getElementById('statistics_clear').textContent = '脱出済み 0点(競技進行の停止総数が' + stop_count_all + '回であるため)';
               } else {
                 get_points(60 - (5 * stop_count_all));
-                final_score = final_score + (60 - (5 * stop_count_all)) + '点) × 乗数'
+                final_score = final_score + (60 - (5 * stop_count_all)) + '点) × 乗数';
                 document.getElementById('statistics_clear').textContent = '脱出済み 60 - 5 × ' + stop_count_all + ' = ' + (60 - (5 * stop_count_all)) + '点';
               }
+            } else {
+              final_score = 'ライントレース:' + score + '点 × 乗数';
             }
             //最終タイルでは乗数をかける
             if(multiplier.length > 0){
               multiply_points();
+            } else {
+              final_score = final_score + '0 = ' + score + '点';
+              document.getElementById('statistics_score').textContent = final_score
             }
             //競技終了処理
             clearInterval(TimerID);
