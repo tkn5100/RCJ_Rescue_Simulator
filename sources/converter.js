@@ -834,8 +834,10 @@
             three_to_Four(file.name);
           } else if(csv_arrays[0] == "v2.0.2," || csv_arrays[0] == "v2.0.1," || csv_arrays[0] == "v2.0.0,"){
             two_to_Four(file.name);
-          } else {
+          } else if(csv_arrays[0].slice(0,9) == ".././img/"){
             one_to_Four(file.name);
+          } else {
+            window.alert('このファイルはこのソフトウェア以外で作られたCSVファイルです。ページを再読み込みします。')
           }
         }
       } else {

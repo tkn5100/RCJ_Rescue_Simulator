@@ -14,8 +14,8 @@
     <p class="help-sentence">アプリケーション版の配布はv1.1.1をもって終了しました。なおv1.1.1以前でもアプリケーション版を利用すると思わぬ不具合が発生する場合がありますので、ブラウザ版(このソフトウェア)をご利用ください。</p>
     <a href="https://github.com/tkn5100/RCJ_Rescue_Simulator" class="help-sentence" style="color: #4400FF; text-decoration: underline solid 1px;">Githubでソースコードを公開しています(外部リンク)</a>
     <h3 class="help-sentence" style="margin-top: 10px; background-color: #F8F8E7; text-indent: 0;"><img src="../img/help/attention.svg" class="help_icon" style="background-color: #F8F8B3;">お願い</h3>
-    <p class="help-sentence" style="background-color: #F8F8E7;">スマートフォン、iPadではブラウザのタブを非表示にしてお使いください。操作に支障をきたすおそれがあります。</p>
-    <p class="help-sentence" style="background-color: #F8F8E7;">また、スマートフォンは画面が小さいため横向きでのご利用を推奨いたします。</p>
+    <p class="help-sentence" style="background-color: #F8F8E7;">iPhone・iPadではブラウザのツールバーを非表示にしてお使いください。操作に支障をきたすおそれがあります。</p>
+    <p class="help-sentence" style="background-color: #F8F8E7;">また、各種スマートフォンは画面が小さいため横向きでのご利用を推奨いたします。</p>
     <br>
     <div class="help-link-div">
       <a href=".././index.html" class="help-link">ホームへ</a>
@@ -62,18 +62,23 @@
     <h4 class="help_h4"><img src="../img/tools/read.svg" class="help_icon">プロジェクトの読み込み</h4>
     <p class="help-sentence">作成途中のプロジェクトを読み込み、途中から編集作業を再開できます。クリックするとファイル選択画面が出るので、任意のファイルを選んでください。読み込むことができるファイルの拡張子は.rrlのみ(Safariでは.csvも可、ただしこのソフトウェアで作成されたもののみ)です。</p>
     <p class="help-sentence">※保存と読み込みは基本的に同じバージョンで行ってください。違うバージョンで行った場合正常に読み込まれないことがあります。メジャーアップデートでRRLファイルの内部構造が変わった場合、新しいバージョンでは古いバージョンのファイルをサポートし、新しいバージョンのファイルに変更できるようにします。その場合は下の表に△で表されます。古いバージョンで作られたファイルのサポートは、次のメジャーアップデートで打ち切ります。サポート打ち切り後はファイル変換をご利用ください。</p>
+    <p class="help-sentence">※下の表で「読み込み可能」となっている場合でも、読み込む側のバージョンよりファイルを作ったバージョンが新しい場合は読み込めませんのでご注意ください。</p>
     <h4 class="help_h4">RRLファイルの互換性</h4>
     <table class="help-table">
       <tbody>
-        <tr><td rowspan="2" colspan="2"></td><td colspan="4">作成</td></tr>
-        <tr><td>v1.0.0~v1.1.3</td><td>v2.0.0~v2.0.2</td><td>v3.0.0~v3.1.1</td><td>v4.0.0~v4.4.0</td></tr>
-        <tr><td rowspan="4">読み込み</td><td>v1.0.0~<br>v1.1.3</td><td>○</td><td>-</td><td>-</td><td>-</td></tr>
-        <tr><td>v2.0.0~<br>v2.0.2</td><td>△</td><td>○</td><td>-</td><td>-</td></tr>
-        <tr><td>v3.0.0~<br>v3.1.1</td><td>×</td><td>△</td><td>○</td><td>-</td></tr>
-        <tr><td>v4.0.0~<br>v4.4.0</td><td>×</td><td>×</td><td>△</td><td>○</td></tr>
+        <tr><td rowspan="2" colspan="2"></td><td colspan="6">作成</td></tr>
+        <tr><td>v1.0.0~v1.1.3</td><td>v2.0.0~v2.0.2</td><td>v3.0.0~v3.1.1</td><td>v4.0.0~v4.2.2</td><td>v4.3.0~v4.3.1</td><td>v4.4.0</td></tr>
+        <tr><td rowspan="6">読み込み</td><td>v1.0.0~<br>v1.1.3</td><td>○</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>
+        <tr><td>v2.0.0~<br>v2.0.2</td><td>△</td><td>○</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>
+        <tr><td>v3.0.0~<br>v3.1.1</td><td>×</td><td>△</td><td>○</td><td>-</td><td>-</td><td>-</td></tr>
+        <tr><td>v4.0.0~<br>v4.2.2</td><td>×</td><td>×</td><td>△</td><td>○</td><td>-</td><td>-</td></tr>
+        <tr><td>v4.3.0~<br>v4.3.1</td><td>×</td><td>×</td><td>△</td><td>○</td><td style="background-color: #FFEEEE;"><img src="../img/help/attention.svg" class="help_icon" style="background-color: #FFEEEE;"></td><td>-</td></tr>
+        <tr><td>v4.4.0</td><td>×</td><td>×</td><td>△</td><td>○</td><td style="background-color: #FFEEEE;"><img src="../img/help/attention.svg" class="help_icon" style="background-color: #FFEEEE;"></td><td>○</td></tr>
       </tbody>
     </table>
-    <p class="help-sentence">○…読み込み可能　△…読み込み可能だが非推奨　×…ファイル変換が必要　-…不可能</p>
+    <p class="help-sentence">○…読み込み可能　△…読み込み可能だが非推奨　×…ファイル変換が必要　- …不可能</p>
+    <h3 class="help-sentence-changes" style="margin-top: 10px; background-color: #FFEEEE;"><img src="../img/help/attention.svg" class="help_icon" style="background-color: #FFBBBB;">読み込みに関する不具合</h3>
+    <p class="help-sentence-changes" style="background-color: #FFEEEE;">・v4.3.0とv4.3.1では、コート作成機能において、2階部分を含むWRLコートのプロジェクトを保存した際に2階部分がうまく保存されない不具合が発生しています。この不具合はv4.4.0で修正されました。v4.3.0とv4.3.1で作成したファイルをv4.4.0以降で読み込んだ場合、その旨を知らせる警告が出ます。</p>
     <h4 class="help_h4"><img src="../img/tools/auto_read.svg" class="help_icon">自動保存データの読み込み</h4>
     <p class="help-sentence">後述の自動保存したデータを読み込みます。</p>
     <h4 class="help_h4"><img src="../img/tools/help.svg" class="help_icon">ヘルプボタン</h4>
@@ -229,7 +234,7 @@
     <h3 class="help_h3">使い方</h3>
     <img src="../img/help/WRL得点計算_競技中.png" alt="画面" class="help_img">
     <p class="help-sentence">競技中の画面の一例。</p>
-    <p class="help-sentence">オレンジ色に光っているものは得点要素です。すでにクリアしている場合、ハザードは光りません。競技の進行は、タイルやハザードをクリックするのではなく、すべて左側のメニューで行います。</p>
+    <p class="help-sentence">オレンジ色に光っているものは得点要素です。すでにクリアしている場合、得点要素は光りません。競技の進行は、タイルや得点要素をクリックするのではなく、すべて左側のメニューで行います。</p>
     <h4 class="help_h4">競技開始・終了</h4>
     <p class="help-sentence">「競技開始」を押すとタイマーがスタートし、無条件に5点加算されます。「競技終了」を押すとタイマーがストップします。もし競技が続行しているのに8分が経過した場合、競技を終了するようアラートが出ます。</p>
     <h4 class="help_h4">現在走行中のタイル</h4>
