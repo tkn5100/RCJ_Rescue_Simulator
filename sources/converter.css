@@ -8,7 +8,7 @@ body{
     user-select: none;
 }
 .copyright{
-    position: absolute;
+    position: fixed;
     bottom: 5px;
     right: 0;
 }

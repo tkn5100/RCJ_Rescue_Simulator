@@ -116,8 +116,8 @@
       }
       score = round(score * multiply_all)
       document.getElementById('score').innerHTML = score;
-      final_score = final_score + multiply_all + ' = ' + score + '点'
-      document.getElementById('statistics_score').textContent = final_score
+      final_score = final_score + round(multiply_all) + ' = ' + score + '点';
+      document.getElementById('statistics_score').textContent = final_score;
     }
 
     //タイマー
