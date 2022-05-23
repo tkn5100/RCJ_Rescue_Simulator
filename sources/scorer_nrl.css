@@ -8,7 +8,7 @@ body{
     user-select: none;
 }
 .copyright{
-    position: fixed;
+    position: absolute;
     bottom: 5px;
     right: 0;
 }
@@ -555,7 +555,7 @@ td{
     box-shadow: 0 0 5px #888888;
 }
 .guide{
-    position: fixed;
+    position: absolute;
     bottom: 0px;
     left: 0px;
     height: 30px;

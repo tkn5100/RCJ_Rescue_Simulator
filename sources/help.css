@@ -1,0 +1,179 @@
+body{
+    display: flex;
+    flex-direction: column;
+    background: #f8f8f8;
+    font-family: "游ゴシック", "ヒラギノ角ゴシック", sans-serif;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+.copyright{
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    background-color: #DDDDDD;
+    text-align: end;
+    height: 30px;
+    padding: 7px 10px 7px 10px;
+    font-size: 15px;
+    cursor: default;
+}
+.copyright-help{
+    margin-right: 0;
+    margin-left: auto;
+}
+.help_title_div{
+    display: flex;
+    flex-direction: row;
+    background-color: #EEEEEE;
+    margin-bottom: 10px;
+}
+.help_title_div > div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+}
+.help_img-title{
+    width: 50%;
+    height: auto;
+    padding-left: 20px;
+    margin-bottom: auto;
+}
+.help_title{
+    text-align: center;
+    font-size: 30px;
+    font-weight: 1000;
+    margin-bottom: 20px;
+}
+.help_title_sentence{
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+.help_h1{
+    font-size: 40px;
+    font-weight: bold;
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+.help_h2{
+    font-size: 25px;
+    font-weight: 600;
+    padding: 5px;
+    border-bottom: 3px solid #000000;
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+.help_h3{
+    font-size: 20px;
+    margin-top: 20px;
+    font-weight: 700;
+    text-indent: 1em;
+}
+.help-sentence{
+    font-size: 20px;
+    text-indent: 1em;
+    padding-left: 20px;
+}
+.help-sentence-changes{
+    font-size: 20px;
+    text-indent: -1em;
+    padding-left: 50px;
+}
+.userguide_h1{
+    font-size: 40px;
+    font-weight: bold;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+.userguide_h2{
+    font-size: 25px;
+    font-weight: 600;
+    padding: 5px;
+    border-bottom: 3px solid #000000;
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+.userguide_h3{
+    font-size: 20px;
+    margin-top: 20px;
+    font-weight: 700;
+    text-indent: 1em;
+}
+.userguide_sentence{
+    font-size: 20px;
+    text-indent: 1em;
+    padding-left: 20px;
+}
+.help_icon{
+    width: 25px;
+    display: inline;
+    margin-right: 10px;
+    border-radius: 30%;
+    padding: 3px;
+    background-color: #DDDDDD;
+}
+.help_img{
+    width: 80%;
+    height: auto;
+    padding-left: 20px;
+}
+.help_link-div{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.help_link, .help_link-close{
+    width: 160px;
+    height: 41px;
+    text-align: center;
+    background-color: #F8F8F8;
+    font-size: 15px;
+    font-weight: 600;
+    padding: 8px;
+    border-radius: 20px;
+    margin-right: 15px;
+    margin-bottom: 15px;
+}
+.help_link{
+    color: #111111;
+    border: solid 3px #111111;
+}
+.help_link-close{
+    color: #AA0000;
+    border: solid 3px #AA0000;
+}
+.help_link:hover{
+    transition: all 0.2s ease-out;
+    background-color: #111111;
+    color: #F8F8F8;
+}
+.help_link-close:hover{
+    transition: all 0.2s ease-out;
+    background-color: #AA0000;
+    color: #F8F8F8;
+}
+.help-table {
+    margin-left: 0 !important;
+    border-collapse: collapse;
+    border: 1px solid #000000;
+}
+.help-table > tbody > tr > td{
+    background-color: #F8F8F8;
+    border: 1px solid #000000;
+    text-align: center;
+    vertical-align: middle;
+    padding: 3px;
+}
+@media screen and (min-width:920px){
+    .help-table {
+        width: 600px;
+    }
+}
+@media screen and (max-width:920px){
+    .help-table {
+        width: 60vw;
+    }
+}
