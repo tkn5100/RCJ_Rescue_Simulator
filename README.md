@@ -38,17 +38,17 @@ Windows10 Home 21H3(Microsoft Edge v101.0.1210.53,Google Chrome v102.0.5005.63)
 iPadOS 15.4.1(Safari v605.1.15)  
 iOS 15.4.1(Safari v604.1)
 #### 正常動作可能と思われる環境
-Windows10(Microsoft Edge,Google Chrome,Opera各最新版)  
-Windows11(Microsoft Edge,Google Chrome,Opera各最新版)  
-Mac OS(Safari,Google Chrome,Microsoft Edge,Opera各最新版)  
-Linux OS(Google Chrome,Microsoft Edge,Safari,Opera各最新版)  
-Chrome OS(Google Chrome,Opera各最新版)  
-AndroidOS(Google Chrome,Microsoft Edge,Safari,Opera,Samsung Internet各最新版)
+Windows10(Microsoft Edge,Google Chrome,Opera,FireFox各最新版)  
+Windows11(Microsoft Edge,Google Chrome,Opera,FireFox各最新版)  
+Mac OS(Safari,Google Chrome,Microsoft Edge,Opera,FireFox各最新版)  
+Linux OS(Google Chrome,Microsoft Edge,Safari,Opera,FireFox各最新版)  
+Chrome OS(Google Chrome,Opera,FireFox各最新版)  
+AndroidOS(Google Chrome,Microsoft Edge,Safari,Opera,FireFox,Samsung Internet各最新版)
 #### Web上でのみ動作可能な環境
-iOS(Safari,Google Chrome,Microsoft Edge,Opera各最新版)  
-iPadOS(Safari,Google Chrome,Microsoft Edge,Opera各最新版)
+iOS(Safari,Google Chrome,Microsoft Edge,Opera,FireFox各最新版)  
+iPadOS(Safari,Google Chrome,Microsoft Edge,Opera,FireFox各最新版)
 #### 動作不可能である環境
-Windows10(旧Microsoft Edge,Internet Explorer)  
+Windows10(旧Microsoft Edge,Internet Explorer,旧Opera)  
 その他PC向け旧OS
 
 ### アプリケーションの調子が悪いときは
