@@ -12,7 +12,6 @@ body{
     bottom: 5px;
     right: 0;
 }
-/* index.html */
 table{
     margin-left: 30px !important;
     border-collapse: collapse;
@@ -107,13 +106,40 @@ td{
     background-color: #DDDDDD;
     border-radius: 10px;
     padding: 5px;
+    width: -moz-fit-content;
     width: fit-content;
+    height: -moz-fit-content;
     height: fit-content;
 }
 #stop_count{
     display: flex;
     justify-content: center;
     align-items: center;
+}
+#timer_start, #timer_stop, .button_hinan, .button_line, #route_finish{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-weight: 500;
+    color: #111111;
+    background-color: #F8F8F8;
+    border: solid 3px #111111;
+}
+#timer_start:hover, #timer_stop:hover, .button_hinan:hover, .button_line:hover, #route_finish:hover{
+    transition: all 0.2s ease-out;
+    background-color: #111111;
+    color: #F8F8F8;
+}
+#timer_start.disabled, #timer_stop.disabled, .button_hinan.disabled, .button_line.disabled, #route_finish.disabled{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-weight: 500;
+    color: #888888;
+    background-color: #F8F8F8;
+    border: solid 3px #888888;
 }
 #tile_now > div{
     margin-left: 20px;
@@ -153,13 +179,11 @@ td{
     #timer_start, #timer_stop{
         margin-left: 20px;
         margin-bottom: 20px;
-        height: 35px;
+        height: -moz-fit-content;
+        height: fit-content;
         width: 120px;
-        text-align: center;
-        background-color: #000000;
-        color: #f8f8f8;
-        padding: 10px;
-        border-radius: 10px;
+        padding: 8px;
+        border-radius: 19px;
     }
     #added_score{
         margin-left: 2vw;
@@ -188,13 +212,11 @@ td{
     .button_hinan, .button_line, #route_finish{
         margin-top: 10px;
         margin-left: 20px;
+        height: -moz-fit-content;
         height: fit-content;
         width: 280px;
-        text-align: center;
-        background-color: #000000;
-        color: #f8f8f8;
-        padding: 10px;
-        border-radius: 10px;
+        padding: 8px;
+        border-radius: 19px;
     }
     .image, .image_tile_now{
         height: 80px;
@@ -266,13 +288,11 @@ td{
     }
     #timer_start, #timer_stop{
         margin-bottom: 10px;
-        height: 35px;
+        height: -moz-fit-content;
+        height: fit-content;
         width: 120px;
-        text-align: center;
-        background-color: #000000;
-        color: #f8f8f8;
-        padding: 10px;
-        border-radius: 10px;
+        padding: 8px;
+        border-radius: 19px;
     }
     #added_score{
         margin-left: 20px;
@@ -301,13 +321,11 @@ td{
     .button_hinan, .button_line, #route_finish{
         margin-top: 10px;
         margin-left: 20px;
+        height: -moz-fit-content;
         height: fit-content;
         width: 180px;
-        text-align: center;
-        background-color: #000000;
-        color: #f8f8f8;
-        padding: 10px;
-        border-radius: 10px;
+        padding: 8px;
+        border-radius: 19px;
     }
     .image, .image_tile_now{
         height: 80px;
@@ -379,13 +397,11 @@ td{
     #timer_start, #timer_stop{
         font-size: 1.5vw;
         margin-bottom: 10px;
-        height: 3.5vw;
+        height: -moz-fit-content;
+        height: fit-content;
         width: 15vw;
-        text-align: center;
-        background-color: #000000;
-        color: #f8f8f8;
-        padding: 10px;
-        border-radius: 10px;
+        padding: 8px;
+        border-radius: 1.9vw;
     }
     #added_score{
         margin-left: 20px;
@@ -414,14 +430,12 @@ td{
     .button_hinan, .button_line, #route_finish{
         margin-top: 10px;
         margin-left: 20px;
+        height: -moz-fit-content;
         height: fit-content;
         width: 18vw;
         font-size: 1.5vw;
-        text-align: center;
-        background-color: #000000;
-        color: #f8f8f8;
-        padding: 10px;
-        border-radius: 10px;
+        padding: 8px;
+        border-radius: 1.9vw;
     }
     .image, .image_tile_now{
         height: 8vw;
@@ -508,7 +522,9 @@ td{
         position: static !important;
         visibility: visible !important;
         opacity: 1 !important;
+        width: -moz-fit-content !important;
         width: fit-content !important;
+        height: -moz-fit-content !important;
         height: fit-content !important;
         overflow: hidden !important;
         padding: 0 !important;
@@ -661,84 +677,70 @@ td{
     cursor: pointer;
 }
 
-#start{
+#start, #league, #level, #rule, #statistics{
     visibility: collapse;
     opacity: 0;
     display: flex;
     flex-direction: column;
-    position: fixed;
+    position: fixed;overflow: auto;
+    padding: 2vw 5vw 2vw 5vw;
+    background-color: #F8F8F8;
+    border-radius: 20px;
+    font-size: 1.2vw;
+    cursor: default;
+    transition: all 0.3s 0s ease-out;
+    z-index: 5;
+}
+#start{
     top: 10vh;
     left: 10vw;
     width: 80vw;
     height: 80vh;
-    overflow: auto;
-    padding: 2vw 5vw 2vw 5vw;
-    background-color: #F8F8F8;
-    border-radius: 20px;
-    font-size: 1.2vw;
-    cursor: default;
-    transition: all 0.3s 0s ease-out;
-    z-index: 5;
-}
-#start.active{
-    visibility: visible;
-    opacity: 1;
 }
 #league{
-    visibility: collapse;
-    opacity: 0;
-    display: flex;
-    flex-direction: column;
-    position: fixed;
     top: 30vh;
     left: 30vw;
     width: 40vw;
     height: 40vh;
-    overflow: auto;
-    padding: 2vw 5vw 2vw 5vw;
-    background-color: #F8F8F8;
-    border-radius: 20px;
-    font-size: 1.2vw;
-    cursor: default;
-    transition: all 0.3s 0s ease-out;
-    z-index: 5;
 }
 #level{
-    visibility: collapse;
-    opacity: 0;
-    display: flex;
-    flex-direction: column;
-    position: fixed;
     top: 15vh;
     left: 10vw;
     width: 80vw;
     height: 70vh;
-    overflow: auto;
-    padding: 2vw 5vw 2vw 5vw;
-    background-color: #F8F8F8;
-    border-radius: 20px;
-    font-size: 1.2vw;
-    cursor: default;
-    transition: all 0.3s 0s ease-out;
-    z-index: 5;
+}
+#rule, #statistics{
+    top: 10vh;
+    left: 15vw;
+    width: 70vw;
+    height: 80vh;
 }
 #league > p{
     font-size: 1.3vw;
     font-weight: 500;
     padding-bottom: 1vw;
 }
-#league.active, #level.active{
+#start.active, #league.active, #level.active, #rule.active, #statistics.active{
     visibility: visible;
     opacity: 1;
 }
 #league_nrl, #league_wrl, #rule_close, #statistics_close, #level_decide{
     position: absolute;
     width: 10vw;
+    height: -moz-fit-content;
+    height: fit-content;
+    font-weight: 500;
     text-align: center;
-    background-color: #000000;
-    color: #f8f8f8;
-    padding: 0.8vw;
-    border-radius: 1vw;
+    background-color: #F8F8F8;
+    color: #111111;
+    border: solid 3px #111111;
+    padding: 8px;
+    border-radius: 1.9vw;
+}
+#league_nrl:hover, #league_wrl:hover, #rule_close:hover, #statistics_close:hover, #level_decide:hover{
+    transition: all 0.2s ease-out;
+    background-color: #111111;
+    color: #F8F8F8;
 }
 #league_nrl, #rule_close, #statistics_close, #level_decide{
     right: 5vw;
@@ -747,25 +749,6 @@ td{
 #league_wrl{
     right: 18vw;
     bottom: 3vw;
-}
-#rule, #statistics{
-    visibility: collapse;
-    opacity: 0;
-    display: flex;
-    flex-direction: column;
-    position: fixed;
-    top: 10vh;
-    left: 15vw;
-    width: 70vw;
-    height: 80vh;
-    overflow: auto;
-    padding: 2vw 5vw 2vw 5vw;
-    background-color: #F8F8F8;
-    border-radius: 20px;
-    font-size: 1.2vw;
-    cursor: default;
-    transition: all 0.3s 0s ease-out;
-    z-index: 5;
 }
 #rule > h1, #statistics > h1, #level > p{
     font-size: 2.5vw;
@@ -779,10 +762,6 @@ td{
 }
 #rule > div > ul > li{
     text-indent: 1em;
-}
-#rule.active, #statistics.active{
-    visibility: visible;
-    opacity: 1;
 }
 
 #overlay{
@@ -829,7 +808,6 @@ td{
     padding-left: 2vw;
     margin-bottom: 1vw;
     cursor: pointer;
-    user-select: none;
     padding-top: 0.5vw;
     padding-left: 3vw;
 }

@@ -34,7 +34,7 @@ iPhone・iPadではブラウザの**ツールバーを非表示**にしてお使
 
 ### 動作環境
 #### 正常動作確認済みの環境
-Windows10 Home 21H2(Microsoft Edge v101.0.1210.32,Google Chrome v101.0.4951.41)  
+Windows10 Home 21H3(Microsoft Edge v101.0.1210.53,Google Chrome v102.0.5005.63)  
 iPadOS 15.4.1(Safari v605.1.15)  
 iOS 15.4.1(Safari v604.1)
 #### 正常動作可能と思われる環境
@@ -43,14 +43,13 @@ Windows11(Microsoft Edge,Google Chrome,Opera各最新版)
 Mac OS(Safari,Google Chrome,Microsoft Edge,Opera各最新版)  
 Linux OS(Google Chrome,Microsoft Edge,Safari,Opera各最新版)  
 Chrome OS(Google Chrome,Opera各最新版)  
-AndroidOS(Google Chrome,Microsoft Edge,Safari,Opera各最新版)
+AndroidOS(Google Chrome,Microsoft Edge,Safari,Opera,Samsung Internet各最新版)
 #### Web上でのみ動作可能な環境
 iOS(Safari,Google Chrome,Microsoft Edge,Opera各最新版)  
 iPadOS(Safari,Google Chrome,Microsoft Edge,Opera各最新版)
 #### 動作不可能である環境
 Windows10(旧Microsoft Edge,Internet Explorer)  
-その他PC向け旧OS  
-**FireFox**では一部機能が正常に動作しなかったりデザインが崩れたりする恐れがありますが、基本的な機能はご利用いただけます。
+その他PC向け旧OS
 
 ### アプリケーションの調子が悪いときは
 リロードせずに長時間使い続けると、動作が重くなったり不具合が出ることがあります。再読み込みするか、「Ctrl+F5」を押してスーパーリロードしてください。ただし、プロジェクトを保存するのを忘れないでください。なお、再読み込みを行っても自動保存データは保持されます。

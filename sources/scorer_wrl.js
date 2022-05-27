@@ -137,7 +137,7 @@
     document.getElementById('timer_start').addEventListener('click', function () {
       TimerID = setInterval(count, 1000);
       document.getElementById("timer_start").disabled = true;
-      document.getElementById("timer_start").style.backgroundColor = "#888888";
+      document.getElementById("timer_start").classList.add("disabled");
       time = 480;
       document.getElementById("timer").textContent = "8:00";
       get_points(5);
@@ -157,13 +157,13 @@
           document.getElementById('statistics_score').textContent = final_score
         }
         document.getElementById("timer_stop").disabled = true;
-        document.getElementById("timer_stop").style.backgroundColor = "#888888";
+        document.getElementById("timer_stop").classList.add("disabled");
         document.getElementsByClassName('button_hinan')[0].disabled = true;
-        document.getElementsByClassName('button_hinan')[0].style.backgroundColor = "#888888";
+        document.getElementsByClassName('button_hinan')[0].classList.add("disabled");
         document.getElementsByClassName('button_hinan')[1].disabled = true;
-        document.getElementsByClassName('button_hinan')[1].style.backgroundColor = "#888888";
+        document.getElementsByClassName('button_hinan')[1].classList.add("disabled");
         document.getElementsByClassName('button_hinan')[2].disabled = true;
-        document.getElementsByClassName('button_hinan')[2].style.backgroundColor = "#888888";
+        document.getElementsByClassName('button_hinan')[2].classList.add("disabled");
         for (let index = 0; index < $line_tools.length; index++) {
           $line_tools[index].style.pointerEvents = 'none';
         }
@@ -617,13 +617,13 @@
             //競技終了処理
             clearInterval(TimerID);
             document.getElementById("timer_stop").disabled = true;
-            document.getElementById("timer_stop").style.backgroundColor = "#888888";
+            document.getElementById("timer_stop").classList.add("disabled");
             document.getElementsByClassName('button_hinan')[0].disabled = true;
-            document.getElementsByClassName('button_hinan')[0].style.backgroundColor = "#888888";
+            document.getElementsByClassName('button_hinan')[0].classList.add("disabled");
             document.getElementsByClassName('button_hinan')[1].disabled = true;
-            document.getElementsByClassName('button_hinan')[1].style.backgroundColor = "#888888";
+            document.getElementsByClassName('button_hinan')[1].classList.add("disabled");
             document.getElementsByClassName('button_hinan')[2].disabled = true;
-            document.getElementsByClassName('button_hinan')[2].style.backgroundColor = "#888888";
+            document.getElementsByClassName('button_hinan')[2].classList.add("disabled");
             for (let index = 0; index < $line_tools.length; index++) {
               $line_tools[index].style.pointerEvents = 'none';
             }
