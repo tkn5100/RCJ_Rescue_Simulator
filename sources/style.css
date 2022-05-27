@@ -1,4 +1,4 @@
-body{
+﻿body{
     display: flex;
     flex-direction: column;
     background: #f8f8f8;
@@ -8,7 +8,7 @@ body{
     user-select: none;
 }
 .copyright{
-    position: fixed;
+    position: absolute;
     bottom: 5px;
     right: 0;
 }
@@ -22,17 +22,27 @@ body{
     margin: 3vw auto 3vw auto;
     width: 80vw;
     font-size: 5vw;
+    font-weight: 500;
 }
-.home-link{
-    background: #000000;
-    color: #ffffff;
-    font-size: 1.5vw;
-    text-align: center;
-    line-height: 4vw;
-    height: 4vw;
+.home_link{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 30vw;
+    height: 4vw;
+    color: #111111;
+    border: solid 0.3vw #111111;
+    background-color: #F8F8F8;
+    font-size: 1.5vw;
+    font-weight: 600;
+    padding: 8px;
+    border-radius: 1.5vw;
     margin: 1vw auto 1vw auto;
-    border-radius: 7px 7px 7px 7px;
+}
+.home_link:hover{
+    transition: all 0.2s ease-out;
+    color: #F8F8F8;
+    background-color: #111111;
 }
 .footer{
     display: flex;
@@ -470,7 +480,7 @@ td{
     z-index: 1;
 }
 .guide{
-    position: fixed;
+    position: absolute;
     bottom: 0px;
     left: 0px;
     height: 30px;

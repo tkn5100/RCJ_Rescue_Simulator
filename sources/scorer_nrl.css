@@ -8,7 +8,7 @@ body{
     user-select: none;
 }
 .copyright{
-    position: fixed;
+    position: absolute;
     bottom: 5px;
     right: 0;
 }
@@ -100,13 +100,30 @@ td{
     background-color: #DDDDDD;
     border-radius: 10px;
     padding: 5px;
+    width: -moz-fit-content;
     width: fit-content;
+    height: -moz-fit-content;
     height: fit-content;
 }
 #stop_count{
     display: flex;
     justify-content: center;
     align-items: center;
+}
+#timer_start, #timer_stop, .button_hinan{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-weight: 500;
+    color: #111111;
+    background-color: #F8F8F8;
+    border: solid 3px #111111;
+}
+#timer_start:hover, #timer_stop:hover, .button_hinan:hover{
+    transition: all 0.2s ease-out;
+    background-color: #111111;
+    color: #F8F8F8;
 }
 @media screen and (min-width:1040px){
     .menu{
@@ -135,11 +152,8 @@ td{
         margin-bottom: 20px;
         height: 35px;
         width: 120px;
-        text-align: center;
-        background-color: #000000;
-        color: #f8f8f8;
         padding: 10px;
-        border-radius: 10px;
+        border-radius: 17px;
     }
     #added_score{
         margin-left: 2vw;
@@ -158,11 +172,8 @@ td{
         margin-left: 20px;
         height: 35px;
         width: 150px;
-        text-align: center;
-        background-color: #000000;
-        color: #f8f8f8;
         padding: 10px;
-        border-radius: 10px;
+        border-radius: 17px;
     }
     .image{
         height: 80px;
@@ -230,11 +241,8 @@ td{
         margin-bottom: 10px;
         height: 35px;
         width: 120px;
-        text-align: center;
-        background-color: #000000;
-        color: #f8f8f8;
         padding: 10px;
-        border-radius: 10px;
+        border-radius: 17px;
     }
     #added_score{
         margin-left: 20px;
@@ -253,11 +261,8 @@ td{
         margin-left: 20px;
         height: 35px;
         width: 150px;
-        text-align: center;
-        background-color: #000000;
-        color: #f8f8f8;
         padding: 10px;
-        border-radius: 10px;
+        border-radius: 17px;
     }
     .image{
         height: 80px;
@@ -326,11 +331,8 @@ td{
         margin-bottom: 10px;
         height: 3.5vw;
         width: 15vw;
-        text-align: center;
-        background-color: #000000;
-        color: #f8f8f8;
         padding: 10px;
-        border-radius: 10px;
+        border-radius: 1.7vw;
     }
     #added_score{
         margin-left: 20px;
@@ -350,11 +352,8 @@ td{
         height: 3.5vw;
         width: 15vw;
         font-size: 1.5vw;
-        text-align: center;
-        background-color: #000000;
-        color: #f8f8f8;
         padding: 10px;
-        border-radius: 10px;
+        border-radius: 1.7vw;
     }
     .image{
         height: 8vw;
@@ -442,7 +441,9 @@ td{
         position: static !important;
         visibility: visible !important;
         opacity: 1 !important;
+        width: -moz-fit-content !important;
         width: fit-content !important;
+        height: -moz-fit-content !important;
         height: fit-content !important;
         overflow: hidden !important;
         padding: 0 !important;
@@ -555,7 +556,7 @@ td{
     box-shadow: 0 0 5px #888888;
 }
 .guide{
-    position: fixed;
+    position: absolute;
     bottom: 0px;
     left: 0px;
     height: 30px;
@@ -642,11 +643,19 @@ td{
 #league_nrl, #league_wrl, #rule_close, #statistics_close{
     position: absolute;
     width: 10vw;
+    height: 3vw;
     text-align: center;
-    background-color: #000000;
-    color: #f8f8f8;
+    font-weight: 500;
+    color: #111111;
+    background-color: #F8F8F8;
+    border: solid 3px #111111;
     padding: 0.8vw;
-    border-radius: 1vw;
+    border-radius: 1.5vw;
+}
+#league_nrl:hover, #league_wrl:hover, #rule_close:hover, #statistics_close:hover{
+    transition: all 0.2s ease-out;
+    background-color: #111111;
+    color: #F8F8F8;
 }
 #league_nrl{
     right: 18vw;
@@ -722,6 +731,7 @@ td{
     padding: 10px;
     border-radius: 15px;
     cursor: default;
+    width: -moz-fit-content;
     width: fit-content;
     z-index: 3;
     box-shadow: 0 0 10px #888888;
@@ -742,7 +752,9 @@ td{
     font-size: 12px;
     margin-left: 10px;
     padding: 5px;
+    width: -moz-fit-content;
     width: fit-content;
+    height: -moz-fit-content;
     height: fit-content;
 }
 #hazard_status{
@@ -755,22 +767,33 @@ td{
 #hazard_clear, #hazard_clear2{
     margin-left: 20px;
     width: 100px;
+    height: 35px;
     text-align: center;
-    background-color: #000000;
-    color: #f8f8f8;
+    font-weight: 500;
+    color: #111111;
+    background-color: #F8F8F8;
+    border: solid 3px #111111;
     box-shadow: 0 0 10px #FFD700;
     padding: 5px;
-    border-radius: 5px;
+    border-radius: 17px;
+}
+#hazard_clear:hover, #hazard_clear2:hover{
+    transition: all 0.2s ease-out;
+    background-color: #111111;
+    color: #F8F8F8;
 }
 #hazard_clear.disabled, #hazard_clear2.disabled{
-    background-color: #888888;
+    border: solid 3px #888888 !important;
     box-shadow: 0 0 10px #FFD700;
-    color: #f8f8f8;
+}
+#hazard_clear.disabled:hover, #hazard_clear2.disabled:hover{
+    transition: all 0.2s ease-out;
+    background-color: #888888;
+    color: #F8F8F8;
 }
 #hazard_clear.cleared, #hazard_clear2.cleared{
-    background-color: #000000;
+    border: solid 3px #111111 !important;
     box-shadow: 0 0 10px #888888;
-    color: #f8f8f8;
 }
 #hazard_clear2{
     margin-top: 10px;
