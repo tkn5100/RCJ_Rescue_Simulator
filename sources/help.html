@@ -3,13 +3,13 @@
   <head>
     <meta charset="utf-8">
     <link rel="icon" type="image/png" href="../img/simulator/ad.png">
-    <link rel="stylesheet" href="">
+    <link rel="stylesheet" href="help.css">
     <link rel="stylesheet" href="destyle.css">
-    <title>ヘルプ -RoboCupJunior コート作成環境v4.4.2</title>
+    <title>ヘルプ -RoboCupJunior コート作成環境v4.4.3</title>
   </head>
 
   <body class="body">
-    <h1 class="help_h1">ヘルプ - RoboCupJunior コート作成環境v4.4.2</h1>
+    <h1 class="help_h1">ヘルプ - RoboCupJunior コート作成環境v4.4.3</h1>
     <p class="help-sentence">ロボカップジュニアレスキューラインの競技者のためのソフトウェアです。機能は以下の通りです。ルールは2022年版に準拠します。</p>
     <p class="help-sentence">アプリケーション版の配布はv1.1.1をもって終了しました。なおv1.1.1以前でもアプリケーション版をご利用になると思わぬ不具合が発生する場合がありますので、ブラウザ版(このソフトウェア)をご利用ください。</p>
     <a class="help-sentence" onclick="window.open('https://github.com/tkn5100/RCJ_Rescue_Simulator')" style="color: #4400FF; text-decoration: underline solid 1px; cursor: pointer;">Githubでソースコードを公開しています(外部リンク)</a>
@@ -92,6 +92,13 @@
     <p class="help-sentence">上記にないOS</p>
 
     <h2 class="help_h2" style="margin-bottom: 0px;">変更履歴</h2>
+    <h3 class="help_h3">v4.4.3</h3>
+    <ul>
+      <li class="help-sentence-changes">・2022.06.02公開</li>
+      <li class="help-sentence-changes">・動作環境外のブラウザで警告を発する機能を改善</li>
+      <li class="help-sentence-changes">・コート作成で、1階部分を表示した状態で印刷するとその後2階部分に切り替わってしまう不具合を修正</li>
+      <li class="help-sentence-changes">・NRL得点計算で、競技を開始しないと操作ができないよう変更</li>
+    </ul>
     <h3 class="help_h3">v4.4.2</h3>
     <ul>
       <li class="help-sentence-changes">・2022.05.28公開</li>
@@ -289,7 +296,7 @@
     <ul>
       <li class="help-sentence-changes">・2022.01.26公開</li>
     </ul>
-    <h2 class="help_h2">旧ソフトウェア(NRLバージョン)の更新履歴</h2>
+    <h2 class="help_h2">旧ソフトウェア(NRL版)の更新履歴</h2>
     <h3 class="help_h3">v3.2.1</h3>
     <ul>
       <li class="help-sentence-changes">・2022.01.01公開</li>
@@ -348,7 +355,7 @@
       <li class="help-sentence-changes">・2021.09.03公開</li>
       <li class="help-sentence-changes">・初版完成</li>
     </ul>
-    <h2 class="help_h2">旧ソフトウェア(WRLバージョン)の変更履歴</h2>
+    <h2 class="help_h2">旧ソフトウェア(WRL版)の変更履歴</h2>
     <h3 class="help_h3">v1.1.2</h3>
     <ul>
       <li class="help-sentence-changes">・2022.01.21公開</li>
@@ -384,9 +391,9 @@
 
     <h2 class="help_h2" style="margin-bottom: 0px;">このソフトウェアについて</h2>
     <h3 class="help_h3">開発の経緯</h3>
-    <p class="help-sentence">2020年1月22日までは、同じくロボカップジュニアレスキューラインのコートを作成するソフトウェアとして「RoboCupJunior NRL コート作成環境」と「RoboCupJunior WRL コート作成環境」(ヘルプでは2つ合わせて「旧ソフトウェア」と表記)を開発していました。しかし、アップデートを重ね機能がほぼ同じになってきたこと、またWRL向けのソフトウェアでNRLのコートも作成可能であることから、WRL版にNRL版を組み込む形で新たにこの「RoboCupJunior コート作成環境」を作成することとしました。2022年1月29日に公開したRC3版で動作が安定したことからそれをv1.0.0とし、UIの改善と機能追加を重ねています。</p>
+    <p class="help-sentence">2021年1月22日までは、同じくロボカップジュニアレスキューラインのコートを作成するソフトウェアとして「RoboCupJunior NRL コート作成環境」と「RoboCupJunior WRL コート作成環境」(ヘルプでは2つ合わせて「旧ソフトウェア」と表記)を開発していました。しかし、アップデートを重ね機能がほぼ同じになってきたこと、またWRL版でNRLのコートも作成可能であることから、WRL版にNRL版を組み込む形で新たにこの「RoboCupJunior コート作成環境」を作成することとしました。2022年1月29日に公開したRC3版で動作が安定したことからそれをv1.0.0とし、UIの改善と機能追加を重ねています。</p>
     <h3 class="help_h3">バージョンの命名規則</h3>
-    <p class="help-sentence">セマンティック・バージョニングを参考にしており、vX.Y.Zのようにつけます。Xはメジャーバージョンで、RRLファイルの内部構造の変更など後方互換性がなくなる変更があった場合に数字を1つ上げます。Yはマイナーバージョンで、機能性を追加した場合に数字を1つ上げます。Zはパッチバージョンで、バグ修正など細かい変更の際に数字を1つ上げます。詳しくは下記URLをご覧ください(ただしAPIをインターネットに公開しているわけではありませんし、旧ソフトウェアは必ずしもこれに従っているわけではありません)。</p>
+    <p class="help-sentence">セマンティック・バージョニングを参考にしており、vX.Y.Zのようにつけます。Xはメジャーバージョンで、RRLファイルの内部構造の変更など後方互換性がなくなる変更があった場合に数字を1つ上げます。Yはマイナーバージョンで、機能性を追加した場合に数字を1つ上げます。Zはパッチバージョンで、バグ修正など細かい変更の際に数字を1つ上げます。詳しくは下記URLをご覧ください</p>
     <a href="https://semver.org/lang/ja/" target="_blank" rel="noopener noreferrer" class="help-sentence" style="text-decoration: underline 1px; color: #4400FF;">セマンティック バージョニング 2.0.0(https://semver.org/lang/ja/)</a>
     <h3 class="help_h3">アプリケーションの調子が悪いときは</h3>
     <p class="help-sentence">リロードせずに長時間使い続けると、動作が重くなったり不具合が出ることがあります。再読み込みするか、「Ctrl+F5」を押してスーパーリロードしてください。ただし、プロジェクトを保存するのを忘れないでください。なお、再読み込みを行っても自動保存データは保持されます。</p>

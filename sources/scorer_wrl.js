@@ -66,14 +66,14 @@
 
     if (agent.indexOf('msie') != -1 || agent.indexOf('trident') != -1) {
       window.alert('このブラウザではアプリケーションが正しく動作しません。')
+    } else if (agent.indexOf('edge') != -1) {
+      window.alert('このブラウザではアプリケーションが正しく動作しません。')
     } else if (agent.indexOf('edg') != -1) {
       what_browser = 'Edge';
-    } else if (agent.indexOf('edge') != -1) {
+    } else if (agent.indexOf('opera') != -1) {
       window.alert('このブラウザではアプリケーションが正しく動作しません。')
     } else if (agent.indexOf('opr') != -1) {
       what_browser = 'Opera';
-    } else if (agent.indexOf('opera') != -1) {
-      window.alert('このブラウザではアプリケーションが正しく動作しません。')
     } else if (agent.indexOf('chrome') != -1) {
       what_browser = 'Chrome';
     } else if (agent.indexOf('safari') != -1) {
@@ -81,6 +81,8 @@
       document.getElementById('input_file').accept=".rrl, .csv"
     } else if (agent.indexOf('firefox') != -1) {
       what_browser = 'FireFox';
+    } else {
+      window.alert('このブラウザではアプリケーションが正しく動作しない可能性があります。')
     }
 
     function round(value){
@@ -1480,7 +1482,7 @@
         reader.readAsText(file);
         reader.onload = function () {
           csv_arrays = reader.result.split('\n');
-          if (csv_arrays[0] == "v4.0.0," || csv_arrays[0] == "v4.1.0," || csv_arrays[0] == "v4.1.1," || csv_arrays[0] == "v4.2.0," || csv_arrays[0] == "v4.2.1," || csv_arrays[0] == "v4.2.2," || csv_arrays[0] == "v4.3.0," || csv_arrays[0] == "v4.3.1," || csv_arrays[0] == "v4.4.0," || csv_arrays[0] == "v4.4.1," || csv_arrays[0] == "v4.4.2,") {
+          if (csv_arrays[0] == "v4.0.0," || csv_arrays[0] == "v4.1.0," || csv_arrays[0] == "v4.1.1," || csv_arrays[0] == "v4.2.0," || csv_arrays[0] == "v4.2.1," || csv_arrays[0] == "v4.2.2," || csv_arrays[0] == "v4.3.0," || csv_arrays[0] == "v4.3.1," || csv_arrays[0] == "v4.4.0," || csv_arrays[0] == "v4.4.1," || csv_arrays[0] == "v4.4.2," || csv_arrays[0] == "v4.4.3,") {
             if (csv_arrays[0] == "v4.3.0," || csv_arrays[0] == "v4.3.1,") {
               window.alert('v4.3.0とv4.3.1で作成したファイルは、2階部分がうまく保存されていません。')
             }

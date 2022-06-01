@@ -55,14 +55,14 @@
 
     if (agent.indexOf('msie') != -1 || agent.indexOf('trident') != -1) {
       window.alert('このブラウザではアプリケーションが正しく動作しません。')
+    } else if (agent.indexOf('edge') != -1) {
+      window.alert('このブラウザではアプリケーションが正しく動作しません。')
     } else if (agent.indexOf('edg') != -1) {
       what_browser = 'Edge';
-    } else if (agent.indexOf('edge') != -1) {
+    } else if (agent.indexOf('opera') != -1) {
       window.alert('このブラウザではアプリケーションが正しく動作しません。')
     } else if (agent.indexOf('opr') != -1) {
       what_browser = 'Opera';
-    } else if (agent.indexOf('opera') != -1) {
-      window.alert('このブラウザではアプリケーションが正しく動作しません。')
     } else if (agent.indexOf('chrome') != -1) {
       what_browser = 'Chrome';
     } else if (agent.indexOf('safari') != -1) {
@@ -70,6 +70,8 @@
       document.getElementById('input_file').accept=".rrl, .csv"
     } else if (agent.indexOf('firefox') != -1) {
       what_browser = 'FireFox';
+    } else {
+      window.alert('このブラウザではアプリケーションが正しく動作しない可能性があります。')
     }
 
     function nomal_guide() {
@@ -391,7 +393,7 @@
       const filename = window.prompt('ファイル名を入力:');
       if (filename) {
         //ダウンロードするタイルを配列に入れる
-        output_data[0].push("v4.4.2");
+        output_data[0].push("v4.4.3");
         //どのコートを編集しいたか
         if($table[0].style.display == 'block'){
           output_data[1].push("0");
@@ -634,7 +636,7 @@
         reader.readAsText(file);
         reader.onload = function () {
           csv_arrays = reader.result.split('\n');
-          if (csv_arrays[0] == "v4.0.0," || csv_arrays[0] == "v4.1.0," || csv_arrays[0] == "v4.1.1," || csv_arrays[0] == "v4.2.0," || csv_arrays[0] == "v4.2.1," || csv_arrays[0] == "v4.2.2," || csv_arrays[0] == "v4.3.0," || csv_arrays[0] == "v4.3.1," || csv_arrays[0] == "v4.4.0," || csv_arrays[0] == "v4.4.1," || csv_arrays[0] == "v4.4.2,") {
+          if (csv_arrays[0] == "v4.0.0," || csv_arrays[0] == "v4.1.0," || csv_arrays[0] == "v4.1.1," || csv_arrays[0] == "v4.2.0," || csv_arrays[0] == "v4.2.1," || csv_arrays[0] == "v4.2.2," || csv_arrays[0] == "v4.3.0," || csv_arrays[0] == "v4.3.1," || csv_arrays[0] == "v4.4.0," || csv_arrays[0] == "v4.4.1," || csv_arrays[0] == "v4.4.2," || csv_arrays[0] == "v4.4.3,") {
             if (csv_arrays[0] == "v4.3.0," || csv_arrays[0] == "v4.3.1,") {
               window.alert('v4.3.0とv4.3.1で作成したファイルは、2階部分がうまく保存されていません。')
             }
@@ -763,17 +765,17 @@
           print_block = 5;
         }
         window.print();
-        if(print_block = 0){
+        if(print_block == 0){
           $table[1].style.display = 'none';
-        }else if(print_block = 1){
+        }else if(print_block == 1){
           $table[0].style.display = 'none';
-        }else if(print_block = 2){
+        }else if(print_block == 2){
           $table[3].style.display = 'none';
-        }else if(print_block = 3){
+        }else if(print_block == 3){
           $table[2].style.display = 'none';
-        }else if(print_block = 4){
+        }else if(print_block == 4){
           $table[5].style.display = 'none';
-        }else if(print_block = 5){
+        }else if(print_block == 5){
           $table[4].style.display = 'none';
         }
       });

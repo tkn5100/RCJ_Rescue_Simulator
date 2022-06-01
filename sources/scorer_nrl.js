@@ -50,14 +50,14 @@
 
     if (agent.indexOf('msie') != -1 || agent.indexOf('trident') != -1) {
       window.alert('このブラウザではアプリケーションが正しく動作しません。')
+    } else if (agent.indexOf('edge') != -1) {
+      window.alert('このブラウザではアプリケーションが正しく動作しません。')
     } else if (agent.indexOf('edg') != -1) {
       what_browser = 'Edge';
-    } else if (agent.indexOf('edge') != -1) {
+    } else if (agent.indexOf('opera') != -1) {
       window.alert('このブラウザではアプリケーションが正しく動作しません。')
     } else if (agent.indexOf('opr') != -1) {
       what_browser = 'Opera';
-    } else if (agent.indexOf('opera') != -1) {
-      window.alert('このブラウザではアプリケーションが正しく動作しません。')
     } else if (agent.indexOf('chrome') != -1) {
       what_browser = 'Chrome';
     } else if (agent.indexOf('safari') != -1) {
@@ -65,6 +65,8 @@
       document.getElementById('input_file').accept=".rrl, .csv"
     } else if (agent.indexOf('firefox') != -1) {
       what_browser = 'FireFox';
+    } else {
+      window.alert('このブラウザではアプリケーションが正しく動作しない可能性があります。')
     }
 
     function nomal_guide() {
@@ -132,81 +134,81 @@
     for (let index = 1; index < imgLen; index++) {
       $img[index].addEventListener('click', function (e) {
         if (document.getElementById("timer_start").hasAttribute('disabled')){
-        } else {
-          window.alert('先に競技を開始してください。')
-        }
-        if (e.target.dataset.check == '0'){
-          if (e.target.dataset.passed == '1' && e.target.src.slice(-6) == '25.png'){
-            e.target.parentElement.style.backgroundColor = '#8EF1FF';
-            e.target.dataset.passed = '2';
-          } else if (e.target.dataset.passed == '1' && e.target.src.slice(-6) == '33.png'){
-            e.target.parentElement.style.backgroundColor = '#8EF1FF';
-            e.target.dataset.passed = '2';
-          } else if (e.target.dataset.passed == '1-' && e.target.src.slice(-6) == '25.png'){
-            e.target.parentElement.style.backgroundColor = '#8EF1FF';
-            e.target.dataset.passed = '2-';
-          } else if (e.target.dataset.passed == '1-' && e.target.src.slice(-6) == '33.png'){
-            e.target.parentElement.style.backgroundColor = '#8EF1FF';
-            e.target.dataset.passed = '2-';
+          if (e.target.dataset.check == '0'){
+            if (e.target.dataset.passed == '1' && e.target.src.slice(-6) == '25.png'){
+              e.target.parentElement.style.backgroundColor = '#8EF1FF';
+              e.target.dataset.passed = '2';
+            } else if (e.target.dataset.passed == '1' && e.target.src.slice(-6) == '33.png'){
+              e.target.parentElement.style.backgroundColor = '#8EF1FF';
+              e.target.dataset.passed = '2';
+            } else if (e.target.dataset.passed == '1-' && e.target.src.slice(-6) == '25.png'){
+              e.target.parentElement.style.backgroundColor = '#8EF1FF';
+              e.target.dataset.passed = '2-';
+            } else if (e.target.dataset.passed == '1-' && e.target.src.slice(-6) == '33.png'){
+              e.target.parentElement.style.backgroundColor = '#8EF1FF';
+              e.target.dataset.passed = '2-';
+            } else {
+              e.target.parentElement.style.backgroundColor = '#C2EEFF';
+              e.target.dataset.passed = '1';
+            }
           } else {
-            e.target.parentElement.style.backgroundColor = '#C2EEFF';
-            e.target.dataset.passed = '1';
-          }
-        } else {
-          for (let index = 1; index < imgLen; index++) {
-            if ($img[index].dataset.passed == '1'){
-              passed_tiles++;
-              if($img[index].src.slice(-6) == '25.png' || $img[index].src.slice(-6) == '33.png'){
-                $img[index].dataset.passed = '1-';
-              } else {
+            for (let index = 1; index < imgLen; index++) {
+              if ($img[index].dataset.passed == '1'){
+                passed_tiles++;
+                if($img[index].src.slice(-6) == '25.png' || $img[index].src.slice(-6) == '33.png'){
+                  $img[index].dataset.passed = '1-';
+                } else {
+                  $img[index].dataset.passed = '0';
+                  $img[index].parentElement.style.backgroundColor = '#FFFFFF';
+                  $img[index].style.pointerEvents = 'none';
+                  $img[index].style.boxShadow = 'none';
+                }
+              } else if ($img[index].dataset.passed == '2'){
+                passed_tiles = passed_tiles + 2;
+                $img[index].dataset.passed = '0';
+                $img[index].parentElement.style.backgroundColor = '#FFFFFF';
+                $img[index].style.pointerEvents = 'none';
+                $img[index].style.boxShadow = 'none';
+              } else if ($img[index].dataset.passed == '2-'){
+                passed_tiles++;
                 $img[index].dataset.passed = '0';
                 $img[index].parentElement.style.backgroundColor = '#FFFFFF';
                 $img[index].style.pointerEvents = 'none';
                 $img[index].style.boxShadow = 'none';
               }
-            } else if ($img[index].dataset.passed == '2'){
-              passed_tiles = passed_tiles + 2;
-              $img[index].dataset.passed = '0';
-              $img[index].parentElement.style.backgroundColor = '#FFFFFF';
-              $img[index].style.pointerEvents = 'none';
-              $img[index].style.boxShadow = 'none';
-            } else if ($img[index].dataset.passed == '2-'){
-              passed_tiles++;
-              $img[index].dataset.passed = '0';
-              $img[index].parentElement.style.backgroundColor = '#FFFFFF';
-              $img[index].style.pointerEvents = 'none';
-              $img[index].style.boxShadow = 'none';
             }
+            //↓チェックマーカーがあるタイルの分
+            passed_tiles++;
+            e.target.parentElement.style.backgroundColor = '#FFFFFF';
+            e.target.style.pointerEvents = 'none';
+            if (stop_count == '0'){
+              get_points(passed_tiles * 5);
+              newSectionTag = document.createElement("p");
+              newSectionTag.textContent = '区間' + nowSection + ' : 5点 × ' + passed_tiles + 'タイル = ' + passed_tiles * 5 + '点';
+              document.getElementById('statistics_line').appendChild(newSectionTag);
+            } else if (stop_count == '1'){
+              get_points(passed_tiles * 3);
+              newSectionTag = document.createElement("p");
+              newSectionTag.textContent = '区間' + nowSection + ' : 3点 × ' + passed_tiles + 'タイル = ' + passed_tiles * 3 + '点';
+              document.getElementById('statistics_line').appendChild(newSectionTag);
+            } else if (stop_count == '2'){
+              get_points(passed_tiles * 1);
+              newSectionTag = document.createElement("p");
+              newSectionTag.textContent = '区間' + nowSection + ' : 1点 × ' + passed_tiles + 'タイル = ' + passed_tiles * 1 + '点';
+              document.getElementById('statistics_line').appendChild(newSectionTag);
+            } else {
+              window.alert('競技進行の停止が3回以上行われているので得点はありません。');
+              newSectionTag = document.createElement("p");
+              newSectionTag.textContent = '区間' + nowSection + ' : 0点 × ' + passed_tiles + 'タイル = 0点';
+              document.getElementById('statistics_line').appendChild(newSectionTag);
+            }
+            nowSection++;
+            passed_tiles = 0;
+            stop_count = 0;
+            document.getElementById('stop_count').textContent = '0';
           }
-          //↓チェックマーカーがあるタイルの分
-          passed_tiles++;
-          e.target.parentElement.style.backgroundColor = '#FFFFFF';
-          e.target.style.pointerEvents = 'none';
-          if (stop_count == '0'){
-            get_points(passed_tiles * 5);
-            newSectionTag = document.createElement("p");
-            newSectionTag.textContent = '区間' + nowSection + ' : 5点 × ' + passed_tiles + 'タイル = ' + passed_tiles * 5 + '点';
-            document.getElementById('statistics_line').appendChild(newSectionTag);
-          } else if (stop_count == '1'){
-            get_points(passed_tiles * 3);
-            newSectionTag = document.createElement("p");
-            newSectionTag.textContent = '区間' + nowSection + ' : 3点 × ' + passed_tiles + 'タイル = ' + passed_tiles * 3 + '点';
-            document.getElementById('statistics_line').appendChild(newSectionTag);
-          } else if (stop_count == '2'){
-            get_points(passed_tiles * 1);
-            newSectionTag = document.createElement("p");
-            newSectionTag.textContent = '区間' + nowSection + ' : 1点 × ' + passed_tiles + 'タイル = ' + passed_tiles * 1 + '点';
-            document.getElementById('statistics_line').appendChild(newSectionTag);
-          } else {
-            window.alert('競技進行の停止が3回以上行われているので得点はありません。');
-            newSectionTag = document.createElement("p");
-            newSectionTag.textContent = '区間' + nowSection + ' : 0点 × ' + passed_tiles + 'タイル = 0点';
-            document.getElementById('statistics_line').appendChild(newSectionTag);
-          }
-          nowSection++;
-          passed_tiles = 0;
-          stop_count = 0;
-          document.getElementById('stop_count').textContent = '0';
+        } else {
+          window.alert('先に競技を開始してください。')
         }
       });
     }
@@ -214,104 +216,108 @@
     //得点要素
     let hazard_show = 0;
     function hazard_dialog (e) {
-      hazard_show = 1;
-      document.querySelector('#hazard_img > img').style.boxShadow = '';
-      document.getElementById('hazard_out').style.display = "block";
-      //topとbottomの決定(もし下のスペースがなければメニューを上にずらす)
-      if (window.innerHeight - e.pageY < 155) {
-        document.getElementById('hazard_out').style.top = "auto";
-        document.getElementById('hazard_out').style.bottom = window.innerHeight - e.pageY + "px";
+      if (document.getElementById("timer_start").hasAttribute('disabled')){
+        hazard_show = 1;
+        document.querySelector('#hazard_img > img').style.boxShadow = '';
+        document.getElementById('hazard_out').style.display = "block";
+        //topとbottomの決定(もし下のスペースがなければメニューを上にずらす)
+        if (window.innerHeight - e.pageY < 155) {
+          document.getElementById('hazard_out').style.top = "auto";
+          document.getElementById('hazard_out').style.bottom = window.innerHeight - e.pageY + "px";
+        } else {
+          document.getElementById('hazard_out').style.top = e.pageY + "px";
+          document.getElementById('hazard_out').style.bottom = "auto";
+        }
+        //rightとleftの決定(もし右のスペースがなければメニューを左にずらす)
+        if (window.innerWidth - e.pageX < 300) {
+          document.getElementById('hazard_out').style.right = (window.innerWidth - e.pageX) + "px";
+          document.getElementById('hazard_out').style.left = "auto";
+        } else {
+          document.getElementById('hazard_out').style.left = e.pageX + "px";
+          document.getElementById('hazard_out').style.right = "auto";
+        }
+        if (e.target.classList.contains('bump')) {
+          //バンプ
+          document.getElementById('hazard_name').textContent = '減速バンプ';
+          document.getElementById('hazard_score').textContent = '5';
+          document.querySelector('#hazard_img > img').src = '../img/simulator/bu.png';
+          if (e.target.dataset.cleared == '0') {
+            document.querySelector('#hazard_img > img').className = 'bump';
+            document.getElementById('hazard_status').textContent = 'これからクリア';
+          } else {
+            document.querySelector('#hazard_img > img').className = 'bump cleared';
+            document.getElementById('hazard_status').textContent = 'クリア済み';
+          }
+          document.getElementById('hazard_clear').textContent = 'クリア';
+          document.getElementById('hazard_clear2').style.display = 'none';
+          hazard_clear(e.target,'バンプ');
+        } else if (e.target.classList.contains('obstacle')) {
+          //障害物
+          document.getElementById('hazard_name').textContent = '障害物';
+          document.getElementById('hazard_score').textContent = '15';
+          document.querySelector('#hazard_img > img').src = '../img/simulator/ob.svg';
+          if (e.target.dataset.cleared == '0') {
+            document.querySelector('#hazard_img > img').className = 'obstacle';
+            document.getElementById('hazard_status').textContent = 'これからクリア';
+          } else {
+            document.querySelector('#hazard_img > img').className = 'obstacle cleared';
+            document.getElementById('hazard_status').textContent = 'クリア済み';
+          }
+          document.getElementById('hazard_clear').textContent = 'クリア';
+          document.getElementById('hazard_clear2').style.display = 'none';
+          hazard_clear(e.target,'障害物');
+        } else if (e.target.src.slice(-6) == '03.png') {
+          //ギャップ1個
+          document.getElementById('hazard_name').textContent = 'ギャップ';
+          document.getElementById('hazard_score').textContent = '10';
+          document.querySelector('#hazard_img > img').src = '../img/simulator/03.png';
+          document.querySelector('#hazard_img > img').className = 'image_hazard';
+          if (e.target.dataset.cleared == '0'){
+            document.getElementById('hazard_status').textContent = 'これからクリア';
+          } else {
+            document.querySelector('#hazard_img > img').style.boxShadow = '0 0 5px #888888';
+            document.getElementById('hazard_status').textContent = 'クリア済み';
+          }
+          document.getElementById('hazard_clear').textContent = 'クリア';
+          document.getElementById('hazard_clear2').style.display = 'none';
+          hazard_clear(e.target,'ギャップ');
+        } else if (e.target.src.slice(-6) == '04.png' || e.target.src.slice(-6) == '33.png') {
+          //ギャップ2個
+          document.getElementById('hazard_name').textContent = 'ギャップ(2)';
+          document.getElementById('hazard_score').textContent = '10';
+          document.querySelector('#hazard_img > img').src = '../img/simulator/' + e.target.src.slice(-6);
+          document.querySelector('#hazard_img > img').className = 'image_hazard';
+          if (e.target.dataset.cleared == '0'){
+            document.getElementById('hazard_status').textContent = 'これからクリア';
+          } else if (e.target.dataset.cleared == '1'){
+            document.getElementById('hazard_status').textContent = '1つクリア済み';
+          } else if (e.target.dataset.cleared == '2'){
+            document.querySelector('#hazard_img > img').style.boxShadow = '0 0 5px #888888';
+            document.getElementById('hazard_status').textContent = 'すべてクリア済み';
+          }
+          document.getElementById('hazard_clear').textContent = 'クリア(1)';
+          document.getElementById('hazard_clear2').style.display = 'block';
+          document.getElementById('hazard_clear2').textContent = 'クリア(2)';
+          hazard_clear(e.target,'ギャップ');
+          hazard_clear2(e.target);
+        } else if (e.target.style.border == "1px solid rgb(102, 51, 102)" || e.target.style.border == "1px solid rgb(204, 51, 102)") {
+          //傾斜路
+          document.getElementById('hazard_name').textContent = '傾斜路';
+          document.getElementById('hazard_score').textContent = '10';
+          document.querySelector('#hazard_img > img').src = e.target.src;
+          document.querySelector('#hazard_img > img').className = 'image_hazard';
+          if (e.target.dataset.cleared == '0'){
+            document.getElementById('hazard_status').textContent = 'これからクリア';
+          } else {
+            document.querySelector('#hazard_img > img').style.boxShadow = '0 0 5px #888888';
+            document.getElementById('hazard_status').textContent = 'クリア済み';
+          }
+          document.getElementById('hazard_clear').textContent = 'クリア';
+          document.getElementById('hazard_clear2').style.display = 'none';
+          hazard_clear(e.target,'傾斜路');
+        }
       } else {
-        document.getElementById('hazard_out').style.top = e.pageY + "px";
-        document.getElementById('hazard_out').style.bottom = "auto";
-      }
-      //rightとleftの決定(もし右のスペースがなければメニューを左にずらす)
-      if (window.innerWidth - e.pageX < 300) {
-        document.getElementById('hazard_out').style.right = (window.innerWidth - e.pageX) + "px";
-        document.getElementById('hazard_out').style.left = "auto";
-      } else {
-        document.getElementById('hazard_out').style.left = e.pageX + "px";
-        document.getElementById('hazard_out').style.right = "auto";
-      }
-      if (e.target.classList.contains('bump')) {
-        //バンプ
-        document.getElementById('hazard_name').textContent = '減速バンプ';
-        document.getElementById('hazard_score').textContent = '5';
-        document.querySelector('#hazard_img > img').src = '../img/simulator/bu.png';
-        if (e.target.dataset.cleared == '0') {
-          document.querySelector('#hazard_img > img').className = 'bump';
-          document.getElementById('hazard_status').textContent = 'これからクリア';
-        } else {
-          document.querySelector('#hazard_img > img').className = 'bump cleared';
-          document.getElementById('hazard_status').textContent = 'クリア済み';
-        }
-        document.getElementById('hazard_clear').textContent = 'クリア';
-        document.getElementById('hazard_clear2').style.display = 'none';
-        hazard_clear(e.target,'バンプ');
-      } else if (e.target.classList.contains('obstacle')) {
-        //障害物
-        document.getElementById('hazard_name').textContent = '障害物';
-        document.getElementById('hazard_score').textContent = '15';
-        document.querySelector('#hazard_img > img').src = '../img/simulator/ob.svg';
-        if (e.target.dataset.cleared == '0') {
-          document.querySelector('#hazard_img > img').className = 'obstacle';
-          document.getElementById('hazard_status').textContent = 'これからクリア';
-        } else {
-          document.querySelector('#hazard_img > img').className = 'obstacle cleared';
-          document.getElementById('hazard_status').textContent = 'クリア済み';
-        }
-        document.getElementById('hazard_clear').textContent = 'クリア';
-        document.getElementById('hazard_clear2').style.display = 'none';
-        hazard_clear(e.target,'障害物');
-      } else if (e.target.src.slice(-6) == '03.png') {
-        //ギャップ1個
-        document.getElementById('hazard_name').textContent = 'ギャップ';
-        document.getElementById('hazard_score').textContent = '10';
-        document.querySelector('#hazard_img > img').src = '../img/simulator/03.png';
-        document.querySelector('#hazard_img > img').className = 'image_hazard';
-        if (e.target.dataset.cleared == '0'){
-          document.getElementById('hazard_status').textContent = 'これからクリア';
-        } else {
-          document.querySelector('#hazard_img > img').style.boxShadow = '0 0 5px #888888';
-          document.getElementById('hazard_status').textContent = 'クリア済み';
-        }
-        document.getElementById('hazard_clear').textContent = 'クリア';
-        document.getElementById('hazard_clear2').style.display = 'none';
-        hazard_clear(e.target,'ギャップ');
-      } else if (e.target.src.slice(-6) == '04.png' || e.target.src.slice(-6) == '33.png') {
-        //ギャップ2個
-        document.getElementById('hazard_name').textContent = 'ギャップ(2)';
-        document.getElementById('hazard_score').textContent = '10';
-        document.querySelector('#hazard_img > img').src = '../img/simulator/' + e.target.src.slice(-6);
-        document.querySelector('#hazard_img > img').className = 'image_hazard';
-        if (e.target.dataset.cleared == '0'){
-          document.getElementById('hazard_status').textContent = 'これからクリア';
-        } else if (e.target.dataset.cleared == '1'){
-          document.getElementById('hazard_status').textContent = '1つクリア済み';
-        } else if (e.target.dataset.cleared == '2'){
-          document.querySelector('#hazard_img > img').style.boxShadow = '0 0 5px #888888';
-          document.getElementById('hazard_status').textContent = 'すべてクリア済み';
-        }
-        document.getElementById('hazard_clear').textContent = 'クリア(1)';
-        document.getElementById('hazard_clear2').style.display = 'block';
-        document.getElementById('hazard_clear2').textContent = 'クリア(2)';
-        hazard_clear(e.target,'ギャップ');
-        hazard_clear2(e.target);
-      } else if (e.target.style.border == "1px solid rgb(102, 51, 102)" || e.target.style.border == "1px solid rgb(204, 51, 102)") {
-        //傾斜路
-        document.getElementById('hazard_name').textContent = '傾斜路';
-        document.getElementById('hazard_score').textContent = '10';
-        document.querySelector('#hazard_img > img').src = e.target.src;
-        document.querySelector('#hazard_img > img').className = 'image_hazard';
-        if (e.target.dataset.cleared == '0'){
-          document.getElementById('hazard_status').textContent = 'これからクリア';
-        } else {
-          document.querySelector('#hazard_img > img').style.boxShadow = '0 0 5px #888888';
-          document.getElementById('hazard_status').textContent = 'クリア済み';
-        }
-        document.getElementById('hazard_clear').textContent = 'クリア';
-        document.getElementById('hazard_clear2').style.display = 'none';
-        hazard_clear(e.target,'傾斜路');
+        window.alert('先に競技を開始してください。')
       }
     }
 
@@ -330,103 +336,123 @@
     }
 
     function hazard_clear(element,type) {
-      if (element.dataset.cleared == '0'){
-        hazard_button(document.getElementById('hazard_clear'), null);
-        document.getElementById('hazard_clear').onclick = function(){
-          element.dataset.cleared = '1';
-          element.classList.add('cleared');
-          if (element.src.slice(-6) == '03.png' || element.style.border == "1px solid rgb(102, 51, 102)" || element.style.border == "1px solid rgb(204, 51, 102)") {
-            element.style.boxShadow = '0 0 5px #888888';
-          }
-          get_points(Number(document.getElementById('hazard_score').textContent));
-          if (type == 'バンプ'){
-            cleared_bumps++;
-            document.getElementById('statistics_bump').textContent = '5点 × ' + cleared_bumps + '個 =  ' + cleared_bumps * 5 + '点';
-          } else if (type == '障害物'){
-            cleared_obstacles++;
-            document.getElementById('statistics_obstacle').textContent = '15点 × ' + cleared_obstacles + '個 =  ' + cleared_obstacles * 15 + '点';
-          } else if (type == 'ギャップ'){
-            cleared_gaps++;
-            document.getElementById('statistics_gap').textContent = '10点 × ' + cleared_gaps + '個 =  ' + cleared_gaps * 10 + '点';
-          } else if (type == '傾斜路'){
-            cleared_slopes++;
-            document.getElementById('statistics_slope').textContent = '10点 × ' + cleared_slopes + '個 =  ' + cleared_slopes * 10 + '点';
-          }
-        };
-      } else {
-        hazard_button(document.getElementById('hazard_clear'),'cleared');
-        document.getElementById('hazard_clear').textContent = '取り消し';
-        document.getElementById('hazard_clear').onclick = function () {
-          element.classList.remove('cleared');
-          if (element.src.slice(-6) == '03.png' || element.style.border == "1px solid rgb(102, 51, 102)" || element.style.border == "1px solid rgb(204, 51, 102)") {
-            element.style.boxShadow = '0 0 5px #FFD700';
-          }
-          element.dataset.cleared = '0';
-          lose_points(Number(document.getElementById('hazard_score').textContent));
-          if (type == 'バンプ'){
-            cleared_bumps--;
-            document.getElementById('statistics_bump').textContent = '5点 × ' + cleared_bumps + '個 =  ' + cleared_bumps * 5 + '点';
-          } else if (type == '障害物'){
-            cleared_obstacles--;
-            document.getElementById('statistics_obstacle').textContent = '15点 × ' + cleared_obstacles + '個 =  ' + cleared_obstacles * 15 + '点';
-          } else if (type == 'ギャップ'){
-            cleared_gaps--;
-            document.getElementById('statistics_gap').textContent = '10点 × ' + cleared_gaps + '個 =  ' + cleared_gaps * 10 + '点';
-          } else if (type == '傾斜路'){
-            cleared_slopes--;
-            document.getElementById('statistics_slope').textContent = '10点 × ' + cleared_slopes + '個 =  ' + cleared_slopes * 10 + '点';
+      if (document.getElementById("timer_start").hasAttribute('disabled')){
+        if (element.dataset.cleared == '0'){
+          hazard_button(document.getElementById('hazard_clear'), null);
+          document.getElementById('hazard_clear').onclick = function(){
+            element.dataset.cleared = '1';
+            element.classList.add('cleared');
+            if (element.src.slice(-6) == '03.png' || element.style.border == "1px solid rgb(102, 51, 102)" || element.style.border == "1px solid rgb(204, 51, 102)") {
+              element.style.boxShadow = '0 0 5px #888888';
+            }
+            get_points(Number(document.getElementById('hazard_score').textContent));
+            if (type == 'バンプ'){
+              cleared_bumps++;
+              document.getElementById('statistics_bump').textContent = '5点 × ' + cleared_bumps + '個 =  ' + cleared_bumps * 5 + '点';
+            } else if (type == '障害物'){
+              cleared_obstacles++;
+              document.getElementById('statistics_obstacle').textContent = '15点 × ' + cleared_obstacles + '個 =  ' + cleared_obstacles * 15 + '点';
+            } else if (type == 'ギャップ'){
+              cleared_gaps++;
+              document.getElementById('statistics_gap').textContent = '10点 × ' + cleared_gaps + '個 =  ' + cleared_gaps * 10 + '点';
+            } else if (type == '傾斜路'){
+              cleared_slopes++;
+              document.getElementById('statistics_slope').textContent = '10点 × ' + cleared_slopes + '個 =  ' + cleared_slopes * 10 + '点';
+            }
+          };
+        } else {
+          hazard_button(document.getElementById('hazard_clear'),'cleared');
+          document.getElementById('hazard_clear').textContent = '取り消し';
+          document.getElementById('hazard_clear').onclick = function () {
+            element.classList.remove('cleared');
+            if (element.src.slice(-6) == '03.png' || element.style.border == "1px solid rgb(102, 51, 102)" || element.style.border == "1px solid rgb(204, 51, 102)") {
+              element.style.boxShadow = '0 0 5px #FFD700';
+            }
+            element.dataset.cleared = '0';
+            lose_points(Number(document.getElementById('hazard_score').textContent));
+            if (type == 'バンプ'){
+              cleared_bumps--;
+              document.getElementById('statistics_bump').textContent = '5点 × ' + cleared_bumps + '個 =  ' + cleared_bumps * 5 + '点';
+            } else if (type == '障害物'){
+              cleared_obstacles--;
+              document.getElementById('statistics_obstacle').textContent = '15点 × ' + cleared_obstacles + '個 =  ' + cleared_obstacles * 15 + '点';
+            } else if (type == 'ギャップ'){
+              cleared_gaps--;
+              document.getElementById('statistics_gap').textContent = '10点 × ' + cleared_gaps + '個 =  ' + cleared_gaps * 10 + '点';
+            } else if (type == '傾斜路'){
+              cleared_slopes--;
+              document.getElementById('statistics_slope').textContent = '10点 × ' + cleared_slopes + '個 =  ' + cleared_slopes * 10 + '点';
+            }
           }
         }
+      } else {
+        window.alert('先に競技を開始してください。')
       }
     };
     function hazard_clear2(element) {
-      if (element.dataset.cleared == '0'){
-        hazard_button(document.getElementById('hazard_clear2'),'disabled');
-        document.getElementById('hazard_clear2').onclick = function () {
-          window.alert('先に1つ目をクリアしてください。');
+      if (document.getElementById("timer_start").hasAttribute('disabled')){
+        if (element.dataset.cleared == '0'){
+          hazard_button(document.getElementById('hazard_clear2'),'disabled');
+          document.getElementById('hazard_clear2').onclick = function () {
+            window.alert('先に1つ目をクリアしてください。');
+          }
+        } else if (element.dataset.cleared == '1'){
+          hazard_button(document.getElementById('hazard_clear2'), null);
+          document.getElementById('hazard_clear2').onclick = function(){
+            element.style.boxShadow = '0 0 5px #888888';
+            element.dataset.cleared = '2';
+            get_points(10);
+            cleared_gaps++;
+            document.getElementById('statistics_gap').textContent = '10点 × ' + cleared_gaps + '個 =  ' + cleared_gaps * 10 + '点';
+          };
+        } else {
+          hazard_button(document.getElementById('hazard_clear2'),'cleared');
+          document.getElementById('hazard_clear').style.display = 'none';
+          document.getElementById('hazard_clear2').textContent = '取り消し';
+          document.getElementById('hazard_clear2').onclick = function () {
+            element.style.boxShadow = '0 0 5px #FFD700';
+            element.dataset.cleared = '0';
+            //このボタンはギャップ2個以外では表示されない
+            lose_points(20);
+            cleared_gaps = cleared_gaps - 2;
+            document.getElementById('statistics_gap').textContent = '10点 × ' + cleared_gaps + '個 =  ' + cleared_gaps * 10 + '点';
+          }
         }
-      } else if (element.dataset.cleared == '1'){
-        hazard_button(document.getElementById('hazard_clear2'), null);
-        document.getElementById('hazard_clear2').onclick = function(){
-          element.style.boxShadow = '0 0 5px #888888';
-          element.dataset.cleared = '2';
-          get_points(10);
-          cleared_gaps++;
-          document.getElementById('statistics_gap').textContent = '10点 × ' + cleared_gaps + '個 =  ' + cleared_gaps * 10 + '点';
-        };
       } else {
-        hazard_button(document.getElementById('hazard_clear2'),'cleared');
-        document.getElementById('hazard_clear').style.display = 'none';
-        document.getElementById('hazard_clear2').textContent = '取り消し';
-        document.getElementById('hazard_clear2').onclick = function () {
-          element.style.boxShadow = '0 0 5px #FFD700';
-          element.dataset.cleared = '0';
-          //このボタンはギャップ2個以外では表示されない
-          lose_points(20);
-          cleared_gaps = cleared_gaps - 2;
-          document.getElementById('statistics_gap').textContent = '10点 × ' + cleared_gaps + '個 =  ' + cleared_gaps * 10 + '点';
-        }
+        window.alert('先に競技を開始してください。')
       }
     };
 
     //避難ゾーン
     document.getElementsByClassName('button_hinan')[0].addEventListener('click', () => {
-      get_points(30);
-      cleared_green++;
-      document.getElementById('statistics_green').textContent = '30点 × ' + cleared_green + '人 = ' + cleared_green * 30 + '点';
+      if (document.getElementById("timer_start").hasAttribute('disabled')){
+        get_points(30);
+        cleared_green++;
+        document.getElementById('statistics_green').textContent = '30点 × ' + cleared_green + '人 = ' + cleared_green * 30 + '点';
+      } else {
+        window.alert('先に競技を開始してください。')
+      }
     });
     document.getElementsByClassName('button_hinan')[1].addEventListener('click', () => {
-      get_points(15);
-      cleared_black++;
-      document.getElementById('statistics_black').textContent = '15点 × ' + cleared_black + '人 = ' + cleared_black * 15 + '点';
+      if (document.getElementById("timer_start").hasAttribute('disabled')){
+        get_points(15);
+        cleared_black++;
+        document.getElementById('statistics_black').textContent = '15点 × ' + cleared_black + '人 = ' + cleared_black * 15 + '点';
+      } else {
+        window.alert('先に競技を開始してください。')
+      }
     });
     document.getElementsByClassName('button_hinan')[2].addEventListener('click', () => {
-      if (escaped == 0){
-        escaped = 1;
-        get_points(30);
-        document.getElementById('statistics_clear').textContent = '脱出済み 30点';
+      if (document.getElementById("timer_start").hasAttribute('disabled')){
+        if (escaped == 0){
+          escaped = 1;
+          get_points(30);
+          document.getElementById('statistics_clear').textContent = '脱出済み 30点';
+        } else {
+          window.alert('すでに避難ゾーンを脱出しています。');
+        }
       } else {
-        window.alert('すでに避難ゾーンを脱出しています。');
+        window.alert('先に競技を開始してください。')
       }
     });
 
@@ -602,7 +628,7 @@
         reader.readAsText(file);
         reader.onload = function () {
           csv_arrays = reader.result.split('\n');
-          if (csv_arrays[0] == "v4.0.0," || csv_arrays[0] == "v4.1.0," || csv_arrays[0] == "v4.1.1," || csv_arrays[0] == "v4.2.0," || csv_arrays[0] == "v4.2.1," || csv_arrays[0] == "v4.2.2," || csv_arrays[0] == "v4.3.0," || csv_arrays[0] == "v4.3.1," || csv_arrays[0] == "v4.4.0," || csv_arrays[0] == "v4.4.1," || csv_arrays[0] == "v4.4.2,") {
+          if (csv_arrays[0] == "v4.0.0," || csv_arrays[0] == "v4.1.0," || csv_arrays[0] == "v4.1.1," || csv_arrays[0] == "v4.2.0," || csv_arrays[0] == "v4.2.1," || csv_arrays[0] == "v4.2.2," || csv_arrays[0] == "v4.3.0," || csv_arrays[0] == "v4.3.1," || csv_arrays[0] == "v4.4.0," || csv_arrays[0] == "v4.4.1," || csv_arrays[0] == "v4.4.2," || csv_arrays[0] == "v4.4.3,") {
             if (csv_arrays[0] == "v4.3.0," || csv_arrays[0] == "v4.3.1,") {
               window.alert('v4.3.0とv4.3.1で作成したファイルは、2階部分がうまく保存されていません。')
             }
@@ -827,14 +853,14 @@
       //競技進行の停止
       $contextmenu_title[3].onclick = function() {
         if (document.getElementById("timer_start").hasAttribute('disabled')){
+          e.target.dataset.stopped = Number(e.target.dataset.stopped) + 1;
+          e.target.parentElement.style.backgroundColor = '#FFCCCC';
+          e.target.dataset.passed ='0';
+          stop_count++;
+          document.getElementById('stop_count').textContent = stop_count;
         } else {
           window.alert('先に競技を開始してください。')
         }
-        e.target.dataset.stopped = Number(e.target.dataset.stopped) + 1;
-        e.target.parentElement.style.backgroundColor = '#FFCCCC';
-        e.target.dataset.passed ='0';
-        stop_count++;
-        document.getElementById('stop_count').textContent = stop_count;
       };
       if (e.target.dataset.stopped == 0) {
         $contextmenu_title[4].className = "contextmenu-title";
