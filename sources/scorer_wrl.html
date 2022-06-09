@@ -5,7 +5,7 @@
     <link rel="icon" type="image/png" href="../img/simulator/ad.png">
     <link rel="stylesheet" href="scorer_wrl.css">
     <link rel="stylesheet" href="destyle.css">
-    <title>WRL得点計算 -RoboCupJunior コート作成環境v4.4.3</title>
+    <title>WRL得点計算 -RoboCupJunior コート作成環境v4.5.0</title>
   </head>
 
   <body class="body">
@@ -95,8 +95,11 @@
     </div>
     <div class="main">
       <div class="menu_start">
-        <p>タイルを、ロボットが走行する順にクリックしてください。その後下のボタンをクリックして走行順序を決定してください。</p>
-        <button id="route_finish" style="margin-bottom: 10px;">走行順序の決定</button>
+        <button id="route_cancel" style="margin-bottom: 10px;">通過を取り消し</button>
+        <p style="margin-left: 20px;">現在のタイル選択枚数: <span id="route_selected">0</span>枚</p>
+        <p style="margin-left: 20px;" id="route_yn"><img src="../img/scorer/out.svg" alt="競技の可否" style="display: inline; width: 20px;">競技を開始できません</p>
+        <button id="route_finish" class="disabled" style="margin-bottom: 10px;" disabled="true">走行順序の決定</button>
+        <p style="margin-left: 20px;">タイルを、ロボットが走行する順にクリックしてください。その後上のボタンをクリックして走行順序を決定してください。</p>
       </div>
       <div class="menu" style="display: none;">
         <h1 class="index">残りの競技時間</h1>
@@ -158,7 +161,7 @@
           <button class="button_hinan">黒の被災者救助</button>
           <button class="button_hinan" style="margin-bottom: 10px;">レスキューキット配置</button>
           <p style="margin-top: 5px; margin-left: 20px;">現在獲得した乗数:</p>
-          <p id="show_multiplier">なし</p>
+          <p id="show_multiplier" style="margin-left: 20px;">なし</p>
         </div>
         <div id="attention">
           <h1 class="index">注意</h1>

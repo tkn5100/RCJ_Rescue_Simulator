@@ -1014,11 +1014,11 @@
     function show_multiplier(){
       for (let index = 0; index < multiplier.length; index++){
         if (multiplier[index][0] == 'living'){
-          show_multiplier_innerhtml = show_multiplier_innerhtml + '生きている被災者 : x' + multiplier[index][2] + '<br>';
+          show_multiplier_innerhtml = show_multiplier_innerhtml + '(' + (index + 1) + ') 生きている被災者 : x' + multiplier[index][2] + '<br>';
         } else if (multiplier[index][0] == 'dead'){
-          show_multiplier_innerhtml = show_multiplier_innerhtml + '死んでいる被災者 : x' + multiplier[index][2] + '<br>';
+          show_multiplier_innerhtml = show_multiplier_innerhtml + '(' + (index + 1) + ') 死んでいる被災者 : x' + multiplier[index][2] + '<br>';
         } else if (multiplier[index][0] == 'rescue_kit'){
-          show_multiplier_innerhtml = show_multiplier_innerhtml + 'レスキューキット : x' + multiplier[index][2] + '<br>';
+          show_multiplier_innerhtml = show_multiplier_innerhtml + '(' + (index + 1) + ') レスキューキット : x' + multiplier[index][2] + '<br>';
         }
       }
       document.getElementById('show_multiplier').innerHTML = show_multiplier_innerhtml;
@@ -1387,9 +1387,66 @@
                 e.target.nextElementSibling.textContent = e.target.dataset.pass;
               }
             }
+            document.getElementById('route_selected').textContent =  route.length;
+            if(route.length >= 8){
+              document.getElementById('route_finish').classList.remove('disabled');
+              document.getElementById('route_finish').disabled = false;
+              document.getElementById('route_yn').innerHTML = '<img src="../img/scorer/ok.svg" alt="競技の可否" style="display: inline; width: 20px;">競技を開始できます';
+            }
           }
         }
       }
+      document.getElementById('route_cancel').addEventListener('click', () => {
+        if(route.length == 0){
+          window.alert('まだ一枚も選択していません。')
+        } else {
+          route[route.length - 1].style.backgroundColor = "#EEEEEE";
+          route[route.length - 1].dataset.pass = Number(route[route.length - 1].dataset.pass) - 1;
+          if(route[route.length - 1].dataset.check == 1 || route[route.length - 1].dataset.obstacle == 1 || route[route.length - 1].dataset.bump1 != 0){
+            if(route[route.length - 1].nextElementSibling.nextElementSibling.textContent != 1){
+              route[route.length - 1].nextElementSibling.nextElementSibling.textContent = Number(route[route.length - 1].nextElementSibling.nextElementSibling.textContent) - 1;
+              route[route.length - 1].style.backgroundColor = "#C2EEFF";
+            } else {
+              route[route.length - 1].nextElementSibling.nextElementSibling.remove();
+            }
+          } else if(route[route.length - 1].dataset.bump2 != 0){
+            if(route[route.length - 1].nextElementSibling.nextElementSibling.nextElementSibling.textContent != 1){
+              route[route.length - 1].nextElementSibling.nextElementSibling.nextElementSibling.textContent = Number(route[route.length - 1].nextElementSibling.nextElementSibling.nextElementSibling.textContent) - 1;
+              route[route.length - 1].style.backgroundColor = "#C2EEFF";
+            } else {
+              route[route.length - 1].nextElementSibling.nextElementSibling.nextElementSibling.remove();
+            }
+          } else if(route[route.length - 1].dataset.bump3 != 0){
+            if(route[route.length - 1].nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent != 1){
+              route[route.length - 1].nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent = Number(route[route.length - 1].nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent) - 1;
+              route[route.length - 1].style.backgroundColor = "#C2EEFF";
+            } else {
+              route[route.length - 1].nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.remove();
+            }
+          } else if(route[route.length - 1].dataset.bump4 != 0){
+            if(route[route.length - 1].nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent != 1){
+              route[route.length - 1].nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent = Number(route[route.length - 1].nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent) - 1;
+              route[route.length - 1].style.backgroundColor = "#C2EEFF";
+            } else {
+              route[route.length - 1].nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.remove();
+            }
+          } else {
+            if(route[route.length - 1].nextElementSibling.textContent != 1){
+              route[route.length - 1].nextElementSibling.textContent = Number(route[route.length - 1].nextElementSibling.textContent) - 1;
+              route[route.length - 1].style.backgroundColor = "#C2EEFF";
+            } else {
+              route[route.length - 1].nextElementSibling.remove();
+            }
+          }
+          route.pop()
+          document.getElementById('route_selected').textContent =  route.length;
+          if(route.length < 8){
+            document.getElementById('route_finish').classList.add('disabled');
+            document.getElementById('route_finish').disabled = true;
+            document.getElementById('route_yn').innerHTML = '<img src="../img/scorer/out.svg" alt="競技の可否" style="display: inline; width: 20px;">競技を開始できません';
+          }
+        }
+      });
       document.getElementById('route_finish').addEventListener('click', () => {
         if(window.confirm('走行順序を決定してもよろしいですか?')){
           if (route.length < 8) {
@@ -1482,7 +1539,7 @@
         reader.readAsText(file);
         reader.onload = function () {
           csv_arrays = reader.result.split('\n');
-          if (csv_arrays[0] == "v4.0.0," || csv_arrays[0] == "v4.1.0," || csv_arrays[0] == "v4.1.1," || csv_arrays[0] == "v4.2.0," || csv_arrays[0] == "v4.2.1," || csv_arrays[0] == "v4.2.2," || csv_arrays[0] == "v4.3.0," || csv_arrays[0] == "v4.3.1," || csv_arrays[0] == "v4.4.0," || csv_arrays[0] == "v4.4.1," || csv_arrays[0] == "v4.4.2," || csv_arrays[0] == "v4.4.3,") {
+          if (csv_arrays[0] == "v4.0.0," || csv_arrays[0] == "v4.1.0," || csv_arrays[0] == "v4.1.1," || csv_arrays[0] == "v4.2.0," || csv_arrays[0] == "v4.2.1," || csv_arrays[0] == "v4.2.2," || csv_arrays[0] == "v4.3.0," || csv_arrays[0] == "v4.3.1," || csv_arrays[0] == "v4.4.0," || csv_arrays[0] == "v4.4.1," || csv_arrays[0] == "v4.4.2," || csv_arrays[0] == "v4.4.3," || csv_arrays[0] == "v4.5.0,") {
             if (csv_arrays[0] == "v4.3.0," || csv_arrays[0] == "v4.3.1,") {
               window.alert('v4.3.0とv4.3.1で作成したファイルは、2階部分がうまく保存されていません。')
             }

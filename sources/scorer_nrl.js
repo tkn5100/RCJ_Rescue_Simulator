@@ -111,6 +111,7 @@
     document.getElementById('timer_start').addEventListener('click', function () {
       TimerID = setInterval(count, 1000);
       document.getElementById("timer_start").disabled = true;
+      document.getElementById("timer_start").classList.add("disabled");
       time = 480;
       document.getElementById("timer").textContent = "8:00";
       get_points(5);
@@ -121,9 +122,13 @@
     document.getElementById('timer_stop').addEventListener('click', function () {
       clearInterval(TimerID);
       document.getElementById("timer_stop").disabled = true;
+      document.getElementById("timer_stop").classList.add("disabled");
       document.getElementsByClassName('button_hinan')[0].disabled = true;
+      document.getElementsByClassName('button_hinan')[0].classList.add("disabled");
       document.getElementsByClassName('button_hinan')[1].disabled = true;
+      document.getElementsByClassName('button_hinan')[1].classList.add("disabled");
       document.getElementsByClassName('button_hinan')[2].disabled = true;
+      document.getElementsByClassName('button_hinan')[2].classList.add("disabled");
       for (let index = 1; index < imgLen; index++) {
         $img[index].style.pointerEvents = 'none';
       }
@@ -628,7 +633,7 @@
         reader.readAsText(file);
         reader.onload = function () {
           csv_arrays = reader.result.split('\n');
-          if (csv_arrays[0] == "v4.0.0," || csv_arrays[0] == "v4.1.0," || csv_arrays[0] == "v4.1.1," || csv_arrays[0] == "v4.2.0," || csv_arrays[0] == "v4.2.1," || csv_arrays[0] == "v4.2.2," || csv_arrays[0] == "v4.3.0," || csv_arrays[0] == "v4.3.1," || csv_arrays[0] == "v4.4.0," || csv_arrays[0] == "v4.4.1," || csv_arrays[0] == "v4.4.2," || csv_arrays[0] == "v4.4.3,") {
+          if (csv_arrays[0] == "v4.0.0," || csv_arrays[0] == "v4.1.0," || csv_arrays[0] == "v4.1.1," || csv_arrays[0] == "v4.2.0," || csv_arrays[0] == "v4.2.1," || csv_arrays[0] == "v4.2.2," || csv_arrays[0] == "v4.3.0," || csv_arrays[0] == "v4.3.1," || csv_arrays[0] == "v4.4.0," || csv_arrays[0] == "v4.4.1," || csv_arrays[0] == "v4.4.2," || csv_arrays[0] == "v4.4.3," || csv_arrays[0] == "v4.5.0,") {
             if (csv_arrays[0] == "v4.3.0," || csv_arrays[0] == "v4.3.1,") {
               window.alert('v4.3.0とv4.3.1で作成したファイルは、2階部分がうまく保存されていません。')
             }

@@ -116,7 +116,7 @@ td{
     justify-content: center;
     align-items: center;
 }
-#timer_start, #timer_stop, .button_hinan, .button_line, #route_finish{
+#timer_start, #timer_stop, .button_hinan, .button_line, #route_finish, #route_cancel{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -126,17 +126,12 @@ td{
     background-color: #F8F8F8;
     border: solid 3px #111111;
 }
-#timer_start:hover, #timer_stop:hover, .button_hinan:hover, .button_line:hover, #route_finish:hover{
+#timer_start:hover, #timer_stop:hover, .button_hinan:hover, .button_line:hover, #route_finish:hover, #route_cancel:hover{
     transition: all 0.2s ease-out;
     background-color: #111111;
     color: #F8F8F8;
 }
 #timer_start.disabled, #timer_stop.disabled, .button_hinan.disabled, .button_line.disabled, #route_finish.disabled{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    font-weight: 500;
     color: #888888;
     background-color: #F8F8F8;
     border: solid 3px #888888;
@@ -209,7 +204,7 @@ td{
         margin-bottom: 5px;
         margin-left: 13px;
     }
-    .button_hinan, .button_line, #route_finish{
+    .button_hinan, .button_line, #route_finish, #route_cancel{
         margin-top: 10px;
         margin-left: 20px;
         height: -moz-fit-content;
@@ -318,7 +313,7 @@ td{
         margin-bottom: 5px;
         margin-left: 13px;
     }
-    .button_hinan, .button_line, #route_finish{
+    .button_hinan, .button_line, #route_finish, #route_cancel{
         margin-top: 10px;
         margin-left: 20px;
         height: -moz-fit-content;
@@ -427,7 +422,7 @@ td{
         margin-bottom: 0.5vw;
         margin-left: 13px;
     }
-    .button_hinan, .button_line, #route_finish{
+    .button_hinan, .button_line, #route_finish, #route_cancel{
         margin-top: 10px;
         margin-left: 20px;
         height: -moz-fit-content;
@@ -677,6 +672,23 @@ td{
     cursor: pointer;
 }
 
+#overlay{
+    visibility: collapse;
+    position:absolute;
+    left:0;
+    top:0;
+    width:100vw;
+    height:100vh;
+    background-color: #555555;
+    opacity: 0;
+    transition: all 0.3s 0s ease-out;
+    z-index: 4;
+}
+#overlay.active{
+    visibility: visible;
+    opacity: 0.7;
+}
+
 #start, #league, #level, #rule, #statistics{
     visibility: collapse;
     opacity: 0;
@@ -764,22 +776,6 @@ td{
     text-indent: 1em;
 }
 
-#overlay{
-    visibility: collapse;
-    position:absolute;
-    left:0;
-    top:0;
-    width:100vw;
-    height:100vh;
-    background-color: #555555;
-    opacity: 0;
-    transition: all 0.3s 0s ease-out;
-    z-index: 4;
-}
-#overlay.active{
-    visibility: visible;
-    opacity: 0.7;
-}
 .image.hazard{
     box-shadow: 0 0 5px #FFD700;
 }

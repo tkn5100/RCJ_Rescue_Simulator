@@ -125,6 +125,11 @@ td{
     background-color: #111111;
     color: #F8F8F8;
 }
+#timer_start.disabled, #timer_stop.disabled, .button_hinan.disabled{
+    color: #888888;
+    background-color: #F8F8F8;
+    border: solid 3px #888888;
+}
 @media screen and (min-width:1040px){
     .menu{
         width: 340px;
