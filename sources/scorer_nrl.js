@@ -8,10 +8,10 @@
     const $table = $doc.getElementsByTagName('table');
     const $contextmenu_title = document.getElementsByTagName('li');
     const $contextmenu = document.getElementById('contextmenu');
-    let checkOrUncheck = null;
     let newCheckMarker = null;
     let newObstacle = null;
     let newBump = null;
+    let newStopCounter = null;
     let csv_arrays = null;
     let input_data_show = null;
     let input_data_course = [];
@@ -633,7 +633,7 @@
         reader.readAsText(file);
         reader.onload = function () {
           csv_arrays = reader.result.split('\n');
-          if (csv_arrays[0] == "v4.0.0," || csv_arrays[0] == "v4.1.0," || csv_arrays[0] == "v4.1.1," || csv_arrays[0] == "v4.2.0," || csv_arrays[0] == "v4.2.1," || csv_arrays[0] == "v4.2.2," || csv_arrays[0] == "v4.3.0," || csv_arrays[0] == "v4.3.1," || csv_arrays[0] == "v4.4.0," || csv_arrays[0] == "v4.4.1," || csv_arrays[0] == "v4.4.2," || csv_arrays[0] == "v4.4.3," || csv_arrays[0] == "v4.5.0,") {
+          if (csv_arrays[0] == "v4.0.0," || csv_arrays[0] == "v4.1.0," || csv_arrays[0] == "v4.1.1," || csv_arrays[0] == "v4.2.0," || csv_arrays[0] == "v4.2.1," || csv_arrays[0] == "v4.2.2," || csv_arrays[0] == "v4.3.0," || csv_arrays[0] == "v4.3.1," || csv_arrays[0] == "v4.4.0," || csv_arrays[0] == "v4.4.1," || csv_arrays[0] == "v4.4.2," || csv_arrays[0] == "v4.4.3," || csv_arrays[0] == "v4.5.0," || csv_arrays[0] == "v4.5.1,") {
             if (csv_arrays[0] == "v4.3.0," || csv_arrays[0] == "v4.3.1,") {
               window.alert('v4.3.0とv4.3.1で作成したファイルは、2階部分がうまく保存されていません。')
             }
@@ -858,11 +858,23 @@
       //競技進行の停止
       $contextmenu_title[3].onclick = function() {
         if (document.getElementById("timer_start").hasAttribute('disabled')){
-          e.target.dataset.stopped = Number(e.target.dataset.stopped) + 1;
-          e.target.parentElement.style.backgroundColor = '#FFCCCC';
-          e.target.dataset.passed ='0';
-          stop_count++;
-          document.getElementById('stop_count').textContent = stop_count;
+          if (e.target.dataset.stopped == 0){
+            e.target.dataset.stopped = "1";
+            newStopCounter = document.createElement("div");
+            newStopCounter.id = "stop-" + Number(e.target.dataset.number);
+            newStopCounter.className = "stop_counter";
+            newStopCounter.textContent = "1";
+            e.target.parentElement.appendChild(newStopCounter);
+            stop_count++;
+            document.getElementById('stop_count').textContent = stop_count;
+          } else {
+            e.target.dataset.stopped = Number(e.target.dataset.stopped) + 1;
+            document.getElementById('stop-' + Number(e.target.dataset.number)).textContent = e.target.dataset.stopped;
+            stop_count++;
+            document.getElementById('stop_count').textContent = stop_count;
+          }
+          e.target.parentElement.style.backgroundColor = '';
+          e.target.dataset.passed = '0';
         } else {
           window.alert('先に競技を開始してください。')
         }
@@ -874,11 +886,13 @@
         $contextmenu_title[4].className = "contextmenu-title_active";
         $contextmenu_title[4].onclick = function () {
           e.target.dataset.stopped = Number(e.target.dataset.stopped) - 1;
+          if(e.target.dataset.stopped == 0){
+            document.getElementById('stop-' + Number(e.target.dataset.number)).remove();
+          } else {
+            document.getElementById('stop-' + Number(e.target.dataset.number)).textContent = e.target.dataset.stopped;
+          }
           stop_count--;
           document.getElementById('stop_count').textContent = stop_count;
-          if (e.target.dataset.stopped == 0){
-            e.target.parentElement.style.backgroundColor = '';
-          }
         }
       }
     }

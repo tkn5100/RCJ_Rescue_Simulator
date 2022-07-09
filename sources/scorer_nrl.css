@@ -203,10 +203,10 @@ td{
         top: 80px;
         left: 30px;
     }
-    .check-marker{
+    .check-marker, .stop_counter{
         height: 17px;
         width: 17px;
-        font-size: 10px;
+        font-size: 15px;
         text-align: center;
     }
     .obstacle, .obstacle_cleared{
@@ -292,10 +292,10 @@ td{
         top: 70px;
         left: 30px;
     }
-    .check-marker, .stop-merker{
+    .check-marker, .stop_counter{
         height: 17px;
         width: 17px;
-        font-size: 10px;
+        font-size: 15px;
         text-align: center;
     }
     .obstacle, .obstacle_cleared{
@@ -386,7 +386,7 @@ td{
     .help-link{
         width: 20vw !important;
     }
-    .check-marker{
+    .check-marker, .stop_counter{
         height: 2vw;
         width: 2vw;
         font-size: 1.5vw;
@@ -409,6 +409,9 @@ td{
     table{
         overflow: visible;
     }
+    #timer_buttons, #stop, #hinan, #attention, #statistics > h1, #statistics > h2:nth-of-type(4), #statistics_score, #statistics_close, .toolbar, .guide, .copyright{
+        display: none;
+    }
     .menu{
         width: 350px;
         height: 600px;
@@ -429,18 +432,6 @@ td{
         font-size: 50px;
         font-weight: 700;
     }
-    #timer_buttons{
-        display: none;
-    }
-    #stop{
-        display: none;
-    }
-    #hinan{
-        display: none;
-    }
-    #attention{
-        display: none;
-    }
     #statistics{
         display: block !important;
         position: static !important;
@@ -459,9 +450,6 @@ td{
         transition: none !important;
         z-index: 1 !important;
     }
-    #statistics > h1{
-        display: none;
-    }
     #statistics > h2{
         width: 300px;
         font-size: 15px;
@@ -473,27 +461,15 @@ td{
         background-color: #000000;
         cursor: normal;
     }
-    #statistics > h2:nth-of-type(4){
-        display: none;
-    }
-    #statistics_score{
-        display: none;
-    }
     #statistics > p, #statistics > div{
         margin-left: 15px;
-    }
-    #statistics_close{
-        display: none;
     }
     .image{
         height: 80px;
         width: 80px;
         cursor: pointer;
     }
-    .toolbar{
-        display: none;
-    }
-    .check-marker{
+    .check-marker, .stop_counter{
         height: 17px;
         width: 17px;
         font-size: 10px;
@@ -509,12 +485,6 @@ td{
         height: 80px;
         left: 37px;
         top: 0px;
-    }
-    .guide{
-        display: none;
-    }
-    .copyright{
-        display: none;
     }
 }
 .description{
@@ -598,16 +568,29 @@ td{
     cursor: pointer;
 }
 
-#start{
+#overlay{
+    visibility: collapse;
+    position:absolute;
+    left:0;
+    top:0;
+    width:100vw;
+    height:100vh;
+    background-color: #555555;
+    opacity: 0;
+    transition: all 0.3s 0s ease-out;
+    z-index: 4;
+}
+#overlay.active{
+    visibility: visible;
+    opacity: 0.7;
+}
+
+#start, #league, #rule, #statistics{
     visibility: collapse;
     opacity: 0;
     display: flex;
     flex-direction: column;
     position: fixed;
-    top: 10vh;
-    left: 10vw;
-    width: 80vw;
-    height: 80vh;
     overflow: auto;
     padding: 2vw 5vw 2vw 5vw;
     background-color: #F8F8F8;
@@ -617,33 +600,32 @@ td{
     transition: all 0.3s 0s ease-out;
     z-index: 5;
 }
+#start{
+    top: 10vh;
+    left: 10vw;
+    width: 80vw;
+    height: 80vh;
+}
 #league{
-    visibility: collapse;
-    opacity: 0;
-    display: flex;
-    flex-direction: column;
-    position: fixed;
     top: 30vh;
     left: 30vw;
     width: 40vw;
     height: 40vh;
-    overflow: auto;
-    padding: 2vw 5vw 2vw 5vw;
-    background-color: #F8F8F8;
-    border-radius: 20px;
-    font-size: 1.2vw;
-    cursor: default;
-    transition: all 0.3s 0s ease-out;
-    z-index: 5;
+}
+#rule, #statistics{
+    top: 10vh;
+    left: 15vw;
+    width: 70vw;
+    height: 80vh;
+}
+#start.active, #league.active, #rule.active, #statistics.active{
+    visibility: visible;
+    opacity: 1;
 }
 #league > span{
     font-size: 1.3vw;
     font-weight: 500;
     padding-bottom: 1vw;
-}
-#league.active{
-    visibility: visible;
-    opacity: 1;
 }
 #league_nrl, #league_wrl, #rule_close, #statistics_close{
     position: absolute;
@@ -670,29 +652,6 @@ td{
     right: 5vw;
     bottom: 3vw;
 }
-#start.active{
-    visibility: visible;
-    opacity: 1;
-}
-#rule, #statistics{
-    visibility: collapse;
-    opacity: 0;
-    display: flex;
-    flex-direction: column;
-    position: fixed;
-    top: 10vh;
-    left: 15vw;
-    width: 70vw;
-    height: 80vh;
-    overflow: auto;
-    padding: 2vw 5vw 2vw 5vw;
-    background-color: #F8F8F8;
-    border-radius: 20px;
-    font-size: 1.2vw;
-    cursor: default;
-    transition: all 0.3s 0s ease-out;
-    z-index: 5;
-}
 #rule > h1, #statistics > h1{
     font-size: 2.5vw;
     font-weight: 700;
@@ -703,28 +662,6 @@ td{
     font-weight: 500;
     margin-top: 1vw;
 }
-#rule.active, #statistics.active{
-    visibility: visible;
-    opacity: 1;
-}
-
-#overlay{
-    visibility: collapse;
-    position:absolute;
-    left:0;
-    top:0;
-    width:100vw;
-    height:100vh;
-    background-color: #555555;
-    opacity: 0;
-    transition: all 0.3s 0s ease-out;
-    z-index: 4;
-}
-#overlay.active{
-    visibility: visible;
-    opacity: 0.7;
-}
-
 #hazard_out{
     position: absolute;
 }
@@ -817,4 +754,13 @@ td{
     width: 80px;
     box-shadow: 0 0 5px #888888;
     cursor: default;
+}
+.stop_counter{
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    background-color: #DD0000;
+    color: #FFFFFF;
+    border-radius: 50%;
+    z-index: 0;
 }

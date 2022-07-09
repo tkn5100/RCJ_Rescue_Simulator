@@ -34,7 +34,7 @@ iPhone・iPadではブラウザの**ツールバーを非表示**にしてお使
 
 ### 動作環境
 #### 正常動作確認済みの環境
-Windows10 Home 21H3(Microsoft Edge v102.0.1245.33,Google Chrome v102.0.5005.63)  
+Windows10 Home 21H3(Microsoft Edge v103.0.1264.49,Google Chrome v103.0.5060.114)  
 iPadOS 15.4.1(Safari v605.1.15)  
 iOS 15.4.1(Safari v604.1)
 #### 正常動作可能と思われる環境

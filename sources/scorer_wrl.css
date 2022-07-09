@@ -509,32 +509,29 @@ td{
         font-size: 50px;
         font-weight: 700;
     }
-    #timer_buttons, #stop, #hinan, #attention, #tile_now{
+    #timer_buttons, #stop, #hinan, #attention, #tile_now, #statistics > h1, #statistics > div > h2:nth-of-type(5), #statistics_score, #statistics_close, .toolbar, .guide, .copyright{
         display: none;
     }
     #statistics{
-        display: block !important;
-        position: static !important;
-        visibility: visible !important;
-        opacity: 1 !important;
-        width: -moz-fit-content !important;
-        width: fit-content !important;
-        height: -moz-fit-content !important;
-        height: fit-content !important;
-        overflow: hidden !important;
-        padding: 0 !important;
-        background-color: #FFFFFF !important;
-        border-radius: 0 !important;
-        font-size: unset !important;
-        cursor: unset !important;
-        transition: none !important;
-        z-index: 1 !important;
+        display: block;
+        position: static;
+        visibility: visible;
+        opacity: 1;
+        width: -moz-fit-content;
+        width: fit-content;
+        height: -moz-fit-content;
+        height: fit-content;
+        overflow: hidden;
+        padding: 0;
+        background-color: #FFFFFF;
+        border-radius: 0;
+        font-size: unset;
+        cursor: unset;
+        transition: none;
+        z-index: 1;
     }
     #statistics > div{
-        overflow-y: visible !important;
-    }
-    #statistics > h1{
-        display: none;
+        overflow-y: visible;
     }
     #statistics > h2{
         width: 300px;
@@ -547,25 +544,13 @@ td{
         background-color: #000000;
         cursor: default;
     }
-    #statistics > div > h2:nth-of-type(5){
-        display: none;
-    }
-    #statistics_score{
-        display: none;
-    }
     #statistics > p, #statistics > div{
         margin-left: 15px;
-    }
-    #statistics_close{
-        display: none;
     }
     .image{
         height: 80px;
         width: 80px;
         cursor: pointer;
-    }
-    .toolbar{
-        display: none;
     }
     .check-marker, .route_counter, .stop_counter{
         height: 17px;
@@ -583,12 +568,6 @@ td{
         height: 80px;
         left: 37px;
         top: 0px;
-    }
-    .guide{
-        display: none;
-    }
-    .copyright{
-        display: none;
     }
 }
 .description{

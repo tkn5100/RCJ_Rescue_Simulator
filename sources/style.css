@@ -238,11 +238,7 @@ table{
         top: 80px;
         left: 30px;
     }
-    .menu-img-w, .menu-img-n{
-        height: 60px;
-        width: 60px;
-    }
-    .coursedata{
+    .menu-img-w, .menu-img-n, .coursedata{
         width: 60px;
         height: 60px;
     }
@@ -267,9 +263,6 @@ table{
     .index{
         width: 200px;
     }
-    /* .index-plus{
-        padding-left: 110px;
-    } */
     .image, #image-preview{
         height: 80px;
         width: 80px;
@@ -293,13 +286,9 @@ table{
         top: 70px;
         left: 30px;
     }
-    .menu-img-w, .menu-img-n{
+    .menu-img-w, .menu-img-n, .coursedata{
         height: 60px;
         width: 60px;
-    }
-    .coursedata{
-        width: 60px;
-        height: 60px;
     }
     .check-marker{
         height: 17px;
@@ -322,9 +311,6 @@ table{
     .index{
         width: 20vw;
     }
-    /* .index-plus{
-        padding-left: 110px;
-    } */
     .image, #image-preview{
         height: 8vw;
         width: 8vw;
@@ -348,13 +334,9 @@ table{
         top: 7vw;
         left: 3vw;
     }
-    .menu-img-w, .menu-img-n{
+    .menu-img-w, .menu-img-n, .coursedata{
         height: 8vw;
         width: 8vw;
-    }
-    .coursedata{
-        width: 8vw;
-        height: 8vw;
     }
     .help-link{
         width: 20vw !important;
@@ -595,7 +577,6 @@ td{
     right: 5vw;
     bottom: 3vw;
 }
-
 #bump_settings > div{
     display: flex;
     flex-direction: row;

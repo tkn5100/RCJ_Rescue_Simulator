@@ -9,7 +9,6 @@
     const $table = $doc.getElementsByTagName('table');
     const $contextmenu_title = document.querySelectorAll('#contextmenu > ul > li');
     const $contextmenu = document.getElementById('contextmenu');
-    let checkOrUncheck = null;
     let newCheckMarker = null;
     let newObstacle = null;
     let newBump = null;
@@ -151,11 +150,11 @@
       if (document.getElementById("timer_start").hasAttribute('disabled')){
         clearInterval(TimerID);
         //乗数をかける
-        final_score = 'ライントレース:' + score + '点 × 乗数';
+        final_score = 'ライントレース' + score + '点 × 乗数';
         if(multiplier.length > 0){
           multiply_points();
         } else {
-          final_score = final_score + '0 = ' + score + '点';
+          final_score = final_score + '1.0(未獲得) = ' + score + '点';
           document.getElementById('statistics_score').textContent = final_score
         }
         document.getElementById("timer_stop").disabled = true;
@@ -607,13 +606,13 @@
                 document.getElementById('statistics_clear').textContent = '脱出済み 60 - 5 × ' + stop_count_all + ' = ' + (60 - (5 * stop_count_all)) + '点';
               }
             } else {
-              final_score = 'ライントレース:' + score + '点 × 乗数';
+              final_score = 'ライントレース' + score + '点 × 乗数';
             }
             //最終タイルでは乗数をかける
             if(multiplier.length > 0){
               multiply_points();
             } else {
-              final_score = final_score + '0 = ' + score + '点';
+              final_score = final_score + '1.0(未獲得) = ' + score + '点';
               document.getElementById('statistics_score').textContent = final_score
             }
             //競技終了処理
@@ -1539,7 +1538,7 @@
         reader.readAsText(file);
         reader.onload = function () {
           csv_arrays = reader.result.split('\n');
-          if (csv_arrays[0] == "v4.0.0," || csv_arrays[0] == "v4.1.0," || csv_arrays[0] == "v4.1.1," || csv_arrays[0] == "v4.2.0," || csv_arrays[0] == "v4.2.1," || csv_arrays[0] == "v4.2.2," || csv_arrays[0] == "v4.3.0," || csv_arrays[0] == "v4.3.1," || csv_arrays[0] == "v4.4.0," || csv_arrays[0] == "v4.4.1," || csv_arrays[0] == "v4.4.2," || csv_arrays[0] == "v4.4.3," || csv_arrays[0] == "v4.5.0,") {
+          if (csv_arrays[0] == "v4.0.0," || csv_arrays[0] == "v4.1.0," || csv_arrays[0] == "v4.1.1," || csv_arrays[0] == "v4.2.0," || csv_arrays[0] == "v4.2.1," || csv_arrays[0] == "v4.2.2," || csv_arrays[0] == "v4.3.0," || csv_arrays[0] == "v4.3.1," || csv_arrays[0] == "v4.4.0," || csv_arrays[0] == "v4.4.1," || csv_arrays[0] == "v4.4.2," || csv_arrays[0] == "v4.4.3," || csv_arrays[0] == "v4.5.0," || csv_arrays[0] == "v4.5.1,") {
             if (csv_arrays[0] == "v4.3.0," || csv_arrays[0] == "v4.3.1,") {
               window.alert('v4.3.0とv4.3.1で作成したファイルは、2階部分がうまく保存されていません。')
             }
