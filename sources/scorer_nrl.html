@@ -5,7 +5,7 @@
     <link rel="icon" type="image/png" href="../img/simulator/ad.png">
     <link rel="stylesheet" href="scorer_nrl.css">
     <link rel="stylesheet" href="destyle.css">
-    <title>NRL得点計算 -RoboCupJunior コート作成環境v4.5.2</title>
+    <title>NRL得点計算 -RoboCupJunior コート作成環境</title>
   </head>
 
   <body class="body">
@@ -44,12 +44,15 @@
     <div id="overlay" class="active"></div>
     <div id="contextmenu">
       <ul>
-          <li class="contextmenu-title" style="border-bottom: none;">チェックマーカーを置く</li>
+          <li class="contextmenu-title">チェックマーカーを置く</li>
           <li class="contextmenu-title">チェックマーカーを取る</li>
+          <hr class="contextmenu-border">
           <li class="contextmenu-title">通過の取り消し</li>
-          <li class="contextmenu-title_active" style="border-bottom: none;">競技進行の停止</li>
+          <hr class="contextmenu-border">
+          <li class="contextmenu-title_active">競技進行の停止</li>
           <li class="contextmenu-title_active">競技進行の停止を1回取り消し</li>
-          <li class="contextmenu-title_active" style="border-bottom: none; cursor: default;">競技進行の停止数 : <span id="contextmenu_stop">0</span></li>
+          <hr class="contextmenu-border">
+          <li class="contextmenu-title" style="cursor: default; color: #000000;">競技進行の停止数 : <span id="contextmenu_stop">0</span></li>
       </ul>
     </div>
     <div id="hazard_out" style="display: none;"><!-- hazard_out ハザードの外側 -->

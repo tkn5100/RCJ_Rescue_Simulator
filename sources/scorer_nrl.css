@@ -547,16 +547,19 @@ td{
     top: 0;
     left: 0;
     background: #FFFFFF;
-    padding: 10px 10px 10px 10px;
+    padding: 5px;
     border-radius: 5px 5px 5px 5px;
     box-shadow: 0 0 8px #888888;
     z-index: 2;
 }
+.contextmenu-border{
+    margin: 2px 3px 2px 3px;
+    color: #CCCCCC;
+}
 .contextmenu-title_active, .contextmenu-title{
-    padding-bottom: 5px;
-    padding-top: 5px;
+    padding: 5px;
+    border-radius: 5px;
     font-size: 15px;
-    border-bottom: solid 1px #AAAAAA;
 }
 .contextmenu-title{
     color: #AAAAAA;
@@ -566,6 +569,9 @@ td{
 .contextmenu-title_active{
     color: #000000;
     cursor: pointer;
+}
+.contextmenu-title_active:hover{
+    background-color: #EDEDED;
 }
 
 #overlay{
