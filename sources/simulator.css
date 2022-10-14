@@ -1,0 +1,239 @@
+﻿@media screen and (min-width:1040px){
+    .menu{
+        width: 340px;
+    }
+    .index{
+        width: 270px;
+    }
+    /* .index-plus{
+        padding-left: 180px;
+    } */
+    .image, #image-preview{
+        height: 80px;
+        width: 80px;
+        cursor: pointer;
+    }
+    .tools{
+        width: 50px;
+        height: 50px;
+        margin-right: 25px;
+    }
+    .start_tools{
+        width: 90px;
+        height: 90px;
+        margin-right: 80px;
+    }
+    .tools + p{
+        top: 50px;
+        left: 20px;
+    }
+    .start_tools + p{    
+        top: 80px;
+        left: 30px;
+    }
+    .menu-img-w, .menu-img-n, .coursedata{
+        width: 60px;
+        height: 60px;
+    }
+    .check-marker{
+        height: 17px;
+        width: 17px;
+    }
+    .obstacle{
+        height: 30px;
+        width: 30px;
+        left: 25px;
+        top: 25px;
+    }
+    .bump{
+        height: 80px;
+    }
+}
+@media screen and (max-width:1040px) and (min-width:920px){
+    .menu{
+        width: 270px;
+    }
+    .index{
+        width: 200px;
+    }
+    .image, #image-preview{
+        height: 80px;
+        width: 80px;
+        cursor: pointer;
+    }
+    .tools{
+        width: 50px;
+        height: 50px;
+        margin-right: 20px;
+    }
+    .start_tools{
+        width: 80px;
+        height: 80px;
+        margin-right: 80px;
+    }
+    .tools + p{
+        top: 50px;
+        left: 20px;
+    }
+    .start_tools + p{    
+        top: 70px;
+        left: 30px;
+    }
+    .menu-img-w, .menu-img-n, .coursedata{
+        height: 60px;
+        width: 60px;
+    }
+    .check-marker{
+        height: 17px;
+        width: 17px;
+    }
+    .obstacle{
+        height: 30px;
+        width: 30px;
+        left: 25px;
+        top: 25px;
+    }
+    .bump{
+        height: 80px;
+    }
+}
+@media screen and (max-width:920px){
+    .menu{
+        width: 25vw;
+    }
+    .index{
+        width: 20vw;
+    }
+    .image, #image-preview{
+        height: 8vw;
+        width: 8vw;
+        cursor: pointer;
+    }
+    .tools{
+        width: 6vw;
+        height: 6vw;
+        margin-right: 2vw;
+    }
+    .start_tools{
+        width: 8vw;
+        height: 8vw;
+        margin-right: 8vw;
+    }
+    .tools + p{
+        top: 5vw;
+        left: 2vw;
+    }
+    .start_tools + p{    
+        top: 7vw;
+        left: 3vw;
+    }
+    .menu-img-w, .menu-img-n, .coursedata{
+        height: 8vw;
+        width: 8vw;
+    }
+    .help-link{
+        width: 20vw !important;
+    }
+    .check-marker{
+        height: 2vw;
+        width: 2vw;
+    }
+    .obstacle{
+        height: 3vw;
+        width: 3vw;
+        left: 2.5vw;
+        top: 2.5vw;
+    }
+    .bump{
+        height: 8vw;
+    }
+}
+@media print{
+    body{
+        background-color: #FFFFFF;
+    }
+    table{
+        overflow: visible;
+    }
+    .menu{
+        display: none;
+    }
+    .image, #image-preview{
+        height: 80px;
+        width: 80px;
+        cursor: pointer;
+    }
+    .toolbar{
+        display: none;
+    }
+    .check-marker{
+        height: 17px;
+        width: 17px;
+    }
+    .obstacle{
+        height: 30px;
+        width: 30px;
+        left: 25px;
+        top: 25px;
+    }
+    .bump{
+        height: 80px;
+        left: 37px;
+        top: 0px;
+    }
+    .guide{
+        display: none;
+    }
+    .copyright{
+        display: none;
+    }
+}
+.menu-img-w, .menu-img-n{
+    margin: 4px 4px 4px 4px;
+    border: solid 0.1px #AAAAAA;
+    background-color: #FFFFFF;
+    cursor: pointer;
+    z-index: 0;
+}
+.menu-img-w:hover + .description,
+.menu-img-n:hover + .description,
+.coursedata:hover ~ .description{
+    display: block;
+}
+.coursedata{
+    margin: 4px 4px 4px 4px;
+    font-size: 10px;
+    text-align: center;
+    color: #000000;
+    background-color: #CCCCCC;
+    border-radius: 7px 7px 7px 7px;   
+}
+
+#league > span{
+    font-size: 1.3vw;
+    font-weight: 700;
+    padding-bottom: 1vw;
+}
+#bump_settings > div{
+    display: flex;
+    flex-direction: row;
+    height: 2vw;
+    margin-bottom: 1.2vw;
+}
+#bump_settings > p{
+    margin-bottom: 1vw;
+}
+#bump_settings > div > span{
+    margin-right: 10px;
+}
+.bump-input{
+    height: 2vw;
+    width: 7vw;
+    padding: 2px;
+    margin-right: 20px;
+    border: solid 1px #000000;
+    border-radius: 5px;
+}
+#image-preview{
+    cursor: default !important;
+}

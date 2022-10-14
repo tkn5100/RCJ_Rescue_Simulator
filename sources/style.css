@@ -1,18 +1,4 @@
-﻿body{
-    display: flex;
-    flex-direction: column;
-    background: #f8f8f8;
-    font-family: "游ゴシック", "ヒラギノ角ゴシック", sans-serif;
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    user-select: none;
-}
-.copyright{
-    position: absolute;
-    bottom: 5px;
-    right: 0;
-}
-/* home.html */
+﻿/* home.html */
 .home-img{
     margin: 3vw auto 3vw auto;
     width: 80vw;
@@ -52,7 +38,22 @@
     color: #4400FF;
     text-decoration: underline solid 1px #4400FF;
 }
-/* index.html */
+
+/* general */
+body{
+    display: flex;
+    flex-direction: column;
+    background: #f8f8f8;
+    font-family: "游ゴシック", "ヒラギノ角ゴシック", sans-serif;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+.copyright{
+    position: absolute;
+    bottom: 5px;
+    right: 0;
+}
 table{
     margin-left: 30px !important;
     border-collapse: collapse;
@@ -83,10 +84,10 @@ table{
     margin-bottom: 3px;
     cursor: pointer;
 }
-.tools:hover, .start_tools:hover{
+.tools:hover, .start_tools:hover, .line_tools:hover{
     background-color: #DDDDDD;
 }
-.tools + p, .start_tools + p{
+.tools + p, .start_tools + p, .line_tools + p{
     display: none;
     position: absolute;
     width: max-content;
@@ -97,15 +98,14 @@ table{
     box-shadow: 0 0 8px #888888;
     z-index: 3;
 }
-.tools:hover + p, .start_tools:hover + p{
+.tools:hover + p, .start_tools:hover + p, .line_tools:hover + p{
     display: block;
 }
-.menu{
+.menu, .menu_start{
     display: flex;
+    position: relative;
     margin-left: 10px;
-    /* flex-wrap:wrap; */
     flex-direction: column !important;
-    align-items: center;
     border-right: solid 5px #000000;
     overflow: auto;
     max-height: 80vh;
@@ -122,9 +122,6 @@ table{
     .index{
         width: 270px;
     }
-    /* .index-plus{
-        padding-left: 180px;
-    } */
     .image, #image-preview{
         height: 80px;
         width: 80px;
@@ -305,16 +302,6 @@ table{
         display: none;
     }
 }
-.coursedata{
-    margin: 4px 4px 4px 4px;
-}
-.menu-img-w, .menu-img-n{
-    margin: 4px 4px 4px 4px;
-    border: solid 0.1px #AAAAAA;
-    background-color: #FFFFFF;
-    cursor: pointer;
-    z-index: 0;
-}
 .description{
     display: none;
     position: absolute;
@@ -326,11 +313,6 @@ table{
     color: #000000;
     background-color: #f8f8f8;
     z-index: 3;
-}
-.menu-img-w:hover + .description,
-.menu-img-n:hover + .description,
-.coursedata:hover ~ .description{
-    display: block;
 }
 td{
     position: relative;
@@ -348,13 +330,6 @@ td{
     font-size: 15px;
     font-weight: 600;
     cursor: normal;
-}
-.coursedata{
-    font-size: 10px;
-    text-align: center;
-    color: #000000;
-    background-color: #CCCCCC;
-    border-radius: 7px 7px 7px 7px;   
 }
 .check-marker{
     position: absolute;
@@ -462,16 +437,23 @@ td{
     width: 40vw;
     height: 40vh;
 }
-#league > span{
-    font-size: 1.3vw;
-    font-weight: 700;
-    padding-bottom: 1vw;
+#level{
+    top: 15vh;
+    left: 10vw;
+    width: 80vw;
+    height: 70vh;
 }
-#start.active, #league.active, #bump_settings.active{
+#rule, #statistics{
+    top: 10vh;
+    left: 15vw;
+    width: 70vw;
+    height: 80vh;
+}
+#start.active, #league.active, #bump_settings.active, #level.active, #rule.active, #statistics.active{
     visibility: visible;
     opacity: 1;
 }
-#bump_decide, #bump_cancel, #league_decide{
+#bump_decide, #bump_cancel, #league_decide,#league_nrl, #league_wrl, #rule_close, #statistics_close, #level_decide{
     position: absolute;
     width: 10vw;
     height: -moz-fit-content;
@@ -484,16 +466,16 @@ td{
     padding: 8px;
     border-radius: 1.9vw;
 }
-#bump_decide:hover, #bump_cancel:hover, #league_decide:hover{
+#bump_decide:hover, #bump_cancel:hover, #league_decide:hover, #league_nrl:hover, #league_wrl:hover, #rule_close:hover, #statistics_close:hover, #level_decide:hover{
     transition: all 0.2s ease-out;
     background-color: #111111;
     color: #F8F8F8;
 }
-#bump_decide{
+#bump_decide, #league_wrl{
     right: 20vw;
     bottom: 3vw;
 }
-#bump_cancel, #league_decide{
+#bump_cancel, #league_decide, #league_nrl, #rule_close, #statistics_close, #level_decide{
     right: 5vw;
     bottom: 3vw;
 }
