@@ -1,52 +1,3 @@
-.line_tools{
-    border-radius: 30%;
-    padding: 5px;
-    margin-top: 3px;
-    margin-bottom: 3px;
-    cursor: pointer;
-}
-#timer_buttons{
-    display: flex;
-}
-#score{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-#added_score, #tile_now_score{
-    background-color: #DDDDDD;
-    border-radius: 10px;
-    padding: 5px;
-    width: -moz-fit-content;
-    width: fit-content;
-    height: -moz-fit-content;
-    height: fit-content;
-}
-#stop_count{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-#timer_start, #timer_stop, .button_hinan, .button_line, #route_finish, #route_cancel{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    font-weight: 500;
-    color: #111111;
-    background-color: #F8F8F8;
-    border: solid 3px #111111;
-}
-#timer_start:hover, #timer_stop:hover, .button_hinan:hover, .button_line:hover, #route_finish:hover, #route_cancel:hover{
-    transition: all 0.2s ease-out;
-    background-color: #111111;
-    color: #F8F8F8;
-}
-#timer_start.disabled, #timer_stop.disabled, .button_hinan.disabled, .button_line.disabled, #route_finish.disabled{
-    color: #888888;
-    background-color: #F8F8F8;
-    border: solid 3px #888888;
-}
 #tile_now > div{
     margin-left: 20px;
 }
@@ -60,49 +11,49 @@
     color: #888888;
     text-decoration: underline solid 1px;
 }
+.bump, .obstacle{
+    box-shadow: 0 0 5px #FFD700;
+}
+.bump.cleared, .obstacle.cleared{
+    box-shadow: 0 0 5px #888888;
+}
+
+#rule > h1, #statistics > h1, #level > p{
+    font-size: 2.5vw;
+    font-weight: 700;
+    margin-bottom: 2vw;
+}
+#rule > div > h2, #statistics > div > h2{
+    font-size: 1.5vw;
+    font-weight: 500;
+    margin-top: 1vw;
+}
+#rule > div > ul > li{
+    text-indent: 1em;
+}
+
+.image.hazard{
+    box-shadow: 0 0 5px #FFD700;
+}
+.route_counter{
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    background-color: #888888;
+    color: #FFFFFF;
+    border-radius: 50%;
+    z-index: 0;
+}
+.stop_counter{
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    background-color: #DD0000;
+    color: #FFFFFF;
+    border-radius: 50%;
+    z-index: 0;
+}
 @media screen and (min-width:1040px){
-    .menu, .menu_start{
-        width: 340px;
-    }
-    .menu > p, .menu_start > p{
-        font-size: 15px;
-    }
-    .index{
-        width: 300px;
-        font-size: 15px;
-    }
-    #timer, #score{
-        margin-top: 10px;
-        margin-left: 10px;
-        width: 300px;
-        text-align: center;
-        font-size: 50px;
-        font-weight: 700;
-    }
-    #timer_buttons{
-        flex-direction: row;
-    }
-    #timer_start, #timer_stop{
-        margin-left: 20px;
-        margin-bottom: 20px;
-        height: -moz-fit-content;
-        height: fit-content;
-        width: 120px;
-        padding: 8px;
-        border-radius: 19px;
-    }
-    #added_score{
-        margin-left: 2vw;
-        font-size: 1.5vw;
-        font-weight: 400;
-    }
-    #stop_count{
-        margin-left: 10px;
-        margin-bottom: 5px;
-        width: 300px;
-        font-size: 30px;
-        font-weight: 600;
-    }
     #tile_now_name{
         font-size: 22px;
     }
@@ -114,104 +65,14 @@
         font-size: 13px;
         margin-bottom: 5px;
         margin-left: 13px;
-    }
-    .button_hinan, .button_line, #route_finish, #route_cancel{
-        margin-top: 10px;
-        margin-left: 20px;
-        height: -moz-fit-content;
-        height: fit-content;
-        width: 280px;
-        padding: 8px;
-        border-radius: 19px;
-    }
-    .image, .image_tile_now{
-        height: 80px;
-        width: 80px;
-        cursor: pointer;
-    }
-    .tools{
-        width: 50px;
-        height: 50px;
-        margin-right: 25px;
     }
     .line_tools{
         width: 50px;
         height: 50px;
         margin-right: 10px;
     }
-    .start_tools{
-        width: 90px;
-        height: 90px;
-        margin-right: 80px;
-    }
-    .tools + p, .line_tools + p{
-        top: 50px;
-        left: 20px;
-    }
-    .start_tools + p{    
-        top: 80px;
-        left: 30px;
-    }
-    .check-marker, .route_counter, .stop_counter{
-        height: 17px;
-        width: 17px;
-        padding: 1px;
-        font-size: 12px;
-        text-align: center;
-    }
-    .obstacle, .obstacle_cleared{
-        height: 30px;
-        width: 30px;
-        left: 25px;
-        top: 25px;
-    }
-    .bump, .bump_cleared{
-        height: 80px;
-    }
 }
 @media screen and (max-width:1040px) and (min-width:920px){
-    .menu, .menu_start{
-        width: 240px;
-    }
-    .menu > p, .menu_start > p{
-        font-size: 15px;
-    }
-    .index{
-        width: 200px;
-        font-size: 15px;
-    }
-    #timer, #score{
-        margin-top: 10px;
-        margin-left: 10px;
-        width: 200px;
-        text-align: center;
-        font-size: 50px;
-        font-weight: 700;
-    }
-    #timer_buttons{
-        flex-direction: column;
-        align-items: center;
-    }
-    #timer_start, #timer_stop{
-        margin-bottom: 10px;
-        height: -moz-fit-content;
-        height: fit-content;
-        width: 120px;
-        padding: 8px;
-        border-radius: 19px;
-    }
-    #added_score{
-        margin-left: 20px;
-        font-size: 15px;
-        font-weight: 400;
-    }
-    #stop_count{
-        margin-left: 10px;
-        margin-bottom: 5px;
-        width: 200px;
-        font-size: 30px;
-        font-weight: 600;
-    }
     #tile_now_name{
         font-size: 22px;
     }
@@ -224,103 +85,12 @@
         margin-bottom: 5px;
         margin-left: 13px;
     }
-    .button_hinan, .button_line, #route_finish, #route_cancel{
-        margin-top: 10px;
-        margin-left: 20px;
-        height: -moz-fit-content;
-        height: fit-content;
-        width: 180px;
-        padding: 8px;
-        border-radius: 19px;
-    }
-    .image, .image_tile_now{
-        height: 80px;
-        width: 80px;
-        cursor: pointer;
-    }
-    .tools{
-        width: 50px;
-        height: 50px;
-        margin-right: 20px;
-    }
     .line_tools{
         width: 45px;
         height: 45px;
     }
-    .start_tools{
-        width: 80px;
-        height: 80px;
-        margin-right: 80px;
-    }
-    .tools + p, .line_tools + p{
-        top: 50px;
-        left: 20px;
-    }
-    .start_tools + p{    
-        top: 70px;
-        left: 30px;
-    }
-    .check-marker, .route_counter, .stop_counter{
-        height: 17px;
-        width: 17px;
-        padding: 1px;
-        font-size: 12px;
-        text-align: center;
-    }
-    .obstacle, .obstacle_cleared{
-        height: 30px;
-        width: 30px;
-        left: 25px;
-        top: 25px;
-    }
-    .bump, .bump_cleared{
-        height: 80px;
-    }
 }
 @media screen and (max-width:920px){
-    .menu, .menu_start{
-        width: 25vw;
-    }
-    .menu > p, .menu_start > p{
-        font-size: 1.5vw;
-    }
-    .index{
-        width: 20vw;
-        font-size: 1.5vw;
-    }
-    #timer, #score{
-        margin-top: 10px;
-        margin-left: 10px;
-        width: 18vw;
-        text-align: center;
-        font-size: 5vw;
-        font-weight: 700;
-    }
-    #timer_buttons{
-        flex-direction: column;
-        align-items: center;
-    }
-    #timer_start, #timer_stop{
-        font-size: 1.5vw;
-        margin-bottom: 10px;
-        height: -moz-fit-content;
-        height: fit-content;
-        width: 15vw;
-        padding: 8px;
-        border-radius: 1.9vw;
-    }
-    #added_score{
-        margin-left: 20px;
-        font-size: 1.5vw;
-        font-weight: 400;
-    }
-    #stop_count{
-        margin-left: 10px;
-        margin-bottom: 5px;
-        width: 18vw;
-        font-size: 3vw;
-        font-weight: 600;
-    }
     #tile_now_name{
         font-size: 2.2vw;
     }
@@ -333,26 +103,6 @@
         margin-bottom: 0.5vw;
         margin-left: 13px;
     }
-    .button_hinan, .button_line, #route_finish, #route_cancel{
-        margin-top: 10px;
-        margin-left: 20px;
-        height: -moz-fit-content;
-        height: fit-content;
-        width: 18vw;
-        font-size: 1.5vw;
-        padding: 8px;
-        border-radius: 1.9vw;
-    }
-    .image, .image_tile_now{
-        height: 8vw;
-        width: 8vw;
-        cursor: pointer;
-    }
-    .tools{
-        width: 6vw;
-        height: 6vw;
-        margin-right: 2vw;
-    }
     .line_tools{
         width: 4.5vw;
         height: 4.5vw;
@@ -360,46 +110,8 @@
     .line_tools + p{
         font-size: 1.5vw !important;
     }
-    .start_tools{
-        width: 8vw;
-        height: 8vw;
-        margin-right: 8vw;
-    }
-    .tools + p, .line_tools + p{
-        top: 5vw;
-        left: 2vw;
-    }
-    .start_tools + p{    
-        top: 7vw;
-        left: 3vw;
-    }
-    .help-link{
-        width: 20vw !important;
-    }
-    .check-marker, .route_counter, .stop_counter{
-        height: 2vw;
-        width: 2vw;
-        padding: 0.1vw;
-        font-size: 1.5vw;
-        text-align: center;
-    }
-    .obstacle, .obstacle_cleared{
-        height: 3vw;
-        width: 3vw;
-        left: 2.5vw;
-        top: 2.5vw;
-    }
-    .bump, .bump_cleared{
-        height: 8vw;
-    }
 }
 @media print{
-    body{
-        background-color: #FFFFFF;
-    }
-    table{
-        overflow: visible;
-    }
     .menu{
         width: 350px;
         height: 600px;
@@ -458,114 +170,4 @@
     #statistics > p, #statistics > div{
         margin-left: 15px;
     }
-    .image{
-        height: 80px;
-        width: 80px;
-        cursor: pointer;
-    }
-    .check-marker, .route_counter, .stop_counter{
-        height: 17px;
-        width: 17px;
-        font-size: 10px;
-        text-align: center;
-    }
-    .obstacle, .obstacle_cleared{
-        height: 30px;
-        width: 30px;
-        left: 25px;
-        top: 25px;
-    }
-    .bump, .bump_cleared{
-        height: 80px;
-        left: 37px;
-        top: 0px;
-    }
-}
-.description{
-    display: none;
-    position: absolute;
-    left: 0px;
-    bottom: 0px;
-    padding: 4px;
-    border: solid 1px #AAAAAA;
-    font-size: 12px;
-    color: #000000;
-    background-color: #f8f8f8;
-    z-index: 3;
-}
-.check-marker{
-    position: absolute !important;
-    left: 0px;
-    top: 0px;
-    background-color: #FFD700;
-    border-radius: 50%;
-    z-index: 1;
-}
-.obstacle, .obstacle.cleared{
-    display: block;
-    position: absolute;
-    z-index: 1;
-}
-.bump, .bump.cleared{
-    display: block;
-    position: absolute;
-    z-index: 1;
-}
-.bump, .obstacle{
-    box-shadow: 0 0 5px #FFD700;
-}
-.bump.cleared, .obstacle.cleared{
-    box-shadow: 0 0 5px #888888;
-}
-.guide{
-    position: absolute;
-    bottom: 0px;
-    left: 0px;
-    height: 30px;
-    padding: 7px 10px 7px 10px;
-    font-size: 15px;
-    width: 100%;
-    background: #DDDDDD;
-    cursor: default;
-}
-
-#league > p{
-    font-size: 1.3vw;
-    font-weight: 500;
-    padding-bottom: 1vw;
-}
-#rule > h1, #statistics > h1, #level > p{
-    font-size: 2.5vw;
-    font-weight: 700;
-    margin-bottom: 2vw;
-}
-#rule > div > h2, #statistics > div > h2{
-    font-size: 1.5vw;
-    font-weight: 500;
-    margin-top: 1vw;
-}
-#rule > div > ul > li{
-    text-indent: 1em;
-}
-
-.image.hazard{
-    box-shadow: 0 0 5px #FFD700;
-}
-.route_counter{
-    position: absolute;
-    right: 0px;
-    top: 0px;
-    background-color: #888888;
-    color: #FFFFFF;
-    border-radius: 50%;
-    z-index: 0;
-}
-.stop_counter{
-    position: absolute;
-    right: 0px;
-    top: 0px;
-    background-color: #DD0000;
-    color: #FFFFFF;
-    border-radius: 50%;
-    z-index: 0;
 }

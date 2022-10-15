@@ -514,6 +514,7 @@
         }
         //タイル
         $img[index].src = input_data_course[index + 1];
+        $img[index].parentElement.style.backgroundColor = '#EEEEEE';
         if (input_data_course[index + 1] == '../img/simulator/03.png' || input_data_course[index + 1] == '../img/simulator/04.png' || input_data_course[index + 1] == '../img/simulator/33.png'){
           $img[index].addEventListener('click', function(e){hazard_dialog(e)});
           $img[index].classList.add('hazard');

@@ -9,6 +9,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
     width: 30vw;
     height: 4vw;
     color: #111111;
@@ -17,6 +18,7 @@
     font-size: 1.5vw;
     font-weight: 600;
     padding: 8px;
+    padding-right: 4.2vw;
     border-radius: 1.5vw;
     margin: 1vw auto 1vw auto;
 }
@@ -24,6 +26,21 @@
     transition: all 0.2s ease-out;
     color: #F8F8F8;
     background-color: #111111;
+}
+.home_link::after{
+    content: "";
+    position: absolute;
+    top: 1vw;
+    right: 2vw;
+    transition: all 0.2s ease-out;
+    height: 0px;
+    width: 0px;
+    border: 0.8vw solid transparent;
+    border-left: 1.4vw solid #000000;
+}
+.home_link:hover::after{
+    right: 1vw;
+    border-left: 1.4vw solid #F8F8F8;
 }
 .footer{
     display: flex;
@@ -54,17 +71,16 @@ body{
     bottom: 5px;
     right: 0;
 }
-table{
-    margin-left: 30px !important;
-    border-collapse: collapse;
-    overflow: scroll;
-	overflow-x: auto;
-	overflow-y: auto;
-    max-height: 80vh;
-}
-.main{
-    display: flex;
-    align-items: flex-start;
+.guide{
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    height: 30px;
+    padding: 7px 10px 7px 10px;
+    font-size: 15px;
+    width: 100%;
+    background: #DDDDDD;
+    cursor: default;
 }
 .toolbar{
     display: flex;
@@ -101,6 +117,23 @@ table{
 .tools:hover + p, .start_tools:hover + p, .line_tools:hover + p{
     display: block;
 }
+.main{
+    display: flex;
+    align-items: flex-start;
+}
+table{
+    margin-left: 30px !important;
+    border-collapse: collapse;
+    overflow: scroll;
+	overflow-x: auto;
+	overflow-y: auto;
+    max-height: 80vh;
+}
+td{
+    position: relative;
+    border: 1px solid #AAAAAA;
+    background-color: #FFFFFF;
+}
 .menu, .menu_start{
     display: flex;
     position: relative;
@@ -115,192 +148,17 @@ table{
     flex-direction: row;
     flex-wrap: wrap;
 }
-@media screen and (min-width:1040px){
-    .menu{
-        width: 340px;
-    }
-    .index{
-        width: 270px;
-    }
-    .image, #image-preview{
-        height: 80px;
-        width: 80px;
-        cursor: pointer;
-    }
-    .tools{
-        width: 50px;
-        height: 50px;
-        margin-right: 25px;
-    }
-    .start_tools{
-        width: 90px;
-        height: 90px;
-        margin-right: 80px;
-    }
-    .tools + p{
-        top: 50px;
-        left: 20px;
-    }
-    .start_tools + p{    
-        top: 80px;
-        left: 30px;
-    }
-    .menu-img-w, .menu-img-n, .coursedata{
-        width: 60px;
-        height: 60px;
-    }
-    .check-marker{
-        height: 17px;
-        width: 17px;
-    }
-    .obstacle{
-        height: 30px;
-        width: 30px;
-        left: 25px;
-        top: 25px;
-    }
-    .bump{
-        height: 80px;
-    }
-}
-@media screen and (max-width:1040px) and (min-width:920px){
-    .menu{
-        width: 270px;
-    }
-    .index{
-        width: 200px;
-    }
-    .image, #image-preview{
-        height: 80px;
-        width: 80px;
-        cursor: pointer;
-    }
-    .tools{
-        width: 50px;
-        height: 50px;
-        margin-right: 20px;
-    }
-    .start_tools{
-        width: 80px;
-        height: 80px;
-        margin-right: 80px;
-    }
-    .tools + p{
-        top: 50px;
-        left: 20px;
-    }
-    .start_tools + p{    
-        top: 70px;
-        left: 30px;
-    }
-    .menu-img-w, .menu-img-n, .coursedata{
-        height: 60px;
-        width: 60px;
-    }
-    .check-marker{
-        height: 17px;
-        width: 17px;
-    }
-    .obstacle{
-        height: 30px;
-        width: 30px;
-        left: 25px;
-        top: 25px;
-    }
-    .bump{
-        height: 80px;
-    }
-}
-@media screen and (max-width:920px){
-    .menu{
-        width: 25vw;
-    }
-    .index{
-        width: 20vw;
-    }
-    .image, #image-preview{
-        height: 8vw;
-        width: 8vw;
-        cursor: pointer;
-    }
-    .tools{
-        width: 6vw;
-        height: 6vw;
-        margin-right: 2vw;
-    }
-    .start_tools{
-        width: 8vw;
-        height: 8vw;
-        margin-right: 8vw;
-    }
-    .tools + p{
-        top: 5vw;
-        left: 2vw;
-    }
-    .start_tools + p{    
-        top: 7vw;
-        left: 3vw;
-    }
-    .menu-img-w, .menu-img-n, .coursedata{
-        height: 8vw;
-        width: 8vw;
-    }
-    .help-link{
-        width: 20vw !important;
-    }
-    .check-marker{
-        height: 2vw;
-        width: 2vw;
-    }
-    .obstacle{
-        height: 3vw;
-        width: 3vw;
-        left: 2.5vw;
-        top: 2.5vw;
-    }
-    .bump{
-        height: 8vw;
-    }
-}
-@media print{
-    body{
-        background-color: #FFFFFF;
-    }
-    table{
-        overflow: visible;
-    }
-    .menu{
-        display: none;
-    }
-    .image, #image-preview{
-        height: 80px;
-        width: 80px;
-        cursor: pointer;
-    }
-    .toolbar{
-        display: none;
-    }
-    .check-marker{
-        height: 17px;
-        width: 17px;
-    }
-    .obstacle{
-        height: 30px;
-        width: 30px;
-        left: 25px;
-        top: 25px;
-    }
-    .bump{
-        height: 80px;
-        left: 37px;
-        top: 0px;
-    }
-    .guide{
-        display: none;
-    }
-    .copyright{
-        display: none;
-    }
+.index{
+    padding: 5px;
+    border-bottom: 3px solid #000000;
+    margin-top: 30px;
+    margin-bottom: 10px;
+    height: 35px;
+    padding-top: 10px;
+    padding-left: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: normal;
 }
 .description{
     display: none;
@@ -314,23 +172,6 @@ table{
     background-color: #f8f8f8;
     z-index: 3;
 }
-td{
-    position: relative;
-    border: 1px solid #AAAAAA;
-    background-color: #FFFFFF;
-}
-.index{
-    padding: 5px;
-    border-bottom: 3px solid #000000;
-    margin-top: 30px;
-    margin-bottom: 10px;
-    height: 35px;
-    padding-top: 10px;
-    padding-left: 10px;
-    font-size: 15px;
-    font-weight: 600;
-    cursor: normal;
-}
 .check-marker{
     position: absolute;
     left: 0px;
@@ -339,26 +180,64 @@ td{
     border-radius: 50%;
     z-index: 1;
 }
-.obstacle{
+.obstacle, .obstacle.cleared{
     display: block;
     position: absolute;
     z-index: 1;
 }
-.bump{
+.bump, .bump.cleared{
     display: block;
     position: absolute;
     z-index: 1;
 }
-.guide{
-    position: absolute;
-    bottom: 0px;
-    left: 0px;
-    height: 30px;
-    padding: 7px 10px 7px 10px;
-    font-size: 15px;
-    width: 100%;
-    background: #DDDDDD;
-    cursor: default;
+.line_tools{
+    border-radius: 30%;
+    padding: 5px;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    cursor: pointer;
+}
+#timer_buttons{
+    display: flex;
+}
+#score{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#added_score, #tile_now_score{
+    background-color: #DDDDDD;
+    border-radius: 10px;
+    padding: 5px;
+    width: -moz-fit-content;
+    width: fit-content;
+    height: -moz-fit-content;
+    height: fit-content;
+}
+#stop_count{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#timer_start, #timer_stop, .button_hinan, .button_line, #route_finish, #route_cancel{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-weight: 500;
+    color: #111111;
+    background-color: #F8F8F8;
+    border: solid 3px #111111;
+}
+#timer_start:hover, #timer_stop:hover, .button_hinan:hover, .button_line:hover, #route_finish:hover, #route_cancel:hover{
+    transition: all 0.2s ease-out;
+    background-color: #111111;
+    color: #F8F8F8;
+}
+#timer_start.disabled, #timer_stop.disabled, .button_hinan.disabled, .button_line.disabled, #route_finish.disabled{
+    color: #888888;
+    background-color: #F8F8F8;
+    border: solid 3px #888888;
 }
 #contextmenu{
     display: none;
@@ -392,7 +271,6 @@ td{
 .contextmenu-title_active:hover{
     background-color: #EDEDED;
 }
-
 #overlay{
     visibility: collapse;
     position:absolute;
@@ -409,7 +287,6 @@ td{
     visibility: visible;
     opacity: 0.7;
 }
-
 #start, #league, #level, #rule, #statistics, #bump_settings{
     visibility: collapse;
     opacity: 0;
@@ -453,7 +330,7 @@ td{
     visibility: visible;
     opacity: 1;
 }
-#bump_decide, #bump_cancel, #league_decide,#league_nrl, #league_wrl, #rule_close, #statistics_close, #level_decide{
+#bump_decide, #bump_cancel, #league_decide, #league_nrl, #league_wrl, #rule_close, #statistics_close, #level_decide{
     position: absolute;
     width: 10vw;
     height: -moz-fit-content;
@@ -479,29 +356,12 @@ td{
     right: 5vw;
     bottom: 3vw;
 }
-#bump_settings > div{
-    display: flex;
-    flex-direction: row;
-    height: 2vw;
-    margin-bottom: 1.2vw;
+#league > p{
+    font-size: 1.3vw;
+    font-weight: 500;
+    padding-bottom: 1vw;
 }
-#bump_settings > p{
-    margin-bottom: 1vw;
-}
-#bump_settings > div > span{
-    margin-right: 10px;
-}
-.bump-input{
-    height: 2vw;
-    width: 7vw;
-    padding: 2px;
-    margin-right: 20px;
-    border: solid 1px #000000;
-    border-radius: 5px;
-}
-#image-preview{
-    cursor: default !important;
-}
+
 .container {
     display: block;
     position: relative;
@@ -547,4 +407,331 @@ td{
     border: solid 0.3vw #F8F8F8;
     border-radius: 50%;
     background-color:#000000;
+}
+@media screen and (min-width:1040px){
+    .menu, .menu_start{
+        width: 340px;
+    }
+    .menu > p, .menu_start > p{
+        font-size: 15px;
+    }
+    .index{
+        width: 300px;
+        font-size: 15px;
+    }
+    #timer, #score{
+        margin-top: 10px;
+        margin-left: 10px;
+        width: 300px;
+        text-align: center;
+        font-size: 50px;
+        font-weight: 700;
+    }
+    #timer_buttons{
+        flex-direction: row;
+    }
+    #timer_start, #timer_stop{
+        margin-left: 20px;
+        margin-bottom: 20px;
+        height: -moz-fit-content;
+        height: fit-content;
+        width: 120px;
+        padding: 8px;
+        border-radius: 19px;
+    }
+    #added_score{
+        margin-left: 2vw;
+        font-size: 1.5vw;
+        font-weight: 400;
+    }
+    #stop_count{
+        margin-left: 10px;
+        margin-bottom: 5px;
+        width: 300px;
+        font-size: 30px;
+        font-weight: 600;
+    }
+    .button_hinan, .button_line, #route_finish, #route_cancel{
+        margin-top: 10px;
+        margin-left: 20px;
+        height: -moz-fit-content;
+        height: fit-content;
+        width: 250px;
+        padding: 8px;
+        border-radius: 19px;
+    }
+    .image, #image-preview, .image_tile_now{
+        height: 80px;
+        width: 80px;
+        cursor: pointer;
+    }
+    .tools{
+        width: 50px;
+        height: 50px;
+        margin-right: 25px;
+    }
+    .start_tools{
+        width: 90px;
+        height: 90px;
+        margin-right: 80px;
+    }
+    .tools + p, .line_tools + p{
+        top: 50px;
+        left: 20px;
+    }
+    .start_tools + p{    
+        top: 80px;
+        left: 30px;
+    }
+    .menu-img-w, .menu-img-n, .coursedata{
+        width: 60px;
+        height: 60px;
+    }
+    .check-marker, .route_counter, .stop_counter{
+        height: 17px;
+        width: 17px;
+        padding: 1px;
+        font-size: 12px;
+        text-align: center;
+    }
+    .obstacle{
+        height: 30px;
+        width: 30px;
+        left: 25px;
+        top: 25px;
+    }
+    .bump{
+        height: 80px;
+    }
+}
+@media screen and (max-width:1040px) and (min-width:920px){
+    .menu, .menu_start{
+        width: 270px;
+    }
+    .menu > p, .menu_start > p{
+        font-size: 15px;
+    }
+    .index{
+        width: 230px;
+    }
+    #timer, #score{
+        margin-top: 10px;
+        margin-left: 10px;
+        width: 200px;
+        text-align: center;
+        font-size: 50px;
+        font-weight: 700;
+    }
+    #timer_buttons{
+        flex-direction: column;
+        align-items: center;
+    }
+    #timer_start, #timer_stop{
+        margin-bottom: 10px;
+        height: -moz-fit-content;
+        height: fit-content;
+        width: 120px;
+        padding: 8px;
+        border-radius: 19px;
+    }
+    #added_score{
+        margin-left: 20px;
+        font-size: 15px;
+        font-weight: 400;
+    }
+    #stop_count{
+        margin-left: 10px;
+        margin-bottom: 5px;
+        width: 200px;
+        font-size: 30px;
+        font-weight: 600;
+    }
+    .button_hinan, .button_line, #route_finish, #route_cancel{
+        margin-top: 10px;
+        margin-left: 20px;
+        height: -moz-fit-content;
+        height: fit-content;
+        width: 200px;
+        padding: 8px;
+        border-radius: 19px;
+    }
+    .image, #image-preview, .image_tile_now{
+        height: 80px;
+        width: 80px;
+        cursor: pointer;
+    }
+    .tools{
+        width: 50px;
+        height: 50px;
+        margin-right: 20px;
+    }
+    .start_tools{
+        width: 80px;
+        height: 80px;
+        margin-right: 80px;
+    }
+    .tools + p, .line_tools + p{
+        top: 50px;
+        left: 20px;
+    }
+    .start_tools + p{    
+        top: 70px;
+        left: 30px;
+    }
+    .menu-img-w, .menu-img-n, .coursedata{
+        height: 60px;
+        width: 60px;
+    }
+    .check-marker, .route_counter, .stop_counter{
+        height: 17px;
+        width: 17px;
+        padding: 1px;
+        font-size: 12px;
+        text-align: center;
+    }
+    .obstacle{
+        height: 30px;
+        width: 30px;
+        left: 25px;
+        top: 25px;
+    }
+    .bump{
+        height: 80px;
+    }
+}
+@media screen and (max-width:920px){
+    .menu, .menu_start{
+        width: 25vw;
+    }
+    .menu > p, .menu_start > p{
+        font-size: 1.5vw;
+    }
+    .index{
+        width: 21vw;
+    }
+    #timer, #score{
+        margin-top: 10px;
+        margin-left: 10px;
+        width: 18vw;
+        text-align: center;
+        font-size: 5vw;
+        font-weight: 700;
+    }
+    #timer_buttons{
+        flex-direction: column;
+        align-items: center;
+    }
+    #timer_start, #timer_stop{
+        font-size: 1.5vw;
+        margin-bottom: 10px;
+        height: -moz-fit-content;
+        height: fit-content;
+        width: 15vw;
+        padding: 8px;
+        border-radius: 1.9vw;
+    }
+    #added_score{
+        margin-left: 20px;
+        font-size: 1.5vw;
+        font-weight: 400;
+    }
+    #stop_count{
+        margin-left: 10px;
+        margin-bottom: 5px;
+        width: 18vw;
+        font-size: 3vw;
+        font-weight: 600;
+    }
+    .button_hinan, .button_line, #route_finish, #route_cancel{
+        margin-top: 10px;
+        margin-left: 20px;
+        height: -moz-fit-content;
+        height: fit-content;
+        width: 18vw;
+        font-size: 1.5vw;
+        padding: 8px;
+        border-radius: 1.9vw;
+    }
+    .image, #image-preview, .image_tile_now{
+        height: 8vw;
+        width: 8vw;
+        cursor: pointer;
+    }
+    .tools{
+        width: 6vw;
+        height: 6vw;
+        margin-right: 2vw;
+    }
+    .start_tools{
+        width: 8vw;
+        height: 8vw;
+        margin-right: 8vw;
+    }
+    .tools + p, .line_tools + p{
+        top: 5vw;
+        left: 2vw;
+    }
+    .start_tools + p{    
+        top: 7vw;
+        left: 3vw;
+    }
+    .menu-img-w, .menu-img-n, .coursedata{
+        height: 8vw;
+        width: 8vw;
+    }
+    .check-marker, .route_counter, .stop_counter{
+        height: 2vw;
+        width: 2vw;
+        padding: 0.1vw;
+        font-size: 1.5vw;
+        text-align: center;
+    }
+    .obstacle{
+        height: 3vw;
+        width: 3vw;
+        left: 2.5vw;
+        top: 2.5vw;
+    }
+    .bump{
+        height: 8vw;
+    }
+}
+@media print{
+    body{
+        background-color: #FFFFFF;
+    }
+    table{
+        overflow: visible;
+    }
+    .image, #image-preview{
+        height: 80px;
+        width: 80px;
+        cursor: pointer;
+    }
+    .toolbar{
+        display: none;
+    }
+    .check-marker, .route_counter, .stop_counter{
+        height: 17px;
+        width: 17px;
+        font-size: 10px;
+        text-align: center;
+    }
+    .obstacle{
+        height: 30px;
+        width: 30px;
+        left: 25px;
+        top: 25px;
+    }
+    .bump{
+        height: 80px;
+        left: 37px;
+        top: 0px;
+    }
+    .guide{
+        display: none;
+    }
+    .copyright{
+        display: none;
+    }
 }

@@ -19,10 +19,6 @@ body{
     font-size: 15px;
     cursor: default;
 }
-.copyright-help{
-    margin-right: 0;
-    margin-left: auto;
-}
 .help_title_div{
     display: flex;
     flex-direction: row-reverse;
@@ -98,7 +94,8 @@ body{
     flex-direction: row;
     flex-wrap: wrap;
 }
-.help_link{
+.help_link, .help_version{
+    position: relative;
     color: #111111;
     border: solid 3px #111111;
 }
@@ -106,7 +103,14 @@ body{
     color: #AA0000;
     border: solid 3px #AA0000;
 }
-.help_link:hover{
+.help_link::after{
+    content: "";
+    position: absolute;
+    transition: all 0.2s ease-out;
+    height: 0px;
+    width: 0px;
+}
+.help_link:hover, .help_version:hover{
     transition: all 0.2s ease-out;
     background-color: #111111;
     color: #F8F8F8;
@@ -130,6 +134,84 @@ body{
     vertical-align: middle;
     padding: 3px;
 }
+
+#overlay{
+    visibility: collapse;
+    position: fixed;
+    left:0;
+    top:0;
+    width:100vw;
+    height:100vh;
+    background-color: #555555;
+    opacity: 0;
+    transition: all 0.3s 0s ease-out;
+    z-index: 4;
+}
+#overlay.active{
+    visibility: visible;
+    opacity: 0.7;
+}
+#version{
+    visibility: collapse;
+    opacity: 0;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    overflow: auto;
+    padding: 2vw 5vw 2vw 5vw;
+    background-color: #F8F8F8;
+    border-radius: 20px;
+    font-size: 2vw;
+    cursor: default;
+    top: 20vh;
+    left: 25vw;
+    width: 50vw;
+    height: 60vh;
+    transition: all 0.3s 0s ease-out;
+    z-index: 5;
+}
+#version.active{
+    visibility: visible;
+    opacity: 1;
+}
+#version > div{
+    max-width: 40vw;
+    max-height: 40vh;
+    overflow: auto;
+}
+#version_close{
+    position: absolute;
+    right: 5vw;
+    bottom: 3vw;
+    width: 10vw;
+    height: -moz-fit-content;
+    height: fit-content;
+    font-weight: 500;
+    text-align: center;
+    background-color: #F8F8F8;
+    color: #111111;
+    border: solid 3px #111111;
+    padding: 8px;
+    border-radius: 1.9vw;
+}
+#version_close:hover{
+    transition: all 0.2s ease-out;
+    background-color: #111111;
+    color: #F8F8F8;
+}
+#version >div > h1{
+    margin-top: 1vw;
+    margin-bottom: 1vw;
+    border-bottom: solid 5px #000000;
+    font-size: 6vw;
+    font-weight: 800;
+}
+#version > div > h2{
+    margin-top: 2vw;
+    margin-bottom: 1vw;
+    font-size: 3vw;
+    font-weight: 600;
+}
 @media screen and (min-width:1000px){
     .help-table {
         width: 600px;
@@ -143,7 +225,7 @@ body{
         font-size: 18px;
         margin-bottom: 20px;
     }
-    .help_link, .help_link-close{
+    .help_link, .help_version, .help_link-close{
         width: 160px;
         height: 41px;
         text-align: center;
@@ -154,6 +236,19 @@ body{
         border-radius: 20px;
         margin-left: 15px;
         margin-bottom: 15px;
+    }
+    .help_link{
+        padding-right: 27px;
+    }
+    .help_link::after{
+        top: 10px;
+        right: 5px;
+        border: 8px solid transparent;
+        border-left: 14px solid #000000;
+    }
+    .help_link:hover::after{
+        right: 0px;
+        border-left: 14px solid #F8F8F8;   
     }
 }
 @media screen and (max-width:1000px){
@@ -169,7 +264,7 @@ body{
         font-size: 1.8vw;
         margin-bottom: 2vw;
     }
-    .help_link, .help_link-close{
+    .help_link, .help_version, .help_link-close{
         width: 16vw;
         height: 4.1vw;
         text-align: center;
@@ -180,5 +275,18 @@ body{
         border-radius: 2vw;
         margin-left: 1.5vw;
         margin-bottom: 1.5vw;
+    }
+    .help_link{
+        padding-right: 2.7vw;
+    }
+    .help_link::after{
+        top: 1vw;
+        right: 0.5vw;
+        border: 0.8vw solid transparent;
+        border-left: 1.4vw solid #000000;
+    }
+    .help_link:hover::after{
+        right: 0vw;
+        border-left: 1.4vw solid #F8F8F8;   
     }
 }
