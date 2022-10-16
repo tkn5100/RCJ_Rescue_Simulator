@@ -8,7 +8,7 @@
     <title>ユーザーガイド(WRL得点計算) -RoboCupJunior コート作成環境</title>
   </head>
 
-  <body class="body" style="margin-left: 15%; margin-right: 15%; margin-bottom: 30px; cursor: default;">
+  <body class="body">
     <h1 class="userguide_h1" id="scorer_wrl">WRL得点計算</h1>
     <p class="userguide_sentence">コート作成で保存したプロジェクトファイル(WRL)を利用し、実際に競技を行いながら得点を算出できる機能です。</p>
     <div class="help_link-div" style="margin-top: 20px;">
@@ -25,13 +25,15 @@
     <p class="userguide_sentence" style="background-color: #F8F8E7;">※保存と読み込みは基本的に同じバージョンで行ってください。違うバージョンで行った場合正常に読み込まれないことがあります。メジャーアップデートでRRLファイルの内部構造が変わった場合、新しいバージョンでは古いバージョンのファイルをサポートします。メジャーバージョンが2つ以上古いファイルはサポートしません。その場合はファイル変換をご利用ください。</p>
     <p class="userguide_sentence" style="background-color: #F8F8E7;">※下の表で「読み込み可能」となっている場合でも、読み込む側のバージョンよりファイルを作ったバージョンが新しい場合は読み込めませんのでご注意ください。</p>
     <h3 class="userguide_h3">RRLファイルの互換性</h3>
-    <table class="help-table">
-      <tbody>
-        <tr><td rowspan="2" colspan="2"></td><td colspan="5">作成(コート作成)</td></tr>
-        <tr><td>v1.0.0~v2.0.2</td><td>v3.0.0~v3.1.1</td><td>v4.0.0~v4.2.2</td><td>v4.3.0~v4.3.1</td><td>v4.4.0~v4.5.3</td></tr>
-        <tr><td rowspan="1">読み込み<br>(WRL得点計算)</td><td>v4.4.0~<br>v4.5.3</td><td>×</td><td>△</td><td>○</td><td style="background-color: #FFEEEE;"><img src="../img/help/attention.svg" class="help_icon" style="background-color: #FFEEEE;"></td><td>○</td></tr>
-      </tbody>
-    </table>
+    <div class="userguide_table">
+      <table>
+        <tbody>
+          <tr><td rowspan="2" colspan="2"></td><td colspan="5">作成(コート作成)</td></tr>
+          <tr><td>v1.0.0~v2.0.2</td><td>v3.0.0~v3.1.1</td><td>v4.0.0~v4.2.2</td><td>v4.3.0~v4.3.1</td><td>v4.4.0~v4.5.4</td></tr>
+          <tr><td rowspan="1">読み込み<br>(WRL得点計算)</td><td>v4.4.0~<br>v4.5.4</td><td>×</td><td>△</td><td>○</td><td style="background-color: #FFEEEE;"><img src="../img/help/attention.svg" class="help_icon" style="background-color: #FFEEEE;"></td><td>○</td></tr>
+        </tbody>
+      </table>
+    </div>
     <p class="userguide_sentence">○…読み込み可能　△…読み込み可能だが非推奨　×…ファイル変換が必要　- …不可能</p>
     <h2 class="userguide_sentence" style="margin-top: 10px; padding-left: 0; background-color: #FFEEEE;"><img src="../img/help/attention.svg" class="help_icon" style="background-color: #FFBBBB;">読み込みに関する不具合</h2>
     <p class="userguide_sentence" style="background-color: #FFEEEE;">v4.3.0とv4.3.1では、コート作成機能において、2階部分を含むWRLコートのプロジェクトを保存した際に2階部分がうまく保存されない不具合が発生しています。この不具合はv4.4.0で修正されました。v4.3.0とv4.3.1で作成したファイルをv4.4.0以降で読み込んだ場合、その旨を知らせる警告が出ます。</p>
@@ -139,5 +141,24 @@
     <h3 class="userguide_h3"><img src="../img/tools/help.svg" class="help_icon">ヘルプボタン</h3>
     <p class="userguide_sentence">ヘルプを表示します。</p>
     <small class="copyright">Copyright&copy; 2021-2022 TKN All Rights Reserved.</small>
+    <script>
+      const $link = document.getElementsByTagName('link')[1];
+      const agent = window.navigator.userAgent.toLowerCase();  
+      if (agent.indexOf('linux; android') != -1) {
+        $link.href = 'help_mobile.css';
+      } else if (agent.indexOf('iphone') != -1) {
+        $link.href = 'help_mobile.css';
+      } else if (agent.indexOf('ipad') != -1) {
+        $link.href = 'help.css';
+      } else if (agent.indexOf('cros') != -1) {
+        $link.href = 'help.css';
+      } else if (agent.indexOf('macintosh') != -1) {
+        $link.href = 'help.css';
+      } else if (agent.indexOf('windows') != -1) {
+        $link.href = 'help.css';
+      } else {
+        $link.href = 'help.css';
+      }
+    </script>
   </body>
 </html>

@@ -8,7 +8,7 @@
     <title>ユーザーガイド(ファイル変換) -RoboCupJunior コート作成環境</title>
   </head>
 
-  <body class="body" style="margin-left: 15%; margin-right: 15%; margin-bottom: 30px; cursor: default;">
+  <body class="body">
     <h1 class="userguide_h1" id="converter">ファイル変換</h1>
     <p class="userguide_sentence">古いバージョンのコート作成で保存したプロジェクトファイル(WRL)の情報を、新しいバージョンで読み込めるように更新します。</p>
     <div class="help_link-div" style="margin-top: 20px;">
@@ -30,5 +30,24 @@
     <h3 class="userguide_h3"><img src="../img/tools/help.svg" class="help_icon">ヘルプボタン</h3>
     <p class="help-sentence">ヘルプを表示します。</p>
     <small class="copyright">Copyright&copy; 2021-2022 TKN All Rights Reserved.</small>
+    <script>
+      const $link = document.getElementsByTagName('link')[1];
+      const agent = window.navigator.userAgent.toLowerCase();  
+      if (agent.indexOf('linux; android') != -1) {
+        $link.href = 'help_mobile.css';
+      } else if (agent.indexOf('iphone') != -1) {
+        $link.href = 'help_mobile.css';
+      } else if (agent.indexOf('ipad') != -1) {
+        $link.href = 'help.css';
+      } else if (agent.indexOf('cros') != -1) {
+        $link.href = 'help.css';
+      } else if (agent.indexOf('macintosh') != -1) {
+        $link.href = 'help.css';
+      } else if (agent.indexOf('windows') != -1) {
+        $link.href = 'help.css';
+      } else {
+        $link.href = 'help.css';
+      }
+    </script>
   </body>
 </html>
