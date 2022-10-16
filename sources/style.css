@@ -287,7 +287,7 @@ td{
     visibility: visible;
     opacity: 0.7;
 }
-#start, #league, #level, #rule, #statistics, #bump_settings{
+#start, #version, #league, #level, #rule, #statistics, #bump_settings{
     visibility: collapse;
     opacity: 0;
     display: flex;
@@ -308,6 +308,12 @@ td{
     width: 80vw;
     height: 80vh;
 }
+#version{
+    top: 20vh;
+    left: 25vw;
+    width: 50vw;
+    height: 60vh;
+}
 #league{
     top: 30vh;
     left: 30vw;
@@ -326,11 +332,11 @@ td{
     width: 70vw;
     height: 80vh;
 }
-#start.active, #league.active, #bump_settings.active, #level.active, #rule.active, #statistics.active{
+#start.active, #version.active, #league.active, #bump_settings.active, #level.active, #rule.active, #statistics.active{
     visibility: visible;
     opacity: 1;
 }
-#bump_decide, #bump_cancel, #league_decide, #league_nrl, #league_wrl, #rule_close, #statistics_close, #level_decide{
+#version_close, #bump_decide, #bump_cancel, #league_decide, #league_nrl, #league_wrl, #rule_close, #statistics_close, #level_decide{
     position: absolute;
     width: 10vw;
     height: -moz-fit-content;
@@ -343,7 +349,7 @@ td{
     padding: 8px;
     border-radius: 1.9vw;
 }
-#bump_decide:hover, #bump_cancel:hover, #league_decide:hover, #league_nrl:hover, #league_wrl:hover, #rule_close:hover, #statistics_close:hover, #level_decide:hover{
+#version_close:hover, #bump_decide:hover, #bump_cancel:hover, #league_decide:hover, #league_nrl:hover, #league_wrl:hover, #rule_close:hover, #statistics_close:hover, #level_decide:hover{
     transition: all 0.2s ease-out;
     background-color: #111111;
     color: #F8F8F8;
@@ -352,7 +358,7 @@ td{
     right: 20vw;
     bottom: 3vw;
 }
-#bump_cancel, #league_decide, #league_nrl, #rule_close, #statistics_close, #level_decide{
+#version_close, #bump_cancel, #league_decide, #league_nrl, #rule_close, #statistics_close, #level_decide{
     right: 5vw;
     bottom: 3vw;
 }
@@ -361,6 +367,24 @@ td{
     font-weight: 500;
     padding-bottom: 1vw;
 }
+#version > div{
+    max-width: 40vw;
+    max-height: 40vh;
+    overflow: auto;
+}
+#version >div > h1{
+    margin-top: 1vw;
+    margin-bottom: 1vw;
+    border-bottom: solid 5px #000000;
+    font-size: 4vw;
+    font-weight: 800;
+}
+#version > div > h2{
+    margin-top: 2vw;
+    margin-bottom: 1vw;
+    font-size: 1.8vw;
+    font-weight: 600;
+}
 
 .container {
     display: block;
@@ -368,6 +392,7 @@ td{
     padding-left: 2vw;
     margin-bottom: 1vw;
     cursor: pointer;
+    -webkit-user-select: none;
     user-select: none;
     padding-right: 2vw;
 }

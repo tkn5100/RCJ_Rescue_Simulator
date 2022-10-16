@@ -23,7 +23,25 @@
         <label class="container">NRL<input type="radio" name="league" value="0"><span class="checkmark"></span></label>
         <label class="container">WRL<input type="radio" checked="checked" name="league" value="1"><span class="checkmark"></span></label>
       </div>
-      <div style="position: absolute; top: 20px; right: 20px;"><div><img src="../img/tools/help.svg" alt="ヘルプ" class="start_tools" style="margin-right: 0; cursor: help;"><p>ヘルプ</p></div></div>
+      <div style="position: absolute; top: 2vw; right: 5vw;"><div><img src="../img/tools/help.svg" alt="ヘルプ" class="start_tools" style="margin-right: 0; cursor: help;"><p>ヘルプ</p></div></div>
+      <div style="position: absolute; top: 11vw; right: 5vw;"><div><img src="../img/tools/version.svg" alt="バージョン情報" class="start_tools" style="margin-right: 0;"><p>バージョン<br>情報</p></div></div>
+    </div>
+    <div id="version">
+      <div>
+        <h1>v4.5.3</h1>
+        <p>2022.10.16 &copy;TKN</p>
+        <!-- <h2>v4.5.3機能追加中</h2>
+        <p>最終更新 : 2022.10.16</p>
+        <p>オンラインでは、正式なバージョン更新の前に一部の新機能や新デザイン、バグ修正をご利用いただけます。機能追加中は、新機能が不完全であったり不安定である可能性があります。</p>
+        <br>
+        <p>v4.5.3で予定している変更：</p>
+        <p>・デザインの統一、変更</p>
+        <p>・CSSを最適化</p>
+        <p>・バージョン情報の追加</p>
+        <p>・コート作成で、2階部分でのタイルの回転に関する不具合を修正</p> -->
+      </div>
+      <span id="version_value" style="display: none;"></span><!-- スタートのボタンから表示したかツールバーのボタンから表示したかを記録 -->
+      <button id="version_close">閉じる</button>
     </div>
     <div id="league">
       <p>このファイルはどちらのリーグのものですか?</p>
@@ -104,6 +122,7 @@
       <div><img src="../img/tools/49.svg" alt="4×9タイル" class="tools"><p>4×9タイル</p></div>
       <div><img src="../img/tools/312.svg" alt="3×12タイル" class="tools"><p>3×12タイル</p></div>
       <div><img src="../img/tools/help.svg" alt="ヘルプ" class="tools" style="cursor: help;"><p>ヘルプ</p></div>
+      <div><img src="../img/tools/version.svg" alt="バージョン情報" class="tools"><p>バージョン情報</p></div>
     </div>
     <div class="main">
       <div class="menu">

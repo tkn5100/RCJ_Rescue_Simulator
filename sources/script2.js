@@ -175,19 +175,4 @@
         more_920();
       }
     }
-
-
-    // //メニューのインデックス表示・非表示
-    // for (let i = 0; i < $index.length; i++) {
-    //   $index[i].addEventListener('click', () => {
-    //     if (course_show == 0){
-    //       document.getElementsByClassName('group')[i].style.display = 'none';
-    //       course_show = 1;
-    //     }else{
-    //       document.getElementsByClassName('group')[i].style.display = 'block';
-    //       course_show = 0;
-    //     };
-    //   }); 
-    // };
-
   })();
