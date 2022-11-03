@@ -9,6 +9,7 @@ body{
     cursor: default;
     margin-right: 15vw !important;
     margin-left: 15vw !important;
+    margin-bottom: 30px !important;
 }
 .copyright{
     position: fixed;

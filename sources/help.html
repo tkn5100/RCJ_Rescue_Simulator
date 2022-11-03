@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
@@ -27,15 +27,16 @@
       <div>
         <h1>v4.5.4</h1>
         <p>2022.10.17 &copy;TKN</p>
-        <!-- <h2>v4.5.3機能追加中</h2>
-        <p>最終更新 : 2022.10.16</p>
+        <h2>v4.6.0機能追加中</h2>
+        <p>最終更新 : 2022.11.04</p>
         <p>オンラインでは、正式なバージョン更新の前に一部の新機能や新デザイン、バグ修正をご利用いただけます。機能追加中は、新機能が不完全であったり不安定である可能性があります。</p>
         <br>
-        <p>v4.5.3で予定している変更：</p>
-        <p>・デザインの統一、変更</p>
-        <p>・CSSを最適化</p>
-        <p>・バージョン情報の追加</p>
-        <p>・コート作成で、2階部分でのタイルの回転に関する不具合を修正</p> -->
+        <p>v4.6.0で予定している変更：</p>
+        <p>・NRL得点計算で、2023ルールに対応</p>
+        <p>・NRL得点計算で、被災者を1体も見つけていなくても脱出できる不具合を修正</p>
+        <p>・NRL得点計算で、避難ゾーン(救助ゾーン)を脱出すると競技が自動で終了するよう変更</p>
+        <p>・NRL得点計算で、通過の取り消しや競技進行の停止をすると該当タイルの背景が白くなる不具合を修正</p>
+        <p>・ヘルプにタブUIを実装</p>
       </div>
       <button id="version_close">閉じる</button>
     </div>
@@ -81,10 +82,11 @@
 
     <h2 class="help_h2">ソフトウェア内で使用する分かりにくい単語について</h2>
     <p class="help-sentence">このソフトウェアでは、基本的にルールにのっとった単語を使用していますが、特にわかりにくい単語の使い分けを下に示します。</p>
-    <h3 class="help_h3">避難ゾーン</h3>
+    <h3 class="help_h3">避難ゾーン (NRL2023ルール : 救助ゾーン)</h3>
     <p class="help-sentence">壁で囲まれ、入口には銀色のテープ、出口には緑色のテープが貼られている(WRLのみ)、3x4タイルの場所。被災者が置かれる。</p>
     <h3 class="help_h3">避難場所</h3>
-    <p class="help-sentence">避難ゾーン内にある、被災者とレスキューキットを運び込む黒色の場所のこと。</p>
+    <p class="help-sentence">WRLの避難ゾーン内にある、被災者とレスキューキットを運び込む黒色の場所のこと。</p>
+    <p class="help-sentence">2023ルールでは赤色と緑色の2つになる。</p>
     <h3 class="help_h3">ハザード</h3>
     <p class="help-sentence">ライン中のギャップ、減速バンプ、交差点、行き止まり、傾斜路、障害物、シーソーのこと。</p>
     <h3 class="help_h3">得点要素</h3>
@@ -110,6 +112,14 @@
     <p class="help-sentence">上記にないOS</p>
 
     <h2 class="help_h2" style="margin-bottom: 0px;">変更履歴</h2>
+    <h3 class="help_h3">v4.6.0</h3>
+    <ul>
+      <li class="help-sentence-changes">・2022.11.公開</li>
+      <li class="help-sentence-changes">・NRL得点計算で、2023ルールに対応</li>
+      <li class="help-sentence-changes">・NRL得点計算で、被災者を1体も見つけていなくても脱出できる不具合を修正</li>
+      <li class="help-sentence-changes">・NRL得点計算で、避難ゾーン(救助ゾーン)を脱出すると競技が自動で終了するよう変更</li>
+      <li class="help-sentence-changes">・NRL得点計算で、通過の取り消しや競技進行の停止をすると該当タイルの背景が白くなる不具合を修正</li>
+    </ul>
     <h3 class="help_h3">v4.5.4</h3>
     <ul>
       <li class="help-sentence-changes">・2022.10.17公開</li>

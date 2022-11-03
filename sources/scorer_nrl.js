@@ -8,6 +8,8 @@
     const $table = $doc.getElementsByTagName('table');
     const $contextmenu_title = document.getElementsByTagName('li');
     const $contextmenu = document.getElementById('contextmenu');
+    const $2022Rule = $doc.getElementsByClassName('js-2022');
+    const $2023Rule = $doc.getElementsByClassName('js-2023');
     let newCheckMarker = null;
     let newObstacle = null;
     let newBump = null;
@@ -44,6 +46,9 @@
     let cleared_slopes = 0;
     let cleared_green = 0; //緑の被災者
     let cleared_black = 0;
+    let cleared_green_2023 = 0;
+    let cleared_black_2023 = 0;
+    let cleared_basic_2023 = 0;
 
     const agent = window.navigator.userAgent.toLowerCase();
     let what_browser = null;
@@ -119,20 +124,21 @@
       newSectionTag.textContent = '区間0 : 5点(スタートタイル)';
       document.getElementById('statistics_line').appendChild(newSectionTag);
     });
-    document.getElementById('timer_stop').addEventListener('click', function () {
+    function finish(){
       clearInterval(TimerID);
       document.getElementById("timer_stop").disabled = true;
       document.getElementById("timer_stop").classList.add("disabled");
-      document.getElementsByClassName('button_hinan')[0].disabled = true;
-      document.getElementsByClassName('button_hinan')[0].classList.add("disabled");
-      document.getElementsByClassName('button_hinan')[1].disabled = true;
-      document.getElementsByClassName('button_hinan')[1].classList.add("disabled");
-      document.getElementsByClassName('button_hinan')[2].disabled = true;
-      document.getElementsByClassName('button_hinan')[2].classList.add("disabled");
+      for (let index = 0; index < document.getElementsByClassName('button_hinan').length; index++) {
+        document.getElementsByClassName('button_hinan')[index].disabled = true;
+        document.getElementsByClassName('button_hinan')[index].classList.add("disabled");
+      }
       for (let index = 1; index < imgLen; index++) {
         $img[index].style.pointerEvents = 'none';
       }
       $guide.textContent = '競技を終了しました。コートの編集はロックされています。新しく競技を開始するには再読み込みしてください。';
+    }
+    document.getElementById('timer_stop').addEventListener('click', function () {
+      finish();
     });
 
     //チェックポイント 1-は、前のチェックポイントで1回分数えたということ
@@ -450,9 +456,59 @@
     document.getElementsByClassName('button_hinan')[2].addEventListener('click', () => {
       if (document.getElementById("timer_start").hasAttribute('disabled')){
         if (escaped == 0){
-          escaped = 1;
-          get_points(30);
-          document.getElementById('statistics_clear').textContent = '脱出済み 30点';
+          if (cleared_black + cleared_green == 0) {
+            window.alert('まだ被災者を発見していません。')
+          } else {
+            escaped = 1;
+            get_points(30);
+            document.getElementById('statistics_clear').textContent = '脱出済み 30点';
+            finish();
+          }
+        } else {
+          window.alert('すでに避難ゾーンを脱出しています。');
+        }
+      } else {
+        window.alert('先に競技を開始してください。')
+      }
+    });
+    document.getElementsByClassName('button_hinan')[3].addEventListener('click', () => {
+      if (document.getElementById("timer_start").hasAttribute('disabled')){
+        get_points(30);
+        cleared_green_2023++;
+        document.getElementById('statistics_green_2023').textContent = '30点 × ' + cleared_green_2023 + '人 = ' + cleared_green_2023 * 30 + '点';
+      } else {
+        window.alert('先に競技を開始してください。')
+      }
+    });
+    document.getElementsByClassName('button_hinan')[4].addEventListener('click', () => {
+      if (document.getElementById("timer_start").hasAttribute('disabled')){
+        get_points(15);
+        cleared_black_2023++;
+        document.getElementById('statistics_black_2023').textContent = '15点 × ' + cleared_black_2023 + '人 = ' + cleared_black_2023 * 15 + '点';
+      } else {
+        window.alert('先に競技を開始してください。')
+      }
+    });
+    document.getElementsByClassName('button_hinan')[5].addEventListener('click', () => {
+      if (document.getElementById("timer_start").hasAttribute('disabled')){
+        get_points(10);
+        cleared_basic_2023++;
+        document.getElementById('statistics_basic_2023').textContent = '10点 × ' + cleared_basic_2023 + '人 = ' + cleared_basic_2023 * 10 + '点';
+      } else {
+        window.alert('先に競技を開始してください。')
+      }
+    });
+    document.getElementsByClassName('button_hinan')[6].addEventListener('click', () => {
+      if (document.getElementById("timer_start").hasAttribute('disabled')){
+        if (escaped == 0){
+          if (cleared_basic_2023 + cleared_black_2023 + cleared_green_2023 == 0){
+            window.alert('まだ被災者を発見していません。')
+          } else {
+            escaped = 1;
+            get_points(30);
+            document.getElementById('statistics_clear').textContent = '脱出済み 30点';
+            finish();
+          }
         } else {
           window.alert('すでに避難ゾーンを脱出しています。');
         }
@@ -503,6 +559,18 @@
 
     //プロジェクトの読み込み
     function import_project() {
+      //ルール
+      if ($doc.getElementsByName('radio-rule')[0].checked) {
+        for (let index = 0; index < $2022Rule.length; index++) {
+          $2022Rule[index].style.display = '';
+          $2023Rule[index].style.display = 'none';
+        }
+      } else {
+        for (let index = 0; index < $2022Rule.length; index++) {
+          $2023Rule[index].style.display = '';
+          $2022Rule[index].style.display = 'none';
+        }
+      }
       for (let index = 0; index < imgLen; index++) {
         //コート
         tile(input_data_show[1]);
@@ -872,7 +940,7 @@
       } else {
         $contextmenu_title[2].className = "contextmenu-title_active";
         $contextmenu_title[2].onclick = function () {
-          e.target.parentElement.style.backgroundColor = '';
+          e.target.parentElement.style.backgroundColor = '#EEEEEE';
           e.target.dataset.passed = '0';
         }
       }
@@ -894,7 +962,7 @@
             stop_count++;
             document.getElementById('stop_count').textContent = stop_count;
           }
-          e.target.parentElement.style.backgroundColor = '';
+          e.target.parentElement.style.backgroundColor = '#EEEEEE';
           e.target.dataset.passed = '0';
         } else {
           window.alert('先に競技を開始してください。')

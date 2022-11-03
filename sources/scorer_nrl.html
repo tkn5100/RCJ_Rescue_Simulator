@@ -1,4 +1,4 @@
-﻿<!doctype html>
+﻿<!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
@@ -16,6 +16,11 @@
         <label><input type="file" id ="input_file" style="display: none;" accept=".rrl"><img src="../img/tools/read.svg" alt="プロジェクトの選択" class="start_tools"><p>プロジェクトの選択</p></label>
         <div><img src="../img/tools/resume.svg" alt="再開" class="start_tools" style="display: none;"><p>再開</p></div>
       </div>
+      <div>
+        <span>ルールを選択:</span>
+        <label class="container">2022ルール<input type="radio" checked="checked" name="radio-rule" value="0"><span class="checkmark"></span></label>
+        <label class="container">2023ルール<input type="radio" name="radio-rule" value="1"><span class="checkmark"></span></label>
+      </div>
       <div style="position: absolute; top: 2vw; right: 5vw;"><div><img src="../img/tools/help.svg" alt="ヘルプ" class="start_tools" style="margin-right: 0; cursor: help;"><p>ヘルプ</p></div></div>
       <div style="position: absolute; top: 11vw; right: 5vw;"><div><img src="../img/tools/version.svg" alt="バージョン情報" class="start_tools" style="margin-right: 0;"><p>バージョン<br>情報</p></div></div>
     </div>
@@ -23,15 +28,16 @@
       <div>
         <h1>v4.5.4</h1>
         <p>2022.10.17 &copy;TKN</p>
-        <!-- <h2>v4.5.3機能追加中</h2>
-        <p>最終更新 : 2022.10.16</p>
+        <h2>v4.6.0機能追加中</h2>
+        <p>最終更新 : 2022.11.04</p>
         <p>オンラインでは、正式なバージョン更新の前に一部の新機能や新デザイン、バグ修正をご利用いただけます。機能追加中は、新機能が不完全であったり不安定である可能性があります。</p>
         <br>
-        <p>v4.5.3で予定している変更：</p>
-        <p>・デザインの統一、変更</p>
-        <p>・CSSを最適化</p>
-        <p>・バージョン情報の追加</p>
-        <p>・コート作成で、2階部分でのタイルの回転に関する不具合を修正</p> -->
+        <p>v4.6.0で予定している変更：</p>
+        <p>・NRL得点計算で、2023ルールに対応</p>
+        <p>・NRL得点計算で、被災者を1体も見つけていなくても脱出できる不具合を修正</p>
+        <p>・NRL得点計算で、避難ゾーン(救助ゾーン)を脱出すると競技が自動で終了するよう変更</p>
+        <p>・NRL得点計算で、通過の取り消しや競技進行の停止をすると該当タイルの背景が白くなる不具合を修正</p>
+        <p>・ヘルプにタブUIを実装</p>
       </div>
       <span id="version_value" style="display: none;"></span><!-- スタートのボタンから表示したかツールバーのボタンから表示したかを記録 -->
       <button id="version_close">閉じる</button>
@@ -43,21 +49,32 @@
     </div>
     <div id="rule">
       <h1>得点要素の得点一覧</h1>
-      <p>詳細な規定は、日本リーグレスキューの2022ルールをご覧ください。</p>
-      <h2>ライントレース</h2>
-      <p>1回目　 : 5点/タイル</p>
-      <p>2回目　 : 3点/タイル</p>
-      <p>3回目　 : 1点/タイル</p>
-      <p>4回目～ : 0点/タイル</p>
-      <h2>ハザード</h2>
-      <p>障害物　 : 15点</p>
-      <p>ギャップ : 10点</p>
-      <p>傾斜路　 : 10点</p>
-      <p>バンプ　 :  5点</p>
-      <h2>避難ゾーン</h2>
-      <p>黒の被災者救助 : 15点</p>
-      <p>緑の被災者救助 : 30点</p>
-      <p>避難ゾーン脱出 : 30点</p>
+      <div style="max-height: 50vh; overflow-y: auto;">
+        <p>詳細な規定は、日本リーグレスキューの2022ルールをご覧ください。</p>
+        <h2>ライントレース</h2>
+        <p>1回目　 : 5点/タイル</p>
+        <p>2回目　 : 3点/タイル</p>
+        <p>3回目　 : 1点/タイル</p>
+        <p>4回目～ : 0点/タイル</p>
+        <h2>ハザード</h2>
+        <p>障害物　 : 15点</p>
+        <p>ギャップ : 10点</p>
+        <p>傾斜路　 : 10点</p>
+        <p>バンプ　 :  5点</p>
+        <div class="js-2022">
+          <h2>避難ゾーン</h2>
+          <p>黒の被災者救助 : 15点</p>
+          <p>緑の被災者救助 : 30点</p>
+          <p>避難ゾーン脱出 : 30点</p>
+        </div>
+        <div class="js-2023" style="display: none;">
+          <h2>救助ゾーン</h2>
+          <p>被災者発見　　　　　　　　　　　: 10点</p>
+          <p>正しいパフォーマンス(黒の被災者) :  5点</p>
+          <p>正しいパフォーマンス(緑の被災者) : 20点</p>
+          <p>避難ゾーン脱出 : 30点</p>
+        </div>
+      </div>
       <button id="rule_close">閉じる</button>
     </div>
     <div id="overlay" class="active"></div>
@@ -114,10 +131,19 @@
           <p id="stop_count">0</p>
         </div>
         <div id="hinan">
-          <h1 class="index">避難ゾーン</h1>
-          <button class="button_hinan">緑の被災者救助</button>
-          <button class="button_hinan">黒の被災者救助</button>
-          <button class="button_hinan" style="margin-bottom: 10px;">避難ゾーン脱出</button>
+          <div class="js-2022">
+            <h1 class="index">避難ゾーン</h1>
+            <button class="button_hinan">緑の被災者救助</button>
+            <button class="button_hinan">黒の被災者救助</button>
+            <button class="button_hinan" style="margin-bottom: 10px;">避難ゾーン脱出</button>
+          </div>
+          <div class="js-2023" style="display: none;">
+            <h1 class="index">救助ゾーン</h1>
+            <button class="button_hinan">被災者発見(緑)</button>
+            <button class="button_hinan">被災者発見(黒)</button>
+            <button class="button_hinan">被災者発見(色違い)</button>
+            <button class="button_hinan" style="margin-bottom: 10px;">救助ゾーン脱出</button>
+          </div>
         </div>
         <div id="attention">
           <h1 class="index">注意</h1>
@@ -126,19 +152,30 @@
         </div>
         <div id="statistics">
           <h1>競技詳細</h1>
-          <h2 style="margin-top: 0;">ライントレース</h2>
-          <div id="statistics_line" style="margin-top: 5px;"></div>
-          <h2>ハザード</h2>
-          <p style="margin-top: 5px;">障害物　 : <span id="statistics_obstacle">15点 × 0個 = 0点</span></p>
-          <p>ギャップ : <span id="statistics_gap">10点 × 0個 = 0点</span></p>
-          <p>傾斜路　 : <span id="statistics_slope">10点 × 0個 = 0点</span></p>
-          <p>バンプ　 : <span id="statistics_bump">5点 × 0個 = 0点</span></p>
-          <h2>避難ゾーン</h2>
-          <p style="margin-top: 5px;">救助した緑の被災者 : <span id="statistics_green">30点 × 0人 = 0点</span></p>
-          <p>救助した黒の被災者 : <span id="statistics_black">15点 × 0人 = 0点</span></p>
-          <p>避難ゾーン脱出　　 : <span id="statistics_clear">脱出していません</span></p>
-          <h2>計</h2>
-          <p id="statistics_score">0点</p>
+          <div style="max-height: 50vh; overflow-y: auto;">
+            <h2 style="margin-top: 0;">ライントレース</h2>
+            <div id="statistics_line" style="margin-top: 5px;"></div>
+            <h2>ハザード</h2>
+            <p style="margin-top: 5px;">障害物　 : <span id="statistics_obstacle">15点 × 0個 = 0点</span></p>
+            <p>ギャップ : <span id="statistics_gap">10点 × 0個 = 0点</span></p>
+            <p>傾斜路　 : <span id="statistics_slope">10点 × 0個 = 0点</span></p>
+            <p>バンプ　 : <span id="statistics_bump">5点 × 0個 = 0点</span></p>
+            <div class="js-2022">
+              <h2>避難ゾーン</h2>
+              <p style="margin-top: 5px;">救助した緑の被災者 : <span id="statistics_green">30点 × 0人 = 0点</span></p>
+              <p>救助した黒の被災者 : <span id="statistics_black">15点 × 0人 = 0点</span></p>
+              <p>避難ゾーン脱出　　 : <span id="statistics_clear">脱出していません</span></p>
+            </div>
+            <div class="js-2023" style="display: none;">
+              <h2>救助ゾーン</h2>
+              <p style="margin-top: 5px;">被災者発見(緑)　　 : <span id="statistics_green_2023">30点 × 0人 = 0点</span></p>
+              <p>被災者発見(黒)　　 : <span id="statistics_black_2023">15点 × 0人 = 0点</span></p>
+              <p>被災者発見(色違い) : <span id="statistics_basic_2023">10点 × 0人 = 0点</span></p>
+              <p>避難ゾーン脱出　　 : <span id="statistics_clear_2023">脱出していません</span></p>
+            </div>
+            <h2>計</h2>
+            <p id="statistics_score">0点</p>
+          </div>
           <button id="statistics_close">閉じる</button>
         </div>
       </div>

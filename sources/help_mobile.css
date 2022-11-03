@@ -6,6 +6,7 @@ body{
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     user-select: none;
+    margin-bottom: 30px !important;
 }
 .copyright{
     position: fixed;

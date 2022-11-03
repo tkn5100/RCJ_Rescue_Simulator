@@ -11,7 +11,7 @@
     const $tools = $doc.getElementsByClassName('tools');
     const $start_tools = $doc.getElementsByClassName('start_tools');
     const $radio_league = $doc.getElementsByName('league');
-    const $radio_league2 = $doc.getElementsByName('league2')
+    const $radio_league2 = $doc.getElementsByName('league2');
     const $table = $doc.getElementsByTagName('table');
     // const $index = document.getElementsByClassName('index')
     const $coursedata = $doc.getElementsByClassName('coursedata');
