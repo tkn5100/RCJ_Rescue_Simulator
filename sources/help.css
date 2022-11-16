@@ -7,8 +7,6 @@ body{
     -webkit-user-select: none;
     user-select: none;
     cursor: default;
-    margin-right: 15vw !important;
-    margin-left: 15vw !important;
     margin-bottom: 30px !important;
 }
 .copyright{
@@ -23,27 +21,100 @@ body{
     font-size: 15px;
     cursor: default;
 }
-.help_title_div{
+#help_tab_out{
     display: flex;
-    flex-direction: row;
-    background-color: #EEEEEE;
-    margin-bottom: 10px;
 }
-.help_title_div > div{
+#help_tab{
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 50%;
+    white-space: nowrap;
+    overflow-x: hidden;
+    max-width: calc(70vw - 140px);
+    margin-bottom: 50px;
+}
+#help_tab_left, #help_tab_right{
+    position: relative;
+    height: 40px;
+    width: 40px;
+    border-radius: 20px;
+    margin: 5px 10px 0px 10px;
+    cursor: pointer;
+}
+#help_tab_left:hover, #help_tab_right:hover{
+    background-color: #DDDDDD;
+}
+#help_tab_left::after{
+    content: "";
+    position: absolute;
+    top: 12px;
+    right: 14px;
+    height: 0;
+    width: 0;
+    margin: auto;
+    border: 8px solid transparent;
+    border-right: 14px solid #000000;
+    cursor: pointer;
+}
+#help_tab_right::after{
+    content: "";
+    position: absolute;
+    top: 12px;
+    left: 14px;
+    height: 0;
+    width: 0;
+    border: 8px solid transparent;
+    border-left: 14px solid #000000;
+    cursor: pointer;
+}
+.help_tab_item{
+    border-radius: 25px 25px 0 0;
+    padding: 10px 30px 5px 30px;
+    color: #555555;
+    font-size: 18px;
+    border-top: 3px solid transparent;
+    border-bottom: 3px solid #000000;
+    cursor: pointer;
+}
+.help_tab_item.active{
+    text-align: center;
+    color: #000000;
+    font-weight: 600;
+    border-left: 3px solid #000000;
+    border-top: 3px solid #000000;
+    border-right: 3px solid #000000;
+    border-bottom: 3px solid transparent;
+}
+.help_title_div{
+    display: none;
+    background-color: #EEEEEE;
+    padding: 20px;
+    margin-top: 35px;
+    border-radius: 20px;
+    text-align: center;
+    filter:drop-shadow(0 0 8px #AAAAAA);
+    z-index: 3;
+}
+.help_tab_item:hover + .help_title_div{
+    display: block;
+    position: fixed;
+}
+.help_title_div:hover::after + .help_title_div{
+    display: block;
+    position: fixed;
+}
+.help_title_div::after{
+    content: "";
+    position: absolute;
+    top: -33px;
+    left: calc(170px - 15px);
+    width: 0px;
+    height: 0px;
+    border: 15px solid transparent;
+    border-bottom: 18px solid #EEEEEE;
 }
 .help_img-title{
-    width: 50%;
+    width: 300px;
     height: auto;
-    padding-left: 20px;
     margin-bottom: auto;
-}
-.help_title{
-    text-align: center;
 }
 .help_h1{
     font-size: 40px;
@@ -243,13 +314,13 @@ body{
 }
 @media screen and (min-width:1000px){
     .help_title{
-        font-size: 30px;
-        font-weight: 1000;
-        margin-bottom: 20px;
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 10px;
     }
     .help_title_sentence{
-        font-size: 18px;
-        margin-bottom: 20px;
+        font-size: 15px;
+        margin-bottom: 10px;
     }
     .help_link, .help_version, .help_link-close, .help_open, .help_open.opened{
         width: 180px;
