@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="96.02446mm"
+   height="110.50491mm"
+   viewBox="0 0 9.602446 11.050491"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.2 (dc2aedaf03, 2022-05-15)"
+   sodipodi:docname="logo_scorer_nrl.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#f8f8f8"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="1"
+     inkscape:pagecheckerboard="true"
+     inkscape:document-units="mm"
+     showgrid="false"
+     fit-margin-top="10"
+     fit-margin-left="10"
+     fit-margin-bottom="10"
+     fit-margin-right="10"
+     units="in"
+     inkscape:zoom="1.28"
+     inkscape:cx="82.421875"
+     inkscape:cy="219.14062"
+     inkscape:window-width="1920"
+     inkscape:window-height="991"
+     inkscape:window-x="-9"
+     inkscape:window-y="-9"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1"
+     inkscape:showpageshadow="2"
+     inkscape:deskcolor="#f8f8f8"
+     showguides="true" />
+  <defs
+     id="defs2">
+    <inkscape:path-effect
+       effect="spiro"
+       id="path-effect868"
+       is_visible="true"
+       lpeversion="1" />
+    <inkscape:path-effect
+       effect="spiro"
+       id="path-effect864"
+       is_visible="true"
+       lpeversion="1" />
+    <inkscape:path-effect
+       effect="spiro"
+       id="path-effect860"
+       is_visible="true"
+       lpeversion="1" />
+    <inkscape:path-effect
+       effect="spiro"
+       id="path-effect856"
+       is_visible="true"
+       lpeversion="1" />
+    <inkscape:path-effect
+       effect="spiro"
+       id="path-effect2148"
+       is_visible="true"
+       lpeversion="1" />
+    <inkscape:path-effect
+       effect="spiro"
+       id="path-effect2119"
+       is_visible="true"
+       lpeversion="1" />
+    <inkscape:path-effect
+       effect="spiro"
+       id="path-effect1372"
+       is_visible="true"
+       lpeversion="1" />
+    <inkscape:path-effect
+       effect="spiro"
+       id="path-effect1343"
+       is_visible="true"
+       lpeversion="1" />
+    <inkscape:path-effect
+       effect="spiro"
+       id="path-effect1155"
+       is_visible="true"
+       lpeversion="1" />
+  </defs>
+  <g
+     inkscape:label="レイヤー 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-65.921823,-80.492103)">
+    <path
+       id="path351-7"
+       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.2;stroke-dasharray:none"
+       d="m 70.669556,80.652144 a 1.3868689,1.3868689 0 0 0 -1.386852,1.386852 1.3868689,1.3868689 0 0 0 0.02944,0.280695 4.6427607,4.6427607 0 0 1 1.410919,-0.221066 4.6427607,4.6427607 0 0 1 1.310021,0.188812 1.3868689,1.3868689 0 0 0 0.02332,-0.248441 1.3868689,1.3868689 0 0 0 -1.386853,-1.386852 z" />
+    <circle
+       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.2;stroke-dasharray:none"
+       id="path351"
+       cx="70.723045"
+       cy="86.741371"
+       r="4.6427608" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:100;font-stretch:normal;font-size:5.91194px;font-family:'Noto Sans CJK JP';-inkscape-font-specification:'Noto Sans CJK JP Thin';fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.05;stroke-dasharray:none"
+       x="68.607201"
+       y="88.912827"
+       id="text1808"><tspan
+         sodipodi:role="line"
+         id="tspan1806"
+         style="font-style:normal;font-variant:normal;font-weight:100;font-stretch:normal;font-size:5.91194px;font-family:'Noto Sans CJK JP';-inkscape-font-specification:'Noto Sans CJK JP Thin';fill:#000000;fill-opacity:1;stroke-width:0.05;stroke-dasharray:none"
+         x="68.607201"
+         y="88.912827">N</tspan></text>
+    <path
+       style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.2;stroke-dasharray:none"
+       d="m 70.681299,82.202583 v 1.280326"
+       id="path1980" />
+    <path
+       style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.2;stroke-dasharray:none"
+       d="m 70.681272,90.015506 v 1.280326"
+       id="path1980-1" />
+    <path
+       style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.2;stroke-dasharray:none"
+       d="M 67.415593,86.793883 H 66.135267"
+       id="path1980-1-7" />
+    <path
+       style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.2;stroke-dasharray:none"
+       d="M 75.302789,86.793862 H 74.022463"
+       id="path1980-1-7-5" />
+  </g>
+</svg>

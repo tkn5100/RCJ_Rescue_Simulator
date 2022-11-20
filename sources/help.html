@@ -29,47 +29,42 @@
   </div>
     <h1 class="help_h1">ヘルプ - RoboCupJunior コート作成環境</h1>
     <div id="help_tab_out">
-      <p id="help_tab_left" style="display: none;"></p>
-      <div id="help_tab" style="margin-left: 60px;">
-        <p class="help_tab_item active"id="overview_tab">概要</p>
-        <p class="help_tab_item" id="simulator_tab">コート作成</p>
-        <div class="help_title_div">
-          <p class="help_title">コート作成</p>
-          <p class="help_title_sentence">RCJ Rescue Lineのコートを作成</p>
-          <img src="../img/help/シミュレーター作成中.png" alt="作成中" class="help_img-title">
+      <div id="help_tab">
+        <hr id="tab_active_sign">
+        <div class="help_tab_item active" id="overview_tab" onclick="show('overview')">
+          <img src="../img/help/logo_overview.svg" alt="概要">
+          <p>概要</p>
         </div>
-
-        <p class="help_tab_item" id="scorer_nrl_tab">NRL得点計算</p>
-        <div class="help_title_div">
-          <p class="help_title">NRL得点計算</p>
-          <p class="help_title_sentence">競技中の得点算出(NRL)</p>
-          <img src="../img/help/NRL得点計算_競技中.png" alt="NRL得点計算_競技中" class="help_img-title">
+        <div class="help_tab_item" id="simulator_tab" onclick="show('simulator')">
+          <img src="../img/help/logo_simulator.svg" alt="コート作成">
+          <p>コート作成</p>
         </div>
-
-        <p class="help_tab_item" id="scorer_wrl_tab">WRL得点計算</p>
-        <div class="help_title_div">
-          <p class="help_title">WRL得点計算</p>
-          <p class="help_title_sentence">競技中の得点算出(WRL)</p>
-          <img src="../img/help/WRL得点計算_競技中.png" alt="WRL得点計算_競技中" class="help_img-title">
+        <div class="help_tab_item" id="scorer_nrl_tab" onclick="show('scorer_nrl')">
+          <img src="../img/help/logo_scorer_nrl.svg" alt="NRL得点計算">
+          <p>NRL得点計算</p>
         </div>
-
-        <p class="help_tab_item" id="converter_tab">ファイル変換</p>
-        <div class="help_title_div">
-          <p class="help_title">ファイル変換</p>
-          <p class="help_title_sentence">プロジェクトファイルの更新</p>
-          <img src="../img/help/ファイル変換.png" alt="ファイル変換" class="help_img-title">
+        <div class="help_tab_item" id="scorer_wrl_tab" onclick="show('scorer_wrl')">
+          <img src="../img/help/logo_scorer_wrl.svg" alt="WRL得点計算">
+          <p>WRL得点計算</p>
         </div>
-        <p class="help_tab_item" id="changes_tab">変更履歴</p>
+        <div class="help_tab_item" id="converter_tab" onclick="show('converter')">
+          <img src="../img/help/logo_converter.svg" alt="ファイル変換">
+          <p>ファイル変換</p>
+        </div>
+        <div class="help_tab_item" id="changes_tab" onclick="show('changes')">
+          <img src="../img/tools/version.svg" alt="変更履歴">
+          <p>変更履歴</p>
+        </div>
       </div>
-      <p id="help_tab_right"></p>
     </div>
+
     <div id="overview">
-      <p class="help-sentence">ロボカップジュニアレスキューラインの競技者のためのソフトウェアです。機能は以下の通りです。ルールは2022年版に準拠します。</p>
-      <p class="help-sentence">アプリケーション版の配布はv1.1.1をもって終了しました。なおv1.1.1以前でもアプリケーション版をご利用になると思わぬ不具合が発生する場合がありますので、ブラウザ版(このソフトウェア)をご利用ください。</p>
-      <a class="help-sentence" onclick="window.open('https://github.com/tkn5100/RCJ_Rescue_Simulator')" style="color: #4400FF; text-decoration: underline solid 1px; cursor: pointer;">Githubでソースコードを公開しています(外部リンク)</a>
-      <h3 class="help-sentence" style="margin-top: 10px; margin-left: 0; margin-right: 0; background-color: #F8F8E7; text-indent: 0;"><img src="../img/help/attention.svg" class="help_icon" style="background-color: #F8F8B3;">お願い</h3>
-      <p class="help-sentence" style="background-color: #F8F8E7; margin-left: 0; margin-right: 0;">iPhone・iPadではブラウザのツールバーを非表示にしてお使いください。操作に支障をきたすおそれがあります。</p>
-      <p class="help-sentence" style="background-color: #F8F8E7; margin-left: 0; margin-right: 0;">また、各種スマートフォンは画面が小さいため横向きでのご利用を推奨いたします。</p>
+      <p class="help_sentence">ロボカップジュニアレスキューラインの競技者のためのソフトウェアです。機能は以下の通りです。ルールは2022年版に準拠します。</p>
+      <p class="help_sentence">アプリケーション版の配布はv1.1.1をもって終了しました。なおv1.1.1以前でもアプリケーション版をご利用になると思わぬ不具合が発生する場合がありますので、ブラウザ版(このソフトウェア)をご利用ください。</p>
+      <a class="help_sentence" onclick="window.open('https://github.com/tkn5100/RCJ_Rescue_Simulator')" style="color: #4400FF; text-decoration: underline solid 1px; cursor: pointer;">Githubでソースコードを公開しています(外部リンク)</a>
+      <h3 class="help_sentence" style="margin-top: 10px; margin-left: 0; margin-right: 0; background-color: #F8F8E7; text-indent: 0;"><img src="../img/help/attention.svg" class="help_icon" style="background-color: #F8F8B3;">お願い</h3>
+      <p class="help_sentence" style="background-color: #F8F8E7; margin-left: 0; margin-right: 0;">iPhone・iPadではブラウザのツールバーを非表示にしてお使いください。操作に支障をきたすおそれがあります。</p>
+      <p class="help_sentence" style="background-color: #F8F8E7; margin-left: 0; margin-right: 0;">また、各種スマートフォンは画面が小さいため横向きでのご利用を推奨いたします。</p>
       <br>
       <div class="help_link-div">
         <a href=".././index.html" class="help_link">ホームへ</a>
@@ -78,308 +73,636 @@
       </div>
 
       <h2 class="help_h2">ソフトウェア内で使用する分かりにくい単語について</h2>
-      <p class="help-sentence">このソフトウェアでは、基本的にルールにのっとった単語を使用していますが、特にわかりにくい単語の使い分けを下に示します。</p>
+      <p class="help_sentence">このソフトウェアでは、基本的にルールにのっとった単語を使用していますが、特にわかりにくい単語の使い分けを下に示します。</p>
       <h3 class="help_h3">避難ゾーン (NRL2023ルール : 救助ゾーン)</h3>
-      <p class="help-sentence">壁で囲まれ、入口には銀色のテープ、出口には緑色のテープが貼られている(WRLのみ)、3x4タイルの場所。被災者が置かれる。</p>
+      <p class="help_sentence">壁で囲まれ、入口には銀色のテープ、出口には緑色のテープが貼られている(WRLのみ)、3x4タイルの場所。被災者が置かれる。</p>
       <h3 class="help_h3">避難場所</h3>
-      <p class="help-sentence">WRLの避難ゾーン内にある、被災者とレスキューキットを運び込む黒色の場所のこと。</p>
-      <p class="help-sentence">2023ルールでは赤色と緑色の2つになる。</p>
+      <p class="help_sentence">WRLの避難ゾーン内にある、被災者とレスキューキットを運び込む黒色の場所のこと。</p>
+      <p class="help_sentence">2023ルールでは赤色と緑色の2つになる。</p>
       <h3 class="help_h3">ハザード</h3>
-      <p class="help-sentence">ライン中のギャップ、減速バンプ、交差点、行き止まり、傾斜路、障害物、シーソーのこと。</p>
+      <p class="help_sentence">ライン中のギャップ、減速バンプ、交差点、行き止まり、傾斜路、障害物、シーソーのこと。</p>
       <h3 class="help_h3">得点要素</h3>
-      <p class="help-sentence">このソフトウェア内では、ハザードに加えて、チェックポイント・ゴールタイルを含めた得点が発生するものすべて(被災者、レスキューキットを除く)を指す。</p>
+      <p class="help_sentence">このソフトウェア内では、ハザードに加えて、チェックポイント・ゴールタイルを含めた得点が発生するものすべて(被災者、レスキューキットを除く)を指す。</p>
 
       <h2 class="help_h2" style="margin-bottom: 0px;">動作環境</h2>
       <h3 class="help_h3">正常動作確認済みの環境</h3>
-      <p class="help-sentence">Windows11 Home 22H2(Microsoft Edge v107.0.1418.26,Google Chrome v107.0.5304.88) </p>
-      <p class="help-sentence">iPadOS 15.7(Safari v15.6.2)</p>
-      <p class="help-sentence">iOS 16.0.3(Safari v16.0)</p>
+      <p class="help_sentence">Windows11 Home 22H2(Microsoft Edge v107.0.1418.26,Google Chrome v107.0.5304.88) </p>
+      <p class="help_sentence">iPadOS 15.7(Safari v15.6.2)</p>
+      <p class="help_sentence">iOS 16.0.3(Safari v16.0)</p>
       <h3 class="help_h3">正常動作可能と思われる環境</h3>
-      <p class="help-sentence">Windows10(Microsoft Edge,Google Chrome,Opera,FireFox各最新版)</p>
-      <p class="help-sentence">Windows11(Microsoft Edge,Google Chrome,Opera,FireFox各最新版)</p>
-      <p class="help-sentence">Mac OS(Safari,Google Chrome,Microsoft Edge,Opera,FireFox各最新版)</p>
-      <p class="help-sentence">Linux OS(Google Chrome,Microsoft Edge,Safari,Opera,FireFox各最新版)</p>
-      <p class="help-sentence">Chrome OS(Google Chrome,Opera,FireFox各最新版)</p>
-      <p class="help-sentence">AndroidOS(Google Chrome,Microsoft Edge,Safari,Opera,FireFox,Samsung Internet各最新版)</p>
+      <p class="help_sentence">Windows10(Microsoft Edge,Google Chrome,Opera,FireFox各最新版)</p>
+      <p class="help_sentence">Windows11(Microsoft Edge,Google Chrome,Opera,FireFox各最新版)</p>
+      <p class="help_sentence">Mac OS(Safari,Google Chrome,Microsoft Edge,Opera,FireFox各最新版)</p>
+      <p class="help_sentence">Linux OS(Google Chrome,Microsoft Edge,Safari,Opera,FireFox各最新版)</p>
+      <p class="help_sentence">Chrome OS(Google Chrome,Opera,FireFox各最新版)</p>
+      <p class="help_sentence">AndroidOS(Google Chrome,Microsoft Edge,Safari,Opera,FireFox,Samsung Internet各最新版)</p>
       <h3 class="help_h3">Web上でのみ動作可能な環境</h3>
-      <p class="help-sentence">iOS(Safari,Google Chrome,Microsoft Edge,Opera,FireFox各最新版)</p>
-      <p class="help-sentence">iPadOS(Safari,Google Chrome,Microsoft Edge,Opera,FireFox各最新版)</p>
+      <p class="help_sentence">iOS(Safari,Google Chrome,Microsoft Edge,Opera,FireFox各最新版)</p>
+      <p class="help_sentence">iPadOS(Safari,Google Chrome,Microsoft Edge,Opera,FireFox各最新版)</p>
       <h3 class="help_h3">動作不可能である環境</h3>
-      <p class="help-sentence">Windows10(旧Microsoft Edge,Internet Explorer,旧Opera)</p>
-      <p class="help-sentence">上記にないOS</p>
+      <p class="help_sentence">Windows10(旧Microsoft Edge,Internet Explorer,旧Opera)</p>
+      <p class="help_sentence">上記にないOS</p>
 
       <h2 class="help_h2" style="margin-bottom: 0px;">このソフトウェアについて</h2>
       <h3 class="help_h3">開発の経緯</h3>
-      <p class="help-sentence">2022年1月22日までは、同じくロボカップジュニアレスキューラインのコートを作成するソフトウェアとして「RoboCupJunior NRL コート作成環境」と「RoboCupJunior WRL コート作成環境」(ヘルプでは2つ合わせて「旧ソフトウェア」と表記)を開発していました。しかし、アップデートを重ね機能がほぼ同じになってきたこと、またWRL版でNRLのコートも作成可能であることから、WRL版にNRL版を組み込む形で新たにこの「RoboCupJunior コート作成環境」を作成することとしました。2022年1月29日に公開したRC3版で動作が安定したことからそれをv1.0.0とし、UIの改善と機能追加を重ねています。</p>
+      <p class="help_sentence">2022年1月22日までは、同じくロボカップジュニアレスキューラインのコートを作成するソフトウェアとして「RoboCupJunior NRL コート作成環境」と「RoboCupJunior WRL コート作成環境」(ヘルプでは2つ合わせて「旧ソフトウェア」と表記)を開発していました。しかし、アップデートを重ね機能がほぼ同じになってきたこと、またWRL版でNRLのコートも作成可能であることから、WRL版にNRL版を組み込む形で新たにこの「RoboCupJunior コート作成環境」を作成することとしました。2022年1月29日に公開したRC3版で動作が安定したことからそれをv1.0.0とし、UIの改善と機能追加を重ねています。</p>
       <h3 class="help_h3">バージョンの命名規則</h3>
-      <p class="help-sentence">セマンティック・バージョニングを参考にしており、vX.Y.Zのようにつけます。Xはメジャーバージョンで、RRLファイルの内部構造の変更など後方互換性がなくなる変更があった場合に数字を1つ上げます。Yはマイナーバージョンで、機能性を追加した場合に数字を1つ上げます。Zはパッチバージョンで、バグ修正など細かい変更の際に数字を1つ上げます。詳しくは下記URLをご覧ください</p>
-      <a href="https://semver.org/lang/ja/" target="_blank" rel="noopener noreferrer" class="help-sentence" style="text-decoration: underline 1px; color: #4400FF;">セマンティック バージョニング 2.0.0(https://semver.org/lang/ja/)</a>
+      <p class="help_sentence">セマンティック・バージョニングを参考にしており、vX.Y.Zのようにつけます。Xはメジャーバージョンで、RRLファイルの内部構造の変更など後方互換性がなくなる変更があった場合に数字を1つ上げます。Yはマイナーバージョンで、機能性を追加した場合に数字を1つ上げます。Zはパッチバージョンで、バグ修正など細かい変更の際に数字を1つ上げます。詳しくは下記URLをご覧ください</p>
+      <a href="https://semver.org/lang/ja/" target="_blank" rel="noopener noreferrer" class="help_sentence" style="text-decoration: underline 1px; color: #4400FF;">セマンティック バージョニング 2.0.0(https://semver.org/lang/ja/)</a>
       <h3 class="help_h3">アプリケーションの調子が悪いときは</h3>
-      <p class="help-sentence">リロードせずに長時間使い続けると、動作が重くなったり不具合が出ることがあります。再読み込みするか、「Ctrl+F5」を押してスーパーリロードしてください。ただし、プロジェクトを保存するのを忘れないでください。なお、再読み込みを行っても自動保存データは保持されます。</p>
+      <p class="help_sentence">リロードせずに長時間使い続けると、動作が重くなったり不具合が出ることがあります。再読み込みするか、「Ctrl+F5」を押してスーパーリロードしてください。ただし、プロジェクトを保存するのを忘れないでください。なお、再読み込みを行っても自動保存データは保持されます。</p>
       <h3 class="help_h3">その他</h3>
-      <p class="help-sentence">無断での転載、商用利用は禁止します。</p>
-      <p class="help-sentence">Copyright&copy; 2021-2022 TKN All Rights Reserved.</p>
+      <p class="help_sentence">無断での転載、商用利用は禁止します。</p>
       <h3 class="help_h3">付記</h3>
-      <p class="help-sentence">このソフトウェアの開発に力を貸してくださっている ゆき 氏に感謝申し上げます。</p>
+      <p class="help_sentence">このソフトウェアの開発に力を貸してくださっている ゆき 氏に感謝申し上げます。</p>
+    </div>
+
+    <div id="simulator" style="display: none;">
+      <p class="help_sentence">ロボカップジュニアレスキューラインのコースを作成できる機能です。ルールは2022年版に準拠します。なお、レスキューキット・被災者・避難場所等、得点走行毎に場所が異なるものを配置する機能はありません。</p>
+      <div class="help_link-div" style="margin-top: 20px;">
+        <button class="help_link" onclick="window.open('simulator.html')">開始</button>
+      </div>
+      <h2 class="help_h2">スタート</h2>
+      <p class="help_sentence">起動するとこのような画面が出ます。</p>
+      <img src="../img/help/スタート.png" alt="スタート" class="help_img">
+      <h3 class="help_h3"><img src="../img/tools/new.svg" class="help_icon">新規作成</h3>
+      <p class="help_sentence">コートを新規作成します。下の「リーグを選択」でNRLかWRLを選んでからクリックしてください。コート作成画面でリーグを変更することはできません。</p>
+      <h3 class="help_h3"><img src="../img/tools/read.svg" class="help_icon">プロジェクトの読み込み</h3>
+      <p class="help_sentence">作成途中のプロジェクトを読み込み、途中から編集作業を再開します。読み込むことができるファイルの拡張子は.rrlのみ(Safariでは.csvも可、ただしこのソフトウェアで作成されたもののみ)です。</p>
+      <h2 class="help_sentence" style="margin-top: 10px; background-color: #F8F8E7; text-indent: 0;"><img src="../img/help/attention.svg" class="help_icon" style="background-color: #F8F8B3;">注意</h2>
+      <p class="help_sentence" style="background-color: #F8F8E7;">※保存と読み込みは基本的に同じバージョンで行ってください。違うバージョンで行った場合正常に読み込まれないことがあります。メジャーアップデートでRRLファイルの内部構造が変わった場合、新しいバージョンでは古いバージョンのファイルをサポートします。メジャーバージョンが2つ以上古いファイルはサポートしません。その場合はファイル変換をご利用ください。</p>
+      <p class="help_sentence" style="background-color: #F8F8E7;">※下の表で「読み込み可能」となっている場合でも、読み込む側のバージョンよりファイルを作ったバージョンが新しい場合は読み込めませんのでご注意ください。</p>
+      <h3 class="help_h3">RRLファイルの互換性</h3>
+      <div class="help_table">
+        <table>
+          <tbody>
+            <tr><td rowspan="2" colspan="2"></td><td colspan="6">作成</td></tr>
+            <tr><td>v1.0.0~v1.1.3</td><td>v2.0.0~v2.0.2</td><td>v3.0.0~v3.1.1</td><td>v4.0.0~v4.2.2</td><td>v4.3.0~v4.3.1</td><td>v4.4.0~v4.5.4</td></tr>
+            <tr><td rowspan="6">読み込み</td><td>v1.0.0~<br>v1.1.3</td><td>○</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>
+            <tr><td>v2.0.0~<br>v2.0.2</td><td>△</td><td>○</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>
+            <tr><td>v3.0.0~<br>v3.1.1</td><td>×</td><td>△</td><td>○</td><td>-</td><td>-</td><td>-</td></tr>
+            <tr><td>v4.0.0~<br>v4.2.2</td><td>×</td><td>×</td><td>△</td><td>○</td><td>-</td><td>-</td></tr>
+            <tr><td>v4.3.0~<br>v4.3.1</td><td>×</td><td>×</td><td>△</td><td>○</td><td style="background-color: #FFEEEE;"><img src="../img/help/attention.svg" class="help_icon" style="background-color: #FFEEEE;"></td><td>-</td></tr>
+            <tr><td>v4.4.0~<br>v4.5.4</td><td>×</td><td>×</td><td>△</td><td>○</td><td style="background-color: #FFEEEE;"><img src="../img/help/attention.svg" class="help_icon" style="background-color: #FFEEEE;"></td><td>○</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="help_sentence">○…読み込み可能  △…読み込み可能(古いバージョン)  ×…ファイル変換が必要  - …不可能</p>
+      <h2 class="help_sentence" style="margin-top: 10px; padding-left: 0; background-color: #FFEEEE;"><img src="../img/help/attention.svg" class="help_icon" style="background-color: #FFBBBB;">読み込みに関する不具合</h2>
+      <p class="help_sentence" style="background-color: #FFEEEE;">v4.3.0とv4.3.1では、コート作成機能において、2階部分を含むWRLコートのプロジェクトを保存した際に2階部分がうまく保存されない不具合が発生しています。この不具合はv4.4.0で修正されました。v4.3.0とv4.3.1で作成したファイルをv4.4.0以降で読み込んだ場合、その旨を知らせる警告が出ます。</p>
+      <h3 class="help_h3"><img src="../img/tools/auto_read.svg" class="help_icon">自動保存データの読み込み</h3>
+      <p class="help_sentence">後述の自動保存したデータを読み込みます。</p>
+      <h3 class="help_h3"><img src="../img/tools/help.svg" class="help_icon">ヘルプボタン</h3>
+      <p class="help_sentence">ヘルプを表示します。</p>
+  
+      <h2 class="help_h2">画面構成</h2><br>
+      <img src="../img/help/シミュレーター.png" alt="画面" class="help_img">
+      <h3 class="help_h3">① ツールバー</h3>
+      <p class="help_sentence">コート作成のためのツールを実行するボタンやヘルプがあります。</p>
+      <h3 class="help_h3">② タイル選択</h3>
+      <p class="help_sentence">コートに配置するタイルを選ぶことができます。この部分をスクロールすると「特殊タイル」や「タイル情報」があります。</p>
+      <h3 class="help_h3">③ コート</h3>
+      <p class="help_sentence">作ったコートを表示します。</p>
+      <h3 class="help_h3">④ ガイド</h3>
+      <p class="help_sentence">コート作成に役立つガイドを表示します。</p>
+  
+      <h2 class="help_h2">使い方</h2>
+      <h3 class="help_h3">タイルの配置</h3>
+      <p class="help_sentence">まず③で配置したいタイルをクリックします。次に「タイル情報」の任意の階のボタンをクリックします(1回「タイル情報」のボタンを押すとその設定は次に階を変えるまでタイルを変えても保持されます)。さらに③でそのタイルを配置したい場所をクリックします。するとそこにタイルが配置できます。ダブルクリックで向きを時計回りに90度変えることができます。</p>
+      <h3 class="help_h3">被災者ゾーンの自動入力</h3>
+      <p class="help_sentence">③の一番左上にある被災者ゾーンのタイルは4か所にしか置けません。置ける場所は一番左上、その4つ下、一番上の列の左から5番目、その4つ下です。置くと被災者ゾーンが自動入力されます。任意の場所に入り口をつけてください。この機能は6×8タイルの1階部分にのみ対応しています。</p>
+      <h3 class="help_h3">タイルの自動保存</h3>
+      <p class="help_sentence">ブラウザの予期せぬクラッシュなどに備えるため、作ったタイルは自動保存されます。保存されるのはタイルのみで、得点要素などは保存されません。すべてを保存するには「プロジェクトの保存」をしてください。コートを変更するごとに自動保存は上書きされ、それ以前の記録は消されます。</p>
+      <h2 class="help_h2">右クリックメニュー</h2>
+      <img src="../img/help/右クリックメニュー.png" alt="右クリックメニュー" style="width: 20vw; padding-left: 20px;">
+      <p class="help_sentence">③のタイルのどこかを右クリック(タッチデバイスでは長押し)すると右クリックメニューが表示されます。「このタイルの情報を削除」を押すと、そのタイルにある全ての情報が削除されます。未作成のタイルでは、下の3つの機能は停止されます。</p>
+      <h3 class="help_h3">チェックマーカー</h3>
+      <p class="help_sentence">「チェックマーカーを置く」を押すとクリックしたタイルの右上にチェックマーカーが置かれます。ラインとかぶることがあります。「チェックマーカーを取る」で削除できます。</p>
+      <h3 class="help_h3">障害物</h3>  
+      <p class="help_sentence">「障害物を置く」を押すとクリックしたタイルの中央に障害物が置かれます。「障害物を取る」で削除できます。</p>
+      <h3 class="help_h3">バンプ</h3>
+      <img  src="../img/help/バンプ設定.png" alt="バンプ設定"  class="help_img" style="margin-bottom: 10px;">
+      <p class="help_sentence">「バンプを置く」を押すと、上のような設定画面が出ます。まずバンプの個数を選びます。すると個数に合わせた入力欄が表示されるので、左側のスペース、上側のスペース、バンプの回転角度を半角数字で入力します。左側と上側のスペースは0~74で、37を指定すると中央に来ます。回転は-90~90で、0度を指定すると縦向きになり、数字が大きいほど右側に傾きます。下側のプレビューに現在の状態が反映されます。「決定」ボタンを押すと、クリックしたタイルにプレビューの通りにバンプが置かれます。右クリックメニューの「バンプを取る」を押すとすべて削除されます。</p>
+      <h3 class="help_h3">得点要素とチェックマーカー</h3>
+      <p class="help_sentence">得点要素があるタイルにはチェックマーカーは配置できないため、1つのタイルにはチェックマーカー・障害物・バンプのうちどれか1つしか配置できません。またシーソータイルは、得点要素のない直線のラインであるため、チェックマーカー・障害物・バンプは配置できません。</p>
+      
+      <h2 class="help_h2">ツール</h2>
+      <h2 class="help_h3"><img src="../img/tools/start.svg" class="help_icon">スタート画面へ戻るボタン</h2>
+      <p class="help_sentence">スタート画面に戻ることができます。スタート画面に戻ったら「再開」ボタンが追加されているので、それを押すと元に戻ることができます。</p>
+      <h2 class="help_h3"><img src="../img/tools/floor2.svg" class="help_icon">1階部分の作成/2階・半2階部分の作成ボタン</h2>
+      <p class="help_sentence">1階部分の作成と2階・半2階部分の作成を切り替えることができます。いまどちらを作成しているかはガイドに表示されています。2階部分を作成している場合、2階にタイルがない1階部分のタイルは灰色の背景で表示されています。</p>
+      <h2 class="help_h3"><img src="../img/tools/grid.svg" class="help_icon">グリッドの表示/非表示ボタン</h2>
+      <p class="help_sentence">コートのグリッドの表示・非表示を切り替えることができます。デフォルトではグリッドが表示されています。</p>
+      <h2 class="help_h3"><img src="../img/tools/save.svg" class="help_icon">プロジェクトの保存ボタン</h2>
+      <p class="help_sentence">作成途中のコートを保存できます。保存したファイルはまたこのシミュレーターで読み込めます。RRL形式(Safariはcsv形式)のファイルが、Windowsでは通常「ダウンロード」フォルダ(macOSでも同様、iOS・iPadOSはiCloudの「ダウンロード」フォルダ)に保存されます。クリックするとファイル名を入力するダイアログが出るので、入力してください。このとき拡張子の入力は不要です。</p>
+      <h2 class="help_h3"><img src="../img/tools/print.svg" class="help_icon">印刷ボタン</h2>
+      <p class="help_sentence">作成したコートのみを印刷できます。</p>
+      <h2 class="help_sentence" style="margin-top: 10px; background-color: #F8F8E7; text-indent: 0;"><img src="../img/help/attention.svg" class="help_icon" style="background-color: #F8F8B3;">注意</h2>
+      <p class="help_sentence" style="background-color: #F8F8E7;">Microsoft Edgeで印刷する際は、「その他の設定」の「オプション」にある「背景のグラフィックス」をオンにしてください。</p>
+      <p class="help_sentence" style="background-color: #F8F8E7;">Google Chromeで印刷する際は、「詳細設定」の「オプション」にある「背景のグラフィック」をオンにしてください。</p>
+      <p class="help_sentence" style="background-color: #F8F8E7;">Firefoxで印刷する際は、「ページ設定」の「オプション」にある「背景色と背景画像も印刷」をオンにしてください。</p>
+  
+      <h2 class="help_h3"><img src="../img/tools/clear.svg" class="help_icon">オールクリアボタン</h2>
+      <p class="help_sentence">作成したコートのすべての情報を削除します。この操作は取り消せません。</p>
+      <h2 class="help_h3"><img src="../img/tools/68.svg" class="help_icon"><span style="font-size: 15px; margin-right: 5px;">etc.</span>6×8タイルボタン、4×9タイルボタン、3×12タイルボタン</h2>
+      <p class="help_sentence">コートの大きさを変更します。間違って変更してしまっても、入力していたコートの大きさに戻せば「オールクリアボタン」を押していない限り元に戻ります。なお4×9タイル、3×12タイルは被災者ゾーンの自動入力には対応していません。</p>
+      <h2 class="help_h3"><img src="../img/tools/help.svg" class="help_icon">ヘルプボタン</h2>
+      <p class="help_sentence">ヘルプを表示します。</p>
+    </div>
+
+    <div id="scorer_nrl" style="display:none;">
+      <p class="help_sentence">コート作成で保存したプロジェクトファイル(NRL)を利用し、実際に競技を行いながら得点を算出できる機能です。</p>
+      <div class="help_link-div" style="margin-top: 20px;">
+        <button class="help_link" onclick="window.open('scorer_nrl.html')">開始</button>
+      </div>
+      <h2 class="help_h2">スタート</h2>
+      <p class="help_sentence">起動するとこのような画面が出ます。アイコンをクリックしてプロジェクトを読み込みます。</p>
+      <img src="../img/help/NRL得点計算_スタート.png" alt="スタート" class="help_img">
+      <h3 class="help_h3"><img src="../img/tools/read.svg" class="help_icon">プロジェクトの読み込み</h3>
+      <p class="help_sentence">任意のファイルを選ぶと得点計算を開始します。読み込むことができるファイルの拡張子は.rrlのみ(Safariでは.csvも可、ただしこのソフトウェアで作成されたもののみ)です。WRLのコートには対応していません。</p>
+      <h2 class="help_sentence" style="margin-top: 10px; background-color: #F8F8E7; text-indent: 0;"><img src="../img/help/attention.svg" class="help_icon" style="background-color: #F8F8B3;">注意</h2>
+      <p class="help_sentence" style="background-color: #F8F8E7;">※保存と読み込みは基本的に同じバージョンで行ってください。違うバージョンで行った場合正常に読み込まれないことがあります。メジャーアップデートでRRLファイルの内部構造が変わった場合、新しいバージョンでは古いバージョンのファイルをサポートします。メジャーバージョンが2つ以上古いファイルはサポートしません。その場合はファイル変換をご利用ください。</p>
+      <p class="help_sentence" style="background-color: #F8F8E7;">※下の表で「読み込み可能」となっている場合でも、読み込む側のバージョンよりファイルを作ったバージョンが新しい場合は読み込めませんのでご注意ください。</p>
+      <h3 class="help_h3">RRLファイルの互換性</h3>
+      <div class="help_table">
+        <table>
+          <tbody>
+            <tr><td rowspan="2" colspan="2"></td><td colspan="3">作成(コート作成)</td></tr>
+            <tr><td>v1.0.0~v2.0.2</td><td>v3.0.0~v3.1.1</td><td>v4.0.0~v4.5.4</td></tr>
+            <tr><td rowspan="1">読み込み<br>(NRL得点計算)</td><td>v4.1.0~<br>v4.5.4</td><td>×</td><td>△</td><td>○</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="help_sentence">○…読み込み可能　△…読み込み可能だが非推奨　×…ファイル変換が必要　- …不可能</p>
+      <h3 class="help_h3"><img src="../img/tools/help.svg" class="help_icon">ヘルプボタン</h3>
+      <p class="help_sentence">ヘルプを表示します。</p>
+  
+      <h2 class="help
+      <img src="../img/help/NRL得点計算.png" alt="画面" class="help_img">
+      <h3 class="help① ツールバー</h3>
+      <p class="help_sentence">得点計算のためのツールを実行するボタンやヘルプがあります。</p>
+      <h3 class="help_h3">② メニュー</h3>
+      <p class="help_sentence">競技の状況や、避難ゾーンの得点ボタンがあります。</p>
+      <h3 class="help_h3">③ コート</h3>
+      <p class="help_sentence">現在のコートの状況を表示します。</p>
+      <h3 class="help_h3">④ ガイド</h3>
+      <p class="help_sentence">得点計算に役立つガイドを表示します。</p>
+  
+      <h2 class="help_h2">使い方</h2>
+      <img src="../img/help/NRL得点計算_競技中.png" alt="画面" class="help_img">
+      <p class="help_sentence">競技中の画面の一例。</p>
+      <h3 class="help_h3">競技開始・終了</h3>
+      <p class="help_sentence">「競技開始」を押すとタイマーがスタートし、無条件に5点加算されます。「競技終了」を押すとタイマーがストップします。もし競技が続行しているのに8分が経過した場合、競技を終了するようアラートが出ます。</p>
+      <h3 class="help_h3">ハザード (ライン中のギャップ、減速バンプ、傾斜路、障害物)</h3>
+      <p class="help_sentence">オレンジ色に光っているものはハザードです。クリックすると詳細が表示され、「クリア」を押すと得点が加算されます。すでにクリアしている場合、ハザードは灰色に光ります。クリックすると「取り消し」ボタンが表示され、取り消すことができます。</p>
+      <p class="help_sentence">1タイルに2つギャップがある場合、タイルをクリックすると2つ分の詳細が表示されます。先にロボットが通るほうが1つ目と考えて「クリア」を押してください。2つクリアした後は「取り消し」ボタンが1個のみ表示され、クリックすると2つ分が取り消されます。</p>
+      <p class="help_sentence">傾斜路は1タイルごとに認識します。ただし連続している傾斜路は2タイルで10点と定められているので、その場合はどちらかのタイルでのみ「クリア」ボタンを押してください。</p>
+      <h3 class="help_h3">チェックポイントでの得点</h3>
+      <p class="help_sentence">競技中、ロボットが通過した灰色のタイルをクリックすると青色に変化します。これは「通過済み」を表します。チェックマーカーがあるタイルをクリックすると、それまでの通過済みタイル数と競技進行の停止数(右クリックメニューで解説)から得られる点数を加算し、通過したタイルは白色になります。白色になったタイルのギャップ・傾斜路は、得点の変更ができなくなります。障害物、バンプは取り消し可能です。</p>
+      <p class="help_sentence">ロボットが2回通過する十字路・十字ギャップは、2回とも同じ区間(スタートタイル・チェックマーカー～チェックマーカーの間)内であれば2回目の通過で青色が濃くなります。間違って2回押してしまった場合、もう1回押すと1回通過と同じ扱いになります。違う区間内で1回ずつ通過する場合は、1個目のチェックポイント通過では色が青色のまま据え置かれ、2回目の通過で青色が濃くなり、2個目のチェックポイント通過で白色になります。</p>
+      <h3 class="help_h3">避難ゾーンでの得点</h3>
+      <p class="help_sentence">②の「避難ゾーン」の部分にあるボタンを押せば、得点が加算されます。</p>
+      <h2 class="help_h2">右クリックメニュー</h2>
+      <img src="../img/help/NRL得点計算_右クリックメニュー.png" alt="右クリックメニュー" style="width: 20vw; padding-left: 20px;">
+      <p class="help_sentence">③の灰色のタイルのどこかを右クリック(タッチデバイスでは長押し)すると右クリックメニューが表示されます。</p>
+      <h3 class="help_h3">チェックマーカー</h3>
+      <p class="help_sentence">このソフトウェア上でもチェックマーカーを追加できます。「チェックマーカーを置く」を押すとクリックしたタイルの右上にチェックマーカーが置かれます。ラインとかぶることがあります。「チェックマーカーを取る」で削除できます。</p>
+      <p class="help_h3">通過の取り消し</p>
+      <p class="help_sentence">誤ってロボットが通過していないタイルをクリックしてしまった場合、これで元に戻すことができます。通過タイルをきちんと記録しないと得点が不正確になりますので、競技通りに記録してください。</p>
+      <h3 class="help_h3">競技進行の停止</h3>
+      <p class="help_sentence">「競技進行の停止」を押すとタイルの右上に赤丸が表示され、そのタイルでの競技進行の停止数が表示されます。通過は取り消しされます。もう一度挑戦して通過できたときには、クリックして青色に戻してください。通過タイルと同様きちんと記録しないと得点が不正確になります。現在の区間(スタートタイル・チェックマーカー～チェックマーカーの間)での競技進行の停止数の合計は②に表示されます。</p>
+      <p class="help_sentence">「競技進行の停止を1回取り消し」を押すとそのタイルでの競技進行の停止を1回取り消すことができます。</p>
+      <p class="help_sentence">「競技進行の停止数」には、そのタイルでの競技進行の停止数が表示されます。</p>
+  
+      <h2 class="help_h2">ツール</h2>
+      <h3 class="help_h3"><img src="../img/tools/start.svg" class="help_icon">スタート画面へ戻るボタン</h3>
+      <p class="help_sentence">スタート画面に戻ることができます。スタート画面に戻ったら「再開」ボタンが追加されているので、それを押すと元に戻ることができます。</p>
+      <h3 class="help_h3"><img src="../img/tools/grid.svg" class="help_icon">グリッドの表示/非表示ボタン</h3>
+      <p class="help_sentence">コートのグリッドの表示・非表示を切り替えることができます。デフォルトではグリッドが表示されています。</p>
+      <h3 class="help_h3"><img src="../img/tools/statistics.svg" class="help_icon">競技の詳細ボタン</h3>
+      <p class="help_sentence">現在行っている競技の詳細情報を閲覧することができます。</p>
+      <h3 class="help_h3"><img src="../img/tools/print.svg" class="help_icon">印刷ボタン</h3>
+      <p class="help_sentence">競技時間、得点、コートの状況を印刷できます。</p>
+      <h2 class="help_sentence" style="margin-top: 10px; background-color: #F8F8E7; text-indent: 0;"><img src="../img/help/attention.svg" class="help_icon" style="background-color: #F8F8B3;">注意</h2>
+      <p class="help_sentence" style="background-color: #F8F8E7;">Microsoft Edgeで印刷する際は、「その他の設定」の「オプション」にある「背景のグラフィックス」をオンにしてください。</p>
+      <p class="help_sentence" style="background-color: #F8F8E7;">Google Chromeで印刷する際は、「詳細設定」の「オプション」にある「背景のグラフィック」をオンにしてください。</p>
+      <p class="help_sentence" style="background-color: #F8F8E7;">Firefoxで印刷する際は、「ページ設定」の「オプション」にある「背景色と背景画像も印刷」をオンにしてください。</p>
+      <h3 class="help_h3"><img src="../img/tools/rule.svg" class="help_icon">得点一覧ボタン</h3>
+      <p class="help_sentence">日本リーグレスキューの2022ルールに基づき、各要素ごとの得点を掲載しています。詳細な規定はルールをご覧ください。</p>
+      <h3 class="help_h3"><img src="../img/tools/68.svg" class="help_icon"><span style="font-size: 15px; margin-right: 5px;">etc.</span>6×8タイルボタン、4×9タイルボタン、3×12タイルボタン</h3>
+      <p class="help_sentence">コートの大きさを変更します。間違って変更してしまっても、入力していたコートの大きさに戻せば「オールクリアボタン」を押していない限り元に戻ります。</p>
+      <h3 class="help_h3"><img src="../img/tools/help.svg" class="help_icon">ヘルプボタン</h3>
+      <p class="help_sentence">ヘルプを表示します。</p>
+    </div>
+
+    <div id="scorer_wrl" style="display: none;">
+      <p class="help_sentence">コート作成で保存したプロジェクトファイル(WRL)を利用し、実際に競技を行いながら得点を算出できる機能です。</p>
+      <div class="help_link-div" style="margin-top: 20px;">
+        <button class="help_link" onclick="window.open('scorer_wrl.html')">開始</button>
+      </div>
+      <h2 class="help_h2">スタート</h2>
+      <p class="help_sentence">起動するとこのような画面が出ます。アイコンをクリックしてプロジェクトを読み込みます。</p>
+      <img src="../img/help/WRL得点計算_スタート.png" alt="スタート" class="help_img">
+      <h3 class="help_h3"><img src="../img/tools/read.svg" class="help_icon">プロジェクトの読み込み</h3>
+      <p class="help_sentence">任意のファイルを選ぶと得点計算を開始します。読み込むことができるファイルの拡張子は.rrlのみ(Safariでは.csvも可、ただしこのソフトウェアで作成されたもののみ)です。NRLのコートには対応していません。</p>
+      <h2 class="help_sentence" style="margin-top: 10px; background-color: #F8F8E7; text-indent: 0;"><img src="../img/help/attention.svg" class="help_icon" style="background-color: #F8F8B3;">注意</h2>
+      <p class="help_sentence" style="background-color: #F8F8E7;">※保存と読み込みは基本的に同じバージョンで行ってください。違うバージョンで行った場合正常に読み込まれないことがあります。メジャーアップデートでRRLファイルの内部構造が変わった場合、新しいバージョンでは古いバージョンのファイルをサポートします。メジャーバージョンが2つ以上古いファイルはサポートしません。その場合はファイル変換をご利用ください。</p>
+      <p class="help_sentence" style="background-color: #F8F8E7;">※下の表で「読み込み可能」となっている場合でも、読み込む側のバージョンよりファイルを作ったバージョンが新しい場合は読み込めませんのでご注意ください。</p>
+      <h3 class="help_h3">RRLファイルの互換性</h3>
+      <div class="help_table">
+        <table>
+          <tbody>
+            <tr><td rowspan="2" colspan="2"></td><td colspan="5">作成(コート作成)</td></tr>
+            <tr><td>v1.0.0~v2.0.2</td><td>v3.0.0~v3.1.1</td><td>v4.0.0~v4.2.2</td><td>v4.3.0~v4.3.1</td><td>v4.4.0~v4.5.4</td></tr>
+            <tr><td rowspan="1">読み込み<br>(WRL得点計算)</td><td>v4.4.0~<br>v4.5.4</td><td>×</td><td>△</td><td>○</td><td style="background-color: #FFEEEE;"><img src="../img/help/attention.svg" class="help_icon" style="background-color: #FFEEEE;"></td><td>○</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="help_sentence">○…読み込み可能　△…読み込み可能だが非推奨　×…ファイル変換が必要　- …不可能</p>
+      <h2 class="help_sentence" style="margin-top: 10px; padding-left: 0; background-color: #FFEEEE;"><img src="../img/help/attention.svg" class="help_icon" style="background-color: #FFBBBB;">読み込みに関する不具合</h2>
+      <p class="help_sentence" style="background-color: #FFEEEE;">v4.3.0とv4.3.1では、コート作成機能において、2階部分を含むWRLコートのプロジェクトを保存した際に2階部分がうまく保存されない不具合が発生しています。この不具合はv4.4.0で修正されました。v4.3.0とv4.3.1で作成したファイルをv4.4.0以降で読み込んだ場合、その旨を知らせる警告が出ます。</p>
+      <h3 class="help_h3"><img src="../img/tools/help.svg" class="help_icon">ヘルプボタン</h3>
+      <p class="help_sentence">ヘルプを表示します。</p>
+  
+      <h2 class="help_h2">走行順序の決定</h2>
+      <img src="../img/help/WRL得点計算_走行順序の決定.png" alt="走行順序の決定" class="help_img">
+      <p class="help_sentence">プロジェクトを読み込むとこのような画面が出ます。避難ゾーン、白色、未作成のタイルは背景が白になり選択できないようになります。ロボットが通過する順にタイルをクリックして、「走行順序の決定」ボタンを押してください。「走行順序の決定」ボタンはタイルを8枚以上選択すると押せるようになります。</p>
+      <h3 class="help_h3">走行順序の決定画面の操作方法</h3>
+      <p class="help_sentence">タイルをクリックすると青色になり、右上に数字が表示されます。数字は、競技を通してロボットがそのタイルを通る回数を示しています。</p>
+      <p class="help_sentence">「通過を取り消し」ボタンを押すと直前の操作が取り消せます。</p>
+      <p class="help_sentence">2階部分のタイルは「2階部分を表示」ツールを使って2階に移動した後選択してください。各種ツールの使い方は後述していますのでそちらをご参照ください。</p>
+  
+      <h2 class="help_h2">レベル選択</h2>
+      <img src="../img/help/WRL得点計算_レベル選択.png" alt="レベル選択" class="help_img">
+      <p class="help_sentence">走行順序を決定するとこのような画面が出ます。避難場所、レスキューキットについて競技者が選択してください。この後の変更はできません。</p>
+  
+      <h2 class="help_h2">画面構成</h2><br>
+      <img src="../img/help/WRL得点計算.png" alt="画面" class="help_img">
+      <h3 class="help_h3">① ツールバー</h3>
+      <p class="help_sentence">競技の進行を補助したり、詳細を確認するためのツールがあります。</p>
+      <h3 class="help_h3">② メニュー</h3>
+      <p class="help_sentence">競技を進めるためのツールがあります。</p>
+      <h3 class="help_h3">③ コート</h3>
+      <p class="help_sentence">現在のコートの状況を表示します。</p>
+      <h3 class="help_h3">④ ガイド</h3>
+      <p class="help_sentence">得点計算に役立つガイドを表示します。</p>
+  
+      <h2 class="help_h2">使い方</h2>
+      <img src="../img/help/WRL得点計算_競技中.png" alt="画面" class="help_img">
+      <p class="help_sentence">競技中の画面の一例。</p>
+      <p class="help_sentence">オレンジ色に光っているものは得点要素です。すでにクリアしている場合、得点要素は光りません。競技の進行は、タイルや得点要素をクリックするのではなく、すべて左側のメニューで行います。</p>
+      <h3 class="help_h3">競技開始・終了</h3>
+      <p class="help_sentence">「競技開始」を押すとタイマーがスタートし、無条件に5点加算されます。「競技終了」を押すとタイマーがストップします。もし競技が続行しているのに8分が経過した場合、競技を終了するようアラートが出ます。</p>
+      <h3 class="help_h3">「現在走行中のタイル」の見方</h3>
+      <img src="../img/help/WRL得点計算_現在走行中のタイル.png" alt="画面" class="help_img" style="width: 40vw; margin-bottom: 20px;">
+      <p class="help_sentence">現在ロボットが走行中のタイル)には、青の影がついています(場合によっては見えにくいこともあります)。</p>
+      <h3 class="help_h3">①タイルの要約</h3>
+      <p class="help_sentence">得点要素が何もない場合は「通常のタイル」、得点要素があればその名前が表示されます。</p>
+      <h3 class="help_h3">②得点合計</h3>
+      <p class="help_sentence">そのタイルにある得点要素をすべてクリアした場合の得点合計が表示されます(チェックマーカーの得点も含む)。</p>
+      <h3 class="help_h3">③クリア状況</h3>
+      <p class="help_sentence">ハザードがあればクリア状況が灰色文字・下線で表示されます。</p>
+      <h3 class="help_h3">④競技進行の停止数</h3>
+      <p class="help_sentence">競技進行の停止数が灰色文字・下線で表示されます。</p>
+      <h3 class="help_h3">⑤走行中のタイルの画像</h3>
+      <p class="help_sentence">現在走行中のタイルと同じものを拡大表示しています。</p>
+      <h3 class="help_h3">⑥ハザードを扱うツール</h3>
+      <p class="help_sentence">ハザードがあれば、それに関連するツールが表示されます。</p>
+      <h2 class="help_sentence" style="text-indent: 0; margin-top: 10px;"><img src="../img/scorer/gap_1_clear.svg" class="help_icon"><img src="../img/scorer/gap_1_cancel.svg" class="help_icon"><span style="font-size: 15px; margin-right: 5px;">etc.</span>ギャップのクリア・取り消し</h2>
+      <p class="help_sentence">ギャップが含まれるタイルの場合のみ表示され、ギャップのクリア・取り消しを行います。1タイルに2つギャップがある場合、先にロボットが通るほうが1つ目と考えて「クリア」を押してください。2つクリアした後は「取り消し」が1個のみ表示され、クリックすると2つ分が取り消されます。</p>
+      <h2 class="help_sentence" style="text-indent: 0; margin-top: 10px;"><img src="../img/scorer/obstacle_clear.svg" class="help_icon"><img src="../img/scorer/obstacle_cancel.svg" class="help_icon">障害物のクリア・取り消し</h2>
+      <p class="help_sentence">障害物が含まれるタイルの場合のみ表示され、障害物のクリア・取り消しを行います。</p>
+      <h2 class="help_sentence" style="text-indent: 0; margin-top: 10px;"><img src="../img/scorer/bump_1_clear.svg" class="help_icon"><img src="../img/scorer/bump_1_cancel.svg" class="help_icon"><span style="font-size: 15px; margin-right: 5px;">etc.</span>バンプのクリア・取り消し</h2>
+      <p class="help_sentence">バンプが含まれるタイルの場合のみ表示され、バンプのクリア・取り消しを行います。バンプの番号は、コート作成時のバンプ作成画面で指定した番号です。各バンプは独立してクリア・未クリアの状態を扱っているため、必ずしも順番通りにクリアする必要はありません。</p>
+      <h2 class="help_sentence" style="text-indent: 0; margin-top: 10px;"><img src="../img/scorer/slope_clear.svg" class="help_icon"><img src="../img/scorer/slope_clear_cancel.svg" class="help_icon">傾斜路のクリア・取り消し</h2>
+      <p class="help_sentence">傾斜路が含まれるタイルの場合のみ表示され、傾斜路のクリア・取り消しを行います。</p>
+      <h2 class="help_sentence" style="text-indent: 0; margin-top: 10px;"><img src="../img/scorer/slope_skip.svg" class="help_icon"><img src="../img/scorer/slope_skip_cancel.svg" class="help_icon">傾斜路のスキップ・取り消し</h2>
+      <p class="help_sentence">傾斜路が含まれるタイルの場合のみ表示され、傾斜路のスキップ・取り消しを行います。傾斜路は1タイルごとに認識しますが、連続している傾斜路は2タイルで10点と定められているので、その場合はどちらかのタイルで「傾斜路をスキップ」を押してください。</p>
+      <h2 class="help_sentence" style="text-indent: 0; margin-top: 10px;"><img src="../img/scorer/cross_1_clear.svg" class="help_icon"><img src="../img/scorer/cross_1_cancel.svg" class="help_icon"><span style="font-size: 15px; margin-right: 5px;">etc.</span>交差点のクリア・取り消し</h2>
+      <p class="help_sentence">交差点が含まれるタイルの場合のみ表示され、ギャップのクリア・取り消しを行います。1タイルに2つ交差点がある場合、先にロボットが通るほうが1つ目と考えて「クリア」を押してください。2つクリアした後は「取り消し」が1個のみ表示され、クリックすると2つ分が取り消されます。</p>
+      <h2 class="help_sentence" style="text-indent: 0; margin-top: 10px;"><img src="../img/scorer/seesaw_clear.svg" class="help_icon"><img src="../img/scorer/seesaw_cancel.svg" class="help_icon">シーソーのクリア・取り消し</h2>
+      <p class="help_sentence">シーソーが含まれるタイルの場合のみ表示され、シーソーのクリア・取り消しを行います。</p>
+      <h3 class="help_h3">⑦ライントレースを進めるツール</h3>
+      <p class="help_sentence">ライントレースを進めるためのツールが常に表示されます。</p>
+      <h2 class="help_sentence" style="text-indent: 0; margin-top: 10px;"><img src="../img/scorer/pass.svg" class="help_icon">このタイルを通過</h2>
+      <p class="help_sentence">現在走行中のタイルを通過扱いにします。チェックマーカーがある場合は、それを押した時点で得点が加算されます(詳細は下の「チェックポイントでの得点」を参照)。チェックポイントでの得点加算後は、そのタイルには戻れません。</p>
+      <h2 class="help_sentence" style="text-indent: 0; margin-top: 10px;"><img src="../img/scorer/pass_cancel.svg" class="help_icon">直前の通過を取り消し</h2>
+      <p class="help_sentence">直前の通過をもとに戻します。ハザードの状態は元のまま維持されています。プログラムの誤動作防止のため、2つ以上前のタイルには戻れません。</p>
+      <h2 class="help_sentence" style="text-indent: 0; margin-top: 10px;"><img src="../img/scorer/stop.svg" class="help_icon">このタイルで競技進行の停止</h2>
+      <p class="help_sentence">このタイルで競技進行の停止を行います。タイルの右上に赤丸が表示され、そのタイルでの競技進行の停止数が表示されます。もし避難ゾーンを出た後最初のチェックポイント(ない場合ゴール)に着いていなければ、乗数から数値(避難場所のレベルによる)が引かれます。</p>
+      <h2 class="help_sentence" style="text-indent: 0; margin-top: 10px;"><img src="../img/scorer/stop_cancel.svg" class="help_icon">このタイルの競技進行の停止を1回取り消し</h2>
+      <p class="help_sentence">このタイルの競技進行の停止を1回取り消します。乗数も元に戻ります。</p>
+      <h3 class="help_h3">チェックポイントでの得点</h3>
+      <p class="help_sentence">チェックマーカーがあるタイルを通過すると、それまでの通過済みタイル数と競技進行の停止数から得られる点数を加算し、通過したタイルは白色になります。白色になったタイルでは、そこにある得点要素も含め得点の変更ができなくなります。</p>
+      <p class="help_sentence">ロボットが2回以上通過するタイルは、チェックポイントを通過しても、その競技中の最後の通過まで白色になりません。</p>
+      <h3 class="help_h3">避難ゾーンでの得点</h3>
+      <p class="help_sentence">メニューの「避難ゾーン」の部分にあるボタンを押せば、避難場所とレスキューキットのレベルに応じて乗数を獲得できます。獲得した乗数はボタンの下部に表示されています。競技詳細では得点と乗数を別々に四捨五入しているため、表面上は計算が合わない場合があります。</p>
+      <h2 class="help_h2">右クリックメニュー</h2>
+      <img src="../img/help/WRL得点計算_右クリックメニュー.png" alt="右クリックメニュー" style="width: 20vw; padding-left: 20px;">
+      <p class="help_sentence">コートの灰色のタイルのどこかを右クリック(タッチデバイスでは長押し)すると右クリックメニューが表示されます。</p>
+      <h3 class="help_h3">チェックマーカー</h3>
+      <p class="help_sentence">このソフトウェア上でもチェックマーカーを追加できます。「チェックマーカーを置く」を押すとクリックしたタイルの右上にチェックマーカーが置かれます。ラインとかぶることがあります。「チェックマーカーを取る」で削除できます。</p>
+  
+      <h2 class="help_h2">ツール</h2>
+      <h3 class="help_h3"><img src="../img/tools/start.svg" class="help_icon">スタート画面へ戻るボタン</h3>
+      <p class="help_sentence">スタート画面に戻ることができます。スタート画面に戻ったら「再開」ボタンが追加されているので、それを押すと元に戻ることができます。</p>
+      <h3 class="help_h3"><img src="../img/tools/floor2.svg" class="help_icon">1階部分の表示/2階・半2階部分の表示ボタン</h3>
+      <p class="help_sentence">1階部分の表示と2階・半2階部分の表示を切り替えることができます。いまどちらを表示しているかはガイドに表示されています。2階部分を表示している場合、2階にタイルがない1階部分のタイルは灰色の背景で表示されています。</p>
+      <h3 class="help_h3"><img src="../img/tools/grid.svg" class="help_icon">グリッドの表示/非表示ボタン</h3>
+      <p class="help_sentence">コートのグリッドの表示・非表示を切り替えることができます。デフォルトではグリッドが表示されています。</p>
+      <h3 class="help_h3"><img src="../img/tools/statistics.svg" class="help_icon">競技の詳細ボタン</h3>
+      <p class="help_sentence">現在行っている競技の詳細情報を閲覧することができます。</p>
+      <h3 class="help_h3"><img src="../img/tools/print.svg" class="help_icon">印刷ボタン</h3>
+      <p class="help_sentence">競技時間、得点、コートの状況を印刷できます。</p>
+      <h2 class="help_sentence" style="margin-top: 10px; background-color: #F8F8E7; text-indent: 0;"><img src="../img/help/attention.svg" class="help_icon" style="background-color: #F8F8B3;">注意</h2>
+      <p class="help_sentence" style="background-color: #F8F8E7;">Microsoft Edgeで印刷する際は、「その他の設定」の「オプション」にある「背景のグラフィックス」をオンにしてください。</p>
+      <p class="help_sentence" style="background-color: #F8F8E7;">Google Chromeで印刷する際は、「詳細設定」の「オプション」にある「背景のグラフィック」をオンにしてください。</p>
+      <p class="help_sentence" style="background-color: #F8F8E7;">Firefoxで印刷する際は、「ページ設定」の「オプション」にある「背景色と背景画像も印刷」をオンにしてください。</p>
+      <h3 class="help_h3"><img src="../img/tools/rule.svg" class="help_icon">得点一覧ボタン</h3>
+      <p class="help_sentence">日本リーグレスキューの2022ルールに基づき、各要素ごとの得点を掲載しています。詳細な規定はルールをご覧ください。</p>
+      <h3 class="help_h3"><img src="../img/tools/68.svg" class="help_icon"><span style="font-size: 15px; margin-right: 5px;">etc.</span>6×8タイルボタン、4×9タイルボタン、3×12タイルボタン</h3>
+      <p class="help_sentence">コートの大きさを変更します。間違って変更してしまっても、入力していたコートの大きさに戻せば「オールクリアボタン」を押していない限り元に戻ります。</p>
+      <h3 class="help_h3"><img src="../img/tools/help.svg" class="help_icon">ヘルプボタン</h3>
+      <p class="help_sentence">ヘルプを表示します。</p>
+    </div>
+
+    <div id="converter" style="display: none;">
+      <p class="help_sentence">古いバージョンのコート作成で保存したプロジェクトファイル(WRL)の情報を、新しいバージョンで読み込めるように更新します。</p>
+      <div class="help_link-div" style="margin-top: 20px;">
+        <button class="help_link" onclick="window.open('converter.html')">開始</button>
+      </div>
+      <h2 class="help_h2">画面構成</h2><br>
+      <img src="../img/help/ファイル変換.png" alt="画面" class="help_img">
+      <h3 class="help_h3">① ツールバー</h3>
+      <p class="help_sentence">ツールやヘルプがあります。</p>
+      <h3 class="help_h3">② ファイル選択</h3>
+      <h2 class="help_h2">使い方</h2>
+      <p class="help_sentence">②をクリックすると、ファイル選択画面が出ます。RRL形式のファイル(Safariでは.csvも可、ただしこのソフトウェアで作成されたもののみ)を開いてください。開くと自動で変換が始まります。②の下部にファイルの情報と現在の状態が表示されます。矢印がすべて黒くなったら、変換されたファイルが、Windowsでは通常「ダウンロード」フォルダ(macOSでも同様、iOS・iPadOSはiCloudの「ダウンロード」フォルダ)に保存されます。</p>
+      <p class="help_sentence">書き出したバージョンと読み込むバージョンで、メジャーバージョンが同じなら変換しなくても利用できますが、同じメジャーバージョン内で最新のものにする機能もついています。</p>
+      <h2 class="help_h2">ツール</h2>
+      <h3 class="help_h3"><img src="../img/tools/save.svg" class="help_icon">もう1度変換ボタン</h3>
+      <p class="help_sentence">②にあるファイルをもう1度変換できます。</p>
+      <h3 class="help_h3"><img src="../img/tools/help.svg" class="help_icon">ヘルプボタン</h3>
+      <p class="help_sentence">ヘルプを表示します。</p>
     </div>
 
     <div id="changes" style="display: none;">
-      <h2 class="help_h2" style="margin-bottom: 0px;">変更履歴</h2>
+      <p class="help_sentence">これまでの変更履歴をすべて表示しています。</p>
       <h3 class="help_h3">v4.6.0</h3>
       <ul>
-        <li class="help-sentence-changes">・2022.11.公開</li>
-        <li class="help-sentence-changes">・NRL得点計算で、2023ルールに対応</li>
-        <li class="help-sentence-changes">・NRL得点計算で、被災者を1体も見つけていなくても脱出できる不具合を修正</li>
-        <li class="help-sentence-changes">・NRL得点計算で、避難ゾーン(救助ゾーン)を脱出すると競技が自動で終了するよう変更</li>
-        <li class="help-sentence-changes">・NRL得点計算で、通過の取り消しや競技進行の停止をすると該当タイルの背景が白くなる不具合を修正</li>
+        <li class="help_sentence-changes">・2022.11.公開</li>
+        <li class="help_sentence-changes">・NRL得点計算で、2023ルールに対応</li>
+        <li class="help_sentence-changes">・NRL得点計算で、被災者を1体も見つけていなくても脱出できる不具合を修正</li>
+        <li class="help_sentence-changes">・NRL得点計算で、避難ゾーン(救助ゾーン)を脱出すると競技が自動で終了するよう変更</li>
+        <li class="help_sentence-changes">・NRL得点計算で、通過の取り消しや競技進行の停止をすると該当タイルの背景が白くなる不具合を修正</li>
       </ul>
       <h3 class="help_h3">v4.5.4</h3>
       <ul>
-        <li class="help-sentence-changes">・2022.10.17公開</li>
-        <li class="help-sentence-changes">・モバイル端末において、ヘルプの一部のボタンにcssが当たっていない事象を修正</li>
-        <li class="help-sentence-changes">・モバイル端末において、ヘルプのホバー時デザインを撤廃</li>
-        <li class="help-sentence-changes">・ヘルプ,READMEのSafariバージョンがwebkitバージョンになっていた事象を修正</li>
-        <li class="help-sentence-changes">・ユーザーガイドで、画面が狭くなると表が画面から飛び出す事象を修正</li>
-        <li class="help-sentence-changes">・ユーザーガイドのモバイル向けデザイン対応</li>
+        <li class="help_sentence-changes">・2022.10.17公開</li>
+        <li class="help_sentence-changes">・モバイル端末において、ヘルプの一部のボタンにcssが当たっていない事象を修正</li>
+        <li class="help_sentence-changes">・モバイル端末において、ヘルプのホバー時デザインを撤廃</li>
+        <li class="help_sentence-changes">・ヘルプ,READMEのSafariバージョンがwebkitバージョンになっていた事象を修正</li>
+        <li class="help_sentence-changes">・ユーザーガイドで、画面が狭くなると表が画面から飛び出す事象を修正</li>
+        <li class="help_sentence-changes">・ユーザーガイドのモバイル向けデザイン対応</li>
       </ul>
       <h3 class="help_h3">v4.5.3</h3>
       <ul>
-        <li class="help-sentence-changes">・2022.10.16公開</li>
-        <li class="help-sentence-changes">・バージョン情報の追加</li>
-        <li class="help-sentence-changes">・コート作成で、2階部分でのタイルの回転に関する不具合を修正</li>
-        <li class="help-sentence-changes">・メニュー、右クリックメニュー、ヘルプのリンクのデザインを変更</li>
-        <li class="help-sentence-changes">・CSSを最適化</li>
-        <li class="help-sentence-changes">・ヘルプの変更履歴を折りたためるよう変更</li>
+        <li class="help_sentence-changes">・2022.10.16公開</li>
+        <li class="help_sentence-changes">・バージョン情報の追加</li>
+        <li class="help_sentence-changes">・コート作成で、2階部分でのタイルの回転に関する不具合を修正</li>
+        <li class="help_sentence-changes">・メニュー、右クリックメニュー、ヘルプのリンクのデザインを変更</li>
+        <li class="help_sentence-changes">・CSSを最適化</li>
+        <li class="help_sentence-changes">・ヘルプの変更履歴を折りたためるよう変更</li>
       </ul>
       <h3 class="help_h3">v4.5.2</h3>
       <ul>
-        <li class="help-sentence-changes">・2022.08.19公開</li>
-        <li class="help-sentence-changes">・一部タイルで、グリッドを非表示にしても細いグリッドが残る事象を修正</li>
-        <li class="help-sentence-changes">・動作環境を更新</li>
+        <li class="help_sentence-changes">・2022.08.19公開</li>
+        <li class="help_sentence-changes">・一部タイルで、グリッドを非表示にしても細いグリッドが残る事象を修正</li>
+        <li class="help_sentence-changes">・動作環境を更新</li>
       </ul>
       <h3 class="help_h3">v4.5.1</h3>
       <ul>
-        <li class="help-sentence-changes">・2022.07.09公開</li>
-        <li class="help-sentence-changes">・一部タイルのラインが中心からずれている事象を修正</li>
-        <li class="help-sentence-changes">・WRL得点計算の競技詳細で、文面を変更</li>
-        <li class="help-sentence-changes">・NRL得点計算で、競技進行の停止を右上のマーカーで管理するよう変更</li>
-        <li class="help-sentence-changes">・CSSを最適化</li>
+        <li class="help_sentence-changes">・2022.07.09公開</li>
+        <li class="help_sentence-changes">・一部タイルのラインが中心からずれている事象を修正</li>
+        <li class="help_sentence-changes">・WRL得点計算の競技詳細で、文面を変更</li>
+        <li class="help_sentence-changes">・NRL得点計算で、競技進行の停止を右上のマーカーで管理するよう変更</li>
+        <li class="help_sentence-changes">・CSSを最適化</li>
       </ul>
       <h3 class="help_h3">v4.5.0</h3>
       <ul>
-        <li class="help-sentence-changes">・2022.06.09公開</li>
-        <li class="help-sentence-changes">・WRL得点計算の走行順序の決定で、現在選択しているタイル数と競技を開始できるかどうかを表示するよう変更</li>
-        <li class="help-sentence-changes">・WRL得点計算の走行順序の決定で、取り消し機能を追加</li>
-        <li class="help-sentence-changes">・WRL得点計算の乗数表示に連番を振るよう変更</li>
-        <li class="help-sentence-changes">・NRL得点計算で、競技を開始しないと操作ができないよう変更</li>
-        <li class="help-sentence-changes">・NRL得点計算で、使えないボタンを灰色にするよう変更</li>
-        <li class="help-sentence-changes">・コート作成で、ボタンが旧デザインになっていた不具合を修正</li>
+        <li class="help_sentence-changes">・2022.06.09公開</li>
+        <li class="help_sentence-changes">・WRL得点計算の走行順序の決定で、現在選択しているタイル数と競技を開始できるかどうかを表示するよう変更</li>
+        <li class="help_sentence-changes">・WRL得点計算の走行順序の決定で、取り消し機能を追加</li>
+        <li class="help_sentence-changes">・WRL得点計算の乗数表示に連番を振るよう変更</li>
+        <li class="help_sentence-changes">・NRL得点計算で、競技を開始しないと操作ができないよう変更</li>
+        <li class="help_sentence-changes">・NRL得点計算で、使えないボタンを灰色にするよう変更</li>
+        <li class="help_sentence-changes">・コート作成で、ボタンが旧デザインになっていた不具合を修正</li>
       </ul>
       <button class="help_open">すべて表示</button>
       <div style="display: none;">
         <h3 class="help_h3">v4.4.3</h3>
         <ul>
-          <li class="help-sentence-changes">・2022.06.02公開</li>
-          <li class="help-sentence-changes">・動作環境外のブラウザで警告を発する機能を改善</li>
-          <li class="help-sentence-changes">・コート作成で、1階部分を表示した状態で印刷するとその後2階部分に切り替わってしまう不具合を修正</li>
-          <li class="help-sentence-changes">・NRL得点計算で、競技を開始しないと操作ができないよう変更</li>
+          <li class="help_sentence-changes">・2022.06.02公開</li>
+          <li class="help_sentence-changes">・動作環境外のブラウザで警告を発する機能を改善</li>
+          <li class="help_sentence-changes">・コート作成で、1階部分を表示した状態で印刷するとその後2階部分に切り替わってしまう不具合を修正</li>
+          <li class="help_sentence-changes">・NRL得点計算で、競技を開始しないと操作ができないよう変更</li>
         </ul>
         <h3 class="help_h3">v4.4.2</h3>
         <ul>
-          <li class="help-sentence-changes">・2022.05.28公開</li>
-          <li class="help-sentence-changes">・ヘルプ、README.mdの動作環境にFireFoxを追加</li>
+          <li class="help_sentence-changes">・2022.05.28公開</li>
+          <li class="help_sentence-changes">・ヘルプ、README.mdの動作環境にFireFoxを追加</li>
         </ul>
         <h3 class="help_h3">v4.4.1</h3>
         <ul>
-          <li class="help-sentence-changes">・2022.05.28公開</li>
-          <li class="help-sentence-changes">・ボタンデザインを変更</li>
-          <li class="help-sentence-changes">・ヘルプを再構成、ユーザーガイドを分離</li>
-          <li class="help-sentence-changes">・FireFoxをフルサポート</li>
+          <li class="help_sentence-changes">・2022.05.28公開</li>
+          <li class="help_sentence-changes">・ボタンデザインを変更</li>
+          <li class="help_sentence-changes">・ヘルプを再構成、ユーザーガイドを分離</li>
+          <li class="help_sentence-changes">・FireFoxをフルサポート</li>
         </ul>
-        <h2 class="help-sentence-changes" style="margin-top: 10px; background-color: #FFEEEE;"><img src="../img/help/attention.svg" class="help_icon" style="background-color: #FFBBBB;">バージョンの齟齬</h2>
-        <p class="help-sentence-changes" style="background-color: #FFEEEE;">・このバージョンでは、各機能のタイトルのほかプロジェクトファイルもv4.4.0のままとなっていました。</p>
+        <h2 class="help_sentence-changes" style="margin-top: 10px; background-color: #FFEEEE;"><img src="../img/help/attention.svg" class="help_icon" style="background-color: #FFBBBB;">バージョンの齟齬</h2>
+        <p class="help_sentence-changes" style="background-color: #FFEEEE;">・このバージョンでは、各機能のタイトルのほかプロジェクトファイルもv4.4.0のままとなっていました。</p>
         <h3 class="help_h3">v4.4.0</h3>
         <ul>
-          <li class="help-sentence-changes">・2022.05.23公開</li>
-          <li class="help-sentence-changes">・WRL得点計算を追加</li>
-          <li class="help-sentence-changes">・v4.3.0, v4.3.1で作成したプロジェクトファイルを読み込む際に不具合が発生している旨の警告が出るよう変更</li>
-          <li class="help-sentence-changes">・コート作成・NRL得点計算で、グリッドの表示・非表示の際ガイドと実際のグリッドの状況が対応していない不具合を修正</li>
-          <li class="help-sentence-changes">・コート作成で、プロジェクトを保存する際2階部分がうまく保存されない不具合を修正</li>
-          <li class="help-sentence-changes">・コート作成で、「残り全部を白にする」ツールを廃止</li>
-          <li class="help-sentence-changes" style="margin-bottom: 5px; background-color: #EEEEEE;">↑このツールでは、2階部分の残りのタイルもすべて白にしてしまうことになり、2階部分のタイルにラインがないという状況が発生してしまうこと、また実際のコートで白色のタイルは少なく、手動入力でも許容できることから廃止することを決定しました。</li>
-          <li class="help-sentence-changes">・シーソータイルの背景を無色に変更</li>
-          <li class="help-sentence-changes">・Safariではcsv形式のプロジェクトファイルを扱うよう変更</li>
-          <li class="help-sentence-changes">・タッチデバイス向けに、画像を長押しすると右クリックメニューが出るよう変更</li>
-          <li class="help-sentence-changes">・apple製OSのために、使用するフォントの指定を変更</li>
+          <li class="help_sentence-changes">・2022.05.23公開</li>
+          <li class="help_sentence-changes">・WRL得点計算を追加</li>
+          <li class="help_sentence-changes">・v4.3.0, v4.3.1で作成したプロジェクトファイルを読み込む際に不具合が発生している旨の警告が出るよう変更</li>
+          <li class="help_sentence-changes">・コート作成・NRL得点計算で、グリッドの表示・非表示の際ガイドと実際のグリッドの状況が対応していない不具合を修正</li>
+          <li class="help_sentence-changes">・コート作成で、プロジェクトを保存する際2階部分がうまく保存されない不具合を修正</li>
+          <li class="help_sentence-changes">・コート作成で、「残り全部を白にする」ツールを廃止</li>
+          <li class="help_sentence-changes" style="margin-bottom: 5px; background-color: #EEEEEE;">↑このツールでは、2階部分の残りのタイルもすべて白にしてしまうことになり、2階部分のタイルにラインがないという状況が発生してしまうこと、また実際のコートで白色のタイルは少なく、手動入力でも許容できることから廃止することを決定しました。</li>
+          <li class="help_sentence-changes">・シーソータイルの背景を無色に変更</li>
+          <li class="help_sentence-changes">・Safariではcsv形式のプロジェクトファイルを扱うよう変更</li>
+          <li class="help_sentence-changes">・タッチデバイス向けに、画像を長押しすると右クリックメニューが出るよう変更</li>
+          <li class="help_sentence-changes">・apple製OSのために、使用するフォントの指定を変更</li>
         </ul>
         <h3 class="help_h3">v4.3.1</h3>
         <ul>
-          <li class="help-sentence-changes">・2022.04.12公開</li>
-          <li class="help-sentence-changes">・コート作成で2階部分のタイル情報を削除した時に、1階部分の柱が残る不具合を修正</li>
-          <li class="help-sentence-changes">・コート作成で2階部分のタイル情報を削除した時に、1階部分のタイルを表示するよう変更</li>
-          <li class="help-sentence-changes">・コート作成で2階部分を作成中に、タイルがない場所にチェックマーカー・ハザードを配置できる不具合を修正</li>
+          <li class="help_sentence-changes">・2022.04.12公開</li>
+          <li class="help_sentence-changes">・コート作成で2階部分のタイル情報を削除した時に、1階部分の柱が残る不具合を修正</li>
+          <li class="help_sentence-changes">・コート作成で2階部分のタイル情報を削除した時に、1階部分のタイルを表示するよう変更</li>
+          <li class="help_sentence-changes">・コート作成で2階部分を作成中に、タイルがない場所にチェックマーカー・ハザードを配置できる不具合を修正</li>
         </ul>
-        <h2 class="help-sentence-changes" style="margin-top: 10px; background-color: #FFEEEE;"><img src="../img/help/attention.svg" class="help_icon" style="background-color: #FFBBBB;">重大な不具合</h2>
-        <p class="help-sentence-changes" style="background-color: #FFEEEE;">・このバージョンでは、コート作成機能において、2階部分を含むWRLコートのプロジェクトを保存した際に2階部分がうまく保存されない不具合が発生しています。この不具合はv4.4.0で修正されました。</p>
+        <h2 class="help_sentence-changes" style="margin-top: 10px; background-color: #FFEEEE;"><img src="../img/help/attention.svg" class="help_icon" style="background-color: #FFBBBB;">重大な不具合</h2>
+        <p class="help_sentence-changes" style="background-color: #FFEEEE;">・このバージョンでは、コート作成機能において、2階部分を含むWRLコートのプロジェクトを保存した際に2階部分がうまく保存されない不具合が発生しています。この不具合はv4.4.0で修正されました。</p>
         <h3 class="help_h3">v4.3.0</h3>
         <ul>
-          <li class="help-sentence-changes">・2022.04.12公開</li>
-          <li class="help-sentence-changes">・コート作成で、未作成タイルにチェックマーカー・ハザードを配置できないよう変更</li>
-          <li class="help-sentence-changes">・コート作成で、シーソータイルにチェックマーカー・ハザードを配置できる事象を修正</li>
-          <li class="help-sentence-changes">・コート作成で2階・半2階部分の切り替え時に、ユーザーが操作せずともで2階部分のタイルを配置できるよう変更</li>
-          <li class="help-sentence-changes">・コート作成で1階部分を作成中に、2階部分があるタイルに柱を表示するよう変更</li>
-          <li class="help-sentence-changes">・コート作成で2階・半2階部分を作成中に、2階部分がない場所では1階部分のタイルを灰色で表示するよう変更</li>
+          <li class="help_sentence-changes">・2022.04.12公開</li>
+          <li class="help_sentence-changes">・コート作成で、未作成タイルにチェックマーカー・ハザードを配置できないよう変更</li>
+          <li class="help_sentence-changes">・コート作成で、シーソータイルにチェックマーカー・ハザードを配置できる事象を修正</li>
+          <li class="help_sentence-changes">・コート作成で2階・半2階部分の切り替え時に、ユーザーが操作せずともで2階部分のタイルを配置できるよう変更</li>
+          <li class="help_sentence-changes">・コート作成で1階部分を作成中に、2階部分があるタイルに柱を表示するよう変更</li>
+          <li class="help_sentence-changes">・コート作成で2階・半2階部分を作成中に、2階部分がない場所では1階部分のタイルを灰色で表示するよう変更</li>
         </ul>
-        <h2 class="help-sentence-changes" style="margin-top: 10px; background-color: #FFEEEE;"><img src="../img/help/attention.svg" class="help_icon" style="background-color: #FFBBBB;">重大な不具合</h2>
-        <p class="help-sentence-changes" style="background-color: #FFEEEE;">・このバージョンでは、コート作成機能において、2階部分を含むWRLコートのプロジェクトを保存した際に2階部分がうまく保存されない不具合が発生しています。この不具合はv4.4.0で修正されました。</p>
+        <h2 class="help_sentence-changes" style="margin-top: 10px; background-color: #FFEEEE;"><img src="../img/help/attention.svg" class="help_icon" style="background-color: #FFBBBB;">重大な不具合</h2>
+        <p class="help_sentence-changes" style="background-color: #FFEEEE;">・このバージョンでは、コート作成機能において、2階部分を含むWRLコートのプロジェクトを保存した際に2階部分がうまく保存されない不具合が発生しています。この不具合はv4.4.0で修正されました。</p>
         <h3 class="help_h3">v4.2.2</h3>
         <ul>
-          <li class="help-sentence-changes">・2022.04.07公開</li>
-          <li class="help-sentence-changes">・NRL得点計算で避難ゾーン脱出が何回もできる不具合を修正</li>
-          <li class="help-sentence-changes">・NRL得点計算で競技開始ボタンを押していないのにタイルを通過済みにした場合、また競技進行の停止を行った場合に警告を発するよう変更</li>
+          <li class="help_sentence-changes">・2022.04.07公開</li>
+          <li class="help_sentence-changes">・NRL得点計算で避難ゾーン脱出が何回もできる不具合を修正</li>
+          <li class="help_sentence-changes">・NRL得点計算で競技開始ボタンを押していないのにタイルを通過済みにした場合、また競技進行の停止を行った場合に警告を発するよう変更</li>
         </ul>
         <h3 class="help_h3">v4.2.1</h3>
         <ul>
-          <li class="help-sentence-changes">・2022.04.05公開</li>
-          <li class="help-sentence-changes">・NRL得点計算で印刷時に競技詳細も印刷するよう変更</li>
-          <li class="help-sentence-changes">・NRL得点計算のハザードの詳細表示で、「クリア済み」と「クリア済」が混在していたものを「クリア済み」に統一</li>
-          <li class="help-sentence-changes">・NRL得点計算の得点一覧のアイコンを変更</li>
+          <li class="help_sentence-changes">・2022.04.05公開</li>
+          <li class="help_sentence-changes">・NRL得点計算で印刷時に競技詳細も印刷するよう変更</li>
+          <li class="help_sentence-changes">・NRL得点計算のハザードの詳細表示で、「クリア済み」と「クリア済」が混在していたものを「クリア済み」に統一</li>
+          <li class="help_sentence-changes">・NRL得点計算の得点一覧のアイコンを変更</li>
         </ul>
         <h3 class="help_h3">v4.2.0</h3>
         <ul>
-          <li class="help-sentence-changes">・2022.04.02公開</li>
-          <li class="help-sentence-changes">・NRL得点計算に、「競技の詳細」ツールを追加</li>
-          <li class="help-sentence-changes">・NRL得点計算の右クリックメニューに、「通過の取り消し」機能と「競技進行の停止を1回取り消し」機能を追加</li>
-          <li class="help-sentence-changes">・NRL得点計算のハザードの詳細表示に、現在のハザードの状態を文章で表示するよう変更</li>
-          <li class="help-sentence-changes">・NRL得点計算で、ギャップが一つだけ含まれるタイルでギャップをクリアしても灰色にならない不具合を修正</li>
-          <li class="help-sentence-changes">・NRL得点計算のハザードの詳細表示で、ルールに従い「バンプ」を「減速バンプ」と表記するよう修正</li>
+          <li class="help_sentence-changes">・2022.04.02公開</li>
+          <li class="help_sentence-changes">・NRL得点計算に、「競技の詳細」ツールを追加</li>
+          <li class="help_sentence-changes">・NRL得点計算の右クリックメニューに、「通過の取り消し」機能と「競技進行の停止を1回取り消し」機能を追加</li>
+          <li class="help_sentence-changes">・NRL得点計算のハザードの詳細表示に、現在のハザードの状態を文章で表示するよう変更</li>
+          <li class="help_sentence-changes">・NRL得点計算で、ギャップが一つだけ含まれるタイルでギャップをクリアしても灰色にならない不具合を修正</li>
+          <li class="help_sentence-changes">・NRL得点計算のハザードの詳細表示で、ルールに従い「バンプ」を「減速バンプ」と表記するよう修正</li>
         </ul>
         <h3 class="help_h3">v4.1.1</h3>
         <ul>
-          <li class="help-sentence-changes">・2022.03.29公開</li>
-          <li class="help-sentence-changes">・NRL得点計算で、競技終了ボタンをクリックした後にコートの編集をロックするよう変更</li>
-          <li class="help-sentence-changes">・ヘルプの「印刷ボタン」に必要条件を追加</li>
+          <li class="help_sentence-changes">・2022.03.29公開</li>
+          <li class="help_sentence-changes">・NRL得点計算で、競技終了ボタンをクリックした後にコートの編集をロックするよう変更</li>
+          <li class="help_sentence-changes">・ヘルプの「印刷ボタン」に必要条件を追加</li>
         </ul>
         <h3 class="help_h3">v4.1.0</h3>
         <ul>
-          <li class="help-sentence-changes">・2022.03.28公開</li>
-          <li class="help-sentence-changes">・NRL得点計算を追加</li>
-          <li class="help-sentence-changes">・コート作成でディスプレイの横幅が920px以下の時にバンプを配置すると、設定が正しく反映されない事象を再度修正</li>
-          <li class="help-sentence-changes">・ファイル変換にv4系旧版からv4系最新版への変換モードを追加</li>
-          <li class="help-sentence-changes">・ファイル変換でv2系、v3系のファイルを変換したときも「v1.3.3以前→v4.1.0 変換完了」と表示される事象を修正</li>
-          <li class="help-sentence-changes">・ホームのファビコンが表示されない事象を修正</li>
-          <li class="help-sentence-changes">・ヘルプの「動作環境」のディスプレイ条件を変更</li>
-          <li class="help-sentence-changes">・ヘルプのインデントを変更</li>
+          <li class="help_sentence-changes">・2022.03.28公開</li>
+          <li class="help_sentence-changes">・NRL得点計算を追加</li>
+          <li class="help_sentence-changes">・コート作成でディスプレイの横幅が920px以下の時にバンプを配置すると、設定が正しく反映されない事象を再度修正</li>
+          <li class="help_sentence-changes">・ファイル変換にv4系旧版からv4系最新版への変換モードを追加</li>
+          <li class="help_sentence-changes">・ファイル変換でv2系、v3系のファイルを変換したときも「v1.3.3以前→v4.1.0 変換完了」と表示される事象を修正</li>
+          <li class="help_sentence-changes">・ホームのファビコンが表示されない事象を修正</li>
+          <li class="help_sentence-changes">・ヘルプの「動作環境」のディスプレイ条件を変更</li>
+          <li class="help_sentence-changes">・ヘルプのインデントを変更</li>
         </ul>
         <h3 class="help_h3">v4.0.0</h3>
         <ul>
-          <li class="help-sentence-changes">・2022.03.23公開</li>
-          <li class="help-sentence-changes">・プロジェクトに、NRLかWRLかを保存するよう変更</li>
-          <li class="help-sentence-changes">・タイル情報を、作成中のコートの対応するものしか表示しないよう変更</li>
-          <li class="help-sentence-changes">・タイル選択のタイルの間隔を変更</li>
-          <li class="help-sentence-changes">・ファイル変換をメジャーバージョン4向けに対応</li>
-          <li class="help-sentence-changes">・ファビコンを追加</li>
+          <li class="help_sentence-changes">・2022.03.23公開</li>
+          <li class="help_sentence-changes">・プロジェクトに、NRLかWRLかを保存するよう変更</li>
+          <li class="help_sentence-changes">・タイル情報を、作成中のコートの対応するものしか表示しないよう変更</li>
+          <li class="help_sentence-changes">・タイル選択のタイルの間隔を変更</li>
+          <li class="help_sentence-changes">・ファイル変換をメジャーバージョン4向けに対応</li>
+          <li class="help_sentence-changes">・ファビコンを追加</li>
         </ul>
         <h3 class="help_h3">v3.1.1</h3>
         <ul>
-          <li class="help-sentence-changes">・2022.03.16公開</li>
-          <li class="help-sentence-changes">・6×8タイルで、1階部分と2階・半2階部分の切り替えができない事象を修正</li>
-          <li class="help-sentence-changes">・右クリックメニューで、灰色のメニューをクリックすることで一つのタイルにチェックマーカーと得点要素が同時に配置できてしまう事象を修正</li>
+          <li class="help_sentence-changes">・2022.03.16公開</li>
+          <li class="help_sentence-changes">・6×8タイルで、1階部分と2階・半2階部分の切り替えができない事象を修正</li>
+          <li class="help_sentence-changes">・右クリックメニューで、灰色のメニューをクリックすることで一つのタイルにチェックマーカーと得点要素が同時に配置できてしまう事象を修正</li>
         </ul>
         <h3 class="help_h3">v3.1.0</h3>
         <ul>
-          <li class="help-sentence-changes">・2022.03.15公開</li>
-          <li class="help-sentence-changes">・コート作成を起動したときに「コート作成方法を選択」画面が出るよう変更</li>
-          <li class="help-sentence-changes">・上の変更に伴いNRL/WRL切り替えボタンを廃止</li>
-          <li class="help-sentence-changes">・ディスプレイの横幅が920px以下の時にバンプを配置すると、設定が正しく反映されない事象を修正</li>
-          <li class="help-sentence-changes">・ディスプレイの横幅が920px以下の時、ツールバーのアイコンをホバーしたときに出るガイドの位置がずれる事象を修正</li>
+          <li class="help_sentence-changes">・2022.03.15公開</li>
+          <li class="help_sentence-changes">・コート作成を起動したときに「コート作成方法を選択」画面が出るよう変更</li>
+          <li class="help_sentence-changes">・上の変更に伴いNRL/WRL切り替えボタンを廃止</li>
+          <li class="help_sentence-changes">・ディスプレイの横幅が920px以下の時にバンプを配置すると、設定が正しく反映されない事象を修正</li>
+          <li class="help_sentence-changes">・ディスプレイの横幅が920px以下の時、ツールバーのアイコンをホバーしたときに出るガイドの位置がずれる事象を修正</li>
         </ul>
         <h3 class="help_h3">v3.0.1</h3>
         <ul>
-          <li class="help-sentence-changes">・2022.03.14公開</li>
-          <li class="help-sentence-changes">・1階・2階部分の表示がうまくいかない場合がある不具合を再度修正</li>
-          <li class="help-sentence-changes">・ファイル変換にv3系旧版からv3系最新版への変換モードを追加</li>
-          <li class="help-sentence-changes">・ヘルプの「このソフトウェアについて」に項目を追加</li>
+          <li class="help_sentence-changes">・2022.03.14公開</li>
+          <li class="help_sentence-changes">・1階・2階部分の表示がうまくいかない場合がある不具合を再度修正</li>
+          <li class="help_sentence-changes">・ファイル変換にv3系旧版からv3系最新版への変換モードを追加</li>
+          <li class="help_sentence-changes">・ヘルプの「このソフトウェアについて」に項目を追加</li>
         </ul>
         <h3 class="help_h3">v3.0.0</h3>
         <ul>
-          <li class="help-sentence-changes">・2022.03.09公開</li>
-          <li class="help-sentence-changes">・ファイル変換を追加</li>
-          <li class="help-sentence-changes">・ツールバーをアイコンに変更</li>
-          <li class="help-sentence-changes">・6×8タイル以外のコートを保存しても、読み込み時にそのコートに切り替わらない事象を修正</li>
-          <li class="help-sentence-changes">・3×12タイルなどでコートがウィンドウ幅より長くなる場合に、スクロールして全体を操作できるよう変更</li>
+          <li class="help_sentence-changes">・2022.03.09公開</li>
+          <li class="help_sentence-changes">・ファイル変換を追加</li>
+          <li class="help_sentence-changes">・ツールバーをアイコンに変更</li>
+          <li class="help_sentence-changes">・6×8タイル以外のコートを保存しても、読み込み時にそのコートに切り替わらない事象を修正</li>
+          <li class="help_sentence-changes">・3×12タイルなどでコートがウィンドウ幅より長くなる場合に、スクロールして全体を操作できるよう変更</li>
         </ul>
         <h3 class="help_h3">v2.0.2</h3>
         <ul>
-          <li class="help-sentence-changes">・2022.03.06公開</li>
-          <li class="help-sentence-changes">・バンプ設定表示時のアニメーションを追加</li>
-          <li class="help-sentence-changes">・右クリックメニューに影を追加</li>
+          <li class="help_sentence-changes">・2022.03.06公開</li>
+          <li class="help_sentence-changes">・バンプ設定表示時のアニメーションを追加</li>
+          <li class="help_sentence-changes">・右クリックメニューに影を追加</li>
         </ul>
         <h3 class="help_h3">v2.0.1</h3>
         <ul>
-          <li class="help-sentence-changes">・2022.03.04公開</li>
-          <li class="help-sentence-changes">・アプリを立ち上げて1回目にバンプを配置するとき、プレビューの左スペースが0になっている事象を修正</li>
-          <li class="help-sentence-changes">・バンプ設定時の左スペースの値が75以上だとタイルからバンプがはみ出すため74までしか設定できないよう修正</li>
-          <li class="help-sentence-changes">・バンプ設定時の上スペースの値の範囲をより直感的に入力できるよう変更</li>
-          <li class="help-sentence-changes">・バンプ設定画面のプレビューで、タイルの傾きが反映されていない事象を修正</li>
-          <li class="help-sentence-changes">・ヘルプの見出しを追加、「RRLファイルの互換性」を更新</li>
+          <li class="help_sentence-changes">・2022.03.04公開</li>
+          <li class="help_sentence-changes">・アプリを立ち上げて1回目にバンプを配置するとき、プレビューの左スペースが0になっている事象を修正</li>
+          <li class="help_sentence-changes">・バンプ設定時の左スペースの値が75以上だとタイルからバンプがはみ出すため74までしか設定できないよう修正</li>
+          <li class="help_sentence-changes">・バンプ設定時の上スペースの値の範囲をより直感的に入力できるよう変更</li>
+          <li class="help_sentence-changes">・バンプ設定画面のプレビューで、タイルの傾きが反映されていない事象を修正</li>
+          <li class="help_sentence-changes">・ヘルプの見出しを追加、「RRLファイルの互換性」を更新</li>
         </ul>
         <h3 class="help_h3">v2.0.0</h3>
         <ul>
-          <li class="help-sentence-changes">・2022.03.01公開</li>
-          <li class="help-sentence-changes">・タイル選択部分のいくつかのタイルの上にマウスが移動すると、簡易的なガイドを表示する機能を追加</li>
-          <li class="help-sentence-changes">・自動保存で、タイルの角度も保存するように変更</li>
-          <li class="help-sentence-changes">・バンプを1つのタイルに複数個置けるように変更</li>
-          <li class="help-sentence-changes">・ヘルプに「RRLファイルの互換性」を追加</li>
+          <li class="help_sentence-changes">・2022.03.01公開</li>
+          <li class="help_sentence-changes">・タイル選択部分のいくつかのタイルの上にマウスが移動すると、簡易的なガイドを表示する機能を追加</li>
+          <li class="help_sentence-changes">・自動保存で、タイルの角度も保存するように変更</li>
+          <li class="help_sentence-changes">・バンプを1つのタイルに複数個置けるように変更</li>
+          <li class="help_sentence-changes">・ヘルプに「RRLファイルの互換性」を追加</li>
         </ul>
         <h3 class="help_h3">v1.1.3</h3>
         <ul>
-          <li class="help-sentence-changes">・2022.02.22公開</li>
-          <li class="help-sentence-changes">・1階・2階部分の表示がうまくいかない場合がある不具合を再度修正</li>
-          <li class="help-sentence-changes">・アプリケーション版配布中止に伴いヘルプを更新</li>
+          <li class="help_sentence-changes">・2022.02.22公開</li>
+          <li class="help_sentence-changes">・1階・2階部分の表示がうまくいかない場合がある不具合を再度修正</li>
+          <li class="help_sentence-changes">・アプリケーション版配布中止に伴いヘルプを更新</li>
         </ul>
         <h3 class="help_h3">v1.1.2</h3>
         <ul>
-          <li class="help-sentence-changes">・2022.02.22公開</li>
-          <li class="help-sentence-changes">・印刷する際にタイルが異常に大きくなる事象を修正</li>
-          <li class="help-sentence-changes">・被災者ゾーンの自動入力タイル以外のタイルを選択したとき、自動入力を無効化するよう変更</li>
+          <li class="help_sentence-changes">・2022.02.22公開</li>
+          <li class="help_sentence-changes">・印刷する際にタイルが異常に大きくなる事象を修正</li>
+          <li class="help_sentence-changes">・被災者ゾーンの自動入力タイル以外のタイルを選択したとき、自動入力を無効化するよう変更</li>
         </ul>
         <h3 class="help_h3">v1.1.1</h3>
         <ul>
-          <li class="help-sentence-changes">・2022.02.19公開</li>
-          <li class="help-sentence-changes">・ディスプレイ横幅920px以下で障害物、バンプを配置したときタイルからはみ出る事象を修正</li>
-          <li class="help-sentence-changes">・右側2列のタイルの右クリックメニューが画面から下側に飛び出す事象を修正</li>
-          <li class="help-sentence-changes">・NRL/WRLを切り替える際にガイドが切り替わらない事象を修正</li>
-          <li class="help-sentence-changes">・シーソータイルを追加</li>
+          <li class="help_sentence-changes">・2022.02.19公開</li>
+          <li class="help_sentence-changes">・ディスプレイ横幅920px以下で障害物、バンプを配置したときタイルからはみ出る事象を修正</li>
+          <li class="help_sentence-changes">・右側2列のタイルの右クリックメニューが画面から下側に飛び出す事象を修正</li>
+          <li class="help_sentence-changes">・NRL/WRLを切り替える際にガイドが切り替わらない事象を修正</li>
+          <li class="help_sentence-changes">・シーソータイルを追加</li>
         </ul>
         <h3 class="help_h3">v1.1.0</h3>
         <ul>
-          <li class="help-sentence-changes">・2022.02.19公開</li>
-          <li class="help-sentence-changes">・ディスプレイ横幅600pxまで正常動作するよう変更(900px以下はまだ非推奨、デザインが乱れることがある)</li>
-          <li class="help-sentence-changes">・日本リーグモードでタイルが自動保存されない事象を修正</li>
-          <li class="help-sentence-changes">・「残り全部を白にする」機能を使った後に自動保存が行われるよう変更</li>
+          <li class="help_sentence-changes">・2022.02.19公開</li>
+          <li class="help_sentence-changes">・ディスプレイ横幅600pxまで正常動作するよう変更(900px以下はまだ非推奨、デザインが乱れることがある)</li>
+          <li class="help_sentence-changes">・日本リーグモードでタイルが自動保存されない事象を修正</li>
+          <li class="help_sentence-changes">・「残り全部を白にする」機能を使った後に自動保存が行われるよう変更</li>
         </ul>
         <h3 class="help_h3">v1.0.1</h3>
         <ul>
-          <li class="help-sentence-changes">・2022.02.19公開</li>
-          <li class="help-sentence-changes">・1階・2階部分の表示がうまくいかない場合がある不具合を修正</li>
+          <li class="help_sentence-changes">・2022.02.19公開</li>
+          <li class="help_sentence-changes">・1階・2階部分の表示がうまくいかない場合がある不具合を修正</li>
         </ul>
         <h3 class="help_h3">RC3版(→v1.0.0)</h3>
         <ul>
-          <li class="help-sentence-changes">・2022.01.29公開</li>
-          <li class="help-sentence-changes">・オールクリアした後に被災者ゾーンを自動入力しようとすると「コートに避難ゾーンは一つしか置けません。」というダイアログが出る事象を修正</li>
-          <li class="help-sentence-changes">・バンプを2個以上置くと最初に置いたタイルにも追加される事象を修正</li>
-          <li class="help-sentence-changes">・ブラウザ版を公開</li>
+          <li class="help_sentence-changes">・2022.01.29公開</li>
+          <li class="help_sentence-changes">・オールクリアした後に被災者ゾーンを自動入力しようとすると「コートに避難ゾーンは一つしか置けません。」というダイアログが出る事象を修正</li>
+          <li class="help_sentence-changes">・バンプを2個以上置くと最初に置いたタイルにも追加される事象を修正</li>
+          <li class="help_sentence-changes">・ブラウザ版を公開</li>
         </ul>
         <h3 class="help_h3">RC2版</h3>
         <ul>
-          <li class="help-sentence-changes">・2022.01.27公開</li>
-          <li class="help-sentence-changes">・キー入力ができない事象を修正</li>
-          <li class="help-sentence-changes">・プロジェクトの名前入力ウィンドウを廃止</li>
+          <li class="help_sentence-changes">・2022.01.27公開</li>
+          <li class="help_sentence-changes">・キー入力ができない事象を修正</li>
+          <li class="help_sentence-changes">・プロジェクトの名前入力ウィンドウを廃止</li>
         </ul>
         <h3 class="help_h3">RC版</h3>
         <ul>
-          <li class="help-sentence-changes">・2022.01.26公開</li>
+          <li class="help_sentence-changes">・2022.01.26公開</li>
         </ul>
       </div>
       <h2 class="help_h2">旧ソフトウェア(NRL版)の更新履歴</h2>
@@ -387,61 +710,61 @@
       <div style="display: none;">
         <h3 class="help_h3">v3.2.1</h3>
         <ul>
-          <li class="help-sentence-changes">・2022.01.01公開</li>
-          <li class="help-sentence-changes">・プロジェクトの読み込み時にエラーが発生した場合、自動で再読み込みするように変更</li>
-          <li class="help-sentence-changes">・坂・2階部分に設定したタイルに新しいタイルを置きなおすと赤枠が消えてしまう事象を修正</li>
+          <li class="help_sentence-changes">・2022.01.01公開</li>
+          <li class="help_sentence-changes">・プロジェクトの読み込み時にエラーが発生した場合、自動で再読み込みするように変更</li>
+          <li class="help_sentence-changes">・坂・2階部分に設定したタイルに新しいタイルを置きなおすと赤枠が消えてしまう事象を修正</li>
         </ul>
         <h3 class="help_h3">v3.2.0</h3>
         <ul>
-          <li class="help-sentence-changes">・2021.12.29公開</li>
-          <li class="help-sentence-changes">・バンプ機能を搭載</li>
-          <li class="help-sentence-changes">・プロジェクトの保存の際にファイル名を指定できるよう変更</li>
-          <li class="help-sentence-changes">・右クリックメニューのプログラムの効率化</li>
+          <li class="help_sentence-changes">・2021.12.29公開</li>
+          <li class="help_sentence-changes">・バンプ機能を搭載</li>
+          <li class="help_sentence-changes">・プロジェクトの保存の際にファイル名を指定できるよう変更</li>
+          <li class="help_sentence-changes">・右クリックメニューのプログラムの効率化</li>
         </ul>
         <h3 class="help_h3">v3.1.1</h3>
         <ul>
-          <li class="help-sentence-changes">・2021.12.28公開</li>
-          <li class="help-sentence-changes">・プロジェクトの保存・読み込みの際ガイドを表示するように変更</li>
-          <li class="help-sentence-changes">・プロジェクトの読み込み時に読み込み前の障害物・チェックマーカーが表示され続ける事象を修正</li>
-          <li class="help-sentence-changes">・プロジェクトの読み込みが複数回できない場合がある事象を修正</li>
-          <li class="help-sentence-changes">・プロジェクトの読み込み時ファイル選択画面に拡張子制限を追加</li>
-          <li class="help-sentence-changes">・起動ファイルの名称を変更</li>
-          <li class="help-sentence-changes">・ヘルプに注意書きを追加</li>
+          <li class="help_sentence-changes">・2021.12.28公開</li>
+          <li class="help_sentence-changes">・プロジェクトの保存・読み込みの際ガイドを表示するように変更</li>
+          <li class="help_sentence-changes">・プロジェクトの読み込み時に読み込み前の障害物・チェックマーカーが表示され続ける事象を修正</li>
+          <li class="help_sentence-changes">・プロジェクトの読み込みが複数回できない場合がある事象を修正</li>
+          <li class="help_sentence-changes">・プロジェクトの読み込み時ファイル選択画面に拡張子制限を追加</li>
+          <li class="help_sentence-changes">・起動ファイルの名称を変更</li>
+          <li class="help_sentence-changes">・ヘルプに注意書きを追加</li>
         </ul>
         <h3 class="help_h3">v3.1.0</h3>
         <ul>
-          <li class="help-sentence-changes">・2021.12.28公開</li>
-          <li class="help-sentence-changes">・グリッドの表示・非表示機能を追加</li>
-          <li class="help-sentence-changes">・プロジェクトの読み込みに失敗したときのエラーが表示されない事象を修正</li>
-          <li class="help-sentence-changes">・印刷時の背景を白に変更</li>
-          <li class="help-sentence-changes">・ヘルプの語句の修正</li>
+          <li class="help_sentence-changes">・2021.12.28公開</li>
+          <li class="help_sentence-changes">・グリッドの表示・非表示機能を追加</li>
+          <li class="help_sentence-changes">・プロジェクトの読み込みに失敗したときのエラーが表示されない事象を修正</li>
+          <li class="help_sentence-changes">・印刷時の背景を白に変更</li>
+          <li class="help_sentence-changes">・ヘルプの語句の修正</li>
         </ul>
         <h3 class="help_h3">v3.0.1</h3>
         <ul>
-          <li class="help-sentence-changes">・2021.12.27公開</li>
-          <li class="help-sentence-changes">・ギャップタイルにチェックマーカーが置けないように変更</li>
-          <li class="help-sentence-changes">・障害物を置いた際タイルのラインが透ける事象を修正</li>
-          <li class="help-sentence-changes">・ヘルプに「変更履歴」を追加</li>
-          <li class="help-sentence-changes">・ヘルプの語句の修正</li>
+          <li class="help_sentence-changes">・2021.12.27公開</li>
+          <li class="help_sentence-changes">・ギャップタイルにチェックマーカーが置けないように変更</li>
+          <li class="help_sentence-changes">・障害物を置いた際タイルのラインが透ける事象を修正</li>
+          <li class="help_sentence-changes">・ヘルプに「変更履歴」を追加</li>
+          <li class="help_sentence-changes">・ヘルプの語句の修正</li>
         </ul>
         <h3 class="help_h3">v3.0.0</h3>
         <ul>
-          <li class="help-sentence-changes">・2021.12.25公開</li>
-          <li class="help-sentence-changes">・ドラッグ＆ドロップUIからv1.0.0同様のクリックUIに変更</li>
-          <li class="help-sentence-changes">・障害物配置機能を搭載</li>
-          <li class="help-sentence-changes">・プロジェクトの保存・読み込み機能を搭載</li>
-          <li class="help-sentence-changes">・オールクリア・タイル情報の削除時にチェックマーカーも削除できるように変更</li>
-          <li class="help-sentence-changes">・ヘルプに「動作環境」を追加</li>
+          <li class="help_sentence-changes">・2021.12.25公開</li>
+          <li class="help_sentence-changes">・ドラッグ＆ドロップUIからv1.0.0同様のクリックUIに変更</li>
+          <li class="help_sentence-changes">・障害物配置機能を搭載</li>
+          <li class="help_sentence-changes">・プロジェクトの保存・読み込み機能を搭載</li>
+          <li class="help_sentence-changes">・オールクリア・タイル情報の削除時にチェックマーカーも削除できるように変更</li>
+          <li class="help_sentence-changes">・ヘルプに「動作環境」を追加</li>
         </ul>
         <h3 class="help_h3">v2.0.0 </h3>
         <ul>
-          <li class="help-sentence-changes">・2021.10.16公開</li>
-          <li class="help-sentence-changes">・ドラッグ＆ドロップUIに変更</li>
+          <li class="help_sentence-changes">・2021.10.16公開</li>
+          <li class="help_sentence-changes">・ドラッグ＆ドロップUIに変更</li>
         </ul>
         <h3 class="help_h3">v1.0.0 </h3>
         <ul>
-          <li class="help-sentence-changes">・2021.09.03公開</li>
-          <li class="help-sentence-changes">・初版完成</li>
+          <li class="help_sentence-changes">・2021.09.03公開</li>
+          <li class="help_sentence-changes">・初版完成</li>
         </ul>
       </div>
       <h2 class="help_h2">旧ソフトウェア(WRL版)の変更履歴</h2>
@@ -449,47 +772,51 @@
       <div style="display: none;">
         <h3 class="help_h3">v1.1.2</h3>
         <ul>
-          <li class="help-sentence-changes">・2022.01.21公開</li>
-          <li class="help-sentence-changes">・避難ゾーンを複数回配置しようとしたときに警告が出るよう変更</li>
-          <li class="help-sentence-changes">・通常タイルを選択してから被災者ゾーン自動入力タイルを選択して入力すると前に選択したタイルで上書きされる事象を修正</li>
+          <li class="help_sentence-changes">・2022.01.21公開</li>
+          <li class="help_sentence-changes">・避難ゾーンを複数回配置しようとしたときに警告が出るよう変更</li>
+          <li class="help_sentence-changes">・通常タイルを選択してから被災者ゾーン自動入力タイルを選択して入力すると前に選択したタイルで上書きされる事象を修正</li>
         </ul>
         <h3 class="help_h3">v1.1.1</h3>
         <ul>
-          <li class="help-sentence-changes">・2022.01.21公開</li>
-          <li class="help-sentence-changes">・保存するプロジェクトの名称入力画面でキャンセルを押しても「null.wrl」が生成されてしまう事象を修正</li>
-          <li class="help-sentence-changes">・プロジェクトを読み込んで再保存したときにタイルの角度が保存されない事象を修正</li>
-          <li class="help-sentence-changes">・オールクリア時にバンプが消えない事象を修正</li>
-          <li class="help-sentence-changes">・避難ゾーンの出入口を間違って配置した場合を考慮して被災者ゾーンの壁・角タイルを追加</li>
-          <li class="help-sentence-changes">・自動保存機能がローカルストレージを使う他のアプリのデータを消してしまう事象を修正</li>
+          <li class="help_sentence-changes">・2022.01.21公開</li>
+          <li class="help_sentence-changes">・保存するプロジェクトの名称入力画面でキャンセルを押しても「null.wrl」が生成されてしまう事象を修正</li>
+          <li class="help_sentence-changes">・プロジェクトを読み込んで再保存したときにタイルの角度が保存されない事象を修正</li>
+          <li class="help_sentence-changes">・オールクリア時にバンプが消えない事象を修正</li>
+          <li class="help_sentence-changes">・避難ゾーンの出入口を間違って配置した場合を考慮して被災者ゾーンの壁・角タイルを追加</li>
+          <li class="help_sentence-changes">・自動保存機能がローカルストレージを使う他のアプリのデータを消してしまう事象を修正</li>
         </ul>
         <h3 class="help_h3">v1.1.0</h3>
         <ul>
-          <li class="help-sentence-changes">・2022.01.11公開</li>
-          <li class="help-sentence-changes">・ファイル拡張子を.wrlに変更</li>
-          <li class="help-sentence-changes">・自動保存機能を追加</li>
-          <li class="help-sentence-changes">・バンプの角度入力画面でキャンセルを押してもバンプが配置されてしまう事象を修正</li>
+          <li class="help_sentence-changes">・2022.01.11公開</li>
+          <li class="help_sentence-changes">・ファイル拡張子を.wrlに変更</li>
+          <li class="help_sentence-changes">・自動保存機能を追加</li>
+          <li class="help_sentence-changes">・バンプの角度入力画面でキャンセルを押してもバンプが配置されてしまう事象を修正</li>
         </ul>
         <h3 class="help_h3">v1.0.1</h3>
         <ul>
-          <li class="help-sentence-changes">・2022.01.07公開</li>
-          <li class="help-sentence-changes">・ヘルプの文面を変更</li>
+          <li class="help_sentence-changes">・2022.01.07公開</li>
+          <li class="help_sentence-changes">・ヘルプの文面を変更</li>
         </ul>
         <h3 class="help_h3">v1.0.0 </h3>
         <ul>
-          <li class="help-sentence-changes">・2022.01.01公開</li>
-          <li class="help-sentence-changes">・初版完成</li>
+          <li class="help_sentence-changes">・2022.01.01公開</li>
+          <li class="help_sentence-changes">・初版完成</li>
         </ul>
       </div>
     </div>
-    <iframe src="userguide_simulator.html" frameborder="no" scrolling="no" style="display: none;" id="iframe"></iframe>
+    <small class="copyright">Copyright&copy; 2021-2022 TKN All Rights Reserved.</small>
 
     <script>
       const $link = document.getElementsByTagName('link')[1];
-      const agent = window.navigator.userAgent.toLowerCase();  
+      const agent = window.navigator.userAgent.toLowerCase();
       if (agent.indexOf('linux; android') != -1) {
         $link.href = 'help_mobile.css';
+        document.body.style.marginRight = "0px";
+        document.body.style.marginLeft = "0px";
       } else if (agent.indexOf('iphone') != -1) {
         $link.href = 'help_mobile.css';
+        document.body.style.marginRight = "0px";
+        document.body.style.marginLeft = "0px";
       } else if (agent.indexOf('ipad') != -1) {
         $link.href = 'help.css';
       } else if (agent.indexOf('cros') != -1) {
@@ -526,81 +853,51 @@
         });
       }
 
-      const $tab = document.getElementById('help_tab');
-      const $tab_left = document.getElementById('help_tab_left');
-      const $tab_right = document.getElementById('help_tab_right');
-      let pre_scrollLeft = 0;
-      $tab_left.addEventListener('click', () => {
-        if($tab_right.style.display == "none"){
-          $tab_right.style.display = "";
-          $tab.style.marginRight = "";
-        }
-        $tab.scrollLeft = $tab.scrollLeft - 200;
-        if($tab.scrollLeft == 0){
-          $tab_left.style.display = "none";
-          $tab.style.marginLeft = "60px";
-        }
-      });
-      $tab_right.addEventListener('click', () => {
-        if($tab_left.style.display == "none"){
-          $tab_left.style.display = "";
-          $tab.style.marginLeft = "";
-        }
-        pre_scrollLeft = $tab.scrollLeft;
-        $tab.scrollLeft = $tab.scrollLeft + 200;
-        if($tab.scrollLeft == pre_scrollLeft){
-          $tab_right.style.display = "none";
-          $tab.style.marginRight = "60px";
-        }
-      });
-      for (let i = 1; i < document.getElementsByClassName('help_tab_item').length - 1; i++){
-        document.getElementsByClassName('help_tab_item')[i].addEventListener('mouseover', (e) => {
-          e.target.nextElementSibling.style.top = Math.round(e.target.getBoundingClientRect().top) + 20 + 'px';
-          e.target.nextElementSibling.style.left = Math.round(e.target.getBoundingClientRect().left) - 80 + 'px';
-        });
+      function tab_active_sign(){
+        document.getElementById('tab_active_sign').style.left = Math.round(document.querySelector('.help_tab_item.active').getBoundingClientRect().left - window.innerWidth * 0.15 - 20) + 'px';
       }
+      tab_active_sign();
 
       function show(id){
         document.getElementById('overview').style.display = 'none';
+        document.getElementById('simulator').style.display = 'none';
+        document.getElementById('scorer_nrl').style.display = 'none';
+        document.getElementById('scorer_wrl').style.display = 'none';
+        document.getElementById('converter').style.display = 'none';
         document.getElementById('changes').style.display = 'none';
-        document.getElementById('iframe').style.display = 'none';
         for (let i = 0; i < document.getElementsByClassName('help_tab_item').length; i++){
           if(document.getElementsByClassName('help_tab_item')[i].classList.contains('active')){
             document.getElementsByClassName('help_tab_item')[i].classList.remove('active');
           }
         }
         document.getElementById(id).style.display = '';
+        document.getElementById(id + '_tab').classList.add('active');
+        tab_active_sign();
+        if(window.pageYOffset > document.getElementsByClassName('help_h1')[0].offsetHeight){
+          window.scrollTo({
+            top: document.getElementsByClassName('help_h1')[0].offsetHeight,
+            behavior: 'smooth'
+          });
+        }else{
+          window.scrollTo({
+            top: '0px',
+            behavior: 'smooth'
+          });
+        }
       }
-      document.getElementsByClassName('help_tab_item')[0].addEventListener('click', (e) => {
-        show('overview')
-        document.getElementById('overview_tab').classList.add('active');
-      });
-      document.getElementsByClassName('help_tab_item')[1].addEventListener('click', (e) => {
-        show('iframe')
-        document.getElementById('iframe').src = 'userguide_simulator.html';
-        document.getElementById('simulator_tab').classList.add('active');
-      });
-      document.getElementsByClassName('help_tab_item')[2].addEventListener('click', (e) => {
-        show('iframe')
-        document.getElementById('iframe').src = 'userguide_scorer_nrl.html';
-        document.getElementById('scorer_nrl_tab').classList.add('active');
-      });
-      document.getElementsByClassName('help_tab_item')[3].addEventListener('click', (e) => {
-        show('iframe')
-        document.getElementById('iframe').src = 'userguide_scorer_wrl.html';
-        document.getElementById('scorer_wrl_tab').classList.add('active');
-      });
-      document.getElementsByClassName('help_tab_item')[4].addEventListener('click', (e) => {
-        show('iframe')
-        document.getElementById('iframe').src = 'userguide_converter.html';
-        document.getElementById('converter_tab').classList.add('active');
-      });
-      document.getElementsByClassName('help_tab_item')[5].addEventListener('click', (e) => {
-        show('changes')
-        document.getElementById('changes_tab').classList.add('active');
-      });
       window.onresize = function () {
-        document.getElementsByTagName('iframe').height = document.getElementsByTagName('iframe').contentWindow.document.body.scrollHight + "px";
+        tab_active_sign();
+      }
+      window.onscroll = function () {
+        if(window.pageYOffset > document.getElementsByClassName('help_h1')[0].offsetHeight){
+          document.getElementById('help_tab_out').style.position = 'fixed';
+          document.getElementsByClassName('help_h1')[0].style.marginBottom = '125.6px';
+          document.getElementById('help_tab').classList.add('mini');
+        } else {
+          document.getElementById('help_tab_out').style.position = 'inherit';
+          document.getElementsByClassName('help_h1')[0].style.marginBottom = "";
+          document.getElementById('help_tab').classList.remove('mini');
+        }
       }
     </script>
   </body>
