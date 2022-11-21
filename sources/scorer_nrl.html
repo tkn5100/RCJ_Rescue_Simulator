@@ -18,18 +18,18 @@
       </div>
       <div>
         <span>ルールを選択:</span>
-        <label class="container">2022ルール<input type="radio" checked="checked" name="radio-rule" value="0"><span class="checkmark"></span></label>
-        <label class="container">2023ルール<input type="radio" name="radio-rule" value="1"><span class="checkmark"></span></label>
+        <label class="container">2022ルール<input type="radio" name="radio-rule" value="0"><span class="checkmark"></span></label>
+        <label class="container">2023ルール<input type="radio" checked="checked" name="radio-rule" value="1"><span class="checkmark"></span></label>
       </div>
       <div style="position: absolute; top: 2vw; right: 5vw;"><div><img src="../img/tools/help.svg" alt="ヘルプ" class="start_tools" style="margin-right: 0; cursor: help;"><p>ヘルプ</p></div></div>
       <div style="position: absolute; top: 11vw; right: 5vw;"><div><img src="../img/tools/version.svg" alt="バージョン情報" class="start_tools" style="margin-right: 0;"><p>バージョン<br>情報</p></div></div>
     </div>
     <div id="version">
       <div>
-        <h1>v4.5.4</h1>
-        <p>2022.10.17 &copy;TKN</p>
-        <h2>v4.6.0機能追加中</h2>
-        <p>最終更新 : 2022.11.04</p>
+        <h1>v4.6.0</h1>
+        <p>2022.11.22 &copy;TKN</p>
+        <!-- <h2>v4.6.0機能追加中</h2>
+        <p>最終更新 : 2022.11.22</p>
         <p>オンラインでは、正式なバージョン更新の前に一部の新機能や新デザイン、バグ修正をご利用いただけます。機能追加中は、新機能が不完全であったり不安定である可能性があります。</p>
         <br>
         <p>v4.6.0で予定している変更：</p>
@@ -37,7 +37,7 @@
         <p>・NRL得点計算で、被災者を1体も見つけていなくても脱出できる不具合を修正</p>
         <p>・NRL得点計算で、避難ゾーン(救助ゾーン)を脱出すると競技が自動で終了するよう変更</p>
         <p>・NRL得点計算で、通過の取り消しや競技進行の停止をすると該当タイルの背景が白くなる不具合を修正</p>
-        <p>・ヘルプにタブUIを実装</p>
+        <p>・ヘルプにタブUIを実装</p> -->
       </div>
       <span id="version_value" style="display: none;"></span><!-- スタートのボタンから表示したかツールバーのボタンから表示したかを記録 -->
       <button id="version_close">閉じる</button>
@@ -50,7 +50,12 @@
     <div id="rule">
       <h1>得点要素の得点一覧</h1>
       <div style="max-height: 50vh; overflow-y: auto;">
-        <p>詳細な規定は、日本リーグレスキューの2022ルールをご覧ください。</p>
+        <div class="js-2022">
+          <p>詳細な規定は、日本リーグレスキューの2022ルールをご覧ください。</p>
+        </div>
+        <div class="js-2023" style="display: none;">
+          <p>詳細な規定は、日本リーグレスキューの2023ルールをご覧ください。</p>
+        </div>
         <h2>ライントレース</h2>
         <p>1回目　 : 5点/タイル</p>
         <p>2回目　 : 3点/タイル</p>
